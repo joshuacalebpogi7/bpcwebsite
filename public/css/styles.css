@@ -1,7 +1,7 @@
 #show_bg_2 {
   background-image:
   linear-gradient(to bottom, #007000cd, #ffffff4f),
-  url('../images/bpc_building.jpeg');
+  url('images/background.jpg');
   width: 80%;
   height: 400px;
   background-size: cover;
