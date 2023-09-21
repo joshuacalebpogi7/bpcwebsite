@@ -8,8 +8,8 @@
                 <div class="card-body text-center">
 
 
-                    <img class="rounded img-fluid" id="img-preview" src="{{ $events->thumbnail }}" alt=""
-                        data-prev-src="{{ $events->thumbnail }}">
+                    <img class="rounded img-fluid" id="img-preview" src="{{ $jobs->thumbnail }}" alt=""
+                        data-prev-src="{{ $jobs->thumbnail }}">
 
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
 
@@ -44,7 +44,7 @@
                             <label for="title">Title</label>
                             <input class="form-control @error('title') is-invalid @enderror" type="text"
                                 placeholder="Event's title" name="title" id="title"
-                                value="{{ old('title', $events->title) }}">
+                                value="{{ old('title', $jobs->title) }}">
 
                             @error('title')
                                 <div class="invalid-feedback">
@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
-                                cols="30" rows="10">{{ old('description', $events->description) }}</textarea>
+                                cols="30" rows="10">{{ old('description', $jobs->description) }}</textarea>
 
                             @error('description')
                                 <div class="invalid-feedback">
@@ -75,7 +75,7 @@
                             <label for="event-start">Event Start</label>
                             <input class="form-control @error('event_start') is-invalid @enderror" type="datetime-local"
                                 placeholder="Event Start" name="event_start" id="event_start"
-                                value="{{ old('event_start', $events->event_start) }}">
+                                value="{{ old('event_start', $jobs->event_start) }}">
                             @error('event_start')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -87,7 +87,7 @@
                             <label for="event-end">Event End</label>
                             <input class="form-control @error('event_end') is-invalid @enderror" type="datetime-local"
                                 placeholder="Event End" name="event_end" id="event_end"
-                                value="{{ old('event_end', $events->event_end) }}">
+                                value="{{ old('event_end', $jobs->event_end) }}">
                             @error('event_end')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -101,7 +101,7 @@
                             <label for="link">Link</label>
                             <input class="form-control @error('link') is-invalid @enderror" name="link"
                                 id="link" type="text" placeholder="Event's link"
-                                value="{{ old('link', $events->link) }}">
+                                value="{{ old('link', $jobs->link) }}">
 
 
                             @error('link')

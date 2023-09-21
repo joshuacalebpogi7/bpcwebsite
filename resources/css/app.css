@@ -1,132 +1,925 @@
-* {
-    font-family: 'Raleway', 'Merriweather';
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,700;1,400&display=swap');
+*{
+   font-family: 'Exo 2', sans-serif;
+   margin:0; 
+   padding:0;
+   box-sizing: border-box;
+   outline: none; 
+   border:none;
+   text-decoration: none;
+   color: #E9EEF2;
 }
 
-input, button {
-    color: black;
+body{
+   background-color: #E9EEF2;
 }
 
-.image-area {
-    border: 2px dashed rgba(255, 255, 255, 0.7);
-    padding: 1rem;
-    position: relative;
+/*HEADER CODES */
+
+.header{
+   background: linear-gradient(180deg, #157424 0%, rgba(217, 217, 217, 0.00) 100%);
+   height: 300px;
+   position: absolute;
+   top:0; 
+   left:0; 
+   right:0;
 }
 
-.image-area::before {
-    content: "Uploaded image result";
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.8rem;
-    z-index: 1;
+.header .flex{
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   padding: 24px;
+   margin: 0 auto;
+   max-width: 1300px;
+   position: relative;
 }
 
-.image-area img {
-    z-index: 2;
-    position: relative;
+.header .flex .logo{
+   width: 100px;
+   height: 100px;
+}
+.header .flex .logoname{
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column;
+   justify-content: center;
+   flex-shrink: 0;
+   color: #FAFAFA;
+   text-align: left;
+   text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+   font-size: 36px;
+   font-style: normal;
+   font-weight: 900;
+   line-height: normal;
+   text-transform: uppercase;
+}
+
+.header .flex .navbar a{
+   margin:0 24px;
+   font-size: 32px;
+   color: #fafafa;
+   text-decoration: none;
+}
+
+.header .flex .navbar a:hover{
+   text-decoration: underline;
+   color: #f79b2e;
+}
+
+.header .flex .icons > *{
+   font-size: 42px;
+   color: #fafafa;
+   cursor: pointer;
+   margin-left: 16px;
+}
+
+.header .flex .icons > *:hover{
+   color: #f79b2e;
+}
+
+.header .flex .icons a span,
+.header .flex .icons a i{
+   color:  #f6c35d;
+}
+
+.header .flex .icons a:hover span,
+.header .flex .icons a:hover i{
+   color: #91cde2;
+}
+
+.header .flex .icons a span{
+   font-size: 16px;
+}
+
+#menu-btn,
+#times-btn{
+   display: none;
+}
+
+/* LANDING PAGE CODES */
+
+.home-bg {
+   background: linear-gradient(90deg, rgba(35, 217, 222, 0.5522584033613445) 0%, rgba(8, 116, 215, 0.55) 100%), url("/public/pictures/bg.jpg") no-repeat;
+   background-size: cover;
+   background-position: center;
+   z-index: 1000;
+}
+
+.home-bg .home{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   padding-top: 400px;
+}
+
+.home-bg .home .content{
+   display: flex;
+   width: auto;
+   height: 100px;
+   flex-direction: column;
+   justify-content: center;
+   flex-shrink: 0;
+}
+
+.home-bg .home .content h1{
+   color: #FAFAFA;
+   font-family: Exo 2;
+   font-size: 96px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: normal;
+}
+
+.home-bg .home .content h3{
+   color: #FAFAFA;
+   text-align: center;
+   font-family: Exo 2;
+   font-size: 96px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: normal;
+}
+
+.shapedividers_com-6277{
+   overflow:hidden;
+   position:relative;
+   margin-top: 310px;
+}
+.shapedividers_com-6277::before{
+   content:'';
+   font-family:'shape divider from ShapeDividers.com';
+   position: absolute;
+   bottom: -1px;
+   left: -1px;
+   right: -1px;
+   top: -1px;
+   z-index: 3;
+   pointer-events: none;
+   background-repeat: no-repeat; 
+   background-size: 100% 200px;
+   background-position: 50% 100%;    
+   transform: rotateY(180deg);
+   background-image: url('data:image/svg+xml;charset=utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 381 77.25" preserveAspectRatio="none"><g fill="%23E9EEF2"><path d="M0 68.78l381-33.86v42.33H0z"/><path d="M0 43.38l381-25.4v59.27H0z" opacity=".33"/><path d="M0 17.98L381 0v77.25H0z" opacity=".33"/></g></svg>'); 
+}
+
+@media (min-width:768px){
+.shapedividers_com-6277::before{
+   background-size: 100% 200px;
+   background-position: 50% 100%;  
+   transform: rotateY(180deg); 
+  }  
+}
+ 
+@media (min-width:1025px){
+.shapedividers_com-6277::before{ 
+   bottom: -0.1vw;
+   left: -0.1vw;
+   right: -0.1vw;
+   top: -0.1vw; 
+   background-size: 100% 200px;
+   background-position: 50% 100%; 
+   transform: rotateY(180deg); 
+  }
+}
+@media (min-width:2100px){
+.shapedividers_com-6277::before{
+   background-size: 100% calc(2vw + 200px);
+  }
+}
+
+.welcome-alumni{
+   max-width: 100%;
+   height: auto;
+   transform: rotate(-17deg);
+   top: 900px;
+   left: -400px;
+   position: absolute;
+   z-index: 4;
+}
+
+.banner{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   padding-top: 400px;
+}
+
+.banner .banner-text{
+   display: flex;
+   height: 100px;
+   flex-direction: column;
+   justify-content: center;
+   column-span: all;
+   flex-shrink: 0;
+   max-width: 1200px;
+   margin-left: 300px;
+   margin-top: -20px;
+}
+
+.banner .banner-text h3{
+   color: #46A094;
+   font-family: Exo 2;
+   font-size: 64px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: normal;
+}
+
+.banner .banner-text p{
+   font-size: 30px;
+   padding: 16px 0;
+   line-height: 2;
+   color: #252525;
+}
+
+.books{
+   max-width: 100%;
+   height: auto;
+   flex-shrink: 0;
+   margin-top: 50px;
+   position: relative;
+   z-index: 2;
+}
+
+.shapedividers_com-5524{
+   overflow:hidden;
+   position:relative;
+   top: 430px;
+}
+.shapedividers_com-5524::before{
+   content:'';
+   font-family:'shape divider from ShapeDividers.com';
+   position: absolute;
+   bottom: -1px;
+   left: -1px;
+   right: -1px;
+   top: -1px;
+   z-index: 2;
+   pointer-events: none;
+   background-repeat: no-repeat; 
+   background-size: 100% 200px;
+   background-position: 50% 100%;    
+   background-image: url('data:image/svg+xml;charset=utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.28 2.17" preserveAspectRatio="none"><path d="M35.28 1.67c-3.07-.55-9.27.41-16.15 0-6.87-.4-13.74-.58-19.13.1v.4h35.28z" fill="%23c4e8c2"/></svg>'); 
+}
+
+@media (min-width:768px){
+.shapedividers_com-5524::before{
+   background-size: 100% 200px;
+   background-position: 50% 100%;   
+  }  
+}
+ 
+@media (min-width:1025px){
+.shapedividers_com-5524::before{ 
+   bottom: -0.1vw;
+   left: -0.1vw;
+   right: -0.1vw;
+   top: -0.1vw; 
+   background-size: 100% 200px;
+   background-position: 50% 100%;  
+  }
+}
+@media (min-width:2100px){
+.shapedividers_com-5524::before{
+   background-size: 100% calc(2vw + 200px);
+  }
+}
+
+.event{
+   margin-top: 430px;
+   padding-top: 280px;
+   background-color: #C4E8C2;
+}
+
+.event h1{
+   color: #46A094;
+   text-align: center;
+   font-family: Exo 2;
+   font-size: 96px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: normal; 
+   padding-bottom: 50px;
+}
+
+.event .event-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 150px;
+   padding: 60px 30px;
+}
+
+.event .event-container .event-box {
+   flex: 1 1 300px; /* Allow flexible width, with a minimum of 300px */
+   max-width: 360px; /* Limit the maximum width */
+   min-height: 360px; /* Maintain a minimum height */
+   border-radius: 20px;
+   background: #FAFAFA;
+   box-shadow: 15px 15px 4px 0px rgba(0, 0, 0, 0.25);
+   margin-top: 20px;
+   padding: 20px;
+}
+
+.event .event-container .event-box img {
+   max-width: 100%;
+   height: auto;
+}
+
+.event .event-container .event-box .chat{
+   display: flex;
+   margin: -150px 0 0 0;
+   justify-content: center;
+   align-items: center;
+}
+
+.event .event-container .event-box .gradhat{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: -120px 0 0 0;
+}
+
+.event .event-container .event-box .desktop{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: -189px 0 0 40px;
+}
+
+.event .event-container .event-box h3 {
+   color: #252525;
+   font-size: 28px;
+   margin-top: 50px;
+}
+
+.event .event-container .event-box p {
+   font-size: 18px;
+   color: #252525;
+   margin-top: 10px;
+}
+
+/* FOOTER CODES */
+
+footer{
+   position: relative;
+   width: 100%;
+   height: auto;
+   padding: 50px 100px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-direction: column;
+   flex-wrap: wrap;
+}
+
+footer .container{
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   flex-direction: row;
+}
+
+footer .container .sec{
+   margin-right: 30px;
+}
+
+footer .container .sec.aboutus{
+   width: 40%;
+}
+
+footer .container h2{
+   position: relative;
+   color: #252525;
+   font-weight: 500;
+   margin-bottom: 15px;
+}
+
+footer .container h2:before{
+   content: '';
+   position: absolute;
+   bottom: -5px;
+   left: 0;
+   width: 50px;
+   height: 2px;
+   background: #46A094;
+}
+
+footer p{
+   color: #252525;
+}
+
+.sci{
+   margin-top: 20px;
+   display: flex;
+   padding-left: 0;
+}
+
+.sci li{
+   list-style: none;
+}
+
+.sci li a{
+   display: inline-block;
+   width: 40px;
+   height: 40px;
+   background: #46A094;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-right: 10px;
+   text-decoration: none;
+   border-radius: 4px;
+}
+
+.sci li a:hover{
+   background: #f79b2e;
+}
+
+.sci li a .fa{
+   font-size: 20px;
+}
+
+.quicklinks{
+   position: relative;
+   width: 25%;
+}
+
+.quicklinks ul{
+   padding-left: 0;
+}
+
+.quicklinks ul li{
+   list-style: none;
+}
+
+.quicklinks ul li a{
+   color: #252525;
+   text-decoration: none;
+   margin-bottom: 10px;
+   display: inline-block;
+}
+
+.quicklinks ul li a:hover{
+   color: #f79b2e;
+}
+
+.contact{
+   width: calc(35% - 60px);
+   margin-right: 0 !important;
+}
+
+.contact .info{
+   position: relative;
+   padding-left: 0;
+}
+
+.contact .info li{
+   display: flex;
+   margin-bottom: 16px;
+}
+
+.contact .info li span:nth-child(1){
+   color: #252525;
+   font-size: 20px;
+   margin-right: 10px;
+}
+
+.contact .info li span{
+   color: #252525;
+}
+
+.contact .info li span i{
+   color: #46A094;
+}
+
+.contact .info li a{
+   color: #252525;
+   text-decoration: none;
+}
+
+.contact .info li span a i{
+   color: #999;
+   text-decoration: none;
+}
+
+.contact .info li a:hover{
+   color: #f79b2e;
+}
+
+.copyrightText{
+   width: 100%;
+   background: #46A094;
+   padding: 8px 100px;
+   text-align: center;
+}
+
+/* RESPONSIVE CODES */
+
+@media (max-width:991px){
+   footer{
+      padding: 40px;
+   }
+   footer .container{
+      flex-direction: column;
+   }
+   footer .container .sec{
+      margin-right: 0;
+      margin-bottom: 40px;
+   }
+   footer .container .sec.aboutus,
+   .quicklinks,
+   .contact{
+      width: 100%;
+   }
+   .copyrightText{
+      padding: 8px 40px;
+   }
+}
+
+@media (max-width:1682px){
+
+   .welcome-alumni
+   {
+      left:-350px;
+      width: 831.892px;
+      height: 526.815px;
+   }
+
+   .banner .banner-text
+   {
+      max-width: 1100px;
+      margin-left: 280px;
+      margin-top: -90px;
+   }
+
+   .banner .banner-text h3
+   {
+      font-size: 64px;
+   }
+   
+   .banner .banner-text p
+   {
+      font-size: 26px;
+   }
+
+   .books{
+      margin-top: 0;
+   }
+
+   .shapedividers_com-5524
+   {
+      top: 390px;
+   }
+
+   .event
+   {
+      margin-top: 390px;
+   }
+}
+
+@media (max-width:1560px){
+
+   .welcome-alumni
+   {
+      left: -320px;
+      width: 758.834px;
+      height: 480.55px;
+   }
+   .banner .banner-text
+   {
+      max-width: 1000px;
+      margin-left: 200px;
+      margin-top: -110px;
+   }
+   .banner .banner-text h3
+   {
+      font-size: 64px;
+   }
+   
+   .banner .banner-text p
+   {
+      font-size: 26px;
+   }
+
+   .books
+   {
+      width: 679px;
+      height: 577px;
+   }
+
+   .shapedividers_com-5524
+   {
+      top: 350px;
+   }
+
+   .event
+   {
+      margin-top: 350px;
+   }
+
+}
+
+@media (max-width:1425px){
+
+   .welcome-alumni
+   {
+      left: -270px;
+      width: 648.469px;
+      height: 410.658px;
+   }
+   .banner .banner-text
+   {
+      max-width: 900px;
+      margin-left: 200px;
+      margin-top: -140px;
+   }
+   .banner .banner-text h3
+   {
+      font-size: 60px;
+   }
+   
+   .banner .banner-text p
+   {
+      font-size: 24px;
+   }
+
+   .books
+   {
+      width: 527px;
+      height: 448px;
+   }
+
+   .shapedividers_com-5524
+   {
+      top: 290px;
+   }
+
+   .event
+   {
+      margin-top: 290px;
+      padding-top: 200px;
+   }
+}
+
+@media (max-width:1171px){
+
+   #menu-btn
+   {
+      display: inline-block;
+   }  
+
+   .header .flex .navbar
+   {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-content: flex-start;
+      background-color: #120b0b5e;
+      position: absolute;
+      top:99%; left:0; right:0;
+      transition: .2s linear;
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+   }
+
+   .header .flex .navbar.active
+   {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+   }
+
+   .header .flex .navbar a
+   {
+      display: block;
+      margin:2rem;   
+   }
+
+   .home-bg .home .content h3
+   {
+      font-size: 64px;
+   }
+
+   .home-bg .home .content h1
+   {
+      font-size: 64px;
+   }
+
+   .welcome-alumni
+   {
+      width: 591.814px;
+      height: 374.78px;
+      left: -250px;
+   }
+   .banner .banner-text
+   {
+      max-width: 600px;
+      margin-left: 250px;
+      margin-top: -100px;
+   }
+   .banner .banner-text h3
+   {
+      font-size: 54px;
+   }
+   
+   .banner .banner-text p
+   {
+      font-size: 24px;
+   }
+
+   .books
+   {
+      width: 471px;
+      height: 400px;
+   }
+
+   .shapedividers_com-5524
+   {
+      top: 260px;
+   }
+
+   .event
+   {
+      margin-top: 260px;
+      padding-top: 150px;
+   }
+
+   .update-profile form .flex
+   {
+      flex-wrap: wrap;
+      gap:0;
+   }
+
+   .update-profile form .flex .inputBox
+   {
+      width: 100%;
+   }
+}
+
+@media(max-width:850px){
+
+   .banner .banner-text
+   {
+      max-width: 500px;
+      margin-top: -80px;
+   }
+
+   .books
+   {
+      width: 354px;
+      height: 301px;
+      top: 60px;
+   }
+
+   .shapedividers_com-5524
+   {
+      top: 260px;
+   }
+
+   .event
+   {
+      margin-top: 260px;
+      padding-top: 120px;
+   }
+}
+
+@media (max-width:750px){
+   
+   .welcome-alumni
+   {
+      width: 403.892px;
+      height: 255.774px;
+      left: -170px;
+   }
+   .banner .banner-text
+   {
+      max-width: 500px;
+      margin-left: 150px;
+      margin-top: -180px;
+   }
+   .banner .banner-text h3
+   {
+      font-size: 46px;
+   }
+   
+   .banner .banner-text p
+   {
+      font-size: 22px;
+   }
+
+   .event h1
+   {
+      font-size: 64px;
+   }
+}
+
+@media (max-width:650px){
+   
+   .welcome-alumni
+   {
+      width: 345.458px;
+      height: 218.769px;
+      left: -150px;
+   }
+   .banner .banner-text
+   {
+      max-width: 370px;
+      margin-left: 150px;
+      margin-top: -240px;
+   }
+   .banner .banner-text h3
+   {
+      font-size: 36px;
+   }
+   
+   .banner .banner-text p
+   {
+      font-size: 16px;
+   }
 }
 
 
+@media (max-width:500px){
+
+   html
+   {
+      font-size: 50%;
+   }
+
+   .flex-btn
+   {
+      flex-flow: column;
+      gap:0;
+   }
+
+   .title
+   {
+      font-size: 3rem;
+   }
+
+   .home-bg .home .content h3
+   {
+      font-size: 56px;
+   }
+
+   .home-bg .home .content h1
+   {
+      font-size: 56px;
+   }
 
 
-
-
-body {
-    margin-top:20px;
-    background-color:#f2f6fc;
-    color:#69707a;
-}
-.img-account-profile {
-    height: 10rem;
-}
-.rounded-circle {
-    border-radius: 50% !important;
-}
-.card {
-    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
-}
-.card .card-header {
-    font-weight: 500;
-}
-.card-header:first-child {
-    border-radius: 0.35rem 0.35rem 0 0;
-}
-.card-header {
-    padding: 1rem 1.35rem;
-    margin-bottom: 0;
-    background-color: rgba(33, 40, 50, 0.03);
-    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-}
-.form-control, .dataTable-input {
-    display: block;
-    width: 100%;
-    padding: 0.875rem 1.125rem;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1;
-    color: #69707a;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #c5ccd6;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0.35rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+   .welcome-alumni
+   {
+      width: 323.237px;
+      height: 204.697px;
+      left: -140px;
+   }
+   
+   .banner .banner-text
+   {
+      max-width: 300px;
+      margin-left: 120px;
+      margin-top: -230px;
+   }
+   .banner .banner-text h3
+   {
+      font-size: 36px;
+   }
+   
+   .banner .banner-text p
+   {
+      font-size: 16px;
+   }
 }
 
-.nav-borders .nav-link.active {
-    color: #0061f2;
-    border-bottom-color: #0061f2;
-}
-.nav-borders .nav-link {
-    color: #69707a;
-    border-bottom-width: 0.125rem;
-    border-bottom-style: solid;
-    border-bottom-color: transparent;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-
-
-
-nav.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 250px; /* Adjust the width of the sidebar as needed */
-    background-color: #343a40; /* Add your desired background color for the sidebar */
-    color: #fff; /* Add your desired text color for the sidebar */
-    padding-top: 20px; /* Add any additional padding as needed */
+@media (max-width:420px){
+   
+   .welcome-alumni
+   {
+      width: 302.512px;
+      height: 191.573px;
+      left: -130px;
+   }
+   .banner .banner-text
+   {
+      max-width: 200px;
+      margin-left: 120px;
+      margin-top: -150px;
+   }
+   .banner .banner-text h3
+   {
+      font-size: 24px;
+   }
+   
+   .banner .banner-text p
+   {
+      font-size: 16px;
+   }
 }
 
-nav.sidebar a {
-    /* Add your sidebar link styles here */
-    /* display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #fff; */
-}
+@media (max-width:375px){
 
-nav.sidebar a:hover {
-    background-color: #495057; /* Add your desired background color on hover */
+   .event .event-container .event-box .desktop
+   {
+      margin: -189px 0 0 10px;
+   }
 }
-
-div.main-content {
-    margin-left: 250px; /* Adjust the left margin to match the width of the sidebar */
-    padding: 20px; /* Add any additional padding as needed */
-}
-    
