@@ -35,6 +35,8 @@ Route::get('/survey', [PageController::class, "survey"])->middleware('checkAuthR
 Route::get('/additional-info', [PageController::class, "addInfo"])->middleware('checkAuthRequirements');
 Route::get('/edit-profile', [PageController::class, "editProfile"])->middleware('authUser');
 
+Route::get('/jobs/{job:title}', [PageController::class, "jobsSinglePage"])->middleware('authUser');
+
 //User POST related routes
 Route::post('/login', [UserController::class, "login"])->middleware('guest');
 Route::post('/logout', [UserController::class, "logout"])->middleware('mustBeLoggedIn');
@@ -69,6 +71,7 @@ Route::get('admin/events', [PageController::class, 'adminEvents'])->middleware('
 Route::get('admin/gallery', [PageController::class, 'adminGallery'])->middleware('can:visitAdminPages');
 Route::get('admin/jobs', [PageController::class, 'adminJobs'])->middleware('can:visitAdminPages');
 Route::get('admin/forums', [PageController::class, 'adminForums'])->middleware('can:visitAdminPages');
+Route::get('admin/analytics', [PageController::class, "adminAnalytics"])->middleware('can:visitAdminPages');
 // add
 Route::get('admin/add-alumni', [PageController::class, 'addAlumniPage'])->middleware('can:visitAdminPages');
 Route::get('admin/add-news', [PageController::class, 'addNewsPage'])->middleware('can:visitAdminPages');

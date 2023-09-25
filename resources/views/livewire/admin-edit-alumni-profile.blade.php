@@ -207,7 +207,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="birthday">Birthday</label>
                                         <input wire:model="state.birthday"
@@ -222,8 +222,17 @@
 
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="age">Age</label>
+                                        <input wire:model="state.age"
+                                            class="form-control @error('age') is-invalid @enderror" type="text"
+                                            placeholder="Postal code" name="age" id="postal-code" disabled
+                                            readonly>
+                                    </div>
+                                </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="civil-status">Civil status</label>
                                         <select wire:model="state.civil_status"
@@ -344,7 +353,9 @@
 
                                 </div>
                             </div>
+
                             <div class="row">
+
                                 <div class="form-group">
                                     <label for="postal-code">Postal code</label>
                                     <input wire:model="state.postal_code"
@@ -359,6 +370,7 @@
                                     @enderror
 
                                 </div>
+
                             </div>
 
                             <div class="row">

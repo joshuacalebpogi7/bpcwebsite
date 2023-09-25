@@ -18,42 +18,63 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+    <!-- {{-- fonts --}} -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
     @vite(['resources/css/app.css'])
     @vite(['resources/js/app.js'])
+    @vite(['resources/js/design.js'])
     {{-- livewire style --}}
     @livewireStyles
 
 </head>
 
-<body>
-    <header>
-    </header>
-    <main>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">{{ __('Email Verification') }}</div>
-                        <div class="card-body">
-                            @if (session('resent'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ __('A fresh verification link has been sent to your email address.') }}
-                                </div>
-                            @endif
-                            {{ __('Before proceeding, please check your email for a verification link.') }}
-                            {{ __('If you did not receive the email') }},
-                            <form class="d-inline" method="POST" action="{{ route('verification.send') }}">
-                                @csrf
-                                <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
-                                    {{ __('click here to request another') }}
-                                </button>.
-                            </form>
-                        </div>
+<body
+    style="background-image: linear-gradient(180deg, rgba(0,165,111,0.6) 100%, rgba(2,25,19,0.865983893557423) 100%), url('/images/bg.jpg');">
+    @include('includes.header')
+
+    @if (session()->has('accept'))
+        <div class="container container-narrow">
+            <div class="alert alert-success text-center">
+                {{ session('accept') }}
+            </div>
+        </div>
+    @endif
+
+    @if (session()->has('reject'))
+        <div class="container container-narrow">
+            <div class="alert alert-danger text-center">
+                {{ session('reject') }}
+            </div>
+        </div>
+    @endif
+    <div class="container" style="margin-top: 10rem;">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Email Verification') }}</div>
+                    <div class="card-body">
+                        @if (session('resent'))
+                            <div class="alert alert-success" role="alert">
+                                {{ __('A fresh verification link has been sent to your email address.') }}
+                            </div>
+                        @endif
+                        {{ __('Before proceeding, please check your email for a verification link.') }}
+                        {{ __('If you did not receive the email') }},
+                        <form class="d-inline" method="POST" action="{{ route('verification.send') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
+                                {{ __('click here to request another') }}
+                            </button>.
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
     {{-- livewire script --}}
     @livewireScripts
     {{-- sweetalert installed in laravel --}}
@@ -66,6 +87,8 @@
     @include('includes.data-tables-script')
     {{-- sweetalert script --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

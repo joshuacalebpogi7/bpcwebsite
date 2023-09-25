@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <title>{{ $title ?? 'Home' }}</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
     <!-- {{-- fonts --}} -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
     <div class="sidebar" id="sidebar">
         <nav class="sidebar__container">
             <div class="sidebar__logo">
-                <img src="images/logo.png" alt="" class="sidebar__logo-img">
+                <img src="/images/logo.png" alt="" class="sidebar__logo-img">
                 <p class="sidebar__logo-text">Bulacan Polytechnic College</p>
             </div>
 
@@ -108,7 +108,7 @@
             </div>
 
             <div class="sidebar__account">
-                <img src="images/gab.png" alt="sidebar image" class="sidebar__perfil">
+                <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
 
                 <div class="sidebar__names">
                     <h3 class="sidebar__name">Gab Pogi</h3>

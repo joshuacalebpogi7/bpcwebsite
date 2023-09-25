@@ -199,7 +199,7 @@ class AddAlumniForm extends Component
             'email' => ['required', 'email', 'regex:/^[^\s]+$/', Rule::unique('users', 'email')],
             'password' => ['required', 'regex:/^[^\s]+$/', 'min:8'],
             'first_name' => ['required'],
-            'middle_name' => ['required'],
+            // 'middle_name' => ['required'],
             'last_name' => ['required'],
             'birthday' => ['required', 'date_format:Y-m-d'],
             'gender' => ['required', Rule::in(['male', 'female'])],

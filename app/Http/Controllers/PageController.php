@@ -72,10 +72,10 @@ class PageController extends Controller
         return view('events');
     }
 
-    public function jobs()
+    public function jobs(Jobs $jobs)
     {
         if (auth()->check()) {
-            return view('auth.jobs');
+            return view('auth.jobs', ['jobs' => $jobs->latest()->get()]);
         }
         return view('jobs');
     }
@@ -102,6 +102,13 @@ class PageController extends Controller
     public function editProfile(User $user)
     {
         return view('auth.edit-profile', ['user' => auth()->user()]);
+    }
+
+
+    //single pages
+    public function jobsSinglePage(Jobs $jobs)
+    {
+        return view('auth-single-pages.jobs-single-page', ['jobs' => $jobs->latest()->get(), 'jobclass' => $jobs]);
     }
 
 
@@ -191,5 +198,9 @@ class PageController extends Controller
     public function adminForums(User $user)
     {
         return view('admin.forums', ['surveys' => $user->latest()->get()]);
+    }
+    public function adminAnalytics(User $user, News $news, Events $events, Jobs $jobs)
+    {
+        return view('admin.analytics', ['users' => $user->latest()->get()->where('user_type', '!=', 'admin'), 'news' => $news->latest()->get(), 'events' => $events->latest()->get(), 'jobs' => $jobs->latest()->get()]);
     }
 }

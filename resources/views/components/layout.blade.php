@@ -39,9 +39,9 @@
             </div>
         </div>
     @endif
-    <div>
-        {{ $slot }}
-    </div>
+
+    {{ $slot }}
+
 
     @include('sweetalert::alert')
     @livewireScripts

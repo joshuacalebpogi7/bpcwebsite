@@ -4,7 +4,7 @@
     </x-slot>
     <x-slot name="assets">
         @vite(['resources/css/job.css'])
-        @vite(['resources/js/job.js'])
+        {{-- @vite(['resources/js/job.js']) --}}
         @vite(['resources/css/styles.css'])
         @vite(['resources/js/main.js'])
     </x-slot>
@@ -40,34 +40,38 @@
             </div>
         </div>
         <div class="wrapper">
-            <div class="card">
-                <div class="card-left blue-bg">
-                    <img src="images/chat.png">
-                </div>
-                <div class="card-center">
-                    <h3>Google</h3>
-                    <p class="card-detail">Data Science, Data Engineer</p>
-                    <p class="card-loc"><ion-icon name="location-outline"></ion-icon>Abcd street</p>
-                    <div class="card-sub">
-                        <p><ion-icon name="today-outline"></ion-icon>1 mins ago</p>
-                        <p><ion-icon name="hourglass-outline"></ion-icon>Full-time</p>
-                        <p><ion-icon name="people-outline"></ion-icon>200 Applicants</p>
+            @foreach ($jobs as $job)
+                <a href="/jobs/{{ $job->title }}">
+                    <div class="card">
+                        <div class="card-left blue-bg">
+                            <img src="/images/chat.png">
+                        </div>
+                        <div class="card-center">
+                            <h3>Google</h3>
+                            <p class="card-detail">Data Science, Data Engineer</p>
+                            <p class="card-loc"><ion-icon name="location-outline"></ion-icon>Abcd street</p>
+                            <div class="card-sub">
+                                <p><ion-icon name="today-outline"></ion-icon>1 mins ago</p>
+                                <p><ion-icon name="hourglass-outline"></ion-icon>Full-time</p>
+                                <p><ion-icon name="people-outline"></ion-icon>200 Applicants</p>
+                            </div>
+                        </div>
+                        <div class="card-right">
+                            <div class="card-tag">
+                                <h5>Division</h5>
+                                <a href="#">Data Engineer</a>
+                            </div>
+                            <div class="card-salary">
+                                <p><b>$350k</b> <span>/ year</span></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card-right">
-                    <div class="card-tag">
-                        <h5>Division</h5>
-                        <a href="#">Data Engineer</a>
-                    </div>
-                    <div class="card-salary">
-                        <p><b>$350k</b> <span>/ year</span></p>
-                    </div>
-                </div>
-            </div>
+                </a>
+            @endforeach
 
             <div class="card">
                 <div class="card-left yellow-bg">
-                    <img src="images/desktop.png">
+                    <img src="/images/desktop.png">
                 </div>
                 <div class="card-center">
                     <h3>Tiktok</h3>
@@ -143,7 +147,7 @@
     </div>
 
     <!--right section: details jobs-->
-    <div class="detail">
+    {{-- <div class="detail">
         <ion-icon class="close-detail" name="close-outline"></ion-icon>
         <div class="detail-header">
             <img src="images/chat.png">
@@ -172,6 +176,6 @@
             <button class="btn-apply">Apply Now</button>
             <button class="btn-save">Save Job</button>
         </div>
-    </div>
+    </div> --}}
 
 </x-home-layout>
