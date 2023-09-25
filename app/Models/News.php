@@ -23,7 +23,7 @@ class News extends Model
     protected function thumbnail(): Attribute
     {
         return Attribute::make(get: function ($value) {
-            return $value ? '/storage/news-thumbnail/' . $value : '/images/bpc_building2.jpg';
+            return $value ? '/storage/news-thumbnail/' . $value : '/images/news.png';
         });
     }
 }

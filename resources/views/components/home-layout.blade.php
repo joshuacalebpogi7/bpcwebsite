@@ -13,9 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-    @vite(['resources/css/home-styles.css'])
-    @vite(['resources/css/styles.css'])
-    @vite(['resources/js/main.js'])
+    {{ $assets }}
+
     @livewireStyles
 </head>
 
@@ -35,31 +34,31 @@
     <div class="sidebar" id="sidebar">
         <nav class="sidebar__container">
             <div class="sidebar__logo">
-                <img src="pictures/logo.png" alt="" class="sidebar__logo-img">
+                <img src="images/logo.png" alt="" class="sidebar__logo-img">
                 <p class="sidebar__logo-text">Bulacan Polytechnic College</p>
             </div>
 
             <div class="sidebar__content">
                 <div class="sidebar__list">
-                    <a href="/" class="sidebar__link active-link">
+                    <a href="/" class="sidebar__link {{ request()->is('/') ? 'active-link' : '' }}">
                         <i class="ri-home-5-line"></i>
                         <span class="sidebar__link-name">Home</span>
                         <span class="sidebar__link-floating">Home</span>
                     </a>
 
-                    <a href="#" class="sidebar__link">
+                    <a href="/news" class="sidebar__link {{ request()->is('news') ? 'active-link' : '' }}">
                         <i class="ri-newspaper-line"></i>
                         <span class="sidebar__link-name">News</span>
                         <span class="sidebar__link-floating">News</span>
                     </a>
 
-                    <a href="#" class="sidebar__link">
+                    <a href="/events" class="sidebar__link {{ request()->is('events') ? 'active-link' : '' }}">
                         <i class="ri-calendar-event-line"></i>
                         <span class="sidebar__link-name">Events</span>
                         <span class="sidebar__link-floating">Events</span>
                     </a>
 
-                    <a href="#" class="sidebar__link">
+                    <a href="/jobs" class="sidebar__link {{ request()->is('jobs') ? 'active-link' : '' }}">
                         <i class="ri-briefcase-4-fill"></i>
                         <span class="sidebar__link-name">Jobs</span>
                         <span class="sidebar__link-floating">Jobs</span>
@@ -67,13 +66,13 @@
                 </div>
 
                 <div class="sidebar__list">
-                    <a href="#" class="sidebar__link">
+                    <a href="/forums" class="sidebar__link {{ request()->is('forums') ? 'active-link' : '' }}">
                         <i class="ri-team-fill"></i>
                         <span class="sidebar__link-name">Forum</span>
                         <span class="sidebar__link-floating">Forum</span>
                     </a>
 
-                    <a href="#" class="sidebar__link">
+                    <a href="/gallery" class="sidebar__link {{ request()->is('gallery') ? 'active-link' : '' }}">
                         <i class="ri-gallery-fill"></i>
                         <span class="sidebar__link-name">Gallery</span>
                         <span class="sidebar__link-floating">Gallery</span>
@@ -109,7 +108,7 @@
             </div>
 
             <div class="sidebar__account">
-                <img src="pictures/gab.png" alt="sidebar image" class="sidebar__perfil">
+                <img src="images/gab.png" alt="sidebar image" class="sidebar__perfil">
 
                 <div class="sidebar__names">
                     <h3 class="sidebar__name">Gab Pogi</h3>
@@ -125,15 +124,21 @@
 
     <!--=============== MAIN ===============-->
     <main class="main container" id="main">
-        <h1></h1>
+
     </main>
 
-    <div>
-        {{ $slot }}
-    </div>
+
+    {{ $slot }}
+
     {{-- 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js"></script> --}}
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

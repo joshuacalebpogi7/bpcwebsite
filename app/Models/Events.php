@@ -23,7 +23,7 @@ class Events extends Model
     protected function thumbnail(): Attribute
     {
         return Attribute::make(get: function ($value) {
-            return $value ? '/storage/events-thumbnail/' . $value : '/images/bpc_building2.jpg';
+            return $value ? '/storage/events-thumbnail/' . $value : '/images/prog-pic.jpg';
         });
     }
 }

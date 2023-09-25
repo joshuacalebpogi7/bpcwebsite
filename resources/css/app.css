@@ -100,7 +100,7 @@ body{
 /* LANDING PAGE CODES */
 
 .home-bg {
-   background: linear-gradient(90deg, rgba(35, 217, 222, 0.5522584033613445) 0%, rgba(8, 116, 215, 0.55) 100%), url("/public/pictures/bg.jpg") no-repeat;
+   background: linear-gradient(90deg, rgba(35, 217, 222, 0.5522584033613445) 0%, rgba(8, 116, 215, 0.55) 100%), url("/public/images/bg.jpg") no-repeat;
    background-size: cover;
    background-position: center;
    z-index: 1000;

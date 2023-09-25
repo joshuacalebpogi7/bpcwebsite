@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\View;
 class PageController extends Controller
 {
     //user pages
-    public function home()
+    public function home(News $news, Events $events, Jobs $jobs)
     {
 
         if (auth()->check()) {
@@ -30,7 +30,7 @@ class PageController extends Controller
                         if ($user->survey_completed == false) {
                             return view('auth.survey')->with('info', 'Please complete this survey.');
                         } else {
-                            return view('auth.home');
+                            return view('auth.home', ['news' => $news->latest()->get(), 'events' => $events->latest()->get(), 'jobs' => $jobs->latest()->get()]);
                         }
                     }
                 } else if ($user->user_type == 'admin') {
@@ -45,29 +45,33 @@ class PageController extends Controller
             return view('index');
         }
     }
+
     public function addInfo()
     {
         return view('auth.additional-info');
     }
+
     public function survey()
     {
         return view('auth.survey');
     }
-    public function news()
+
+    public function news(News $news)
     {
         if (auth()->check()) {
-            return view('auth.news');
+            return view('auth.news', ['news' => $news->latest()->get()]);
         }
         return view('news');
     }
 
-    public function events()
+    public function events(Events $events)
     {
         if (auth()->check()) {
-            return view('auth.events');
+            return view('auth.events', ['events' => $events->latest()->get()]);
         }
         return view('events');
     }
+
     public function jobs()
     {
         if (auth()->check()) {
@@ -75,6 +79,7 @@ class PageController extends Controller
         }
         return view('jobs');
     }
+
     public function forums()
     {
         if (auth()->check()) {
@@ -82,6 +87,7 @@ class PageController extends Controller
         }
         return view('forums');
     }
+
     public function gallery()
     {
         if (auth()->check()) {
