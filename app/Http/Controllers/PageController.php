@@ -99,6 +99,10 @@ class PageController extends Controller
     {
         return view('login');
     }
+    public function forgotPassword()
+    {
+        return view('forgotpass');
+    }
     public function editProfile(User $user)
     {
         return view('auth.edit-profile', ['user' => auth()->user()]);
@@ -161,6 +165,11 @@ class PageController extends Controller
         $user = auth()->user();
         return view('admin.add-alumni', ['user' => $user]);
     }
+    public function addAdminPage(User $user)
+    {
+        $user = auth()->user();
+        return view('admin.add-admin', ['user' => $user]);
+    }
     public function addSurveyPage()
     {
         return view('admin.add-survey');
@@ -171,9 +180,14 @@ class PageController extends Controller
     {
         return view('admin.dashboard');
     }
+    //not finishhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+    public function adminAdmins(User $user)
+    {
+        return view('admin.admins', ['users' => $user->latest()->get()->where('user_type', '===', 'admin')]);
+    }
     public function adminUsers(User $user)
     {
-        return view('admin.users', ['users' => $user->latest()->get()->where('user_type', '!=', 'admin')]);
+        return view('admin.users', ['users' => $user->latest()->get()->where('user_type', '===', 'alumni')]);
     }
     public function adminSurvey(Survey $survey)
     {

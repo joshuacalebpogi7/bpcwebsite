@@ -31,6 +31,7 @@ Route::get('/jobs', [PageController::class, "jobs"])->middleware('restrictAdmin'
 Route::get('/forums', [PageController::class, "forums"])->middleware('restrictAdmin');
 Route::get('/gallery', [PageController::class, "gallery"])->middleware('restrictAdmin');
 Route::get('/login', [PageController::class, "login"])->name('login')->middleware('guest');
+Route::get('/forgot-password', [PageController::class, "forgotPassword"])->name('forgot-password-form')->middleware('guest');
 Route::get('/survey', [PageController::class, "survey"])->middleware('checkAuthRequirements');
 Route::get('/additional-info', [PageController::class, "addInfo"])->middleware('checkAuthRequirements');
 Route::get('/edit-profile', [PageController::class, "editProfile"])->middleware('authUser');
@@ -41,6 +42,7 @@ Route::get('/jobs/{job:title}', [PageController::class, "jobsSinglePage"])->midd
 Route::post('/login', [UserController::class, "login"])->middleware('guest');
 Route::post('/logout', [UserController::class, "logout"])->middleware('mustBeLoggedIn');
 Route::post('/submit-survey', [UserController::class, "submitSurvey"])->middleware('mustBeLoggedIn');
+Route::post('/submit-forgot-password', [UserController::class, "submitForgotPassword"])->name('forgot-password-form')->middleware('guest');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -80,6 +82,8 @@ Route::get('admin/add-jobs', [PageController::class, 'addJobsPage'])->middleware
 Route::get('admin/add-gallery', [PageController::class, 'addGalleryPage'])->middleware('can:visitAdminPages');
 Route::get('admin/add-forums', [PageController::class, 'addForumsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/add-survey', [PageController::class, 'addSurveyPage'])->middleware('can:visitAdminPages');
+Route::get('admin/add-admin', [PageController::class, 'addAdminPage'])->middleware('can:visitAdminPages');
+
 // edit
 Route::get('admin/edit-alumni/{user:username}', [PageController::class, 'editAlumniPage'])->middleware('can:visitAdminPages');
 Route::get('admin/edit-news/{news:id}/{title}', [PageController::class, 'editNewsPage'])->middleware('can:visitAdminPages');

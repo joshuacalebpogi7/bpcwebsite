@@ -14,6 +14,17 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
+    public function submitForgotPassword(User $user, Request $request)
+    {
+        $incomingFields = $request->validate([
+            'forgot_email' => ['email', 'required']
+        ]);
+        if (auth()->attempt(['email' => $incomingFields['forgot_email']])) {
+
+        } else {
+            return redirect('/login')->with('error', 'failed to log in.');
+        }
+    }
     public function submitSurvey(Request $request)
     {
         $user = auth()->user();

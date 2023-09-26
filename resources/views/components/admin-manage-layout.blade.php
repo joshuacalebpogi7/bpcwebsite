@@ -35,6 +35,9 @@
             {{-- @php
                 dd((Request::is('admin/add-news') || (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title))));
             @endphp --}}
+            @if (Request::is('admin/add-admin') || (isset($user) && Request::is('admin/edit-admin/' . $user->username)))
+                <a href="/admin/admins">&laquo; Back</a>
+            @endif
             @if (Request::is('admin/add-alumni') || (isset($user) && Request::is('admin/edit-alumni/' . $user->username)))
                 <a href="/admin/users">&laquo; Back</a>
             @endif
