@@ -19,12 +19,19 @@
                     step, you will receive a link in your inbox to set up your new password.</p>
             </div>
 
-            <form action="/submit-forgot-password" class="from">
+            <form action="/submit-forgot-password" class="from" method="POST">
+                @csrf
                 <div class="input-group">
                     <label for="email" class="label-title">Enter Your Email</label>
-                    <input type="email" name="forgot_email" placeholder="Enter your email" id="email">
+                    <input type="email" name="email" placeholder="Enter your email" id="email">
                     <span class="icon">&#9993;</span>
                 </div>
+                @error('email')
+                    <p>{{ $message }}</p>
+                @enderror
+                @if (session('error'))
+                    <p>{{ session('error') }}</p>
+                @endif
 
                 <div class="input-group">
                     <button class="submit-btn" type="submit">Send Reset Email</button>

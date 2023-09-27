@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <img src="images/bg2.png" alt="shape-divider" class="background-image">
+        <img src="/images/bg2.png" alt="shape-divider" class="background-image">
     </div>
 </body>
 

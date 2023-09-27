@@ -31,7 +31,7 @@ Route::get('/jobs', [PageController::class, "jobs"])->middleware('restrictAdmin'
 Route::get('/forums', [PageController::class, "forums"])->middleware('restrictAdmin');
 Route::get('/gallery', [PageController::class, "gallery"])->middleware('restrictAdmin');
 Route::get('/login', [PageController::class, "login"])->name('login')->middleware('guest');
-Route::get('/forgot-password', [PageController::class, "forgotPassword"])->name('forgot-password-form')->middleware('guest');
+
 Route::get('/survey', [PageController::class, "survey"])->middleware('checkAuthRequirements');
 Route::get('/additional-info', [PageController::class, "addInfo"])->middleware('checkAuthRequirements');
 Route::get('/edit-profile', [PageController::class, "editProfile"])->middleware('authUser');
@@ -42,7 +42,7 @@ Route::get('/jobs/{job:title}', [PageController::class, "jobsSinglePage"])->midd
 Route::post('/login', [UserController::class, "login"])->middleware('guest');
 Route::post('/logout', [UserController::class, "logout"])->middleware('mustBeLoggedIn');
 Route::post('/submit-survey', [UserController::class, "submitSurvey"])->middleware('mustBeLoggedIn');
-Route::post('/submit-forgot-password', [UserController::class, "submitForgotPassword"])->name('forgot-password-form')->middleware('guest');
+
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -62,7 +62,12 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('resent', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+Route::get('/forgot-password', [PageController::class, "forgotPassword"])->middleware('guest');
+Route::post('/submit-forgot-password', [UserController::class, "submitForgotPassword"])->middleware('guest');
 
+Route::post('/password/forgot',[UserController::class,'sendResetLink'])->name('forgot.password.link');
+Route::get('/password/reset/{token}',[UserController::class,'showResetForm'])->name('reset.password.form');
+Route::post('/password/reset',[UserController::class,'resetPassword'])->name('reset.password');
 
 //Admin GET related routes
 Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->middleware('can:visitAdminPages', 'verified');
