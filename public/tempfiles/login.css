@@ -37,7 +37,7 @@ body{
 }
 
 .side-image{
-    background: linear-gradient(90deg, rgba(38,106,79,0.8) 100%, rgba(8,116,215,0.55) 100%), url("/public/images/bg.jpg");
+    background: linear-gradient(90deg, rgba(38,106,79,0.8) 100%, rgba(8,116,215,0.55) 100%), url("../pictures/bg.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

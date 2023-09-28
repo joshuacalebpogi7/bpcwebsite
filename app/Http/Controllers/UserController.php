@@ -37,11 +37,11 @@ class UserController extends Controller
     ]);
     
     $action_link = route('reset.password.form',['token'=>$token,'email'=>$request->email]);
-    $body = "We are received a request to reset the password for <b>Your app Name </b> account associated with ".$request->email.". You can reset your password by clicking the link below";
+    $body = "We are received a request to reset the password for <b>BPC Alumni Portal </b> account associated with ".$request->email.". You can reset your password by clicking the link below";
 
    Mail::send('email-forgot',['action_link'=>$action_link,'body'=>$body], function($message) use ($request){
-         $message->from('noreply@example.com','Your App Name');
-         $message->to($request->email,'Your name')
+         $message->from('noreply@example.com','BPC Alumni Portal');
+         $message->to($request->email,'Admin')
                  ->subject('Reset Password');
    });
 

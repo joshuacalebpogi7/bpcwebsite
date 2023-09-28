@@ -12,11 +12,10 @@
 <body>
     <div class="wrapper1">
         <div class="container1">
-
+        <a href="/login"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon1"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M6 6L18 18"></path> <path stroke-linecap="round" stroke-width="2" stroke="#4C4F5A" d="M18 6L6 18"></path> </g></svg></a>
             <div class="title-section">
                 <h2 class="title">Reset Password</h2>
-                <p class="para">Please verify your email before creating your account. Once you've completed this
-                    step, you will receive a link in your inbox to set up your new password.</p>
+                <p class="para">Please verify your email before creating your account. Once you've completed this step, you will receive a link in your inbox to set up your new password.</p>
             </div>
 
             <form action="/submit-forgot-password" class="from" method="POST">

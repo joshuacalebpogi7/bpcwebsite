@@ -37,8 +37,9 @@
 
                 </div>
                 <div class="col-md-6 right">
+                    <a href="/" class="dismiss" style="text-decoration: none;">&#8592;</a> 
                     <div class="input-box">
-                        <img src="images/logo.png" alt="logo" class="logo" width="100px" height="100px">
+                        <img src="/images/logo.png" alt="logo" class="logo" width="100px" height="100px">
                         <header>Bulacan Polytechnic College</header>
                         <p>Alumni Login</p>
 
