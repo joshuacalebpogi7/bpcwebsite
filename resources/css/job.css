@@ -184,6 +184,15 @@ body{
 .card-center{
     width: 50%;
     padding-left: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.card-detail{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 .card-loc, .card-sub{

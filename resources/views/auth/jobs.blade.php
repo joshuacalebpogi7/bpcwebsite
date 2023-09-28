@@ -14,7 +14,9 @@
             <ion-icon class="menu-bar" name="menu-outline"></ion-icon>
             <div class="search">
                 <input type="text" placeholder="Search your best job here...">
-                <button class="btn-search"><ion-icon name="search-outline"></button>
+                <button class="btn-search">
+                    <ion-icon name="search-outline">
+                </button>
             </div>
         </div>
         <div class="filter-wrapper">
@@ -41,32 +43,42 @@
         </div>
         <div class="wrapper">
             @foreach ($jobs as $job)
-                <a href="/jobs/{{ $job->title }}">
-                    <div class="card">
-                        <div class="card-left blue-bg">
-                            <img src="/images/chat.png">
+
+            <div class="card">
+                <div class="card-left blue-bg">
+                    <a href="/jobs/{{ $job->title }}"> <img src="/images/chat.png"></a>
+                </div>
+                <div class="card-center">
+                    <a href="/jobs/{{ $job->title }}">
+                        <h3>{{ $job->company }}</h3>
+                        <p class="card-detail">{{ $job->title }}</p>
+                        <p class="card-loc">
+                            <ion-icon name="location-outline"></ion-icon>{{ $job->company }}
+                        </p>
+                        <div class="card-sub">
+                            <p>
+                                <ion-icon name="today-outline"></ion-icon>{{ $job->created_at->diffForHumans() }}
+                            </p>
+                            <p>
+                                <ion-icon name="hourglass-outline"></ion-icon>Full-time
+                            </p>
+                            <p>
+                                <ion-icon name="people-outline"></ion-icon>200 Applicants
+                            </p>
                         </div>
-                        <div class="card-center">
-                            <h3>Google</h3>
-                            <p class="card-detail">Data Science, Data Engineer</p>
-                            <p class="card-loc"><ion-icon name="location-outline"></ion-icon>Abcd street</p>
-                            <div class="card-sub">
-                                <p><ion-icon name="today-outline"></ion-icon>1 mins ago</p>
-                                <p><ion-icon name="hourglass-outline"></ion-icon>Full-time</p>
-                                <p><ion-icon name="people-outline"></ion-icon>200 Applicants</p>
-                            </div>
-                        </div>
-                        <div class="card-right">
-                            <div class="card-tag">
-                                <h5>Division</h5>
-                                <a href="#">Data Engineer</a>
-                            </div>
-                            <div class="card-salary">
-                                <p><b>$350k</b> <span>/ year</span></p>
-                            </div>
-                        </div>
+                </div>
+                <div class="card-right">
+                    <div class="card-tag">
+                        <h5>Division</h5>
+                        <a href="/jobs/{{ $job->title }}">{{ $job->job_title }}</a>
                     </div>
-                </a>
+                    <div class="card-salary">
+                        <p><b>$350k</b> <span>/ year</span></p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+
             @endforeach
 
             <div class="card">
@@ -76,11 +88,19 @@
                 <div class="card-center">
                     <h3>Tiktok</h3>
                     <p class="card-detail">Data Analytics, Product Analyst</p>
-                    <p class="card-loc"><ion-icon name="location-outline"></ion-icon>Abcd street</p>
+                    <p class="card-loc">
+                        <ion-icon name="location-outline"></ion-icon>Abcd street
+                    </p>
                     <div class="card-sub">
-                        <p><ion-icon name="today-outline"></ion-icon>10 mins ago</p>
-                        <p><ion-icon name="hourglass-outline"></ion-icon>Full-time</p>
-                        <p><ion-icon name="people-outline"></ion-icon>130 Applicants</p>
+                        <p>
+                            <ion-icon name="today-outline"></ion-icon>10 mins ago
+                        </p>
+                        <p>
+                            <ion-icon name="hourglass-outline"></ion-icon>Full-time
+                        </p>
+                        <p>
+                            <ion-icon name="people-outline"></ion-icon>130 Applicants
+                        </p>
                     </div>
                 </div>
                 <div class="card-right">
@@ -101,11 +121,19 @@
                 <div class="card-center">
                     <h3>Youtube</h3>
                     <p class="card-detail">Data Analyst, Product Analyst</p>
-                    <p class="card-loc"><ion-icon name="location-outline"></ion-icon>Abcd street</p>
+                    <p class="card-loc">
+                        <ion-icon name="location-outline"></ion-icon>Abcd street
+                    </p>
                     <div class="card-sub">
-                        <p><ion-icon name="today-outline"></ion-icon>1 hour ago</p>
-                        <p><ion-icon name="hourglass-outline"></ion-icon>Full-time</p>
-                        <p><ion-icon name="people-outline"></ion-icon>240 Applicants</p>
+                        <p>
+                            <ion-icon name="today-outline"></ion-icon>1 hour ago
+                        </p>
+                        <p>
+                            <ion-icon name="hourglass-outline"></ion-icon>Full-time
+                        </p>
+                        <p>
+                            <ion-icon name="people-outline"></ion-icon>240 Applicants
+                        </p>
                     </div>
                 </div>
                 <div class="card-right">
@@ -126,11 +154,19 @@
                 <div class="card-center">
                     <h3>Apple</h3>
                     <p class="card-detail">UI UX Designer</p>
-                    <p class="card-loc"><ion-icon name="location-outline"></ion-icon>Abcd street</p>
+                    <p class="card-loc">
+                        <ion-icon name="location-outline"></ion-icon>Abcd street
+                    </p>
                     <div class="card-sub">
-                        <p><ion-icon name="today-outline"></ion-icon>1 mins ago</p>
-                        <p><ion-icon name="hourglass-outline"></ion-icon>Full-time</p>
-                        <p><ion-icon name="people-outline"></ion-icon>175 Applicants</p>
+                        <p>
+                            <ion-icon name="today-outline"></ion-icon>1 mins ago
+                        </p>
+                        <p>
+                            <ion-icon name="hourglass-outline"></ion-icon>Full-time
+                        </p>
+                        <p>
+                            <ion-icon name="people-outline"></ion-icon>175 Applicants
+                        </p>
                     </div>
                 </div>
                 <div class="card-right">
