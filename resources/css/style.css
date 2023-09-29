@@ -374,6 +374,7 @@ body{
     background-color: #46A094;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     border: 1px solid transparent;
+    margin-bottom: 1rem;
   }
   
   .cards a {
@@ -440,6 +441,7 @@ body{
     padding: 20px;
     position: relative;
     overflow: hidden;
+    margin-bottom: 1rem;
   }
   
   .cookieCard::before {
@@ -1073,7 +1075,7 @@ padding: 10px 15px;
 
 .container1{
   position: relative;
-  max-width: 1350px;
+  max-width: 1250px;
   width: 100%;
   margin: 50px auto;
   padding: 20px;
@@ -1141,4 +1143,15 @@ button.active{
 .card11_text{
   font-size:18px;
   color: #333;
+}
+.post-header{
+  width: 100%;
+  height: 500px;
+  background: #30a05c;
+}
+
+.post-container{
+  max-width: 800px;
+  margin: auto;
+  width: 100%;
 }
