@@ -22,7 +22,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body style="background-color: black">
     <!-- Sidebar bg -->
 
     <!--=============== HEADER ===============-->
@@ -160,13 +160,13 @@
     <section class="post container5">
         @foreach ($events as $eventItem)
 
-        <div class="post-box mobile">
+        <div class="post-box mobile" style="background-color: rgb(78, 78, 78)">
             <img src="/images/bg.jpg" alt="" class="post-img">
             <h2 class="category">Mobile</h2>
             <a href="/events/{{$eventItem->title}}" class="post-title">
-                How To Create UX Design With Adobe XD
+                {{$eventItem->title}}
             </a>
-            <span class="post-date">12 Feb 2022</span>
+            <span class="post-date">{{$eventItem->created_at->format('F j, Y')}}</span>
             <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
 
             <div class="profile">

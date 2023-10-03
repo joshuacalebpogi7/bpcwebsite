@@ -130,7 +130,7 @@
 
     {{ $slot }}
 
-    <div class="footer container5" style="margin: 5rem auto; text-align:center">
+    {{-- <div class="footer container5" style="margin: 5rem; auto; text-align:center">
         <p>&#169; ALUMNIPORTAL All Rights Reserved</p>
         <div class="social" style="margin:auto; text-align:center">
             <a href="#" style="font-size: 1.5rem;"><i class="ri-facebook-circle-fill"></i></a>
@@ -138,7 +138,7 @@
             <a href="#" style="font-size: 1.5rem;"><i class="ri-instagram-fill"></i></a>
             <a href="#" style="font-size: 1.5rem;"><i class="ri-linkedin-box-fill"></i></a>
         </div>
-    </div>
+    </div> --}}
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
