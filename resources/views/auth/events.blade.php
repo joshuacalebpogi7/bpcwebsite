@@ -158,11 +158,12 @@
     </div>
 
     <section class="post container5">
+        @foreach ($events as $eventItem)
 
         <div class="post-box mobile">
             <img src="/images/bg.jpg" alt="" class="post-img">
             <h2 class="category">Mobile</h2>
-            <a href="single-page-post.php" class="post-title">
+            <a href="/events/{{$eventItem->title}}" class="post-title">
                 How To Create UX Design With Adobe XD
             </a>
             <span class="post-date">12 Feb 2022</span>
@@ -174,6 +175,7 @@
             </div>
         </div>
 
+        @endforeach
         <div class="post-box tech">
             <img src="/images/prog-pic.jpg" alt="" class="post-img">
             <h2 class="category">Tech</h2>

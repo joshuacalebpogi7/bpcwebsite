@@ -112,7 +112,7 @@ class PageController extends Controller
     //single pages
     public function jobsSinglePage(Jobs $jobs)
     {
-        return view('auth-single-pages.jobs-single-page', ['jobs' => $jobs->latest()->get(), 'jobclass' => $jobs]);
+        return view('auth-single-pages.jobs-single-page', ['jobs' => $jobs->latest()->get(), 'jobsclass' => $jobs]);
     }
     public function newsSinglePage(News $news)
     {
@@ -121,6 +121,10 @@ class PageController extends Controller
     public function eventsSinglePage(Events $events)
     {
         return view('auth-single-pages.events-single-page', ['events' => $events->latest()->get(), 'eventsclass' => $events]);
+    }
+    public function gallerySinglePage(Gallery $gallery)
+    {
+        return view('auth-single-pages.gallery-single-page', ['gallery' => $gallery->latest()->get(), 'galleryclass' => $gallery]);
     }
 
 

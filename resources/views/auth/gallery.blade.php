@@ -27,61 +27,68 @@
     </div>
     <div class="container1">
         <div class="filterable_cards">
-
+            @foreach ($gallery as $galleryItem)
             <div class="card11" data-name="phone">
-                <img src="images/study-pic.jpg" alt="">
-                <div class="card11_body">
-                    <h6 class="card11_title">Phone</h6>
-                    <p class="card11_text">Lorem ipsum dollar...</p>
-                </div>
+                <a href="/gallery/{gallery:title}"><img src="images/study-pic.jpg" alt="">
+                    <div class="card11_body">
+                        <h6 class="card11_title">Phone</h6>
+                        <p class="card11_text">Lorem ipsum dollar...</p>
+                    </div>
+                </a>
             </div>
-
+            @endforeach
             <div class="card11" data-name="clothes">
-                <img src="images/study-pic.jpg" alt="">
-                <div class="card11_body">
-                    <h6 class="card11_title">Clothes</h6>
-                    <p class="card11_text">Lorem ipsum dollar...</p>
-                </div>
+                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
+                    <div class="card11_body">
+                        <h6 class="card11_title">Clothes</h6>
+                        <p class="card11_text">Lorem ipsum dollar...</p>
+                    </div>
+                </a>
             </div>
 
             <div class="card11" data-name="shoes">
-                <img src="images/study-pic.jpg" alt="">
-                <div class="card11_body">
-                    <h6 class="card11_title">Phone</h6>
-                    <p class="card11_text">Lorem ipsum dollar...</p>
-                </div>
+                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
+                    <div class="card11_body">
+                        <h6 class="card11_title">Phone</h6>
+                        <p class="card11_text">Lorem ipsum dollar...</p>
+                    </div>
+                </a>
             </div>
 
             <div class="card11" data-name="shoes">
-                <img src="images/study-pic.jpg" alt="">
-                <div class="card11_body">
-                    <h6 class="card11_title">Shoe</h6>
-                    <p class="card11_text">Lorem ipsum dollar...</p>
-                </div>
+                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
+                    <div class="card11_body">
+                        <h6 class="card11_title">Shoe</h6>
+                        <p class="card11_text">Lorem ipsum dollar...</p>
+                    </div>
+                </a>
             </div>
 
             <div class="card11" data-name="phone">
-                <img src="images/study-pic.jpg" alt="">
-                <div class="card11_body">
-                    <h6 class="card11_title">Phone</h6>
-                    <p class="card11_text">Lorem ipsum dollar...</p>
-                </div>
+                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
+                    <div class="card11_body">
+                        <h6 class="card11_title">Phone</h6>
+                        <p class="card11_text">Lorem ipsum dollar...</p>
+                    </div>
+                </a>
             </div>
 
             <div class="card11" data-name="phone">
-                <img src="images/study-pic.jpg" alt="">
-                <div class="card11_body">
-                    <h6 class="card11_title">Phone</h6>
-                    <p class="card11_text">Lorem ipsum dollar...</p>
-                </div>
+                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
+                    <div class="card11_body">
+                        <h6 class="card11_title">Phone</h6>
+                        <p class="card11_text">Lorem ipsum dollar...</p>
+                    </div>
+                </a>
             </div>
 
             <div class="card11" data-name="phone">
-                <img src="images/study-pic.jpg" alt="">
-                <div class="card11_body">
-                    <h6 class="card11_title">Phone</h6>
-                    <p class="card11_text">Lorem ipsum dollar...</p>
-                </div>
+                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
+                    <div class="card11_body">
+                        <h6 class="card11_title">Phone</h6>
+                        <p class="card11_text">Lorem ipsum dollar...</p>
+                    </div>
+                </a>
             </div>
 
 
