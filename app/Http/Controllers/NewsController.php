@@ -27,16 +27,18 @@ class NewsController extends Controller
 
         $incomingFields = $request->validate([
             'title' => 'required',
-            'author' => 'required',
+            'author' => 'string',
+            'category' => 'required',
             'description' => 'required',
             'thumbnail' => 'nullable|image|max:5000',
             'link' => ['nullable', 'string', 'url'],
         ]);
 
-        if ($news->title !== $incomingFields['title'] || $news->author !== $incomingFields['author'] || $news->description !== $incomingFields['description'] || $request->hasFile('thumbnail') || $news->link !== $incomingFields['link']) {
+        if ($news->title !== $incomingFields['title'] || $news->author !== $incomingFields['author'] || $news->category !== $incomingFields['category'] || $news->description !== $incomingFields['description'] || $request->hasFile('thumbnail') || $news->link !== $incomingFields['link']) {
             // Update the existing fields
             $news->title = trim(strip_tags(ucwords($incomingFields['title'])));
             $news->author = trim(strip_tags(ucwords($incomingFields['author'])));
+            $news->category = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
             $news->description = $incomingFields['description'];
             $news->link = $incomingFields['link'];
             $news->updated_by = auth()->user()->username;
@@ -77,8 +79,9 @@ class NewsController extends Controller
 
         $incomingFields = $request->validate([
             'title' => 'required',
-            'author' => 'required',
+            'author' => 'string',
             'description' => 'required',
+            'category' => 'required',
             'thumbnail' => 'nullable|image|max:5000',
             'link' => ['nullable', 'string', 'url'],
         ]);
@@ -93,6 +96,7 @@ class NewsController extends Controller
 
         $incomingFields['title'] = trim(strip_tags(ucwords($incomingFields['title'])));
         $incomingFields['author'] = trim(strip_tags(ucwords($incomingFields['author'])));
+        $incomingFields['category'] = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
 
         $incomingFields['posted_by'] = auth()->user()->username;
         $incomingFields['updated_by'] = auth()->user()->username;

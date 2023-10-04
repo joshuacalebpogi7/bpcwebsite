@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('thumbnail')->nullable();
             $table->string('title');
+            $table->string('category');
             $table->longText('description');
             $table->dateTime('event_start')->nullable();
             $table->dateTime('event_end')->nullable();

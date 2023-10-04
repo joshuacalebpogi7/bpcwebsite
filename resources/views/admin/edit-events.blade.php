@@ -17,9 +17,9 @@
                         type="file" onchange="loadFile(event)" hidden>
 
                     @error('thumbnail')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                     @enderror
 
                     <button class="btn btn-primary"
@@ -33,38 +33,56 @@
             </div>
 
             {{-- @php
-                dd($events->thumbnail);
+            dd($events->thumbnail);
             @endphp --}}
             <div class="card mb-2 mt-3">
                 <div class="card-header bg-primary bg-gradient text-white">Add Events
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                placeholder="Event's title" name="title" id="title"
-                                value="{{ old('title', $events->title) }}">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input class="form-control @error('title') is-invalid @enderror" type="text"
+                                    placeholder="Event's title" name="title" id="title"
+                                    value="{{ old('title', $events->title) }}">
 
-                            @error('title')
+                                @error('title')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
-                            @enderror
+                                @enderror
+                            </div>
+                        </div>
 
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <input class="form-control @error('category') is-invalid @enderror" type="text"
+                                    placeholder="Category" name="category" id="category"
+                                    value="{{ old('category', $events->category) }}">
+
+                                @error('category')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
-                                cols="30" rows="10">{{ old('description', $events->description) }}</textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description"
+                                id="myeditorinstance" cols="30"
+                                rows="10">{{ old('description', $events->description) }}</textarea>
 
                             @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
 
                         </div>
@@ -77,9 +95,9 @@
                                 placeholder="Event Start" name="event_start" id="event_start"
                                 value="{{ old('event_start', $events->event_start) }}">
                             @error('event_start')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
 
@@ -89,9 +107,9 @@
                                 placeholder="Event End" name="event_end" id="event_end"
                                 value="{{ old('event_end', $events->event_end) }}">
                             @error('event_end')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
                     </div>
@@ -99,15 +117,14 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="link">Link</label>
-                            <input class="form-control @error('link') is-invalid @enderror" name="link"
-                                id="link" type="text" placeholder="Event's link"
-                                value="{{ old('link', $events->link) }}">
+                            <input class="form-control @error('link') is-invalid @enderror" name="link" id="link"
+                                type="text" placeholder="Event's link" value="{{ old('link', $events->link) }}">
 
 
                             @error('link')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
 
                         </div>

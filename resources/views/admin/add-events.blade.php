@@ -16,9 +16,9 @@
                         type="file" onchange="loadFile(event)" hidden>
 
                     @error('thumbnail')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                     @enderror
 
                     <button class="btn btn-primary"
@@ -36,31 +36,61 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                placeholder="News title" name="title" id="title" value="{{ old('title') }}">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input class="form-control @error('title') is-invalid @enderror" type="text"
+                                    placeholder="News title" name="title" id="title" value="{{ old('title') }}">
 
-                            @error('title')
+                                @error('title')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <input class="form-control @error('category') is-invalid @enderror" type="text"
+                                    placeholder="Category" name="category" id="category" value="{{ old('category') }}">
+
+                                @error('category')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="link">Link (Optional)</label>
+                            <input class="form-control @error('link') is-invalid @enderror" name="link" id="link"
+                                type="text" placeholder="News link" value="{{ old('link') }}">
+
+
+                            @error('link')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
 
                         </div>
                     </div>
 
-
                     <div class="row">
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
-                                cols="30" rows="10">{{ old('description', '**delete this text**<br> - feel free to format your text. <br> - no need to change font size or family. <br> - you can add emoticons if you want. <br> - every paragraph will be automatically indented so no need to indent it yourself.') }}</textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description"
+                                id="myeditorinstance" cols="30"
+                                rows="10">{{ old('description', '**delete this text**<br> - feel free to format your text. <br> - no need to change font size or family. <br> - you can add emoticons if you want. <br> - every paragraph will be automatically indented so no need to indent it yourself.') }}</textarea>
 
                             @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
 
                         </div>
@@ -73,9 +103,9 @@
                                 placeholder="Event Start" name="event_start" id="event_start"
                                 value="{{ old('event_start') }}">
                             @error('event_start')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
 
@@ -84,28 +114,13 @@
                             <input class="form-control @error('event_end') is-invalid @enderror" type="datetime-local"
                                 placeholder="Event End" name="event_end" id="event_end" value="{{ old('event_end') }}">
                             @error('event_end')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="link">Link (Optional)</label>
-                            <input class="form-control @error('link') is-invalid @enderror" name="link"
-                                id="link" type="text" placeholder="News link" value="{{ old('link') }}">
-
-
-                            @error('link')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                        </div>
-                    </div>
                     <button class="btn btn-primary">Add Event</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </div>

@@ -33,60 +33,61 @@
                 <h1>Admin Panel</h1>
             </a>
             {{-- @php
-                dd((Request::is('admin/add-news') || (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title))));
+            dd((Request::is('admin/add-news') || (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' .
+            $news->title))));
             @endphp --}}
-            @if (Request::is('admin/add-admin') || (isset($user) && Request::is('admin/edit-admin/' . $user->username)))
-                <a href="/admin/admins">&laquo; Back</a>
+            @if (Request::is('admin/add-admin') || (isset($user) && Request::is('admin/edit-admin/*')))
+            <a href="/admin/admins">&laquo; Back</a>
             @endif
-            @if (Request::is('admin/add-alumni') || (isset($user) && Request::is('admin/edit-alumni/' . $user->username)))
-                <a href="/admin/users">&laquo; Back</a>
+            @if (Request::is('admin/add-alumni') || (isset($user) && Request::is('admin/edit-alumni/*')))
+            <a href="/admin/users">&laquo; Back</a>
             @endif
 
             @if (Request::is('admin/add-survey') ||
-                    (isset($survey) && Request::is('admin/edit-survey/' . $survey->id . '/' . $survey->title)))
-                <a href="/admin/surveys">&laquo; Back</a>
+            (isset($survey) && Request::is('admin/edit-survey/*')))
+            <a href="/admin/surveys">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-news') || (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title)))
-                <a href="/admin/news">&laquo; Back</a>
+            @if (Request::is('admin/add-news') || (isset($news) && Request::is('admin/edit-news/*')))
+            <a href="/admin/news">&laquo; Back</a>
             @endif
 
             @if (Request::is('admin/add-events') ||
-                    (isset($events) && Request::is('admin/edit-events/' . $events->id . '/' . $events->title)))
-                <a href="/admin/events">&laquo; Back</a>
+            (isset($events) && Request::is('admin/edit-events/*')))
+            <a href="/admin/events">&laquo; Back</a>
             @endif
 
             @if (Request::is('admin/add-gallery') ||
-                    (isset($gallery) && Request::is('admin/edit-gallery/' . $gallery->id . '/' . $gallery->title)))
-                <a href="/admin/gallery">&laquo; Back</a>
+            (isset($gallery) && Request::is('admin/edit-gallery/*')))
+            <a href="/admin/gallery">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-jobs') || (isset($jobs) && Request::is('admin/edit-jobs/' . $jobs->id . '/' . $jobs->title)))
-                <a href="/admin/jobs">&laquo; Back</a>
+            @if (Request::is('admin/add-jobs') || (isset($jobs) && Request::is('admin/edit-jobs/*')))
+            <a href="/admin/jobs">&laquo; Back</a>
             @endif
 
             @if (Request::is('admin/add-forums') ||
-                    (isset($forums) && Request::is('admin/edit-forums/' . $forums->id . '/' . $forums->title)))
-                <a href="/admin/forums">&laquo; Back</a>
+            (isset($forums) && Request::is('admin/edit-forums/*')))
+            <a href="/admin/forums">&laquo; Back</a>
             @endif
 
         </nav>
     </header>
 
     @if (session()->has('accept'))
-        <div class="container container-narrow">
-            <div class="alert alert-success text-center">
-                {{ session('accept') }}
-            </div>
+    <div class="container container-narrow">
+        <div class="alert alert-success text-center">
+            {{ session('accept') }}
         </div>
+    </div>
     @endif
 
     @if (session()->has('reject'))
-        <div class="container container-narrow">
-            <div class="alert alert-danger text-center">
-                {{ session('reject') }}
-            </div>
+    <div class="container container-narrow">
+        <div class="alert alert-danger text-center">
+            {{ session('reject') }}
         </div>
+    </div>
     @endif
 
     <div>
@@ -108,12 +109,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/tinymce/tinymce.min.js"></script>
     @if (Request::is('admin/add-news') ||
-            (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title)) ||
-            Request::is('admin/add-events') ||
-            (isset($events) && Request::is('admin/edit-events/' . $events->id . '/' . $events->title)) ||
-            Request::is('admin/add-jobs') ||
-            (isset($jobs) && Request::is('admin/edit-jobs/' . $jobs->id . '/' . $jobs->title)))
-        @include('includes.img-preview')
+    (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title)) ||
+    Request::is('admin/add-events') ||
+    (isset($events) && Request::is('admin/edit-events/' . $events->id . '/' . $events->title)) ||
+    Request::is('admin/add-jobs') ||
+    (isset($jobs) && Request::is('admin/edit-jobs/' . $jobs->id . '/' . $jobs->title)))
+    @include('includes.img-preview')
     @endif
     <script>
         window.addEventListener('email-success', event => {

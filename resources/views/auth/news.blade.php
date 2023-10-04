@@ -151,8 +151,29 @@
     </div>
 
     <div class="post-filter container5">
+
         <span class="filter-item active-filter" data-filter='all'>All</span>
-        <span class="filter-item" data-filter='design'>Design</span>
+        {{-- @foreach ($news as $newsCategory)
+        <span class="filter-item" data-filter='{{$newsCategory->category}}'>{{$newsCategory->category}}</span>
+        @endforeach --}}
+        @php
+        $uniqueCategories = [];
+        @endphp
+
+        @foreach ($news as $newsCategory)
+        @php
+        $category = $newsCategory->category;
+        $sentenceCaseCategory = ucfirst(strtolower($category));
+        @endphp
+
+        @if (!in_array($sentenceCaseCategory, $uniqueCategories))
+        <span class="filter-item" data-filter='{{$sentenceCaseCategory}}'>{{$sentenceCaseCategory}}</span>
+        @php
+        $uniqueCategories[] = $sentenceCaseCategory;
+        @endphp
+        @endif
+        @endforeach
+
         <span class="filter-item" data-filter='tech'>Tech</span>
         <span class="filter-item" data-filter='mobile'>Mobile</span>
     </div>
@@ -161,8 +182,8 @@
 
         @foreach ($news as $newsItem)
 
-        <div class="post-box mobile">
-            <img src="/images/bg.jpg" alt="" class="post-img">
+        <div class="post-box {{$newsItem->category}}">
+            <img src="{{$newsItem->thumbnail}}" alt="" class="post-img">
             <h2 class="category">{{$newsItem->title}}</h2>
             <a href="/news/{{$newsItem->title}}" class="post-title">
                 {{$newsItem->title}}
@@ -177,6 +198,7 @@
         </div>
 
         @endforeach
+
         <div class="post-box tech">
             <img src="/images/prog-pic.jpg" alt="" class="post-img">
             <h2 class="category">Tech</h2>

@@ -25,19 +25,19 @@
     @include('includes.header')
 
     @if (session()->has('accept'))
-        <div class="container container-narrow">
-            <div class="alert alert-success text-center">
-                {{ session('accept') }}
-            </div>
+    <div class="container container-narrow">
+        <div class="alert alert-success text-center">
+            {{ session('accept') }}
         </div>
+    </div>
     @endif
 
     @if (session()->has('reject'))
-        <div class="container container-narrow">
-            <div class="alert alert-danger text-center">
-                {{ session('reject') }}
-            </div>
+    <div class="container container-narrow">
+        <div class="alert alert-danger text-center">
+            {{ session('reject') }}
         </div>
+    </div>
     @endif
 
     {{ $slot }}

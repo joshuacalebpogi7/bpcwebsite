@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('thumbnail')->nullable();
             $table->string('author');
+            $table->string('category');
             $table->string('title');
             $table->longText('description');
             $table->string('link')->nullable();
