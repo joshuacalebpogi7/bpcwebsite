@@ -21,6 +21,35 @@
         <div class="card mb-2 mt-3">
             <div class="card-header bg-primary bg-gradient text-white">Add Album
             </div>
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Album Cover</div>
+                <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    @if ($album_cover)
+                    <img class="img-account-profile rounded-circle mb-2" src="{{ $album_cover->temporaryUrl() }}"
+                        alt="">
+                    @else
+                    <img class="img-account-profile rounded-circle mb-2" src="{{ $galleryAlbum->album_cover }}" alt="">
+                    @endif
+
+                    <!-- Profile picture help block-->
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <!-- Profile picture upload button-->
+
+                    <input id="getFile" name="album_cover" type="file" wire:model="album_cover" hidden>
+                    @error('album_cover')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <button class="btn btn-primary" onclick="document.getElementById('getFile').click()">Upload
+                        new
+                        image</button>
+                    @if ($album_cover)
+                    <button wire:click.ignore="resetAlbumCover" class="btn btn-danger">Cancel</button>
+                    <button wire:click.ignore="updateAlbumCover" class="btn btn-success">Save</button>
+                    @endif
+
+                </div>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="form-group">
@@ -76,7 +105,7 @@
             </thead>
             <!-- Table body -->
             <tbody>
-                @foreach ($albums as $album)
+                @foreach ($galleryAlbum as $album)
                 @if ($albumIdToUpdate === $album->id)
                 <!-- Edit form -->
                 <tr>

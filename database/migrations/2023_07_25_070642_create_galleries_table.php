@@ -15,8 +15,9 @@ return new class extends Migration {
             $table->string('photo');
             $table->string('title');
             $table->longText('description');
-            $table->foreignId('user_id');
             $table->foreignId('album_id');
+            $table->string('posted_by');
+            $table->string('updated_by');
             $table->timestamps();
         });
     }

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('album_name');
             $table->longText('description');
             $table->string('album_cover')->nullable();
-            $table->foreignId('user_id');
+            $table->string('posted_by');
+            $table->string('updated_by');
             $table->timestamps();
         });
     }

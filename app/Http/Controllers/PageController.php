@@ -174,7 +174,7 @@ class PageController extends Controller
     }
     public function addGalleryPage(Gallery $gallery)
     {
-        return view('admin.add-gallery', ['gallery' => $gallery->latest()->get(), 'galleryItem' => $gallery]);
+        return view('admin.add-gallery', ['gallery' => $gallery, 'galleryItem' => $gallery->latest()->get()]);
     }
     public function addAlumniPage(User $user)
     {

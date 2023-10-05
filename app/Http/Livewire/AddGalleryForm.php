@@ -4,244 +4,149 @@ namespace App\Http\Livewire;
 
 use App\Models\Gallery;
 use Livewire\Component;
+use Illuminate\Support\Str;
+use App\Models\GalleryAlbum;
+use Livewire\WithFileUploads;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class AddGalleryForm extends Component
 {
-    //add course
-    public $course;
+    use WithFileUploads;
+ 
     public $description;
+    public $album_cover;
+    public $photo;
+    //gallery model
+    public $gallery;
+    //gallery album model
+    public $galleryAlbum;
+    public $showAlbums = false;
+    public $albumIdToUpdate;
+    public $album_name;
+    public $albumName;
+    public $albumDescription;
+    public $album_id;
 
-    //add alumni
-    public $student_no;
-    public $course_alumni;
-    public $year_graduated;
-    public $first_name;
-    public $middle_name;
-    public $last_name;
-    public $gender;
-    public $birthday;
-    public $email;
-    public $password;
-
-    //course reference
-    public $courses;
-
-    //show courses
-    public $showCourses = false;
-    public $courseIdToUpdate;
-    public $courseName;
-    public $courseDescription;
-    public $course_id;
-
-    protected $listeners = ['courseAdded' => 'updateCourses', 'deleteCourseConfirmed' => 'deleteCourse', 'resetAlumniFormConfirmed' => 'resetAlumniForm'];
+    // protected $listeners = ['courseAdded' => 'updateCourses', 'deleteCourseConfirmed' => 'deleteCourse', 'resetAlumniFormConfirmed' => 'resetAlumniForm'];
 
     public function mount()
     {
-        $this->updateCourses();
+        $this->updateAlbums();
     }
-
-    public function editCourse($courseId)
+    public function editAlbum($albumId)
     {
-        $gallery = Gallery::findOrFail($courseId);
+        $album = GalleryAlbum::findOrFail($albumId);
 
-        if ($course) {
-            $this->courseIdToUpdate = $course->id;
-            $this->courseName = $course->course;
-            $this->courseDescription = $course->description;
+        if ($album) {
+            $this->albumIdToUpdate = $album->id;
+            $this->albumName = $album->album_name; // Updated property name
+            $this->albumDescription = $album->description; // Updated property name
+            // You may also want to update $this->album_cover if you want to edit the album cover.
         }
     }
-
-    public function updateCourse()
+    public function updateAlbum()
     {
         $this->resetErrorBag();
         $this->validate([
-            'courseName' => ['required'],
-            'courseDescription' => ['required'],
+            'albumName' => ['required'],
+            'albumDescription' => ['required'],
         ]);
 
-        $course = Course::findOrFail($this->courseIdToUpdate);
-        $course->update([
-            'course' => $this->courseName,
-            'description' => $this->courseDescription,
+        $album = GalleryAlbum::findOrFail($this->albumIdToUpdate);
+        $album->update([
+            'album_name' => $this->albumName,
+            'description' => $this->albumDescription,
         ]);
 
-        $this->updateCourses();
+        $this->updateAlbums();
         $this->cancelEdit();
-        session()->flash('success', 'Course successfully updated.');
+        session()->flash('success', 'Album successfully updated.');
     }
-
     public function cancelEdit()
     {
         $this->courseIdToUpdate = null;
         $this->courseName = null;
         $this->courseDescription = null;
     }
-
-    public function toggleShowCourses()
+    public function toggleShowAlbums()
     {
-        $this->showCourses = !$this->showCourses;
+        $this->showAlbums = !$this->showAlbums;
         $this->cancelEdit();
     }
-
-    public function updateCourses()
+    public function updateAlbums()
     {
         // Fetch the updated list of courses
-        $this->courses = Course::all();
+        $this->galleryAlbum = GalleryAlbum::all();
     }
-
-    public function deleteConfirmation($courseId)
+    public function deleteConfirmation($albumId)
     {
-        $this->course_id = $courseId;
-        $this->dispatchBrowserEvent('show-course-delete-confirmation');
+        $this->album_id = $albumId;
+        $this->dispatchBrowserEvent('show-album-delete-confirmation');
     }
     public function deleteCourse()
     {
-        $courseId = $this->course_id;
+        $albumId = $this->album_id;
         $this->resetErrorBag();
         // Find the course by ID
-        $course = Course::findOrFail($courseId);
+        $album = GalleryAlbum::findOrFail($albumId);
 
 
-        if ($course) {
+        if ($album) {
             // Delete the course
-            $course->delete();
-            $this->dispatchBrowserEvent('course-deleted');
+            $album->delete();
+            $this->dispatchBrowserEvent('album-deleted');
         } else {
-            $this->dispatchBrowserEvent('course-error');
+            $this->dispatchBrowserEvent('album-error');
         }
-
         // Refresh the courses list after deletion
-        $this->courses = Course::all();
+        $this->albums = GalleryAlbum::all();
     }
 
-    public function generatePassword()
+    public function resetAlbumForm()
     {
-        // List of characters to be used in the random password
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
-
-        // Get the total number of characters in the list
-        $numCharacters = strlen($characters);
-
-        // Initialize an empty password string
-        $generatedPassword = '';
-
-        // Generate random characters to build the password
-        for ($i = 0; $i < 12; $i++) {
-            $randomIndex = rand(0, $numCharacters - 1);
-            $generatedPassword .= $characters[$randomIndex];
-        }
-
-        // Update the $password property with the generated password
-        $this->password = $generatedPassword;
-    }
-    public function resetAlumniFormConfirmation()
-    {
-        if (
-            !empty($this->student_no) ||
-            !empty($this->email) ||
-            !empty($this->password) ||
-            !empty($this->first_name) ||
-            !empty($this->middle_name) ||
-            !empty($this->last_name) ||
-            !empty($this->birthday) ||
-            !empty($this->gender) ||
-            !empty($this->course_alumni) ||
-            !empty($this->year_graduated)
-        ) {
-            $this->dispatchBrowserEvent('show-reset-alumni-form-confirmation');
-        }
-    }
-    public function resetAlumniForm()
-    {
-        if (
-            !empty($this->student_no) ||
-            !empty($this->email) ||
-            !empty($this->password) ||
-            !empty($this->first_name) ||
-            !empty($this->middle_name) ||
-            !empty($this->last_name) ||
-            !empty($this->birthday) ||
-            !empty($this->gender) ||
-            !empty($this->course_alumni) ||
-            !empty($this->year_graduated)
-        ) {
-            $this->reset([
-                'student_no',
-                'email',
-                'password',
-                'first_name',
-                'middle_name',
-                'last_name',
-                'birthday',
-                'gender',
-                'course_alumni',
-                'year_graduated',
-            ]);
-        }
-    }
-    public function addAlumni()
-    {
-        $this->resetErrorBag();
-
-        if ($this->birthday) {
-            $birthday = Carbon::createFromFormat('Y-m-d', $this->birthday);
-            $age = $birthday->diffInYears(Carbon::now());
-        }
-        $this->validate([
-            'student_no' => ['required', 'min:3', 'max:15', 'regex:/^[^\s]+$/', Rule::unique('users', 'username')],
-            'email' => ['required', 'email', 'regex:/^[^\s]+$/', Rule::unique('users', 'email')],
-            'password' => ['required', 'regex:/^[^\s]+$/', 'min:8'],
-            'first_name' => ['required'],
-            // 'middle_name' => ['required'],
-            'last_name' => ['required'],
-            'birthday' => ['required', 'date_format:Y-m-d'],
-            'gender' => ['required', Rule::in(['male', 'female'])],
-            'course_alumni' => ['required', Rule::exists('courses', 'course')],
-            'year_graduated' => ['required', 'numeric'],
-        ]);
-
-        User::create([
-            'username' => $this->student_no,
-            'email' => $this->email,
-            'password' => $this->password,
-            'first_name' => trim(strip_tags(ucwords($this->first_name))),
-            'middle_name' => trim(strip_tags(ucwords($this->middle_name))),
-            'last_name' => trim(strip_tags(ucwords($this->last_name))),
-            'birthday' => $this->birthday,
-            'gender' => $this->gender,
-            'course' => $this->course_alumni,
-            'year_graduated' => $this->year_graduated,
-            "age" => $age,
-            'default_password' => $this->password,
-        ]);
-
-        $this->resetAlumniForm();
-
-        session()->flash('success', 'Alumni successfully added.');
+        $this->reset(['album_name', 'album_cover', 'description']);
     }
 
-    public function resetCourseForm()
-    {
-        $this->reset(['course', 'description']);
-    }
+    public function addAlbum()
+{
+    $this->resetErrorBag();
+    $this->validate([
+        'album_name' => ['required'],
+        'description' => ['required', 'max:255'],
+        'album_cover' => ['required', 'image', 'max:5000']
+    ]);
 
-    public function addCourse()
-    {
-        $this->resetErrorBag();
-        $this->validate([
-            'course' => ['required'],
-            'description' => ['required', 'max:255']
-        ]);
+    // Generate a unique name for the new album cover
+    $album_cover_name = Str::uuid() . '.' . $this->album_cover->getClientOriginalExtension();
 
-        Course::create([
-            'course' => $this->course,
-            'description' => $this->description,
-        ]);
+    // Store the new album cover
+    $imgData = Image::make($this->album_cover)->encode('jpg');
+    $upload_album_cover = Storage::put('public/album-covers/' . $album_cover_name, $imgData);
 
-        $this->resetCourseForm(); // Clear the input fields after adding the course
-        $this->dispatchBrowserEvent('course-success');
-        $this->emit('courseAdded');
-    }
+    // Create a new album record in the database
+    GalleryAlbum::create([
+        'album_name' => $this->album_name,
+        'description' => $this->description,
+        'album_cover' => $album_cover_name,
+    ]);
+
+    // Reset form fields and show success message
+    $this->resetGalleryForm();
+    toastr()->success('', 'Album added successfully!', [
+        "showEasing" => "swing",
+        "hideEasing" => "swing",
+        "showMethod" => "slideDown",
+        "hideMethod" => "slideUp"
+    ]);
+
+    // Emit events if necessary
+    $this->dispatchBrowserEvent('gallery-success');
+    $this->emit('galleryAdded');
+}
+
+
+    
     public function render()
     {
         return view('livewire.add-gallery-form');

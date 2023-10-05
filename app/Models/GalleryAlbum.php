@@ -6,18 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Gallery extends Model
+class GalleryAlbum extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'photo',
-        'title',
+        'album_name',
         'description',
-        'album_id',
-        // 'album_name',
-        // 'album_cover',
+        'album_cover',
         'posted_by',
         'updated_by',
     ];
 
+    protected function thumbnail(): Attribute
+    {
+        return Attribute::make(get: function ($value) {
+            return $value ? '/storage/album_cover/' . $value : '/images/prog-pic.jpg';
+        });
+    }
 }
