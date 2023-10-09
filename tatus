@@ -1,0 +1,115 @@
+[33mcommit 994d7a4c0ce7db71ff5e8990b7bb40f3cdbdde20[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Mon Oct 9 18:37:15 2023 +0800
+
+    fix reset password functionality
+
+[33mcommit 70a2a72fdaa9eda61aa6f31c4764de0143aa317d[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Oct 5 09:42:02 2023 +0800
+
+    tryingto dogallery livewire
+
+[33mcommit a32e8b71161be72ad3360c0f5b150b18e7702660[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Oct 5 00:56:42 2023 +0800
+
+    updating gallery function...
+
+[33mcommit 7ee75587b877e9d50c6e75a16d25dd9ebf12594e[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Tue Oct 3 21:39:01 2023 +0800
+
+    minor changes in home-layout and events
+
+[33mcommit 0d62564f13f45bc15b229ef7171f2f2064558d12[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Tue Oct 3 17:51:29 2023 +0800
+
+    added gallery UI, tried fixing footer and fix some links
+
+[33mcommit 515ec3716c32150c83bf212549c96488065ae64a[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Fri Sep 29 10:19:01 2023 +0800
+
+    update
+
+[33mcommit e0e5426f53a987cb19b75178acaa87bd26565dc0[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Sep 28 12:39:54 2023 +0800
+
+    fix jobs' ui
+
+[33mcommit 27a6f3045b0c41df4c4c5b535754d2ebac38b81d[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Sep 28 10:54:49 2023 +0800
+
+    added UI design for forgot password
+
+[33mcommit f8588b8427fdfeb1cc673e1ac4b131413a920520[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Sep 28 02:34:58 2023 +0800
+
+    added forgot password function but no UI
+
+[33mcommit ea659ca2c3352c8d1e76abb0d50e69ee2a455471[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Tue Sep 26 19:36:09 2023 +0800
+
+    added many things but need to remove many things too
+
+[33mcommit 6e8affa08148ea5f0fb45080498cd93ebb8f5a5c[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Tue Sep 26 09:39:58 2023 +0800
+
+    added forums and gallery ui page
+
+[33mcommit 7541febdd8b5b49ed3521b940889f9e3a9ed82e6[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Mon Sep 25 19:06:49 2023 +0800
+
+    update again
+
+[33mcommit 948b916df59a21aec2302f5c2f355b1b662a37c7[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Mon Sep 25 10:23:27 2023 +0800
+
+    update
+
+[33mcommit ce0bb83e7d2f05f01973ba6591aee90bfbfcfada[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Sep 21 13:56:13 2023 +0800
+
+    deleted bpc website
+
+[33mcommit 9fe7126c4c92c5031e0b31feaac33eb92822dc9d[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Sep 21 13:51:54 2023 +0800
+
+    updated files
+
+[33mcommit fbac7bc1b9aba73e0cda3158df83b28146071697[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Sep 21 13:28:21 2023 +0800
+
+    Revert "I change styles.css"
+    
+    This reverts commit 554fd4f9007f5e4ce28734cec391c94243e92255.
+
+[33mcommit 554fd4f9007f5e4ce28734cec391c94243e92255[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Thu Sep 21 13:17:01 2023 +0800
+
+    I change styles.css
+
+[33mcommit 9604131f4a041af38848f9894883dfc97d0de0e1[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Sat Aug 5 13:58:28 2023 +0800
+
+    all files
+
+[33mcommit e147f679061ca6205dd24b19310a52a6f12fa2c0[m
+Author: joshuacalebpogi7 <joshuacalebdacutanan@gmail.com>
+Date:   Sat Aug 5 13:19:45 2023 +0800
+
+    test commit

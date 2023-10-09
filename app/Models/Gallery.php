@@ -13,11 +13,19 @@ class Gallery extends Model
         'photo',
         'title',
         'description',
-        'album_id',
-        // 'album_name',
-        // 'album_cover',
+        'gallery_album_id',
         'posted_by',
         'updated_by',
     ];
+    protected function photo(): Attribute
+    {
+        return Attribute::make(get: function ($value) {
+            return $value ? '/storage/photos/' . $value : '/images/prog-pic.jpg';
+        });
+    }
 
+    public function album()
+    {
+        return $this->belongsTo(GalleryAlbum::class, 'gallery_album_id');
+    }
 }

@@ -18,10 +18,10 @@ class GalleryAlbum extends Model
         'updated_by',
     ];
 
-    protected function thumbnail(): Attribute
+    protected function albumCover(): Attribute
     {
         return Attribute::make(get: function ($value) {
-            return $value ? '/storage/album_cover/' . $value : '/images/prog-pic.jpg';
+            return $value ? '/storage/album_covers/' . $value : '/images/prog-pic.jpg';
         });
     }
 }

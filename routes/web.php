@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
@@ -116,6 +117,7 @@ Route::put('admin/update-jobs/{jobs:id}', [JobsController::class, 'updateJobs'])
 Route::delete('admin/delete-news/{news:id}', [NewsController::class, 'deleteNews'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-events/{events:id}', [EventsController::class, 'deleteEvents'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-jobs/{jobs:id}', [JobsController::class, 'deleteJobs'])->middleware('can:visitAdminPages');
+Route::delete('admin/delete-photo/{gallery:id}', [GalleryController::class, 'deletePhoto'])->middleware('can:visitAdminPages');
 
 
 //Admin DELETE related routes

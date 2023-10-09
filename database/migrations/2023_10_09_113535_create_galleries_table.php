@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -15,7 +16,7 @@ return new class extends Migration {
             $table->string('photo');
             $table->string('title');
             $table->longText('description');
-            $table->foreignId('album_id');
+            $table->foreignId('gallery_album_id')->constrained()->onDelete('cascade');
             $table->string('posted_by');
             $table->string('updated_by');
             $table->timestamps();

@@ -2,153 +2,148 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Gallery;
+use Carbon\Carbon;
 use Livewire\Component;
-use Illuminate\Support\Str;
-use App\Models\GalleryAlbum;
 use Livewire\WithFileUploads;
-use Intervention\Image\Facades\Image;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Gallery; // Change this to match your Gallery Photo model
+use App\Models\GalleryAlbum; // Change this to match your Gallery Album model
 
-class AddGalleryForm extends Component
+class AddGalleryForm extends Component // Change the class name accordingly
 {
+    // Properties for gallery form
     use WithFileUploads;
- 
+    public $title;
+    public $selectedAlbum; // Add this property for the selected album
+    public $photo;
+    public $gallery_description;
+
+    // Properties for album form
+    public $album_name;
     public $description;
     public $album_cover;
-    public $photo;
-    //gallery model
-    public $gallery;
-    //gallery album model
+
+    // Other properties as needed
     public $galleryAlbum;
     public $showAlbums = false;
-    public $albumIdToUpdate;
-    public $album_name;
-    public $albumName;
-    public $albumDescription;
-    public $album_id;
+    public $gallery;
 
-    // protected $listeners = ['courseAdded' => 'updateCourses', 'deleteCourseConfirmed' => 'deleteCourse', 'resetAlumniFormConfirmed' => 'resetAlumniForm'];
-
+    // Constructor to fetch albums
     public function mount()
     {
-        $this->updateAlbums();
+        $this->albums = GalleryAlbum::all();
+        $this->galleryalbum = GalleryAlbum::find(1);
+        $this->gallery = Gallery::find(1);
     }
-    public function editAlbum($albumId)
-    {
-        $album = GalleryAlbum::findOrFail($albumId);
 
-        if ($album) {
-            $this->albumIdToUpdate = $album->id;
-            $this->albumName = $album->album_name; // Updated property name
-            $this->albumDescription = $album->description; // Updated property name
-            // You may also want to update $this->album_cover if you want to edit the album cover.
-        }
+    public function resetAlbumCover()
+    {
+        $this->album_cover = null; // Reset the file input
     }
-    public function updateAlbum()
+
+    public function toggleShowAlbums()
+{
+    $this->showAlbums = !$this->showAlbums;
+}
+
+    // Method to add a photo
+    public function addPhoto()
     {
         $this->resetErrorBag();
         $this->validate([
-            'albumName' => ['required'],
-            'albumDescription' => ['required'],
+            'title' => ['required'],
+            'selectedAlbum' => ['required', 'exists:gallery_albums,id'], // Validate selected album
+            'photo' => ['required', 'image', 'max:5120'], // Example validation for photo
+            // Add validation rules for other fields as needed
+            'gallery_description' => ['required'],
+            
         ]);
 
-        $album = GalleryAlbum::findOrFail($this->albumIdToUpdate);
-        $album->update([
-            'album_name' => $this->albumName,
-            'description' => $this->albumDescription,
+        // Save the uploaded photo
+        $photoName = time() . '-' . $this->photo->getClientOriginalName();
+        $photoPath = $this->photo->storeAs('photos', $photoName, 'public');
+
+        // Create the photo record with the selected album ID
+        if ($photoPath) {
+        Gallery::create([
+            'title' => $this->title,
+            'gallery_album_id' => $this->selectedAlbum,
+            'photo' => $photoName,
+            // Add other photo-related fields as needed
+            'description' => $this->gallery_description,
+            'posted_by' => Auth::user()->username,
+            'updated_by' => Auth::user()->username,
         ]);
-
-        $this->updateAlbums();
-        $this->cancelEdit();
-        session()->flash('success', 'Album successfully updated.');
+        // Reset the form
+        $this->resetAddPhotoFormConfirmation();
     }
-    public function cancelEdit()
-    {
-        $this->courseIdToUpdate = null;
-        $this->courseName = null;
-        $this->courseDescription = null;
-    }
-    public function toggleShowAlbums()
-    {
-        $this->showAlbums = !$this->showAlbums;
-        $this->cancelEdit();
-    }
-    public function updateAlbums()
-    {
-        // Fetch the updated list of courses
-        $this->galleryAlbum = GalleryAlbum::all();
-    }
-    public function deleteConfirmation($albumId)
-    {
-        $this->album_id = $albumId;
-        $this->dispatchBrowserEvent('show-album-delete-confirmation');
-    }
-    public function deleteCourse()
-    {
-        $albumId = $this->album_id;
-        $this->resetErrorBag();
-        // Find the course by ID
-        $album = GalleryAlbum::findOrFail($albumId);
-
-
-        if ($album) {
-            // Delete the course
-            $album->delete();
-            $this->dispatchBrowserEvent('album-deleted');
-        } else {
-            $this->dispatchBrowserEvent('album-error');
-        }
-        // Refresh the courses list after deletion
-        $this->albums = GalleryAlbum::all();
-    }
-
-    public function resetAlbumForm()
-    {
-        $this->reset(['album_name', 'album_cover', 'description']);
-    }
-
-    public function addAlbum()
+}
+    public function resetPhoto()
 {
-    $this->resetErrorBag();
-    $this->validate([
-        'album_name' => ['required'],
-        'description' => ['required', 'max:255'],
-        'album_cover' => ['required', 'image', 'max:5000']
+    $this->photo = null; // Reset the photo property to null
+}
+
+public function resetAddPhotoFormConfirmation()
+{
+    // Your reset logic here
+    $this->reset([
+        'title',
+        'selectedAlbum', // Validate selected album
+        'photo', // Example validation for photo
+        'gallery_description'
     ]);
-
-    // Generate a unique name for the new album cover
-    $album_cover_name = Str::uuid() . '.' . $this->album_cover->getClientOriginalExtension();
-
-    // Store the new album cover
-    $imgData = Image::make($this->album_cover)->encode('jpg');
-    $upload_album_cover = Storage::put('public/album-covers/' . $album_cover_name, $imgData);
-
-    // Create a new album record in the database
-    GalleryAlbum::create([
-        'album_name' => $this->album_name,
-        'description' => $this->description,
-        'album_cover' => $album_cover_name,
-    ]);
-
-    // Reset form fields and show success message
-    $this->resetGalleryForm();
-    toastr()->success('', 'Album added successfully!', [
-        "showEasing" => "swing",
-        "hideEasing" => "swing",
-        "showMethod" => "slideDown",
-        "hideMethod" => "slideUp"
-    ]);
-
-    // Emit events if necessary
-    $this->dispatchBrowserEvent('gallery-success');
-    $this->emit('galleryAdded');
 }
 
 
-    
-    public function render()
+    // Method to add an album
+    public function addAlbum()
     {
-        return view('livewire.add-gallery-form');
+        $this->resetErrorBag();
+        $this->validate([
+            'album_name' => ['required'],
+            'description' => ['required'],
+            // Add other album-related validation rules as needed
+        ]);
+
+        // Save the album cover (if needed)
+        $albumCoverName  = time() . '-' . $this->album_cover->getClientOriginalName();
+        $albumCoverPath = $this->album_cover->storeAs('album_covers', $albumCoverName, 'public');
+
+        // Create the album record
+        if ($albumCoverPath) {
+        GalleryAlbum::create([
+            'album_name' => $this->album_name,
+            'description' => $this->description,
+            'album_cover' => $albumCoverName, // Set the album cover path
+            // Add other album-related fields as needed
+            'posted_by' => Auth::user()->username,
+            'updated_by' => Auth::user()->username,
+        ]);
+
+        // Reset the form
+        $this->resetAlbumForm();
+    }
+}
+
+    public function resetAlbumForm()
+{
+    // Reset the form fields and any other necessary data
+    $this->reset([
+        'album_name',
+        'description',
+        'album_cover',
+    ]);
+}
+
+
+    // Other methods and functionality as needed
+
+    public function render(Gallery $gallery, GalleryAlbum $galleryalbum)
+    {
+        $this->albums = GalleryAlbum::all();
+        return view('livewire.add-gallery-form', ['gallery' => $gallery, 'albums' => $galleryalbum]); // Change the view name accordingly
     }
 }
