@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('gallery_albums', function (Blueprint $table) {
             $table->id();
             $table->string('album_name');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->string('album_cover')->nullable();
             $table->string('posted_by');
             $table->string('updated_by');

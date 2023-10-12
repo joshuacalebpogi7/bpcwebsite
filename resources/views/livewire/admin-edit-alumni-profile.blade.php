@@ -18,8 +18,8 @@
     </div>
 
     {{-- @php
-            dd($user->first_name);
-        @endphp --}}
+    dd($user->first_name);
+    @endphp --}}
 
     <div class="col-xl-4">
         <!-- Profile picture card-->
@@ -129,7 +129,7 @@
 
     <div class="col-xl-8">
         {{-- @php
-            dd($email_sent == false);
+        dd($email_sent == false);
         @endphp --}}
         <button wire:click.prevent="sendAccDetailsConfirmation"
             class="btn @if ($email_sent == true) btn-success @else btn-info @endif">
@@ -343,7 +343,8 @@
                                         class="form-control @error('address') is-invalid @enderror" type="text"
                                         placeholder="Street address, apt, suite, unit, building, floor, barangay, city, province, etc."
                                         name="address" id="address"
-                                        @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
+                                        @if ($edit == false) style="cursor: not-allowed;"
+                                        disabled readonly @endif>
 
                                     @error('address')
                                         <div class="invalid-feedback">
@@ -406,7 +407,9 @@
                                     <div class="form-group">
                                         <label for="job-type">Job type</label>
                                         <input wire:model="state.job_type"
-                                            {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', '']) ? 'disabled' : '' }}
+                                            {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', ''])
+                                                ? 'disabled'
+                                                : '' }}
                                             class="form-control @error('job_type') is-invalid @enderror"
                                             type="text" placeholder="Job type" name="job_type" id="job-type"
                                             @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
@@ -424,7 +427,10 @@
                                     <div class="form-group">
                                         <label for="job-position">Job position</label>
                                         <input wire:model="state.job_position"
-                                            {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', 'self-employed', '']) ? 'disabled' : '' }}
+                                            {{ isset($state['employment_status']) &&
+                                            in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
+                                                ? 'disabled'
+                                                : '' }}
                                             class="form-control @error('job_position') is-invalid @enderror"
                                             type="text" placeholder="Job position" name="job_position"
                                             id="job-position"
@@ -444,7 +450,10 @@
                                 <div class="form-group">
                                     <label for="job-location">Job location</label>
                                     <input wire:model="state.job_location"
-                                        {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', 'self-employed', '']) ? 'disabled' : '' }}
+                                        {{ isset($state['employment_status']) &&
+                                        in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
+                                            ? 'disabled'
+                                            : '' }}
                                         class="form-control @error('job_location') is-invalid @enderror"
                                         type="text" placeholder="Job location" name="job_location"
                                         id="job-location"
@@ -463,7 +472,10 @@
                                 <div class="form-group">
                                     <label for="monthly-salary">Monthly salary</label>
                                     <input wire:model="state.monthly_salary"
-                                        {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', 'self-employed', '']) ? 'disabled' : '' }}
+                                        {{ isset($state['employment_status']) &&
+                                        in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
+                                            ? 'disabled'
+                                            : '' }}
                                         class="form-control @error('monthly_salary') is-invalid @enderror"
                                         type="text" placeholder="Monthly salary" name="monthly_salary"
                                         id="monthly-salary"

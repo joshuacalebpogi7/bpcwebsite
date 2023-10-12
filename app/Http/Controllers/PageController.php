@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GalleryAlbum;
 use App\Models\Jobs;
 use App\Models\News;
 use App\Models\User;
@@ -217,10 +218,16 @@ class PageController extends Controller
     {
         return view('admin.events', ['events' => $events->latest()->get()]);
     }
-    public function adminGallery(Gallery $gallery)
+    public function adminGallery(GalleryAlbum $galleryAlbum)
     {
-        return view('admin.gallery', ['gallery' => $gallery->latest()->get()]);
+        return view('admin.gallery', [
+            'galleryAlbum' => $galleryAlbum
+                ->where('id', '!=', 1000)  // Exclude the album with ID 1000
+                ->latest()
+                ->get()
+        ]);
     }
+
     public function adminJobs(Jobs $jobs)
     {
         return view('admin.jobs', ['jobs' => $jobs->latest()->get()]);

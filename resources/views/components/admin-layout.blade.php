@@ -85,19 +85,19 @@
             <!-- Main content for admin views -->
             <main class="col-md-10 ms-sm-auto px-4">
                 @if (session()->has('accept'))
-                    <div class="container container-narrow">
-                        <div class="alert alert-success text-center">
-                            {{ session('accept') }}
-                        </div>
+                <div class="container container-narrow">
+                    <div class="alert alert-success text-center">
+                        {{ session('accept') }}
                     </div>
+                </div>
                 @endif
 
                 @if (session()->has('reject'))
-                    <div class="container container-narrow">
-                        <div class="alert alert-danger text-center">
-                            {{ session('reject') }}
-                        </div>
+                <div class="container container-narrow">
+                    <div class="alert alert-danger text-center">
+                        {{ session('reject') }}
                     </div>
+                </div>
                 @endif
 
 
@@ -172,6 +172,25 @@
 
     {{-- sweetalert script --}}
     <script>
+        $('.deleteAlbum').submit(function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure you want to delete this album?',
+                text: 'All photos in this album will be deleted!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // User confirmed, submit the form programmatically.
+                    $(this).off('submit').submit();
+                }
+            });
+        });
+
         $('.deleteNews').submit(function(e) {
             e.preventDefault();
 

@@ -21,7 +21,7 @@ class GalleryAlbum extends Model
     protected function albumCover(): Attribute
     {
         return Attribute::make(get: function ($value) {
-            return $value ? '/storage/album_covers/' . $value : '/images/prog-pic.jpg';
+            return $value ? '/storage/album_covers/' . $value : '/fallback_noPhoto.jpg';
         });
     }
 }

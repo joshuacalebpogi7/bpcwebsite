@@ -117,6 +117,7 @@ Route::put('admin/update-jobs/{jobs:id}', [JobsController::class, 'updateJobs'])
 Route::delete('admin/delete-news/{news:id}', [NewsController::class, 'deleteNews'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-events/{events:id}', [EventsController::class, 'deleteEvents'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-jobs/{jobs:id}', [JobsController::class, 'deleteJobs'])->middleware('can:visitAdminPages');
+Route::delete('admin/delete-album/{galleryAlbum:id}', [GalleryController::class, 'deleteAlbum'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-photo/{gallery:id}', [GalleryController::class, 'deletePhoto'])->middleware('can:visitAdminPages');
 
 

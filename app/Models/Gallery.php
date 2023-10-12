@@ -20,7 +20,7 @@ class Gallery extends Model
     protected function photo(): Attribute
     {
         return Attribute::make(get: function ($value) {
-            return $value ? '/storage/photos/' . $value : '/images/prog-pic.jpg';
+            return $value ? '/storage/photos/' . $value : '/fallback_noPhoto.jpg';
         });
     }
 
