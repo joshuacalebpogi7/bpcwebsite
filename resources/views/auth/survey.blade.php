@@ -1,4 +1,4 @@
-<x-layout>
+<x-home-layout>
     <h1>This is a survey form</h1>
     <div>
         <form action="/submit-survey" method="POST">
@@ -7,4 +7,4 @@
             <button>Submit</button>
         </form>
     </div>
-</x-layout>
+</x-home-layout>

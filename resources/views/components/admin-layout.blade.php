@@ -24,18 +24,6 @@
     @livewireStyles
 
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DSBQWZP7CQ"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-DSBQWZP7CQ');
-</script>
 
 <body>
     <!-- Admin header and navigation -->
@@ -132,7 +120,8 @@
                 columns: function(idx, data, node) {
                     // Check if the column contains "Action" or "Avatar" header, or if it's hidden
                     if (node.innerHTML === "Action" || node.innerHTML === "Avatar" || node.innerHTML ===
-                        "Thumbnail" || node.hidden) {
+                        "Thumbnail" || node.innerHTML ===
+                        "Album Cover" || node.hidden) {
                         return false; // Exclude the column from export
                     }
                     return true; // Include the column in export

@@ -74,7 +74,7 @@ class AddAlumniForm extends Component
 
         $this->updateCourses();
         $this->cancelEdit();
-        session()->flash('success', 'Course successfully updated.');
+        toastr()->success('Course updated successfully!');
     }
 
     public function cancelEdit()
@@ -224,7 +224,8 @@ class AddAlumniForm extends Component
 
         $this->resetAlumniForm();
 
-        session()->flash('success', 'Alumni successfully added.');
+        toastr()->success('Alumni added successfully!');
+        // session()->flash('success', 'Alumni successfully added.');
     }
 
     public function resetCourseForm()
@@ -236,7 +237,7 @@ class AddAlumniForm extends Component
     {
         $this->resetErrorBag();
         $this->validate([
-            'course' => ['required'],
+            'course' => ['required', 'unique:users,course'],
             'description' => ['required', 'max:255']
         ]);
 
@@ -246,7 +247,9 @@ class AddAlumniForm extends Component
         ]);
 
         $this->resetCourseForm(); // Clear the input fields after adding the course
-        $this->dispatchBrowserEvent('course-success');
+
+        toastr()->success('Course added successfully!');
+        // $this->dispatchBrowserEvent('course-success'); //showing success popup
         $this->emit('courseAdded');
     }
 

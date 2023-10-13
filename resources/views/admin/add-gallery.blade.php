@@ -1,3 +1,11 @@
-<x-admin-manage-layout :gallery="$gallery">
-    @livewire('add-gallery-form', ['gallery' => $gallery])
+<x-admin-manage-layout>
+    @livewire('add-gallery-form')
+    @push('scripts')
+    <script>
+        window.addEventListener('beforeunload', function () {
+                Livewire.emit('deleteTemporaryPhotos');
+            });
+    </script>
+    @endpush
+
 </x-admin-manage-layout>

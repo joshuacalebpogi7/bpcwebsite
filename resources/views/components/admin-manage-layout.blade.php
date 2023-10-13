@@ -108,6 +108,7 @@
     {{-- sweetalert script --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/tinymce/tinymce.min.js"></script>
+
     @if (Request::is('admin/add-news') ||
     (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title)) ||
     Request::is('admin/add-events') ||
@@ -116,7 +117,11 @@
     (isset($jobs) && Request::is('admin/edit-jobs/' . $jobs->id . '/' . $jobs->title)))
     @include('includes.img-preview')
     @endif
+
+    @stack('scripts')
+
     <script>
+        //edit alumni form
         window.addEventListener('email-success', event => {
             Swal.fire({
 
@@ -141,7 +146,8 @@
                 }
             })
         });
-        //edit alumni form
+
+
         window.addEventListener('show-reset-profile-confirmation', event => {
             Swal.fire({
                 title: 'Are you sure you want to reset the form?',
@@ -254,14 +260,6 @@
             })
         });
 
-        window.addEventListener('course-success', event => {
-            Swal.fire({
-
-                icon: 'success',
-                title: 'Course added successfully!',
-
-            })
-        });
     </script>
 </body>
 

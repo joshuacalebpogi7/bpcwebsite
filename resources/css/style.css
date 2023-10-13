@@ -7,11 +7,12 @@
    outline: none; 
    border:none;
    text-decoration: none;
-   color: #E9EEF2;
+   
 }
 
 body{
     background-color: #E9EEF2;
+    color: #E9EEF2;
  }
   
   /* Create two unequal columns that floats next to each other */

@@ -2,13 +2,11 @@
     <x-slot name="title">
         Jobs
     </x-slot>
-    <x-slot name="assets">
-        @vite(['resources/css/job.css'])
-        {{-- @vite(['resources/js/job.js']) --}}
-        @vite(['resources/css/styles.css'])
-        @vite(['resources/js/main.js'])
-    </x-slot>
-    <!--main-->
+    @push('assets')
+    @vite(['resources/css/job.css'])
+    {{-- @vite(['resources/js/job.js']) --}}
+    @endpush
+
     <div class="main-5">
         <div class="main-header">
             <ion-icon class="menu-bar" name="menu-outline"></ion-icon>

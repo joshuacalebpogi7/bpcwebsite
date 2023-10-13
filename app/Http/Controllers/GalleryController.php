@@ -15,8 +15,7 @@ class GalleryController extends Controller
         // Delete the photos in the photos folder
     foreach ($photos as $photo) {
         $photoPath = str_replace("/storage/", "public/", $photo->photo);
-        if (Storage::exists($photoPath)) {
-            // unlink($photoPath); // Delete the photo file
+        if (Storage::exists($photoPath)) { //use storage facade not file_exists because public/photos/$photo is not real path. we use storage link so we can link to public.
             Storage::delete($photoPath);
         }
     }
@@ -26,7 +25,7 @@ class GalleryController extends Controller
         Storage::delete($albumCoverPath); // Delete the file
     }
         $galleryAlbum->delete();
-        toastr()->success('', 'Event deleted successfully!', [
+        toastr()->success('', 'Album deleted successfully!', [
             "showEasing" => "swing",
             "hideEasing" => "swing",
             "showMethod" => "slideDown",

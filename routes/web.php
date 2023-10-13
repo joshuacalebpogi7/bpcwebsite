@@ -98,28 +98,25 @@ Route::get('admin/edit-alumni/{user:username}', [PageController::class, 'editAlu
 Route::get('admin/edit-news/{news:id}/{title}', [PageController::class, 'editNewsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/edit-events/{events:id}/{title}', [PageController::class, 'editEventsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/edit-jobs/{jobs:id}/{title}', [PageController::class, 'editJobsPage'])->middleware('can:visitAdminPages');
-// Route::get('admin/edit-events/{events:id}/{title}', [PageController::class, 'editEventsPage'])->middleware('can:visitAdminPages');
-// Route::get('admin/edit-events/{events:id}/{title}', [PageController::class, 'editEventsPage'])->middleware('can:visitAdminPages');
-// Route::get('admin/edit-survey/{survey:id}/{title}', [PageController::class, 'editSurveyPage'])->middleware('can:visitAdminPages');
+Route::get('admin/edit-gallery/{gallery:id}/{title}', [PageController::class, 'editJobsPage'])->middleware('can:visitAdminPages');
+
+
+
 
 //Admin POST related routes
 Route::post('admin/add-news', [NewsController::class, 'addNews'])->middleware('can:visitAdminPages');
 Route::post('admin/add-events', [EventsController::class, 'addEvents'])->middleware('can:visitAdminPages');
 Route::post('admin/add-jobs', [JobsController::class, 'addJobs'])->middleware('can:visitAdminPages');
-// Route::post('admin/add-events', [EventsController::class, 'addEvents'])->middleware('can:visitAdminPages');
-// Route::post('admin/add-events', [EventsController::class, 'addEvents'])->middleware('can:visitAdminPages');
-// Route::post('admin/add-events', [EventsController::class, 'addEvents'])->middleware('can:visitAdminPages');
 
+//Admin EDIT related routes
 Route::put('admin/update-news/{news:id}', [NewsController::class, 'updateNews'])->middleware('can:visitAdminPages');
 Route::put('admin/update-events/{events:id}', [EventsController::class, 'updateEvents'])->middleware('can:visitAdminPages');
 Route::put('admin/update-jobs/{jobs:id}', [JobsController::class, 'updateJobs'])->middleware('can:visitAdminPages');
 
+//Admin DELETE related routes
+Route::delete('admin/delete-alumni/{user:username}', [AdminController::class, 'deleteUser'])->middleware(['can:visitAdminPages', 'can:delete,user']);
 Route::delete('admin/delete-news/{news:id}', [NewsController::class, 'deleteNews'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-events/{events:id}', [EventsController::class, 'deleteEvents'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-jobs/{jobs:id}', [JobsController::class, 'deleteJobs'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-album/{galleryAlbum:id}', [GalleryController::class, 'deleteAlbum'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-photo/{gallery:id}', [GalleryController::class, 'deletePhoto'])->middleware('can:visitAdminPages');
-
-
-//Admin DELETE related routes
-Route::delete('admin/delete-alumni/{user:username}', [AdminController::class, 'deleteUser'])->middleware(['can:visitAdminPages', 'can:delete,user']);

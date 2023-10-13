@@ -7,7 +7,7 @@
     outline: none; 
     border:none;
     text-decoration: none;
-    color: #9F9D9D;
+    
 }
 
 body{
@@ -17,6 +17,7 @@ body{
   align-items: center;
   justify-content: center;
   background: linear-gradient(90deg, #83C83A 0%, #0F4934 100%);
+  color: #9F9D9D;
 }
 
 .wrapper{

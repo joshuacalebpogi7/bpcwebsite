@@ -12,13 +12,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-    {{ $assets }}
+    @vite(['resources/css/style.css'])
+    @vite(['resources/css/styles.css'])
+    @vite(['resources/js/main.js'])
+    @stack('assets')
 
     @livewireStyles
 </head>
 
-<body style="background-color: black">
+<body>
     <!-- Sidebar bg -->
 
     <!--=============== HEADER ===============-->
@@ -124,11 +126,11 @@
 
     <!--=============== MAIN ===============-->
     <main class="main container" id="main">
-
+        {{ $slot }}
     </main>
 
 
-    {{ $slot }}
+
 
     {{-- <div class="footer container5" style="margin: 5rem; auto; text-align:center">
         <p>&#169; ALUMNIPORTAL All Rights Reserved</p>
@@ -139,12 +141,13 @@
             <a href="#" style="font-size: 1.5rem;"><i class="ri-linkedin-box-fill"></i></a>
         </div>
     </div> --}}
-
+    @livewireScripts
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- @stack('scripts') --}}
 </body>
 
 </html>

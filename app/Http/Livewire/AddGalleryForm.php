@@ -22,10 +22,7 @@ class AddGalleryForm extends Component
     public $photos = [];
     public $temporaryPhotos = []; 
 
-    public function mount()
-    {
-        $this->albums = GalleryAlbum::all();
-    }
+    protected $listeners = ['deleteTemporaryPhotos' => 'deleteTemporaryPhotos']; //need listeners when emitting livewire
 
     public function removePhoto($index)
     {
@@ -112,7 +109,6 @@ class AddGalleryForm extends Component
     {
         $this->resetErrorBag();
         
-        // Validate the album form fields
         $this->validate([
             'album_name' => ['required'],
             'description' => ['required'],
@@ -133,9 +129,6 @@ class AddGalleryForm extends Component
         
         if (!empty($this->temporaryPhotos)) {
             foreach ($this->temporaryPhotos as $index => $tempPhoto) {
-                $photoPath = $tempPhoto['photo']; 
-                $photoName = basename($photoPath); // Extract the filename from the path
-                
                 $photos = Gallery::create([
                     'gallery_album_id' => $albumId,
                     'photo' => $tempPhoto['photo'], // Store only the filename
@@ -164,13 +157,13 @@ class AddGalleryForm extends Component
                     ]);
             }
         }
-        
             // Clear temporary photos
             $this->temporaryPhotos = [];
         }
         
         // Reset the form
         $this->resetAlbumForm();
+        toastr()->success('Album added successfully!', 'Success!');
     }
 
     public function resetAlbumForm()
@@ -190,7 +183,6 @@ class AddGalleryForm extends Component
 
     public function render()
     {
-        $this->albums = GalleryAlbum::all();
         return view('livewire.add-gallery-form');
     }
 }

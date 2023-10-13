@@ -22,7 +22,7 @@
     @livewireStyles
 </head>
 
-<body style="background-color: black">
+<body>
     <!-- Sidebar bg -->
 
     <!--=============== HEADER ===============-->
