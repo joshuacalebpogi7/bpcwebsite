@@ -16,10 +16,8 @@ class AddGalleryForm extends Component
     public $description;
     public $album_cover;
     public $title;
-    public $selectedAlbum;
     public $photo;
     public $gallery_description;
-    public $photos = [];
     public $temporaryPhotos = []; 
 
     protected $listeners = ['deleteTemporaryPhotos' => 'deleteTemporaryPhotos']; //need listeners when emitting livewire
@@ -98,8 +96,6 @@ class AddGalleryForm extends Component
     public function resetAddPhotoFormConfirmation()
     {
         $this->reset([
-            'title',
-            'selectedAlbum',
             'photo',
             'gallery_description',
         ]);
@@ -163,7 +159,8 @@ class AddGalleryForm extends Component
         
         // Reset the form
         $this->resetAlbumForm();
-        toastr()->success('Album added successfully!', 'Success!');
+        return redirect('/admin/gallery')->with('success', 'Album added successfully!');
+        // toastr()->success('Album added successfully!', 'Success!');
     }
 
     public function resetAlbumForm()

@@ -392,9 +392,9 @@ class AdminEditAlumniProfile extends Component
             ])->validate();
 
             $this->user->update([
-                'first_name' => trim(strip_tags(Str::title($this->state['first_name']))),
-                'middle_name' => trim(strip_tags(Str::title($this->state['middle_name']))),
-                'last_name' => trim(strip_tags(Str::title($this->state['last_name']))),
+                'first_name' => trim(strip_tags(ucfirst($this->state['first_name']))),
+                'middle_name' => trim(strip_tags(ucfirst($this->state['middle_name']))),
+                'last_name' => trim(strip_tags(ucfirst($this->state['last_name']))),
                 'birthday' => $this->state['birthday'],
                 'gender' => $this->state['gender'],
                 'course' => $this->state['course'],

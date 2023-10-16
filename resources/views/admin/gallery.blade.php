@@ -24,7 +24,7 @@
                     <td>
                         <div class="d-flex flex-column">
                             <!-- First Row - Edit Button -->
-                            <a href="/admin/edit-album/{{ $album->id }}/{{ $album->title }}" class="flex-fill">
+                            <a href="/admin/edit-album/{{ $album->id }}/{{ $album->album_name }}" class="flex-fill">
                                 <button class="btn btn-success me-1 w-100 h-100">View</button>
                             </a>
 
@@ -40,7 +40,6 @@
                     <td><img src="{{ $album->album_cover }}" alt="{{ $album->album_name }}'s thumbnail"
                             style="width: 40px; margin: 10px;"></td>
                     <td>{{ $album->album_name }}</td>
-                    </td>
                     <td>{{ $album->updated_by }}</td>
                     <td>{{ $album->created_at }}</td>
                     <td>{{ $album->updated_at }}</td>

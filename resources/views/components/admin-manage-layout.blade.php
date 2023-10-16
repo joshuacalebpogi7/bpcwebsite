@@ -36,38 +36,34 @@
             dd((Request::is('admin/add-news') || (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' .
             $news->title))));
             @endphp --}}
-            @if (Request::is('admin/add-admin') || (isset($user) && Request::is('admin/edit-admin/*')))
+            @if (Request::is('admin/add-admin') || (Request::is('admin/edit-admin/*')))
             <a href="/admin/admins">&laquo; Back</a>
             @endif
-            @if (Request::is('admin/add-alumni') || (isset($user) && Request::is('admin/edit-alumni/*')))
+            @if (Request::is('admin/add-alumni') || (Request::is('admin/edit-alumni/*')))
             <a href="/admin/users">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-survey') ||
-            (isset($survey) && Request::is('admin/edit-survey/*')))
+            @if (Request::is('admin/add-survey') || (Request::is('admin/edit-survey/*')))
             <a href="/admin/surveys">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-news') || (isset($news) && Request::is('admin/edit-news/*')))
+            @if (Request::is('admin/add-news') || (Request::is('admin/edit-news/*')))
             <a href="/admin/news">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-events') ||
-            (isset($events) && Request::is('admin/edit-events/*')))
+            @if (Request::is('admin/add-events') || (Request::is('admin/edit-events/*')))
             <a href="/admin/events">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-gallery') ||
-            (isset($gallery) && Request::is('admin/edit-gallery/*')))
+            @if (Request::is('admin/add-gallery') || (Request::is('admin/edit-album/*')))
             <a href="/admin/gallery">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-jobs') || (isset($jobs) && Request::is('admin/edit-jobs/*')))
+            @if (Request::is('admin/add-jobs') || (Request::is('admin/edit-jobs/*')))
             <a href="/admin/jobs">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-forums') ||
-            (isset($forums) && Request::is('admin/edit-forums/*')))
+            @if (Request::is('admin/add-forums') || (Request::is('admin/edit-forums/*')))
             <a href="/admin/forums">&laquo; Back</a>
             @endif
 

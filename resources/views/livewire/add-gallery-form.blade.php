@@ -88,7 +88,8 @@
                         <div class="card-body">
                             <input wire:model="temporaryPhotos.{{ $index }}.gallery_description" class="form-control"
                                 type="text" placeholder="Description"
-                                name="temporaryPhotos.{{ $index }}.gallery_description" id="gallery-description">
+                                name="temporaryPhotos.{{ $index }}.gallery_description" id="gallery-description"
+                                wire:key="{{ $index }}">
                             <span class="text-danger">
                                 @error('temporaryPhotos.' . $index . '.gallery_description')
                                 <p>{{ $message }}</p>

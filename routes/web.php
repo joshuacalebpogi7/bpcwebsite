@@ -98,9 +98,7 @@ Route::get('admin/edit-alumni/{user:username}', [PageController::class, 'editAlu
 Route::get('admin/edit-news/{news:id}/{title}', [PageController::class, 'editNewsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/edit-events/{events:id}/{title}', [PageController::class, 'editEventsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/edit-jobs/{jobs:id}/{title}', [PageController::class, 'editJobsPage'])->middleware('can:visitAdminPages');
-Route::get('admin/edit-gallery/{gallery:id}/{title}', [PageController::class, 'editJobsPage'])->middleware('can:visitAdminPages');
-
-
+Route::get('admin/edit-album/{album:id}/{album_name}', [PageController::class, 'editGalleryPage'])->middleware('can:visitAdminPages');
 
 
 //Admin POST related routes
@@ -108,7 +106,7 @@ Route::post('admin/add-news', [NewsController::class, 'addNews'])->middleware('c
 Route::post('admin/add-events', [EventsController::class, 'addEvents'])->middleware('can:visitAdminPages');
 Route::post('admin/add-jobs', [JobsController::class, 'addJobs'])->middleware('can:visitAdminPages');
 
-//Admin EDIT related routes
+//Admin UPDATE related routes
 Route::put('admin/update-news/{news:id}', [NewsController::class, 'updateNews'])->middleware('can:visitAdminPages');
 Route::put('admin/update-events/{events:id}', [EventsController::class, 'updateEvents'])->middleware('can:visitAdminPages');
 Route::put('admin/update-jobs/{jobs:id}', [JobsController::class, 'updateJobs'])->middleware('can:visitAdminPages');

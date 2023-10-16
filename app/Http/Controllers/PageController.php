@@ -142,7 +142,15 @@ class PageController extends Controller
     //     ]);
     // }
 
-    //edit page
+
+
+
+
+    //EDIT PAGES
+    public function editGalleryPage(Gallery $gallery, GalleryAlbum $album)
+    {
+        return view('admin.edit-gallery', ['gallery' => $gallery->where('gallery_album_id', $album->id)->get(), 'galleryItem' => $gallery->latest()->get(), 'album' => $album, 'albumItem' => $album->latest()->get()]);
+    }
     public function editJobsPage(Events $jobs)
     {
         return view('admin.edit-jobs', ['jobs' => $jobs]);
@@ -160,7 +168,9 @@ class PageController extends Controller
         return view('admin.edit-alumni', ['user' => $user]);
     }
 
-    //add page
+
+
+    //ADD PAGES
     public function addJobsPage(Events $jobs)
     {
         return view('admin.add-jobs', ['jobs' => $jobs]);
@@ -173,9 +183,9 @@ class PageController extends Controller
     {
         return view('admin.add-news', ['news' => $news, 'thumbnail' => $news->thumbnail]);
     }
-    public function addGalleryPage(Gallery $gallery)
+    public function addGalleryPage()
     {
-        return view('admin.add-gallery', ['gallery' => $gallery, 'galleryItem' => $gallery->latest()->get()]);
+        return view('admin.add-gallery');
     }
     public function addAlumniPage(User $user)
     {
