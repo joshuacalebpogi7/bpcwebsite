@@ -2,14 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use Exception;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Course;
 use Livewire\Component;
+use App\Mail\MailNotify;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AddAlumniForm extends Component
@@ -40,7 +43,9 @@ class AddAlumniForm extends Component
     public $courseDescription;
     public $course_id;
 
-    protected $listeners = ['courseAdded' => 'updateCourses', 'deleteCourseConfirmed' => 'deleteCourse', 'resetAlumniFormConfirmed' => 'resetAlumniForm'];
+    public $isSubmitting = false;
+
+    protected $listeners = ['alumniConfirmed' => 'addAlumni', 'courseAdded' => 'updateCourses', 'deleteCourseConfirmed' => 'deleteCourse', 'resetAlumniFormConfirmed' => 'resetAlumniForm'];
 
     public function mount()
     {
@@ -186,9 +191,30 @@ class AddAlumniForm extends Component
             ]);
         }
     }
+
+    public function addAlumniConfirmation()
+    {
+        $validate = $this->validate([
+            'student_no' => ['required', 'min:3', 'max:15', 'regex:/^[^\s]+$/', Rule::unique('users', 'username')],
+            'email' => ['required', 'email', 'regex:/^[^\s]+$/', Rule::unique('users', 'email')],
+            'password' => ['required', 'regex:/^[^\s]+$/', 'min:8'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'birthday' => ['required', 'date_format:Y-m-d'],
+            'gender' => ['required', Rule::in(['male', 'female'])],
+            'course_alumni' => ['required', Rule::exists('courses', 'course')],
+            'year_graduated' => ['required', 'numeric'],
+        ]);
+        if ($validate) {
+            $this->dispatchBrowserEvent('show-add-alumni-confirmation');
+        }
+        
+    }
+
     public function addAlumni()
     {
-        $this->resetErrorBag();
+
+    $this->resetErrorBag();
 
         if ($this->birthday) {
             $birthday = Carbon::createFromFormat('Y-m-d', $this->birthday);
@@ -199,7 +225,6 @@ class AddAlumniForm extends Component
             'email' => ['required', 'email', 'regex:/^[^\s]+$/', Rule::unique('users', 'email')],
             'password' => ['required', 'regex:/^[^\s]+$/', 'min:8'],
             'first_name' => ['required'],
-            // 'middle_name' => ['required'],
             'last_name' => ['required'],
             'birthday' => ['required', 'date_format:Y-m-d'],
             'gender' => ['required', Rule::in(['male', 'female'])],
@@ -207,7 +232,8 @@ class AddAlumniForm extends Component
             'year_graduated' => ['required', 'numeric'],
         ]);
 
-        User::create([
+
+        $user = User::create([
             'username' => $this->student_no,
             'email' => $this->email,
             'password' => $this->password,
@@ -222,10 +248,36 @@ class AddAlumniForm extends Component
             'default_password' => $this->password,
         ]);
 
-        $this->resetAlumniForm();
+        if($user){
+            $data = [
+            "subject" => "Your BPC Alumni Portal Account Details",
+            "username" => $user->username,
+            "password" => $user->default_password,
+            ];
+            // MailNotify class that is extend from Mailable class.
+            try {
+                Mail::to($user->email)->send(new MailNotify($data));
+    
+                $user->email_sent = true;
+                $user->save();
+    
+                $this->dispatchBrowserEvent('alumni-added');
 
-        toastr()->success('Alumni added successfully!');
-        // session()->flash('success', 'Alumni successfully added.');
+                $this->resetAlumniForm();
+
+                toastr()->success('Alumni added successfully!');
+    
+            } catch (Exception $e) {
+                // Log::error('Email sending failed: ' . $e->getMessage());
+                // dd($e);
+                toastr()->error('Something went wrong, please try again later.', 'Error!', [
+                    "showEasing" => "swing",
+                    "hideEasing" => "swing",
+                    "showMethod" => "slideDown",
+                    "hideMethod" => "slideUp"
+                ]);
+            }
+        }
     }
 
     public function resetCourseForm()
@@ -252,6 +304,7 @@ class AddAlumniForm extends Component
         // $this->dispatchBrowserEvent('course-success'); //showing success popup
         $this->emit('courseAdded');
     }
+
 
     public function render()
     {

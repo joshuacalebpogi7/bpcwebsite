@@ -8,6 +8,8 @@
     <title>{{ $title ?? 'BPC Website' }}</title>
     {{-- favicon --}}
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    {{-- font-awesome icons --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     {{-- bootstrap --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <!-- bootstrap icons -->
@@ -17,6 +19,8 @@
     {{-- data tables buttons --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+    @stack('styles')
 
     @vite(['resources/css/appadmin.css'])
     @vite(['resources/js/app.js'])
@@ -36,54 +40,57 @@
             dd((Request::is('admin/add-news') || (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' .
             $news->title))));
             @endphp --}}
-            @if (Request::is('admin/add-admin') || (Request::is('admin/edit-admin/*')))
-            <a href="/admin/admins">&laquo; Back</a>
+            @if (Request::is('admin/edit-profile'))
+                <a href="/">&laquo; Back</a>
             @endif
-            @if (Request::is('admin/add-alumni') || (Request::is('admin/edit-alumni/*')))
-            <a href="/admin/users">&laquo; Back</a>
+            @if (Request::is('admin/add-admin') || Request::is('admin/edit-admin/*'))
+                <a href="/admin/admins">&laquo; Back</a>
             @endif
-
-            @if (Request::is('admin/add-survey') || (Request::is('admin/edit-survey/*')))
-            <a href="/admin/surveys">&laquo; Back</a>
-            @endif
-
-            @if (Request::is('admin/add-news') || (Request::is('admin/edit-news/*')))
-            <a href="/admin/news">&laquo; Back</a>
+            @if (Request::is('admin/add-alumni') || Request::is('admin/edit-alumni/*'))
+                <a href="/admin/users">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-events') || (Request::is('admin/edit-events/*')))
-            <a href="/admin/events">&laquo; Back</a>
+            @if (Request::is('admin/add-survey') || Request::is('admin/edit-survey/*'))
+                <a href="/admin/surveys">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-gallery') || (Request::is('admin/edit-album/*')))
-            <a href="/admin/gallery">&laquo; Back</a>
+            @if (Request::is('admin/add-news') || Request::is('admin/edit-news/*'))
+                <a href="/admin/news">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-jobs') || (Request::is('admin/edit-jobs/*')))
-            <a href="/admin/jobs">&laquo; Back</a>
+            @if (Request::is('admin/add-events') || Request::is('admin/edit-events/*'))
+                <a href="/admin/events">&laquo; Back</a>
             @endif
 
-            @if (Request::is('admin/add-forums') || (Request::is('admin/edit-forums/*')))
-            <a href="/admin/forums">&laquo; Back</a>
+            @if (Request::is('admin/add-gallery') || Request::is('admin/edit-album/*'))
+                <a href="/admin/gallery">&laquo; Back</a>
+            @endif
+
+            @if (Request::is('admin/add-jobs') || Request::is('admin/edit-jobs/*'))
+                <a href="/admin/jobs">&laquo; Back</a>
+            @endif
+
+            @if (Request::is('admin/add-forums') || Request::is('admin/edit-forums/*'))
+                <a href="/admin/forums">&laquo; Back</a>
             @endif
 
         </nav>
     </header>
 
     @if (session()->has('accept'))
-    <div class="container container-narrow">
-        <div class="alert alert-success text-center">
-            {{ session('accept') }}
+        <div class="container container-narrow">
+            <div class="alert alert-success text-center">
+                {{ session('accept') }}
+            </div>
         </div>
-    </div>
     @endif
 
     @if (session()->has('reject'))
-    <div class="container container-narrow">
-        <div class="alert alert-danger text-center">
-            {{ session('reject') }}
+        <div class="container container-narrow">
+            <div class="alert alert-danger text-center">
+                {{ session('reject') }}
+            </div>
         </div>
-    </div>
     @endif
 
     <div>
@@ -106,12 +113,12 @@
     <script src="/js/tinymce/tinymce.min.js"></script>
 
     @if (Request::is('admin/add-news') ||
-    (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title)) ||
-    Request::is('admin/add-events') ||
-    (isset($events) && Request::is('admin/edit-events/' . $events->id . '/' . $events->title)) ||
-    Request::is('admin/add-jobs') ||
-    (isset($jobs) && Request::is('admin/edit-jobs/' . $jobs->id . '/' . $jobs->title)))
-    @include('includes.img-preview')
+            (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title)) ||
+            Request::is('admin/add-events') ||
+            (isset($events) && Request::is('admin/edit-events/' . $events->id . '/' . $events->title)) ||
+            Request::is('admin/add-jobs') ||
+            (isset($jobs) && Request::is('admin/edit-jobs/' . $jobs->id . '/' . $jobs->title)))
+        @include('includes.img-preview')
     @endif
 
     @stack('scripts')
@@ -179,7 +186,7 @@
         window.addEventListener('show-reset-restricted-edit-confirmation', event => {
             Swal.fire({
                 title: 'Are you sure you want to cancel?',
-                text: "your inputs will not be saved!",
+                text: "make sure to save your inputs!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -209,18 +216,6 @@
                 if (result.isConfirmed) {
                     Livewire.emit('resetAlumniFormConfirmed');
                 }
-            })
-        });
-
-        window.addEventListener('alumni-form-reset', event => {
-            Swal.fire({
-                title: 'Reset the form?',
-                text: "Your inputs will not be saved!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, reset it!'
             })
         });
 
@@ -255,7 +250,6 @@
                 text: 'Something went wrong!',
             })
         });
-
     </script>
 </body>
 

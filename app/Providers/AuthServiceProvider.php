@@ -25,9 +25,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        Gate::define('visitAdminPages', function ($user) {
+        $this->registerPolicies();
+        Gate::define('adminOnly', function ($user) {
             return $user->user_type === 'admin';
         });
+        Gate::define('visitAdminPages', function ($user) {
+            return in_array($user->user_type, ['admin', 'content creator']);
+        });
+        
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             return (new MailMessage())

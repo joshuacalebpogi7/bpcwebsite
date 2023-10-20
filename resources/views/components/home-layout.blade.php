@@ -98,27 +98,34 @@
                         <span class="sidebar__link-floating">Settings</span>
                     </a>
 
-                    <form action="/logout" method="POST">
+                    <a href="/logout" class="sidebar__link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="ri-logout-box-r-line"></i>
+                        <span class="sidebar__link-name">Logout</span>
+                        <span class="sidebar__link-floating">Logout</span>
+                    </a>
+
+                    <form action="/logout" method="POST" id="logout-form" style="display: none">
                         @csrf
-                        <button type="submit" class="sidebar__link">
-                            <i class="ri-logout-box-r-line"></i>
-                            <span class="sidebar__link-name">Logout</span>
-                            <span class="sidebar__link-floating">Logout</span>
-                        </button>
                     </form>
+
+
+
+
                 </div>
             </div>
 
-            <div class="sidebar__account">
-                <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
-
-                <div class="sidebar__names">
-                    <h3 class="sidebar__name">Gab Pogi</h3>
-                    <span class="sidebar__email">bpc@email.com</span>
+            <a href="/edit-profile" style="text-decoration: none; color: var(--white-color);">
+                <div class="sidebar__account">
+                    <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
+                    <div class="sidebar__names">
+                        <h3 class="sidebar__name">Gab Pogi</h3>
+                        <span class="sidebar__email" style="text-decoration: none; color: inherit;">bpc@email.com</span>
+                    </div>
+                    <i class="ri-arrow-right-s-line"></i>
                 </div>
+            </a>
 
-                <i class="ri-arrow-right-s-line"></i>
-            </div>
         </nav>
     </div>
 

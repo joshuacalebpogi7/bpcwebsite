@@ -1,21 +1,5 @@
 <div>
-    @if (session()->has('success'))
-        <div class="container container-narrow">
-            <div class="alert alert-success text-center">
-                {{ session('success') }}
-            </div>
-        </div>
-    @endif
-
-    @if (session()->has('reject'))
-        <div class="container container-narrow">
-            <div class="alert alert-danger text-center">
-                {{ session('reject') }}
-            </div>
-        </div>
-    @endif
-
-    <form wire:submit.prevent="addRoles">
+    {{-- <form wire:submit.prevent="addRole">
         @csrf
 
         <div class="card mb-2 mt-3">
@@ -28,7 +12,7 @@
                         <input wire:model="role" class="form-control" type="text" placeholder="Role" name="role"
                             id="role">
                         <span class="text-danger">
-                            @error('role')
+                            @error('roleName')
                                 <p>{{ $message }}</p>
                             @enderror
                         </span>
@@ -40,8 +24,6 @@
                         <label for="description">Description</label>
                         <input wire:model="description" class="form-control" name="description" id="description"
                             type="text" placeholder="Role Description">
-                        {{-- <textarea wire:model="description" class="form-control" name="description" id="description" cols="30"
-                            rows="10"></textarea> --}}
                         <span class="text-danger">
                             @error('description')
                                 <p>{{ $message }}</p>
@@ -53,7 +35,7 @@
                 <button wire:click.prevent="resetRoleForm" class="btn btn-danger">Reset</button>
             </div>
         </div>
-    </form>
+    </form> --}}
 
 
 
@@ -64,32 +46,33 @@
     @endif
 
     @if ($showRoles)
-        <h2>Course List</h2>
+        <h2>Roles lists</h2>
         <div>
             <table class="table table-dark table-striped table-hover rounded shadow-lg">
                 <thead>
                     <tr>
                         <th>Action</th>
                         <th>Id</th>
-                        <th>Course Name|Abbreviation</th>
-                        <th>Course Description|Full Name</th>
+                        <th>Role</th>
+                        <th>Role Description</th>
                     </tr>
                 </thead>
                 <!-- Table body -->
                 <tbody>
-                    @foreach ($user_types as $user_type)
-                        @if ($user_typeIdToUpdate === $user_type->id)
+                    @foreach ($roles as $role)
+                        @if ($roleIdToUpdate === $role->id)
                             <!-- Edit form -->
                             <tr>
                                 <td>
                                     <button class="btn btn-success" wire:click="updateRole">Save</button>
                                     <button class="btn btn-danger" wire:click="cancelEdit">Cancel</button>
                                 </td>
-                                <td>{{ $user_type->id }}</td>
+                                <td>{{ $role->id }}</td>
                                 <td>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <input class="form-control" wire:model="roleName" type="text">
-                                    </div>
+                                    </div> --}}
+                                    {{ $role->user_type }}
                                 </td>
                                 <td>
                                     <input class="form-control" wire:model="roleDescription" type="text">
@@ -100,14 +83,14 @@
                             <tr>
                                 <td>
                                     <button class="btn btn-primary"
-                                        wire:click="editRole({{ $user_type->id }})">Edit</button>
+                                        wire:click="editRole({{ $role->id }})">Edit</button>
 
-                                    <button class="btn btn-danger"
-                                        wire:click="deleteConfirmation({{ $user_type->id }})">Delete</button>
+                                    {{-- <button class="btn btn-danger"
+                                        wire:click="deleteConfirmation({{ $role->id }})">Delete</button> --}}
                                 </td>
-                                <td>{{ $user_type->id }}</td>
-                                <td>{{ $user_type->user_type }}</td>
-                                <td>{{ $user_type->description }}</td>
+                                <td>{{ $role->id }}</td>
+                                <td>{{ $role->user_type }}</td>
+                                <td>{{ $role->description }}</td>
                             </tr>
                         @endif
                     @endforeach
@@ -116,7 +99,7 @@
         </div>
     @endif
 
-    <form wire:submit.prevent="addAdmin">
+    <form wire:submit.prevent="addAdminConfirmation">
         @csrf
 
         <div class="card mt-5 mb-5">
@@ -127,17 +110,11 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="user-type">Admin Role</label>
-                            <select wire:model="user_type" class="form-control" name="user_type" id="user-type">
-                                <option value="" selected>--Select Role--
-                                </option>
-                                @foreach ($user_types as $user_type)
-                                    <option value="{{ $user_type->id }}">
-                                        {{ $user_type->user_type }}</option>
-                                @endforeach
-                            </select>
+                            <label for="username">Username</label>
+                            <input wire:model="username" class="form-control" type="text" placeholder="Username"
+                                name="username" id="username">
                             <span class="text-danger">
-                                @error('user_type')
+                                @error('username')
                                     <p>{{ $message }}</p>
                                 @enderror
                             </span>
@@ -146,11 +123,17 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input wire:model="username" class="form-control" type="text" placeholder="Username"
-                                name="username" id="username">
+                            <label for="user-type">Admin Role</label>
+                            <select wire:model="user_type" class="form-control" name="user_type" id="user-type">
+                                <option value="" selected>--Select Role--
+                                </option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->user_type }}">
+                                        {{ $role->user_type }}</option>
+                                @endforeach
+                            </select>
                             <span class="text-danger">
-                                @error('username')
+                                @error('user_type')
                                     <p>{{ $message }}</p>
                                 @enderror
                             </span>
@@ -190,8 +173,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="last-name">Last name</label>
-                            <input wire:model="last_name" class="form-control" type="text"
-                                placeholder="Last name" name="last_name" id="last-name">
+                            <input wire:model="last_name" class="form-control" type="text" placeholder="Last name"
+                                name="last_name" id="last-name">
                             <span class="text-danger">
                                 @error('last_name')
                                     <p>{{ $message }}</p>
@@ -267,7 +250,7 @@
 
                 </div>
                 <button class="btn btn-primary" type="submit">Add</button>
-                <button wire:click.prevent="resetAlumniFormConfirmation" class="btn btn-danger">Reset</button>
+                <button wire:click.prevent="resetAdminFormConfirmation" class="btn btn-danger">Reset</button>
             </div>
         </div>
 

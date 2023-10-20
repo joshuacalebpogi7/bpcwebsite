@@ -50,7 +50,9 @@
                                 Manage
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/admin/users">Users</a>
+                                <a class="dropdown-item" href="/admin/edit-profile">Edit Profile</a>
+                                <a class="dropdown-item" href="/admin/admins">Admins</a>
+                                <a class="dropdown-item" href="/admin/users">Alumni</a>
                                 <a class="dropdown-item" href="/admin/surveys">Survey</a>
                                 <a class="dropdown-item" href="/admin/news">News</a>
                                 <a class="dropdown-item" href="/admin/events">Events</a>
@@ -73,19 +75,19 @@
             <!-- Main content for admin views -->
             <main class="col-md-10 ms-sm-auto px-4">
                 @if (session()->has('accept'))
-                <div class="container container-narrow">
-                    <div class="alert alert-success text-center">
-                        {{ session('accept') }}
+                    <div class="container container-narrow">
+                        <div class="alert alert-success text-center">
+                            {{ session('accept') }}
+                        </div>
                     </div>
-                </div>
                 @endif
 
                 @if (session()->has('reject'))
-                <div class="container container-narrow">
-                    <div class="alert alert-danger text-center">
-                        {{ session('reject') }}
+                    <div class="container container-narrow">
+                        <div class="alert alert-danger text-center">
+                            {{ session('reject') }}
+                        </div>
                     </div>
-                </div>
                 @endif
 
 

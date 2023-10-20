@@ -20,31 +20,62 @@ class PageController extends Controller
     public function home(News $news, Events $events, Jobs $jobs)
     {
 
+        // if (auth()->check()) {
+        //     $user = auth()->user();
+        //     if ($user->email_verified_at) {
+
+        //         if ($user->user_type == 'alumni') {
+        //             if ($user->add_info_completed == false) {
+        //                 return view('auth.additional-info')->with('info', 'Please Add Your Information.');
+        //             } else {
+        //                 if ($user->survey_completed == false) {
+        //                     return view('auth.survey')->with('info', 'Please complete this survey.');
+        //                 } else {
+        //                     return view('auth.home', ['news' => $news->latest()->get(), 'events' => $events->latest()->get(), 'jobs' => $jobs->latest()->get()]);
+        //                 }
+        //             }
+        //         } else if ($user->user_type != 'alumni') {
+        //             return view('admin.dashboard');
+        //         }
+
+        //     } else {
+        //         return view('auth.verify-email');
+        //     }
+
+        // } else {
+        //     return view('index');
+        // }
+
         if (auth()->check()) {
             $user = auth()->user();
-            if ($user->email_verified_at) {
-
-                if ($user->user_type == 'alumni') {
-                    if ($user->add_info_completed == false) {
-                        return view('auth.additional-info')->with('info', 'Please Add Your Information.');
-                    } else {
-                        if ($user->survey_completed == false) {
-                            return view('auth.survey')->with('info', 'Please complete this survey.');
-                        } else {
-                            return view('auth.home', ['news' => $news->latest()->get(), 'events' => $events->latest()->get(), 'jobs' => $jobs->latest()->get()]);
-                        }
-                    }
-                } else if ($user->user_type == 'admin') {
-                    return view('admin.dashboard');
-                }
-
-            } else {
+        
+            if (!$user->email_verified_at) {
                 return view('auth.verify-email');
             }
-
-        } else {
-            return view('index');
+        
+            if ($user->user_type == 'alumni') {
+                if (!$user->add_info_completed) {
+                    return view('auth.additional-info')->with('info', 'Please Add Your Information.');
+                }
+        
+                if (!$user->survey_completed) {
+                    return view('auth.survey')->with('info', 'Please complete this survey.');
+                }
+        
+                return view('auth.home', [
+                    'news' => $news->latest()->get(),
+                    'events' => $events->latest()->get(),
+                    'jobs' => $jobs->latest()->get(),
+                ]);
+            }
+        
+            if ($user->user_type != 'alumni') {
+                return view('admin.dashboard');
+            }
         }
+        
+        return view('index');
+        
     }
 
     public function addInfo()
@@ -165,8 +196,28 @@ class PageController extends Controller
     }
     public function editAlumniPage(User $user)
     {
-        return view('admin.edit-alumni', ['user' => $user]);
+        if ($user->user_type === 'alumni') {
+            return view('admin.edit-alumni', ['user' => $user]);
+        } else {
+            return back()->with('error', 'Hmmm? This user is not an alumni');
+        }
     }
+
+    public function editAdminPage(User $user)
+    {
+        if ($user->user_type !== 'alumni') {
+            return view('admin.edit-admin', ['user' => $user]);
+        } else {
+            return back()->with('error', 'Hmmm? This user is an alumni.');
+        }
+    }
+
+    public function editAdminProfile(User $user)
+    {
+        return view('admin.edit-profile', ['user' => auth()->user()]);
+    }
+    
+    
 
 
 
@@ -210,7 +261,7 @@ class PageController extends Controller
     //not finishhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
     public function adminAdmins(User $user)
     {
-        return view('admin.admins', ['users' => $user->latest()->get()->where('user_type', '===', 'admin')]);
+        return view('admin.admins', ['users' => $user->latest()->get()->where('user_type', '!=', 'alumni')]);
     }
     public function adminUsers(User $user)
     {
@@ -228,13 +279,14 @@ class PageController extends Controller
     {
         return view('admin.events', ['events' => $events->latest()->get()]);
     }
-    public function adminGallery(GalleryAlbum $galleryAlbum)
+    public function adminGallery(GalleryAlbum $galleryAlbum, Gallery $photos)
     {
         return view('admin.gallery', [
             'galleryAlbum' => $galleryAlbum
                 ->where('id', '!=', 1000)  // Exclude the album with ID 1000
                 ->latest()
-                ->get()
+                ->get(),
+            'photos' => $photos->latest()->get()
         ]);
     }
 

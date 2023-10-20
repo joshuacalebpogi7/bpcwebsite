@@ -30,7 +30,7 @@
         <div>
             <div class="container-xl px-4 mt-4">
                 <nav class="nav nav-borders">
-                    <a class="nav-link ms-0 text-light" href="/" target="__blank">Back to Home</a>
+                    <a class="nav-link ms-0 text-light" href="/">Back to Home</a>
                 </nav>
             </div>
         </div>

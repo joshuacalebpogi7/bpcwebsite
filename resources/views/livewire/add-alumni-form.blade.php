@@ -1,19 +1,18 @@
 <div>
-    @if (session()->has('success'))
-        <div class="container container-narrow">
-            <div class="alert alert-success text-center">
-                {{ session('success') }}
+    {{-- @php
+        dd($isSubmitting);
+    @endphp --}}
+    <div wire:loading.delay>
+        <div class="screen">
+            <div class="loader">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
         </div>
-    @endif
+    </div>
 
-    @if (session()->has('reject'))
-        <div class="container container-narrow">
-            <div class="alert alert-danger text-center">
-                {{ session('reject') }}
-            </div>
-        </div>
-    @endif
+
 
     <form wire:submit.prevent="addCourse">
         @csrf
@@ -116,7 +115,7 @@
         </div>
     @endif
 
-    <form wire:submit.prevent="addAlumni">
+    <form wire:submit.prevent="addAlumniConfirmation">
         @csrf
 
         <div class="card mt-5 mb-5">
@@ -283,4 +282,5 @@
         </div>
 
     </form>
+
 </div>

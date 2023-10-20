@@ -6,19 +6,19 @@
     <div>
 
         @if (session()->has('success'))
-        <div class="container container-narrow">
-            <div class="alert alert-success text-center">
-                {{ session('success') }}
+            <div class="container container-narrow">
+                <div class="alert alert-success text-center">
+                    {{ session('success') }}
+                </div>
             </div>
-        </div>
         @endif
 
         @if (session()->has('reject'))
-        <div class="container container-narrow">
-            <div class="alert alert-danger text-center">
-                {{ session('reject') }}
+            <div class="container container-narrow">
+                <div class="alert alert-danger text-center">
+                    {{ session('reject') }}
+                </div>
             </div>
-        </div>
         @endif
     </div>
     <div class="col-xl-4">
@@ -28,9 +28,10 @@
             <div class="card-body text-center">
                 <!-- Profile picture image-->
                 @if ($avatar)
-                <img class="img-account-profile rounded-circle mb-2" src="{{ $avatar->temporaryUrl() }}" alt="">
+                    <img class="img-account-profile rounded-circle mb-2" src="{{ $avatar->temporaryUrl() }}"
+                        alt="">
                 @else
-                <img class="img-account-profile rounded-circle mb-2" src="{{ $user->avatar }}" alt="">
+                    <img class="img-account-profile rounded-circle mb-2" src="{{ $user->avatar }}" alt="">
                 @endif
 
                 <!-- Profile picture help block-->
@@ -39,14 +40,14 @@
 
                 <input id="getFile" name="avatar" type="file" wire:model="avatar" hidden>
                 @error('avatar')
-                <span class="text-danger">{{ $message }}</span>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
                 <button class="btn btn-primary" onclick="document.getElementById('getFile').click()">Upload
                     new
                     image</button>
                 @if ($avatar)
-                <button wire:click="resetAvatar" class="btn btn-danger">Cancel</button>
-                <button wire:click="updateAvatar" class="btn btn-success">Save</button>
+                    <button wire:click="resetAvatar" class="btn btn-danger">Cancel</button>
+                    <button wire:click="updateAvatar" class="btn btn-success">Save</button>
                 @endif
 
             </div>
@@ -68,19 +69,18 @@
                                         disabled readonly>
                                     <span class="text-danger">
                                         @error('email')
-                                        <p>{{ $message }}</p>
+                                            <p>{{ $message }}</p>
                                         @enderror
                                     </span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="username">Username/Student No.</label>
+                                    <label for="username">Username</label>
                                     <input wire:model="state.username" class="form-control" type="text"
-                                        placeholder="Username" name="username" id="username"
-                                        style="cursor: not-allowed;" disabled readonly>
+                                        placeholder="Username" name="username" id="username">
                                     <span class="text-danger">
                                         @error('username')
-                                        <p>{{ $message }}</p>
+                                            <p>{{ $message }}</p>
                                         @enderror
                                     </span>
                                 </div>
@@ -93,9 +93,9 @@
                                         id="old-password">
 
                                     @error('old_password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
 
                                 </div>
@@ -108,9 +108,9 @@
                                         id="new-password">
 
                                     @error('new_password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
 
                                 </div>
@@ -123,9 +123,9 @@
                                         id="confirm-password">
 
                                     @error('confirm_password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
 
                                 </div>
@@ -155,13 +155,14 @@
                                         <label for="first-name">First name</label>
                                         <input wire:model="state.first_name" class="form-control" type="text"
                                             placeholder="First name" name="first_name" id="first-name"
-                                            style="cursor: not-allowed;" disabled readonly>
+                                            @if ($user->user_type == 'admin') @else
+                                            style="cursor: not-allowed;" disabled readonly @endif>
                                         {{-- @php
                                         dd($this->state['first_name']);
                                         @endphp --}}
                                         <span class="text-danger">
                                             @error('state.first_name')
-                                            <p>{{ $message }}</p>
+                                                <p>{{ $message }}</p>
                                             @enderror
                                         </span>
                                     </div>
@@ -173,10 +174,11 @@
                                         <label for="middle-name">Middle name</label>
                                         <input wire:model="state.middle_name" class="form-control" type="text"
                                             placeholder="Middle name" name="middle_name" id="middle-name"
-                                            style="cursor: not-allowed;" disabled readonly>
+                                            @if ($user->user_type == 'admin') @else
+                                            style="cursor: not-allowed;" disabled readonly @endif>
                                         <span class="text-danger">
                                             @error('state.middle_name')
-                                            <p>{{ $message }}</p>
+                                                <p>{{ $message }}</p>
                                             @enderror
                                         </span>
                                     </div>
@@ -187,10 +189,11 @@
                                         <label for="last-name">Last name</label>
                                         <input wire:model="state.last_name" class="form-control" type="text"
                                             placeholder="Last name" name="last_name" id="last-name"
-                                            style="cursor: not-allowed;" disabled readonly>
+                                            @if ($user->user_type == 'admin') @else
+                                            style="cursor: not-allowed;" disabled readonly @endif>
                                         <span class="text-danger">
                                             @error('state.last_name')
-                                            <p>{{ $message }}</p>
+                                                <p>{{ $message }}</p>
                                             @enderror
                                         </span>
                                     </div>
@@ -202,11 +205,12 @@
                                     <div class="form-group">
                                         <label for="birthday">Birthday</label>
                                         <input wire:model="state.birthday" class="form-control" type="date"
-                                            name="birthday" id="birthday" style="cursor: not-allowed;" disabled
-                                            readonly>
+                                            name="birthday" id="birthday"
+                                            @if ($user->user_type == 'admin') @else
+                                            style="cursor: not-allowed;" disabled readonly @endif>
                                         <span class="text-danger">
                                             @error('state.birthday')
-                                            <p>{{ $message }}</p>
+                                                <p>{{ $message }}</p>
                                             @enderror
                                         </span>
                                     </div>
@@ -229,9 +233,9 @@
                                                 Widowed</option>
                                         </select>
                                         @error('civil_status')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -239,8 +243,10 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="gender">Gender</label>
-                                        <select wire:model="state.gender" class="form-control" name="gender" id="gender"
-                                            style="cursor: not-allowed;" disabled readonly>
+                                        <select wire:model="state.gender" class="form-control" name="gender"
+                                            id="gender"
+                                            @if ($user->user_type == 'admin') @else
+                                            style="cursor: not-allowed;" disabled readonly @endif>
                                             <option value="" selected>--Select Gender--</option>
                                             <option value="male">Male
                                             </option>
@@ -250,57 +256,25 @@
                                         </select>
                                         <span class="text-danger">
                                             @error('state.gender')
-                                            <p>{{ $message }}</p>
+                                                <p>{{ $message }}</p>
                                             @enderror
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="contact-no">Contact number</label>
                                         <input wire:model="state.contact_no"
-                                            class="form-control @error('contact_no') is-invalid @enderror" type="text"
-                                            placeholder="Contact number" name="contact_no" id="contact-no">
+                                            class="form-control @error('contact_no') is-invalid @enderror"
+                                            type="text" placeholder="Contact number" name="contact_no"
+                                            id="contact-no">
                                         @error('contact_no')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="course">Course</label>
-                                        <select wire:model="state.course" class="form-control" name="course" id="course"
-                                            style="cursor: not-allowed;" disabled readonly>
-                                            <option value="" selected>--Select Course--</option>
-                                            @foreach ($courses as $course)
-                                            <option value="{{ $course->course }}">{{ $course->description }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                        <span class="text-danger">
-                                            @error('state.course')
-                                            <p>{{ $message }}</p>
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="year-graduated">Year graduated</label>
-                                        <input wire:model="state.year_graduated" class="form-control" type="text"
-                                            placeholder="Year graduated" name="year_graduated" id="year-graduated"
-                                            disabled readonly>
-                                        <span class="text-danger" style="cursor: not-allowed;">
-                                            @error('state.year_graduated')
-                                            <p>{{ $message }}</p>
-                                            @enderror
-                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -314,9 +288,9 @@
                                         name="address" id="address">
 
                                     @error('address')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
 
                                 </div>
@@ -325,117 +299,19 @@
                                 <div class="form-group">
                                     <label for="postal-code">Postal code</label>
                                     <input wire:model="state.postal_code"
-                                        class="form-control @error('postal_code') is-invalid @enderror" type="text"
-                                        placeholder="Postal code" name="postal_code" id="postal-code">
+                                        class="form-control @error('postal_code') is-invalid @enderror"
+                                        type="text" placeholder="Postal code" name="postal_code"
+                                        id="postal-code">
 
                                     @error('postal_code')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
 
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="employment-status">Employment status</label>
-                                        <select wire:model="state.employment_status"
-                                            class="form-control @error('employment_status') is-invalid @enderror"
-                                            name="employment_status" id="employment-status">
-                                            <option value="" selected>--Select Employment Status--
-                                            </option>
-                                            <option value="unemployed">
-                                                Unemployed
-                                            </option>
-                                            <option value="employed">
-                                                Employed
-                                            </option>
-                                            <option value="self-employed">
-                                                Self-employed</option>
-                                        </select>
-
-                                        @error('employment_status')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="job-type">Job type</label>
-                                        <input wire:model="state.job_type" {{ isset($state['employment_status']) &&
-                                            in_array($state['employment_status'], ['unemployed', '' ]) ? 'disabled' : ''
-                                            }} class="form-control @error('job_type') is-invalid @enderror" type="text"
-                                            placeholder="Job type" name="job_type" id="job-type">
-
-                                        @error('job_type')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="job-position">Job position</label>
-                                        <input wire:model="state.job_position" {{ isset($state['employment_status']) &&
-                                            in_array($state['employment_status'], ['unemployed', 'self-employed' , '' ])
-                                            ? 'disabled' : '' }}
-                                            class="form-control @error('job_position') is-invalid @enderror" type="text"
-                                            placeholder="Job position" name="job_position" id="job-position">
-
-                                        @error('job_position')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="job-location">Job location</label>
-                                    <input wire:model="state.job_location" {{ isset($state['employment_status']) &&
-                                        in_array($state['employment_status'], ['unemployed', 'self-employed' , '' ])
-                                        ? 'disabled' : '' }}
-                                        class="form-control @error('job_location') is-invalid @enderror" type="text"
-                                        placeholder="Job location" name="job_location" id="job-location">
-
-                                    @error('job_location')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="monthly-salary">Monthly salary</label>
-                                    <input wire:model="state.monthly_salary" {{ isset($state['employment_status']) &&
-                                        in_array($state['employment_status'], ['unemployed', 'self-employed' , '' ])
-                                        ? 'disabled' : '' }}
-                                        class="form-control @error('monthly_salary') is-invalid @enderror" type="text"
-                                        placeholder="Monthly salary" name="monthly_salary" id="monthly-salary">
-
-                                    @error('monthly_salary')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="submit">Save changes</button>

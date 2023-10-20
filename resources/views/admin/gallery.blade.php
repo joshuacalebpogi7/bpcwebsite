@@ -11,6 +11,7 @@
                     <th>Action</th>
                     <th>Album Cover</th>
                     <th>Album Name</th>
+                    <th>Photos</th>
                     <th>Posted by</th>
                     <th>Created at</th>
                     <th>Updated at</th>
@@ -40,6 +41,7 @@
                     <td><img src="{{ $album->album_cover }}" alt="{{ $album->album_name }}'s thumbnail"
                             style="width: 40px; margin: 10px;"></td>
                     <td>{{ $album->album_name }}</td>
+                    <td>{{ $photos->where('gallery_album_id', $album->id)->count() }}</td>
                     <td>{{ $album->updated_by }}</td>
                     <td>{{ $album->created_at }}</td>
                     <td>{{ $album->updated_at }}</td>

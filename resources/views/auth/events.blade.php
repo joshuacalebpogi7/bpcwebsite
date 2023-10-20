@@ -110,17 +110,20 @@
                     </form>
                 </div>
             </div>
+            <a href="/edit-profile">
+                <div class="sidebar__account">
 
-            <div class="sidebar__account">
-                <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
+                    <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
 
-                <div class="sidebar__names">
-                    <h3 class="sidebar__name">Gab Pogi</h3>
-                    <span class="sidebar__email">bpc@email.com</span>
+                    <div class="sidebar__names">
+                        <h3 class="sidebar__name">Gab Pogi</h3>
+                        <span class="sidebar__email">bpc@email.com</span>
+                    </div>
+
+                    <i class="ri-arrow-right-s-line"></i>
+
                 </div>
-
-                <i class="ri-arrow-right-s-line"></i>
-            </div>
+            </a>
         </nav>
     </div>
 

@@ -5,28 +5,22 @@ namespace App\Http\Livewire;
 use Exception;
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Course;
 use Livewire\Component;
 use App\Mail\MailNotify;
-use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class AdminEditAlumniProfile extends Component
+class AdminEditAdminProfile extends Component
 {
     use WithFileUploads;
     public $user;
     public $avatar;
     public $birthday;
     public $state = [];
-    public $courses;
     public $old_password;
     public $new_password;
     public $old_email;
@@ -40,7 +34,6 @@ class AdminEditAlumniProfile extends Component
     {
         $this->user = User::find($user->id);
         $this->state = $user->withoutRelations()->toArray();
-        $this->courses = Course::all();
         $this->email_sent = $this->user->email_sent;
         $this->email_verified = $this->user->email_verified_at;
         // dd($this->user->id);
@@ -123,11 +116,6 @@ class AdminEditAlumniProfile extends Component
         $this->state['contact_no'] = $this->user->contact_no;
         $this->state['address'] = $this->user->address;
         $this->state['postal_code'] = $this->user->postal_code;
-        $this->state['employment_status'] = $this->user->employment_status;
-        $this->state['job_type'] = $this->user->job_type;
-        $this->state['job_position'] = $this->user->job_position;
-        $this->state['job_location'] = $this->user->job_location;
-        $this->state['monthly_salary'] = $this->user->monthly_salary;
         $this->state['username'] = $this->user->username;
         $this->reset('avatar');
         $this->resetAccountSecurity();
@@ -179,6 +167,7 @@ class AdminEditAlumniProfile extends Component
         $this->state['email'] = $this->user->email;
         $this->state['username'] = $this->user->username;
     }
+
     public function updateAccountSecurity()
     {
         if ($this->edit) {
@@ -219,18 +208,11 @@ class AdminEditAlumniProfile extends Component
             $this->state['contact_no'] !== $this->user->contact_no ||
             $this->state['address'] !== $this->user->address ||
             $this->state['postal_code'] !== $this->user->postal_code ||
-            $this->state['employment_status'] !== $this->user->employment_status ||
-            $this->state['job_type'] !== $this->user->job_type ||
-            $this->state['job_position'] !== $this->user->job_position ||
-            $this->state['job_location'] !== $this->user->job_location ||
-            $this->state['monthly_salary'] !== $this->user->monthly_salary ||
             $this->state['first_name'] !== $this->user->first_name ||
             $this->state['middle_name'] !== $this->user->middle_name ||
             $this->state['last_name'] !== $this->user->last_name ||
             $this->state['birthday'] !== $this->user->birthday ||
-            $this->state['gender'] !== $this->user->gender ||
-            $this->state['course'] !== $this->user->course ||
-            $this->state['year_graduated'] !== $this->user->year_graduated
+            $this->state['gender'] !== $this->user->gender
         ) {
             $this->dispatchBrowserEvent('show-reset-profile-confirmation');
         }
@@ -244,35 +226,22 @@ class AdminEditAlumniProfile extends Component
             $this->state['contact_no'] !== $this->user->contact_no ||
             $this->state['address'] !== $this->user->address ||
             $this->state['postal_code'] !== $this->user->postal_code ||
-            $this->state['employment_status'] !== $this->user->employment_status ||
-            $this->state['job_type'] !== $this->user->job_type ||
-            $this->state['job_position'] !== $this->user->job_position ||
-            $this->state['job_location'] !== $this->user->job_location ||
-            $this->state['monthly_salary'] !== $this->user->monthly_salary ||
             $this->state['first_name'] !== $this->user->first_name ||
             $this->state['middle_name'] !== $this->user->middle_name ||
             $this->state['last_name'] !== $this->user->last_name ||
             $this->state['birthday'] !== $this->user->birthday ||
-            $this->state['gender'] !== $this->user->gender ||
-            $this->state['course'] !== $this->user->course ||
-            $this->state['year_graduated'] !== $this->user->year_graduated
+            $this->state['gender'] !== $this->user->gender
         ) {
             $this->state['civil_status'] = $this->user->civil_status;
             $this->state['contact_no'] = $this->user->contact_no;
             $this->state['address'] = $this->user->address;
             $this->state['postal_code'] = $this->user->postal_code;
-            $this->state['employment_status'] = $this->user->employment_status;
-            $this->state['job_type'] = $this->user->job_type;
-            $this->state['job_position'] = $this->user->job_position;
-            $this->state['job_location'] = $this->user->job_location;
-            $this->state['monthly_salary'] = $this->user->monthly_salary;
             $this->state['first_name'] = $this->user->first_name;
             $this->state['middle_name'] = $this->user->middle_name;
             $this->state['last_name'] = $this->user->last_name;
             $this->state['birthday'] = $this->user->birthday;
             $this->state['gender'] = $this->user->gender;
-            $this->state['course'] = $this->user->course;
-            $this->state['year_graduated'] = $this->user->year_graduated;
+            $this->state['age'] = $this->user->age;
         }
     }
     public function resetAvatar()
@@ -315,33 +284,6 @@ class AdminEditAlumniProfile extends Component
 
     }
 
-    public function updatedStateEmploymentStatus($value)
-    {
-        if ($this->edit) {
-            $this->resetErrorBag();
-            if ($value === 'unemployed') {
-                $this->state['job_type'] = null;
-                $this->state['job_position'] = null;
-                $this->state['job_location'] = null;
-                $this->state['monthly_salary'] = null;
-            } elseif ($value === 'self-employed') {
-                $this->state['job_type'] = $this->user->job_type;
-                $this->state['job_position'] = null;
-                $this->state['job_location'] = null;
-                $this->state['monthly_salary'] = null;
-            } elseif ($value === '') {
-                $this->state['job_type'] = null;
-                $this->state['job_position'] = null;
-                $this->state['job_location'] = null;
-                $this->state['monthly_salary'] = null;
-            } else {
-                $this->state['job_type'] = $this->user->job_type;
-                $this->state['job_position'] = $this->user->job_position;
-                $this->state['job_location'] = $this->user->job_location;
-                $this->state['monthly_salary'] = $this->user->monthly_salary;
-            }
-        }
-    }
     public function updateProfile()
     {
         $this->resetErrorBag();
@@ -350,18 +292,11 @@ class AdminEditAlumniProfile extends Component
             $this->state['contact_no'] !== $this->user->contact_no ||
             $this->state['address'] !== $this->user->address ||
             $this->state['postal_code'] !== $this->user->postal_code ||
-            $this->state['employment_status'] !== $this->user->employment_status ||
-            $this->state['job_type'] !== $this->user->job_type ||
-            $this->state['job_position'] !== $this->user->job_position ||
-            $this->state['job_location'] !== $this->user->job_location ||
-            $this->state['monthly_salary'] !== $this->user->monthly_salary ||
             $this->state['first_name'] !== $this->user->first_name ||
             $this->state['middle_name'] !== $this->user->middle_name ||
             $this->state['last_name'] !== $this->user->last_name ||
             $this->state['birthday'] !== $this->user->birthday ||
-            $this->state['gender'] !== $this->user->gender ||
-            $this->state['course'] !== $this->user->course ||
-            $this->state['year_graduated'] !== $this->user->year_graduated
+            $this->state['gender'] !== $this->user->gender
         ) {
             $birthday = Carbon::createFromFormat('Y-m-d', $this->state['birthday']);
             $age = $birthday->diffInYears(Carbon::now());
@@ -370,11 +305,11 @@ class AdminEditAlumniProfile extends Component
                 Validator::make($this->state, [
                     'civil_status' => ['nullable', Rule::in(['single', 'married', 'separated', 'widowed'])],
                     'contact_no' => ['nullable', 'regex:/^[\+?\d\s]+$/'],
-                    'employment_status' => ['nullable', Rule::in(['unemployed', 'employed', 'self-employed'])],
-                    'job_type' => ['required_if:employment_status,employed,self-employed'],
-                    'job_position' => ['required_if:employment_status,employed'],
-                    'job_location' => ['required_if:employment_status,employed'],
-                    'monthly_salary' => ['required_if:employment_status,employed', 'nullable', 'numeric'],
+                    'first_name' => ['required'],
+                    'middle_name' => ['required'],
+                    'last_name' => ['required'],
+                    'birthday' => ['required', 'date_format:Y-m-d'],
+                    'gender' => ['required', Rule::in(['male', 'female'])],
                 ])->validate();
 
                 $this->user->update([
@@ -382,34 +317,14 @@ class AdminEditAlumniProfile extends Component
                     'contact_no' => trim($this->state['contact_no']),
                     'address' => trim(strip_tags($this->state['address'])),
                     'postal_code' => trim(strip_tags($this->state['postal_code'])),
-                    'employment_status' => $this->state['employment_status'],
-                    'job_type' => trim(strip_tags(ucwords($this->state['job_type']))),
-                    'job_position' => trim(strip_tags(ucwords($this->state['job_position']))),
-                    'job_location' => trim(strip_tags($this->state['job_location'])),
-                    'monthly_salary' => trim($this->state['monthly_salary']),
+                    'first_name' => trim(strip_tags(ucwords($this->state['first_name']))),
+                    'middle_name' => trim(strip_tags(ucwords($this->state['middle_name']))),
+                    'last_name' => trim(strip_tags(ucwords($this->state['last_name']))),
+                    'birthday' => $this->state['birthday'],
+                    'gender' => $this->state['gender'],
+                    'age' => $age,
                 ]);
             }
-
-            Validator::make($this->state, [
-                'first_name' => ['required'],
-                'middle_name' => ['required'],
-                'last_name' => ['required'],
-                'birthday' => ['required', 'date_format:Y-m-d'],
-                'gender' => ['required', Rule::in(['male', 'female'])],
-                'course' => ['required', Rule::exists('courses', 'course')],
-                'year_graduated' => ['required', 'numeric'],
-            ])->validate();
-
-            $this->user->update([
-                'first_name' => trim(strip_tags(ucfirst($this->state['first_name']))),
-                'middle_name' => trim(strip_tags(ucfirst($this->state['middle_name']))),
-                'last_name' => trim(strip_tags(ucfirst($this->state['last_name']))),
-                'birthday' => $this->state['birthday'],
-                'gender' => $this->state['gender'],
-                'course' => $this->state['course'],
-                'year_graduated' => trim($this->state['year_graduated']),
-                'age' => $age
-            ]);
 
             toastr()->success('', 'Profile updated successfully!', [
                 "showEasing" => "swing",
@@ -474,8 +389,8 @@ class AdminEditAlumniProfile extends Component
             }
         }
     }
-    public function render(User $user)
+    public function render()
     {
-        return view('livewire.admin-edit-alumni-profile', ['user' => $user]);
+        return view('livewire.admin-edit-admin-profile');
     }
 }

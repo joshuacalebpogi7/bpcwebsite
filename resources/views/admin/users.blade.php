@@ -7,9 +7,6 @@
         <table id="example" class="table table-light table-striped table-hover rounded shadow-sm" style="width:100%">
             <thead>
                 <tr>
-                    {{-- @if (data - tables)
-                    <th>Action</th>
-                    @endif --}}
                     <th>Id</th>
                     <th>Action</th>
                     <th>Avatar</th>
