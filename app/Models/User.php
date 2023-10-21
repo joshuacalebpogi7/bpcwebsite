@@ -55,6 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
+    public function jobs()
+    {
+        return $this->belongsToMany(Jobs::class, 'user_jobs', 'user_id', 'job_id');
+    }
+
 
     protected $dates = ['email_verified_at', 'birthday'];
 

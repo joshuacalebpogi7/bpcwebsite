@@ -15,6 +15,8 @@ class Jobs extends Model
         'job_title',
         'description',
         'company',
+        'location',
+        'salary',
         'link',
         'status',
         'posted_by',
@@ -27,5 +29,10 @@ class Jobs extends Model
         return Attribute::make(get: function ($value) {
             return $value ? '/storage/jobs-image/' . $value : '/images/bpc_building2.jpg';
         });
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_jobs', 'job_id', 'user_id');
     }
 }

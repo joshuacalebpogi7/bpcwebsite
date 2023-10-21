@@ -29,17 +29,21 @@ class JobsController extends Controller
             'job_title' => 'required',
             'company' => 'required',
             'description' => 'required',
+            'location' => 'required',
+            'salary' => 'required|numeric',
             'status' => ['required', Rule::in('active', 'archived')],
             'link' => ['nullable', 'string', 'url'],
             'image' => 'nullable|image|max:5000',
 
         ]);
 
-        if ($jobs->title !== $incomingFields['title'] || $jobs->job_title !== $incomingFields['job_title'] || $jobs->company !== $incomingFields['company'] || $jobs->status !== $incomingFields['status'] || $jobs->description !== $incomingFields['description'] || $jobs->link !== $incomingFields['link']) {
+        if (isset($jobs->image) || $jobs->salary !== $incomingFields['salary'] || $jobs->location !== $incomingFields['location'] || $jobs->title !== $incomingFields['title'] || $jobs->job_title !== $incomingFields['job_title'] || $jobs->company !== $incomingFields['company'] || $jobs->status !== $incomingFields['status'] || $jobs->description !== $incomingFields['description'] || $jobs->link !== $incomingFields['link']) {
             // Update the existing fields
             $jobs->title = trim(strip_tags(ucwords($incomingFields['title'])));
             $jobs->job_title = trim(strip_tags(ucwords($incomingFields['job_title'])));
             $jobs->company = trim(ucwords($incomingFields['company']));
+            $jobs->location = trim($incomingFields['location']);
+            $jobs->salary = $incomingFields['salary'];
             $jobs->status = $incomingFields['status'];
             $jobs->description = $incomingFields['description'];
             $jobs->link = $incomingFields['link'];
@@ -84,6 +88,8 @@ class JobsController extends Controller
             'job_title' => 'required',
             'company' => 'required',
             'description' => 'required',
+            'location' => 'required',
+            'salary' => 'required|numeric',
             'status' => ['required', Rule::in('active', 'archived')],
             'link' => ['nullable', 'string', 'url'],
             'image' => 'nullable|image|max:5000',

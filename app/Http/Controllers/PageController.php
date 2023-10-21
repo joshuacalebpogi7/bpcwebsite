@@ -182,7 +182,7 @@ class PageController extends Controller
     {
         return view('admin.edit-gallery', ['gallery' => $gallery->where('gallery_album_id', $album->id)->get(), 'galleryItem' => $gallery->latest()->get(), 'album' => $album, 'albumItem' => $album->latest()->get()]);
     }
-    public function editJobsPage(Events $jobs)
+    public function editJobsPage(Jobs $jobs)
     {
         return view('admin.edit-jobs', ['jobs' => $jobs]);
     }

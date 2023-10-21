@@ -24,4 +24,9 @@ class GalleryAlbum extends Model
             return $value ? '/storage/album_covers/' . $value : '/fallback_noPhoto.jpg';
         });
     }
+
+    public function pictures()
+    {
+        return $this->hasMany(Gallery::class, 'gallery_album_id');
+    }
 }

@@ -1,18 +1,18 @@
 <div>
     @if (session()->has('success'))
-    <div class="container container-narrow">
-        <div class="alert alert-success text-center">
-            {{ session('success') }}
+        <div class="container container-narrow">
+            <div class="alert alert-success text-center">
+                {{ session('success') }}
+            </div>
         </div>
-    </div>
     @endif
 
     @if (session()->has('reject'))
-    <div class="container container-narrow">
-        <div class="alert alert-danger text-center">
-            {{ session('reject') }}
+        <div class="container container-narrow">
+            <div class="alert alert-danger text-center">
+                {{ session('reject') }}
+            </div>
         </div>
-    </div>
     @endif
 
 
@@ -33,7 +33,7 @@
                                 placeholder="Album Name" name="album_name" id="album-name">
                             <span class="text-danger">
                                 @error('album_name')
-                                <p>{{ $message }}</p>
+                                    <p>{{ $message }}</p>
                                 @enderror
                             </span>
                         </div>
@@ -45,7 +45,7 @@
                                 id="description" type="text" placeholder="Description">
                             <span class="text-danger">
                                 @error('description')
-                                <p>{{ $message }}</p>
+                                    <p>{{ $message }}</p>
                                 @enderror
                             </span>
                         </div>
@@ -57,7 +57,8 @@
                     <div class="card-header">Upload Photos</div>
                     <div class="card-body text-center">
                         @if ($photo)
-                        <img class="img-account-profile rounded-circle mb-2" src="{{ $photo->temporaryUrl() }}" alt="">
+                            <img class="img-account-profile rounded-circle mb-2" src="{{ $photo->temporaryUrl() }}"
+                                alt="">
                         @endif
 
                         <!-- Photo help block -->
@@ -66,14 +67,14 @@
                         <!-- Photo upload button -->
                         <input id="getFile" name="photo" type="file" wire:model="photo" hidden>
                         @error('photo')
-                        <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <button type="button" wire:click="resetErrorMessage" class="btn btn-primary"
                             onclick="document.getElementById('getFile').click()">Upload new
                             image</button>
                         @if ($photo)
-                        <button wire:click.prevent="resetPhoto" class="btn btn-danger">Cancel</button>
-                        <button wire:click.prevent="addPhoto" class="btn btn-success">Save Photo</button>
+                            <button wire:click.prevent="resetPhoto" class="btn btn-danger">Cancel</button>
+                            <button wire:click.prevent="addPhoto" class="btn btn-success">Save Photo</button>
                         @endif
                     </div>
                 </div>
@@ -84,72 +85,76 @@
 
         {{-- debbuger --}}
         {{-- @php
-        dd($gallery)
+            dd($album->pictures[0]->photo);
         @endphp --}}
 
         @if ($gallery)
-        <div class="row">
-            @foreach ($gallery as $index => $photo)
-            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <img class="card-img-top" src="{{ $photo->photo }}" alt="Photo">
+            <div class="row">
+                {{-- <img class="card-img-top" src="{{ $album->pictures->photo }}" alt="Photo"> --}}
+                @foreach ($gallery as $index => $photo)
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <img class="card-img-top" src="{{ $photo->photo }}" alt="Photo">
 
-                        <div class="card-body">
-                            <input wire:model="statePhotos.{{ $index }}.description" class="form-control" type="text"
-                                placeholder="Description" name="statePhotos.{{ $index }}.description"
-                                id="gallery-description-{{ $index }}">
-                            <span class="text-danger">
-                                @error('statePhotos.' . $index . '.description')
-                                <p>{{ $message }}</p>
-                                @enderror
-                            </span>
+                                <div class="card-body">
+                                    <input wire:model="statePhotos.{{ $index }}.description" class="form-control"
+                                        type="text" placeholder="Description"
+                                        name="statePhotos.{{ $index }}.description"
+                                        id="gallery-description-{{ $index }}">
+                                    <span class="text-danger">
+                                        @error('statePhotos.' . $index . '.description')
+                                            <p>{{ $message }}</p>
+                                        @enderror
+                                    </span>
+                                </div>
+
+                                <button wire:click.prevent="setAlbumCover({{ $index }})" class="btn btn-primary"
+                                    type="button"
+                                    @if ($photo->photo == '/storage/photos/' . basename($album->album_cover)) style="display:
+                            none" @endif>Make
+                                    Album
+                                    Cover</button>
+                                <button wire:click.prevent="removePhotoConfirmation({{ $index }})"
+                                    class="btn btn-primary" type="button">
+                                    Remove Photo
+                                </button>
+                            </div>
                         </div>
-
-                        <button wire:click.prevent="setAlbumCover({{ $index }})" class="btn btn-primary" type="button"
-                            @if ($photo->photo == '/storage/photos/' . basename($album->album_cover)) style="display:
-                            none" @endif>Make Album
-                            Cover</button>
-                        <button wire:click.prevent="removePhotoConfirmation({{ $index }})" class="btn btn-primary"
-                            type="button">
-                            Remove Photo
-                        </button>
                     </div>
-                </div>
-            </div>
-            @endforeach
+                @endforeach
 
-            @if ($temporaryPhotos)
-            @foreach ($temporaryPhotos as $index => $newPhoto)
-            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <img class="card-img-top" src="{{ asset('storage/photos/' . $newPhoto['photo']) }}"
-                            alt="New Photo">
+                @if ($temporaryPhotos)
+                    @foreach ($temporaryPhotos as $index => $newPhoto)
+                        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img class="card-img-top" src="{{ asset('storage/photos/' . $newPhoto['photo']) }}"
+                                        alt="New Photo">
 
-                        <div class="card-body">
-                            <input wire:model="temporaryPhotos.{{ $index }}.gallery_description" class="form-control"
-                                type="text" placeholder="Description"
-                                name="temporaryPhotos.{{ $index }}.gallery_description"
-                                id="gallery-description-temp-{{ $index }}">
-                            <span class="text-danger">
-                                @error('temporaryPhotos.' . $index . '.gallery_description')
-                                <p>{{ $message }}</p>
-                                @enderror
-                            </span>
+                                    <div class="card-body">
+                                        <input wire:model="temporaryPhotos.{{ $index }}.gallery_description"
+                                            class="form-control" type="text" placeholder="Description"
+                                            name="temporaryPhotos.{{ $index }}.gallery_description"
+                                            id="gallery-description-temp-{{ $index }}">
+                                        <span class="text-danger">
+                                            @error('temporaryPhotos.' . $index . '.gallery_description')
+                                                <p>{{ $message }}</p>
+                                            @enderror
+                                        </span>
+                                    </div>
+                                    <button wire:click.prevent="setAlbumCover({{ $index }})"
+                                        class="btn btn-primary" type="button">Make Album Cover</button>
+                                    <button wire:click.prevent="removePhotoConfirmation({{ $index }})"
+                                        class="btn btn-primary" type="button">
+                                        Remove New Photo
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <button wire:click.prevent="setAlbumCover({{ $index }})" class="btn btn-primary"
-                            type="button">Make Album Cover</button>
-                        <button wire:click.prevent="removePhotoConfirmation({{ $index }})" class="btn btn-primary"
-                            type="button">
-                            Remove New Photo
-                        </button>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
-            @endforeach
-            @endif
-        </div>
         @endif
 
 

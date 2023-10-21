@@ -37,66 +37,99 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                placeholder="News title" name="title" id="title" value="{{ old('title') }}">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input class="form-control @error('title') is-invalid @enderror" type="text"
+                                    placeholder="Title" name="title" id="title" value="{{ old('title') }}">
 
-                            @error('title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                                @error('title')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
 
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="job-title">Job Title</label>
+                                <input class="form-control @error('job_title') is-invalid @enderror" type="text"
+                                    placeholder="Job title" name="job_title" id="job-title"
+                                    value="{{ old('job_title') }}">
+                                @error('job_title')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="form-group">
-                            <label for="job-title">Job Title</label>
-                            <input class="form-control @error('job_title') is-invalid @enderror" type="text"
-                                placeholder="Job title" name="job_title" id="job-title" value="{{ old('job_title') }}">
-                            @error('job_title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="salary">Salary</label>
+                                <input class="form-control @error('salary') is-invalid @enderror" type="text"
+                                    placeholder="Salary" name="salary" id="salary" value="{{ old('salary') }}">
+                                @error('salary')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input class="form-control @error('company') is-invalid @enderror" type="text"
+                                    placeholder="Company" name="company" id="company" value="{{ old('company') }}">
+                                @error('company')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input class="form-control @error('company') is-invalid @enderror" type="text"
-                                placeholder="Company" name="company" id="company" value="{{ old('company') }}">
-                            @error('company')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input class="form-control @error('location') is-invalid @enderror" type="text"
+                                    placeholder="Location" name="location" id="location"
+                                    value="{{ old('location') }}">
+                                @error('location')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select wire:model="status" class="form-control @error('status') is-invalid @enderror"
+                                    name="status" id="status">
+                                    <option value="" selected>--Select Status--
+                                    </option>
+                                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active
+                                    </option>
+                                    <option value="archived" {{ old('status') == 'archived' ? 'selected' : '' }}>
+                                        Archived
+                                    </option>
+                                </select>
 
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <select wire:model="status" class="form-control @error('status') is-invalid @enderror"
-                                name="status" id="status">
-                                <option value="" selected>--Select Status--
-                                </option>
-                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active
-                                </option>
-                                <option value="archived" {{ old('status') == 'archived' ? 'selected' : '' }}>
-                                    Archived
-                                </option>
-                            </select>
+                                @error('status')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
 
-                            @error('status')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
+                            </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group">
                             <label for="description">Description</label>
@@ -127,7 +160,7 @@
 
                         </div>
                     </div>
-                    <button class="btn btn-primary">Add News</button>
+                    <button class="btn btn-primary">Add Job</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </div>
             </div>
