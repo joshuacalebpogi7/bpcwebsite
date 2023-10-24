@@ -3,14 +3,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GalleryAlbum;
+use Carbon\Carbon;
 use App\Models\Jobs;
 use App\Models\News;
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Events;
 use App\Models\Survey;
 use App\Models\Gallery;
 use Illuminate\Support\Str;
+use App\Models\GalleryAlbum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -19,64 +21,42 @@ class PageController extends Controller
     //user pages
     public function home(News $news, Events $events, Jobs $jobs)
     {
-
-        // if (auth()->check()) {
-        //     $user = auth()->user();
-        //     if ($user->email_verified_at) {
-
-        //         if ($user->user_type == 'alumni') {
-        //             if ($user->add_info_completed == false) {
-        //                 return view('auth.additional-info')->with('info', 'Please Add Your Information.');
-        //             } else {
-        //                 if ($user->survey_completed == false) {
-        //                     return view('auth.survey')->with('info', 'Please complete this survey.');
-        //                 } else {
-        //                     return view('auth.home', ['news' => $news->latest()->get(), 'events' => $events->latest()->get(), 'jobs' => $jobs->latest()->get()]);
-        //                 }
-        //             }
-        //         } else if ($user->user_type != 'alumni') {
-        //             return view('admin.dashboard');
-        //         }
-
-        //     } else {
-        //         return view('auth.verify-email');
-        //     }
-
-        // } else {
-        //     return view('index');
-        // }
-
         if (auth()->check()) {
             $user = auth()->user();
-        
+
             if (!$user->email_verified_at) {
                 return view('auth.verify-email');
             }
-        
+
             if ($user->user_type == 'alumni') {
-                if (!$user->add_info_completed) {
-                    return view('auth.additional-info')->with('info', 'Please Add Your Information.');
-                }
-        
-                if (!$user->survey_completed) {
-                    return view('auth.survey')->with('info', 'Please complete this survey.');
-                }
-        
-                return view('auth.home', [
-                    'news' => $news->latest()->get(),
-                    'events' => $events->latest()->get(),
-                    'jobs' => $jobs->latest()->get(),
-                ]);
+                return $this->alumniHome($news, $events, $jobs, $user);
             }
-        
+
             if ($user->user_type != 'alumni') {
-                return view('admin.dashboard');
+                return $this->adminDashboard($user);
             }
         }
-        
+
         return view('index');
-        
     }
+
+    protected function alumniHome(News $news, Events $events, Jobs $jobs, $user)
+    {
+        if (!$user->add_info_completed) {
+            return view('auth.additional-info')->with('info', 'Please Add Your Information.');
+        }
+
+        if (!$user->survey_completed) {
+            return view('auth.survey')->with('info', 'Please complete this survey.');
+        }
+
+        return view('auth.home', [
+            'news' => $news->latest()->get(),
+            'events' => $events->latest()->get(),
+            'jobs' => $jobs->latest()->get(),
+        ]);
+    }
+
 
     public function addInfo()
     {
@@ -159,22 +139,100 @@ class PageController extends Controller
         return view('auth-single-pages.gallery-single-page', ['gallery' => $gallery->latest()->get(), 'galleryclass' => $gallery]);
     }
 
+//--------------------------------ADMIN----------------------------
+
+    //GET
+    public function adminDashboard()
+    {
+        $user = auth()->user();
+        $users = new User;
+        $alumniCount = User::where('user_type', 'alumni')->count();
+        $verifiedUsersCount = User::where('user_type', 'alumni')->whereNotNull('email_verified_at')->count();
+    
+        $percentageChange = 0;
+        if ($verifiedUsersCount > 0) {
+            $percentageChange = ($verifiedUsersCount / $alumniCount) * 100;
+        }
+        $courses = Course::all();
+        $employmentPercentageByCourse = 0;
+        if ($verifiedUsersCount > 0) {
+            $employmentPercentage = ($verifiedUsersCount / $alumniCount) * 100;
+        }
+
+        $data = [
+            //users
+            'users' => new User,
+            'alumniCount' => $alumniCount,
+            'verifiedAlumniCount' => $verifiedUsersCount,
+            'verifiedAlumni' => User::where('user_type', 'alumni')->whereNotNull('email_verified_at')->get(),
+            'verifiedPercentage' => $percentageChange,
+            'total_users' => User::count(),
+            'male_users' => User::where('gender', 'male')->count(),
+            'female_users' => User::where('gender', 'female')->count(),
+            'employed_users' => User::where('employment_status', 'employed')->count(),
+            'unemployed_users' => User::where('employment_status', 'unemployed')->count(),
+
+            //employment status
+            'employed' => User::where('employment_status', 'employed')->count(),
+            'unemployed' => User::where('employment_status', 'unemployed')->count(),
+            'selfEmployed' => User::where('employment_status', 'self-employed')->count(),
+
+            //events
+            'events' => Events::count(),
+            'activeEvents' => Events::where('event_end', '>', Carbon::now())->count(),
+
+            //course
+            'courses' => Course::all(),
+            'employmentPercentageByCourse' => $employmentPercentageByCourse,
+        ];
+        
+        return view('admin.dashboard', compact('user', 'data'));
+    }
 
 
-    // admin pages
-    // private function getSharedData($user, $news, $events, $jobs, $gallery, $survey)
-    // {
-    //     View::share('sharedData', [
-    //         'user' => $user,
-    //         'news' => $news,
-    //         'events' => $events,
-    //         'jobs' => $jobs,
-    //         'gallery' => $gallery,
-    //     ]);
-    // }
+    public function adminAdmins(User $user)
+    {
+        return view('admin.admins', ['users' => $user->latest()->get()->where('user_type', '!=', 'alumni')]);
+    }
+    public function adminUsers(User $user)
+    {
+        return view('admin.users', ['users' => $user->latest()->get()->where('user_type', '===', 'alumni')]);
+    }
+    public function adminSurvey(Survey $survey)
+    {
+        return view('admin.surveys', ['surveys' => $survey->surveyQuestions()->latest()->get()]);
+    }
+    public function adminNews(News $news)
+    {
+        return view('admin.news', ['news' => $news->latest()->get()]);
+    }
+    public function adminEvents(Events $events)
+    {
+        return view('admin.events', ['events' => $events->latest()->get()]);
+    }
+    public function adminGallery(GalleryAlbum $galleryAlbum, Gallery $photos)
+    {
+        return view('admin.gallery', [
+            'galleryAlbum' => $galleryAlbum
+                ->where('id', '!=', 1000)  // Exclude the album with ID 1000
+                ->latest()
+                ->get(),
+            'photos' => $photos->latest()->get()
+        ]);
+    }
 
-
-
+    public function adminJobs(Jobs $jobs)
+    {
+        return view('admin.jobs', ['jobs' => $jobs->latest()->get()]);
+    }
+    public function adminForums(User $user)
+    {
+        return view('admin.forums', ['surveys' => $user->latest()->get()]);
+    }
+    public function adminAnalytics(User $user, News $news, Events $events, Jobs $jobs)
+    {
+        return view('admin.analytics', ['users' => $user->latest()->get()->where('user_type', '!=', 'admin'), 'news' => $news->latest()->get(), 'events' => $events->latest()->get(), 'jobs' => $jobs->latest()->get()]);
+    }
 
 
     //EDIT PAGES
@@ -253,53 +311,4 @@ class PageController extends Controller
         return view('admin.add-survey');
     }
 
-    //
-    public function adminDashboard()
-    {
-        return view('admin.dashboard');
-    }
-    //not finishhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-    public function adminAdmins(User $user)
-    {
-        return view('admin.admins', ['users' => $user->latest()->get()->where('user_type', '!=', 'alumni')]);
-    }
-    public function adminUsers(User $user)
-    {
-        return view('admin.users', ['users' => $user->latest()->get()->where('user_type', '===', 'alumni')]);
-    }
-    public function adminSurvey(Survey $survey)
-    {
-        return view('admin.surveys', ['surveys' => $survey->surveyQuestions()->latest()->get()]);
-    }
-    public function adminNews(News $news)
-    {
-        return view('admin.news', ['news' => $news->latest()->get()]);
-    }
-    public function adminEvents(Events $events)
-    {
-        return view('admin.events', ['events' => $events->latest()->get()]);
-    }
-    public function adminGallery(GalleryAlbum $galleryAlbum, Gallery $photos)
-    {
-        return view('admin.gallery', [
-            'galleryAlbum' => $galleryAlbum
-                ->where('id', '!=', 1000)  // Exclude the album with ID 1000
-                ->latest()
-                ->get(),
-            'photos' => $photos->latest()->get()
-        ]);
-    }
-
-    public function adminJobs(Jobs $jobs)
-    {
-        return view('admin.jobs', ['jobs' => $jobs->latest()->get()]);
-    }
-    public function adminForums(User $user)
-    {
-        return view('admin.forums', ['surveys' => $user->latest()->get()]);
-    }
-    public function adminAnalytics(User $user, News $news, Events $events, Jobs $jobs)
-    {
-        return view('admin.analytics', ['users' => $user->latest()->get()->where('user_type', '!=', 'admin'), 'news' => $news->latest()->get(), 'events' => $events->latest()->get(), 'jobs' => $jobs->latest()->get()]);
-    }
 }

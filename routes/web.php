@@ -22,6 +22,9 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('add-to-log', 'HomeController@myTestAddToLog');
+Route::get('logActivity', 'HomeController@logActivity');
+
 // Route::middleware('guest')->group(function () {
 
 //USER GET related routes
