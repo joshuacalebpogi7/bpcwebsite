@@ -342,25 +342,28 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-users" aria-expanded="false"
-                            aria-controls="ui-users">
-                            <i class="icon-layout menu-icon"></i>
-                            <span class="menu-title">Manage Users</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-users">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/admins')) text-warning @endif"
-                                        href="/admin/admins">Admins</a>
-                                </li>
-                                <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/users')) text-warning @endif"
-                                        href="/admin/users">Alumni</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    @can('adminOnly')
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#ui-users" aria-expanded="false"
+                                aria-controls="ui-users">
+                                <i class="icon-layout menu-icon"></i>
+                                <span class="menu-title">Manage Users</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-users">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a
+                                            class="nav-link @if (Request::is('admin/admins')) text-warning @endif"
+                                            href="/admin/admins">Admins</a>
+                                    </li>
+                                    <li class="nav-item"> <a
+                                            class="nav-link @if (Request::is('admin/users')) text-warning @endif"
+                                            href="/admin/users">Alumni</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endcan
+
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-contents" aria-expanded="false"
                             aria-controls="ui-contents">
