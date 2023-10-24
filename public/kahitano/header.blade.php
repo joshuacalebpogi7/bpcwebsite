@@ -8,18 +8,18 @@
             <a href="/events" class="">Events</a>
             <a href="/gallery" class="">Gallery</a>
             @auth
-                <a href="/edit-profile"><img title="My Profile" data-toggle="tooltip" data-placement="bottom"
-                        style="width: 40px; border-radius: 50%; margin: 10px;" src="{{ auth()->user()->avatar }}" /></a>
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Sign Out</button>
-                </form>
+            <a href="/edit-profile"><img title="My Profile" data-toggle="tooltip" data-placement="bottom"
+                    style="width: 40px; border-radius: 50%; margin: 10px;" src="{{ auth()->user()->avatar }}" /></a>
+            <form action="/logout" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Sign Out</button>
+            </form>
             @else
-                <a href="/login">
-                    <div class="icons">
-                        <div id="user-btn" class="fas fa-user"></div>
-                    </div>
-                </a>
+            <a href="/login">
+                <div class="icons">
+                    <div id="user-btn" class="fas fa-user"></div>
+                </div>
+            </a>
             @endauth
         </nav>
         <div class="icons">

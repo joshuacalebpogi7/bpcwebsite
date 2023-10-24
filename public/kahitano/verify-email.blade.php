@@ -37,41 +37,39 @@
     @include('includes.header')
 
     @if (session()->has('accept'))
-        <div class="container container-narrow">
-            <div class="alert alert-success text-center">
-                {{ session('accept') }}
-            </div>
+    <div class="container container-narrow">
+        <div class="alert alert-success text-center">
+            {{ session('accept') }}
         </div>
+    </div>
     @endif
 
     @if (session()->has('reject'))
-        <div class="container container-narrow">
-            <div class="alert alert-danger text-center">
-                {{ session('reject') }}
-            </div>
+    <div class="container container-narrow">
+        <div class="alert alert-danger text-center">
+            {{ session('reject') }}
         </div>
+    </div>
     @endif
     <div class="container" style="margin-top: 15rem;">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>{{ __('Email Verification') }}</h4>
-                    </div>
+                    <div class="card-header"><h4>{{ __('Email Verification') }}</h4></div>
                     <div class="card-body">
                         @if (session('resent'))
-                            <div class="alert alert-success" role="alert">
-                                {{ __('A fresh verification link has been sent to your email address.') }}
-                            </div>
+                        <div class="alert alert-success" role="alert">
+                            {{ __('A fresh verification link has been sent to your email address.') }}
+                        </div>
                         @endif
                         {{ __('Before proceeding, please check your email for a verification link.') }}
                         {{ __('If you did not receive the email') }},
                         <form class="d-inline" method="POST" action="{{ route('verification.send') }}">
                             @csrf
                             <div class="card-footer text-right">
-                                <button class="btn btn-success">
-                                    {{ __('click here to request another') }}
-                                </button>
+                            <button class="btn btn-success">
+                                {{ __('click here to request another') }}
+                            </button>
                             </div>
                         </form>
                     </div>

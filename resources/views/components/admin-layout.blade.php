@@ -125,10 +125,14 @@
                                 <i class="ti-user text-primary"></i>
                                 Profile
                             </a>
-                            <a class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i>
-                                Logout
-                            </a>
+                            <form action="/logout" method="POST">
+                                @csrf
+                                <button class="dropdown-item">
+                                    <i class="ti-power-off text-primary"></i>
+                                    Logout
+                                </button>
+                            </form>
+
                         </div>
                     </li>
                     <li class="nav-item nav-settings d-none d-lg-flex">
