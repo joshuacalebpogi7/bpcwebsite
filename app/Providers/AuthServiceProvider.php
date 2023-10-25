@@ -27,11 +27,14 @@ class AuthServiceProvider extends ServiceProvider
         //
         $this->registerPolicies();
         Gate::define('adminOnly', function ($user) {
-            return $user->user_type === 'admin';
+            return $user->user_type === 'admin' && $user->email_verified_at !== null;
         });
+        
         Gate::define('visitAdminPages', function ($user) {
-            return in_array($user->user_type, ['admin', 'content creator']);
+            // Allow access if the user is an admin or content creator, and their email is verified and additional info is completed.
+            return in_array($user->user_type, ['admin', 'content creator']) && $user->email_verified_at !== null;
         });
+        
         
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {

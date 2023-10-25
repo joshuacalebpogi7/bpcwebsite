@@ -23,7 +23,6 @@ class NewsController extends Controller
 
     public function updateNews(News $news, Request $request)
     {
-        // if ($news->title !== $request->input('title') || $news->author !== $request->input('author') || $news->description !== $request->input('description') || $news->thumbnail !== $request->input('thumbnail') || $news->link !== $request->input('link')) {
 
         $incomingFields = $request->validate([
             'title' => 'required',
@@ -31,16 +30,14 @@ class NewsController extends Controller
             'category' => 'required',
             'description' => 'required',
             'thumbnail' => 'nullable|image|max:5000',
-            'link' => ['nullable', 'string', 'url'],
         ]);
 
-        if ($news->title !== $incomingFields['title'] || $news->author !== $incomingFields['author'] || $news->category !== $incomingFields['category'] || $news->description !== $incomingFields['description'] || $request->hasFile('thumbnail') || $news->link !== $incomingFields['link']) {
+        if ($news->title !== $incomingFields['title'] || $news->author !== $incomingFields['author'] || $news->category !== $incomingFields['category'] || $news->description !== $incomingFields['description'] || $request->hasFile('thumbnail')) {
             // Update the existing fields
             $news->title = trim(strip_tags(ucwords($incomingFields['title'])));
             $news->author = trim(strip_tags(ucwords($incomingFields['author'])));
             $news->category = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
             $news->description = $incomingFields['description'];
-            $news->link = $incomingFields['link'];
             $news->updated_by = auth()->user()->username;
 
             // Handle the thumbnail if provided
@@ -83,7 +80,6 @@ class NewsController extends Controller
             'description' => 'required',
             'category' => 'required',
             'thumbnail' => 'nullable|image|max:5000',
-            'link' => ['nullable', 'string', 'url'],
         ]);
 
 

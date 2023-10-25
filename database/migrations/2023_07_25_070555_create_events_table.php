@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->longText('description');
             $table->dateTime('event_start')->nullable();
             $table->dateTime('event_end')->nullable();
-            $table->string('link')->nullable();
             $table->string('posted_by');
             $table->string('updated_by');
             $table->timestamps();
