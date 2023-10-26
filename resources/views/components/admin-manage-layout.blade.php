@@ -8,6 +8,8 @@
     <title>{{ $title ?? 'BPC Website' }}</title>
     {{-- favicon --}}
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+
     {{-- font-awesome icons --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     {{-- bootstrap --}}
@@ -48,6 +50,9 @@
             @endif
             @if (Request::is('admin/add-alumni') || Request::is('admin/edit-alumni/*'))
                 <a href="/admin/users">&laquo; Back</a>
+            @endif
+            @if (Request::is('admin/add-courses') || Request::is('admin/edit-courses/*'))
+                <a href="/admin/courses">&laquo; Back</a>
             @endif
 
             @if (Request::is('admin/add-survey') || Request::is('admin/edit-survey/*'))

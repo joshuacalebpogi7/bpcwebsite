@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('category');
             $table->string('title');
             $table->longText('description');
-            $table->string('link')->nullable();
             $table->string('posted_by');
             $table->string('updated_by');
             $table->timestamps();

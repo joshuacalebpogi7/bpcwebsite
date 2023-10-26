@@ -2,7 +2,7 @@
     {{-- @php
         dd($isSubmitting);
     @endphp --}}
-    <div wire:loading.delay>
+    <div wire:loading.delay.longest>
         <div class="screen">
             <div class="loader">
                 <div class="dot"></div>
@@ -14,7 +14,7 @@
 
 
 
-    <form wire:submit.prevent="addCourse">
+    {{-- <form wire:submit.prevent="addCourse">
         @csrf
 
         <div class="card mb-2 mt-3">
@@ -39,8 +39,6 @@
                         <label for="description">Description</label>
                         <input wire:model="description" class="form-control" name="description" id="description"
                             type="text" placeholder="Full Course Name">
-                        {{-- <textarea wire:model="description" class="form-control" name="description" id="description" cols="30"
-                            rows="10"></textarea> --}}
                         <span class="text-danger">
                             @error('description')
                                 <p>{{ $message }}</p>
@@ -52,17 +50,17 @@
                 <button wire:click.prevent="resetCourseForm" class="btn btn-danger">Reset</button>
             </div>
         </div>
-    </form>
+    </form> --}}
 
 
 
-    @if (!$showCourses)
+    {{-- @if (!$showCourses)
         <button class="btn btn-success" wire:click.prevent="toggleShowCourses">Show Courses</button>
     @else
         <button class="btn btn-danger" wire:click.prevent="toggleShowCourses">Hide Courses</button>
-    @endif
+    @endif --}}
 
-    @if ($showCourses)
+    {{-- @if ($showCourses)
         <h2>Course List</h2>
         <div>
             <table class="table table-dark table-striped table-hover rounded shadow-lg">
@@ -113,7 +111,7 @@
                 </tbody>
             </table>
         </div>
-    @endif
+    @endif --}}
 
     <form wire:submit.prevent="addAlumniConfirmation">
         @csrf
@@ -199,8 +197,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="last-name">Last name</label>
-                            <input wire:model="last_name" class="form-control" type="text"
-                                placeholder="Last name" name="last_name" id="last-name">
+                            <input wire:model="last_name" class="form-control" type="text" placeholder="Last name"
+                                name="last_name" id="last-name">
                             <span class="text-danger">
                                 @error('last_name')
                                     <p>{{ $message }}</p>

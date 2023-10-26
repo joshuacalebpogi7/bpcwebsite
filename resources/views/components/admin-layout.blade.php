@@ -29,7 +29,7 @@
     <!-- endinject -->
 
     {{-- @vite(['resources/js/app.js']) --}}
-
+    @stack('styles')
     @livewireStyles
 
 </head>
@@ -51,21 +51,9 @@
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="icon-menu"></span>
                 </button>
-                <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                <span class="input-group-text" id="search">
-                                    <i class="icon-search"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now"
-                                aria-label="search" aria-describedby="search">
-                        </div>
-                    </li>
-                </ul>
+
                 <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                             data-toggle="dropdown">
                             <i class="icon-bell mx-0"></i>
@@ -114,7 +102,7 @@
                                 </div>
                             </a>
                         </div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             <img src="{{ auth()->user()->avatar }}" alt="profile" />
@@ -135,11 +123,11 @@
 
                         </div>
                     </li>
-                    <li class="nav-item nav-settings d-none d-lg-flex">
+                    {{-- <li class="nav-item nav-settings d-none d-lg-flex">
                         <a class="nav-link" href="#">
                             <i class="icon-ellipsis"></i>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                     data-toggle="offcanvas">
@@ -172,13 +160,13 @@
                     </div>
                 </div>
             </div>
-            <div id="right-sidebar" class="settings-panel">
+            {{-- <div id="right-sidebar" class="settings-panel">
                 <i class="settings-close ti-close"></i>
                 <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section"
                             role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-                    </li>
+                    </li>   
                     <li class="nav-item">
                         <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab"
                             aria-controls="chats-section">CHATS</a>
@@ -334,7 +322,7 @@
                     </div>
                     <!-- chat tab ends -->
                 </div>
-            </div>
+            </div> --}}
             <!-- partial -->
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -358,11 +346,14 @@
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"> <a
                                             class="nav-link @if (Request::is('admin/admins')) text-warning @endif"
-                                            href="/admin/admins">Admins</a>
+                                            href="/admin/admins">Content Creator</a>
                                     </li>
                                     <li class="nav-item"> <a
                                             class="nav-link @if (Request::is('admin/users')) text-warning @endif"
                                             href="/admin/users">Alumni</a></li>
+                                    <li class="nav-item"> <a
+                                            class="nav-link @if (Request::is('admin/courses')) text-warning @endif"
+                                            href="/admin/courses">Courses</a></li>
                                 </ul>
                             </div>
                         </li>
