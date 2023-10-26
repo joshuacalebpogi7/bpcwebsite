@@ -159,6 +159,25 @@ class PageController extends Controller
             $employmentPercentage = ($verifiedUsersCount / $alumniCount) * 100;
         }
 
+        $labels = [];
+        $dataAll = [];
+        $dataVerified = [];
+
+        $allAlumniCountByCourse = 0;
+        $verifiedAlumniCountByCourse = 0;
+
+        foreach ($courses as $course) {
+            if($users->where('course',$course->course)->count() > 0) {
+                $allAlumniCountByCourse = $users->where('course',$course->course)->count();
+                $verifiedAlumniCountByCourse = $users->where('course',$course->course)->whereNotNull('email_verified_at')->count();
+            }
+            array_push($labels, $course->course);
+            array_push($dataAll, $allAlumniCountByCourse);
+            array_push($dataVerified, $verifiedAlumniCountByCourse);
+        }
+
+        // dd($labels);
+
         $data = [
             //users
             'users' => new User,
@@ -171,6 +190,11 @@ class PageController extends Controller
             'female_users' => User::where('gender', 'female')->count(),
             'employed_users' => User::where('employment_status', 'employed')->count(),
             'unemployed_users' => User::where('employment_status', 'unemployed')->count(),
+            'allAlumniCountByCourse' => $allAlumniCountByCourse,
+            'verifiedAlumniCountByCourse' => $verifiedAlumniCountByCourse,
+            'labels' => $labels,
+            'dataAll' => $dataAll,
+            'dataVerified' => $dataVerified,
 
             //employment status
             'employed' => User::where('employment_status', 'employed')->count(),
@@ -187,7 +211,9 @@ class PageController extends Controller
 
             //course
             'jobs' => Jobs::all(),
+
         ];
+
         
         return view('admin.dashboard', compact('user', 'data'));
     }

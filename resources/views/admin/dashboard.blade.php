@@ -640,70 +640,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">To Do Lists</h4>
-                    <div class="list-wrapper pt-2">
-                        <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                            <li>
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Meeting with Urban Team
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li class="completed">
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox" checked>
-                                        Duplicate a project for new customer
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Project meeting with CEO
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li class="completed">
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox" checked>
-                                        Follow up of team zilla
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Level up for Antony
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="add-items d-flex mb-0 mt-2">
-                        <input type="text" class="form-control todo-list-input" placeholder="Add new task">
-                        <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i
-                                class="icon-circle-plus"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="row">
-        <div class="col-md-4 stretch-card grid-margin">
+        <div class="col-md-6 stretch-card grid-margin">
             <div class="card">
                 <div class="card-body">
                     <p class="card-title mb-0">Projects</p>
@@ -772,77 +711,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title">Charts</p>
-                            <div class="charts-data">
-                                <div class="mt-3">
-                                    <p class="mb-0">Data 1</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-inf0" role="progressbar" style="width: 95%"
-                                                aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">5k</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">Data 2</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 35%"
-                                                aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">1k</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">Data 3</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 48%"
-                                                aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">992</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">Data 4</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 25%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">687</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 stretch-card grid-margin grid-margin-md-0">
-                    <div class="card data-icon-card-primary">
-                        <div class="card-body">
-                            <p class="card-title text-white">Number of Meetings</p>
-                            <div class="row">
-                                <div class="col-8 text-white">
-                                    <h3>34040</h3>
-                                    <p class="text-white font-weight-500 mb-0">The total number of
-                                        sessions within the date range.It is calculated as the sum .
-                                    </p>
-                                </div>
-                                <div class="col-4 background-icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 stretch-card grid-margin">
+
+        <div class="col-md-6 stretch-card grid-margin">
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Notifications</p>
@@ -902,137 +772,23 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title">Alumni Table</p>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="table-responsive">
-                                <table id="example" class="display expandable-table" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Quote#</th>
-                                            <th>Product</th>
-                                            <th>Business type</th>
-                                            <th>Policy holder</th>
-                                            <th>Premium</th>
-                                            <th>Status</th>
-                                            <th>Updated at</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     @push('scripts')
         <script>
             if ($("#alumni-chart").length) {
-    var SalesChartCanvas = $("#alumni-chart").get(0).getContext("2d");
-
-    var courseNames = {!! json_encode($data['courses']->pluck('course')) !!}
-    var alumniCounts = {!! json_encode($data['courses']->map(function(course) {
-        return course.verifiedAlumniCount;
-    })) !!}
-    var verifiedAlumniCounts = {!! json_encode($data['courses']->map(function(course) {
-        return course.verifiedAlumniCount;
-    })) !!}
-
-    var SalesChart = new Chart(SalesChartCanvas, {
-        type: 'bar',
-        data: {
-            labels: courseNames,
-            datasets: [{
-                label: 'Total Alumni',
-                data: alumniCounts,
-                backgroundColor: '#98BDFF'
-            },
-            {
-                label: 'Verified Alumni',
-                data: verifiedAlumniCounts,
-                backgroundColor: '#4B49AC'
-            }
-            ]
-        },
-        options: {
-            cornerRadius: 5,
-            responsive: true,
-            maintainAspectRatio: true,
-            layout: {
-                padding: {
-                    left: 0,
-                    right: 0,
-                    top: 20,
-                    bottom: 0
-                }
-            },
-            scales: {
-                yAxes: [{
-                    display: true,
-                    gridLines: {
-                        display: true,
-                        drawBorder: false,
-                        color: "#F2F2F2"
-                    },
-                    ticks: {
-                        display: true,
-                        min: 0,
-                        max: 560,
-                        callback: function(value, index, values) {
-                            return value + '$';
-                        },
-                        autoSkip: true,
-                        maxTicksLimit: 10,
-                        fontColor: "#6C7383"
-                    }
-                }],
-                xAxes: [{
-                    stacked: false,
-                    ticks: {
-                        beginAtZero: true,
-                        fontColor: "#6C7383"
-                    },
-                    gridLines: {
-                        color: "rgba(0, 0, 0, 0)",
-                        display: false
-                    },
-                    barPercentage: 1
-                }]
-            },
-            legend: {
-                display: false
-            },
-            elements: {
-                point: {
-                    radius: 0
-                }
-            }
-        },
-    });
-    document.getElementById('alumni-legend').innerHTML = SalesChart.generateLegend();
-}
-
-
-            if ($("#sales-chart-dark").length) {
-                var SalesChartCanvas = $("#sales-chart-dark").get(0).getContext("2d");
+                var SalesChartCanvas = $("#alumni-chart").get(0).getContext("2d");
                 var SalesChart = new Chart(SalesChartCanvas, {
                     type: 'bar',
                     data: {
-                        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+                        labels: @json($data['labels']),
                         datasets: [{
-                                label: 'Offline Sales',
-                                data: [480, 230, 470, 210, 330],
+                                label: 'All Alumni',
+                                data: @json($data['dataAll']),
                                 backgroundColor: '#98BDFF'
                             },
                             {
-                                label: 'Online Sales',
-                                data: [400, 340, 550, 480, 170],
+                                label: 'Verified Alumni',
+                                data: @json($data['dataVerified']),
                                 backgroundColor: '#4B49AC'
                             }
                         ]
@@ -1055,28 +811,17 @@
                                 gridLines: {
                                     display: true,
                                     drawBorder: false,
-                                    color: "#575757"
+                                    color: "#F2F2F2"
                                 },
-                                ticks: {
-                                    display: true,
-                                    min: 0,
-                                    max: 500,
-                                    callback: function(value, index, values) {
-                                        return value + '$';
-                                    },
-                                    autoSkip: true,
-                                    maxTicksLimit: 10,
-                                    fontColor: "#F0F0F0"
-                                }
                             }],
                             xAxes: [{
                                 stacked: false,
                                 ticks: {
                                     beginAtZero: true,
-                                    fontColor: "#F0F0F0"
+                                    fontColor: "#6C7383"
                                 },
                                 gridLines: {
-                                    color: "#575757",
+                                    color: "rgba(0, 0, 0, 0)",
                                     display: false
                                 },
                                 barPercentage: 1
@@ -1092,7 +837,7 @@
                         }
                     },
                 });
-                document.getElementById('sales-legend').innerHTML = SalesChart.generateLegend();
+                document.getElementById('alumni-legend').innerHTML = SalesChart.generateLegend();
             }
         </script>
     @endpush
