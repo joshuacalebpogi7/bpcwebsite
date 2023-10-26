@@ -157,6 +157,7 @@ class AddAdminForm extends Component
             'user_type' => $this->user_type,
             "age" => $age,
             'default_password' => $this->password,
+            'contact_no' => $this->contact_no,
         ]);
 
         if($user){

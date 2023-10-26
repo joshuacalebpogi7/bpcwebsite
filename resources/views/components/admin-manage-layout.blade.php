@@ -54,27 +54,21 @@
             @if (Request::is('admin/add-courses') || Request::is('admin/edit-courses/*'))
                 <a href="/admin/courses">&laquo; Back</a>
             @endif
-
             @if (Request::is('admin/add-survey') || Request::is('admin/edit-survey/*'))
                 <a href="/admin/surveys">&laquo; Back</a>
             @endif
-
             @if (Request::is('admin/add-news') || Request::is('admin/edit-news/*'))
                 <a href="/admin/news">&laquo; Back</a>
             @endif
-
             @if (Request::is('admin/add-events') || Request::is('admin/edit-events/*'))
                 <a href="/admin/events">&laquo; Back</a>
             @endif
-
             @if (Request::is('admin/add-gallery') || Request::is('admin/edit-album/*'))
                 <a href="/admin/gallery">&laquo; Back</a>
             @endif
-
             @if (Request::is('admin/add-jobs') || Request::is('admin/edit-jobs/*'))
                 <a href="/admin/jobs">&laquo; Back</a>
             @endif
-
             @if (Request::is('admin/add-forums') || Request::is('admin/edit-forums/*'))
                 <a href="/admin/forums">&laquo; Back</a>
             @endif
@@ -127,135 +121,6 @@
     @endif
 
     @stack('scripts')
-
-    <script>
-        //edit alumni form
-        window.addEventListener('email-success', event => {
-            Swal.fire({
-
-                icon: 'success',
-                title: 'Email sent successfully!',
-
-            })
-        });
-
-        window.addEventListener('show-send-acc-details-confirmation', event => {
-            Swal.fire({
-                title: "Are you sure you want to send the account details to this email?",
-                text: "Please confirm user's email!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, send it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emit('sendAccDetailsConfirmed');
-                }
-            })
-        });
-
-
-        window.addEventListener('show-reset-profile-confirmation', event => {
-            Swal.fire({
-                title: 'Are you sure you want to reset the form?',
-                text: "Your inputs will not be saved!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, reset it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emit('resetProfileConfirmed');
-                }
-            })
-        });
-
-        window.addEventListener('show-allow-restricted-edit-confirmation', event => {
-            Swal.fire({
-                title: 'Are you sure you also want to edit user inputs?',
-                text: "with great powers comes great responsibility!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, I\'m Spiderman!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emit('allowRestrictedEditConfirmed');
-                }
-            })
-        });
-
-        window.addEventListener('show-reset-restricted-edit-confirmation', event => {
-            Swal.fire({
-                title: 'Are you sure you want to cancel?',
-                text: "make sure to save your inputs!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, cancel!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emit('resetRestrictedEditConfirmed');
-                }
-            })
-        });
-
-
-
-
-        //add alumni form
-        window.addEventListener('show-reset-alumni-form-confirmation', event => {
-            Swal.fire({
-                title: 'Reset the form?',
-                text: "Your inputs will not be saved!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, reset it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emit('resetAlumniFormConfirmed');
-                }
-            })
-        });
-
-        window.addEventListener('show-course-delete-confirmation', event => {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emit('deleteCourseConfirmed');
-                }
-            })
-        });
-
-        window.addEventListener('course-deleted', event => {
-            Swal.fire(
-                'Deleted!',
-                'Deleted successfully!',
-                'success'
-            )
-        });
-
-        window.addEventListener('course-error', event => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-            })
-        });
-    </script>
 </body>
 
 </html>

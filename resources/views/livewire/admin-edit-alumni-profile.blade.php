@@ -62,9 +62,10 @@
                 <!-- Profile picture image-->
                 @if ($avatar)
                     <img class="img-account-profile rounded-circle mb-2" src="{{ $avatar->temporaryUrl() }}"
-                        alt="">
+                        alt="" style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
                 @else
-                    <img class="img-account-profile rounded-circle mb-2" src="{{ $user->avatar }}" alt="">
+                    <img class="img-account-profile rounded-circle mb-2" src="{{ $user->avatar }}" alt=""
+                        style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
                 @endif
 
                 <!-- Profile picture help block-->
@@ -86,6 +87,8 @@
 
             </div>
         </div>
+
+
 
         <!-- Profile picture card-->
         <div class="card mb-4 mb-xl-0">
@@ -373,41 +376,44 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group">
-                                    <label for="address">Full address</label>
-                                    <input wire:model="state.address"
-                                        class="form-control @error('address') is-invalid @enderror" type="text"
-                                        placeholder="Street address, apt, suite, unit, building, floor, barangay, city, province, etc."
-                                        name="address" id="address"
-                                        @if ($edit == false) style="cursor: not-allowed;"
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="address">Full address</label>
+                                        <input wire:model="state.address"
+                                            class="form-control @error('address') is-invalid @enderror"
+                                            type="text"
+                                            placeholder="Street address, apt, suite, unit, building, floor, barangay, city, province, etc."
+                                            name="address" id="address"
+                                            @if ($edit == false) style="cursor: not-allowed;"
                                         disabled readonly @endif>
 
-                                    @error('address')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
+                                        @error('address')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="postal-code">Postal code</label>
+                                        <input wire:model="state.postal_code"
+                                            class="form-control @error('postal_code') is-invalid @enderror"
+                                            type="text" placeholder="Postal code" name="postal_code"
+                                            id="postal-code"
+                                            @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
 
-                                <div class="form-group">
-                                    <label for="postal-code">Postal code</label>
-                                    <input wire:model="state.postal_code"
-                                        class="form-control @error('postal_code') is-invalid @enderror"
-                                        type="text" placeholder="Postal code" name="postal_code" id="postal-code"
-                                        @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
+                                        @error('postal_code')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
 
-                                    @error('postal_code')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
+                                    </div>
                                 </div>
-
                             </div>
 
                             <div class="row">
@@ -483,46 +489,48 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group">
-                                    <label for="job-location">Job location</label>
-                                    <input wire:model="state.job_location"
-                                        {{ isset($state['employment_status']) &&
-                                        in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
-                                            ? 'disabled'
-                                            : '' }}
-                                        class="form-control @error('job_location') is-invalid @enderror"
-                                        type="text" placeholder="Job location" name="job_location"
-                                        id="job-location"
-                                        @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="job-location">Job location</label>
+                                        <input wire:model="state.job_location"
+                                            {{ isset($state['employment_status']) &&
+                                            in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
+                                                ? 'disabled'
+                                                : '' }}
+                                            class="form-control @error('job_location') is-invalid @enderror"
+                                            type="text" placeholder="Job location" name="job_location"
+                                            id="job-location"
+                                            @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
 
-                                    @error('job_location')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
+                                        @error('job_location')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="form-group">
-                                    <label for="monthly-salary">Monthly salary</label>
-                                    <input wire:model="state.monthly_salary"
-                                        {{ isset($state['employment_status']) &&
-                                        in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
-                                            ? 'disabled'
-                                            : '' }}
-                                        class="form-control @error('monthly_salary') is-invalid @enderror"
-                                        type="text" placeholder="Monthly salary" name="monthly_salary"
-                                        id="monthly-salary"
-                                        @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="monthly-salary">Monthly salary</label>
+                                        <input wire:model="state.monthly_salary"
+                                            {{ isset($state['employment_status']) &&
+                                            in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
+                                                ? 'disabled'
+                                                : '' }}
+                                            class="form-control @error('monthly_salary') is-invalid @enderror"
+                                            type="text" placeholder="Monthly salary" name="monthly_salary"
+                                            id="monthly-salary"
+                                            @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
 
-                                    @error('monthly_salary')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
+                                        @error('monthly_salary')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>

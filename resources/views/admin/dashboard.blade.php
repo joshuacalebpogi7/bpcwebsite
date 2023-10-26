@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <p class="mb-4">Alumni</p>
                             <p class="fs-30 mb-2">{{ $data['alumniCount'] }}</p>
-                            <p>{{ $data['verifiedPercentage'] }}% (Verified alumni)</p>
+                            <p>{{ number_format($data['verifiedPercentage'], 2) }}% (Verified alumni)</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <p class="mb-4">Courses</p>
                             <p class="fs-30 mb-2">{{ $data['courses']->count() }}</p>
-                            <p>{{ $data['courses']->count() }} (All Courses)</p>
+                            <p>{{ $data['courses']->count() }} (Total Number of Courses)</p>
                         </div>
                     </div>
                 </div>
@@ -77,29 +77,15 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Order Details</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-title">Alumni by Gender</p>
+                        {{-- <a href="#" class="text-info">View all</a> --}}
+                    </div>
                     <p class="font-weight-500">The total number of sessions within the date range. It
                         is the period time a user is actively engaged with your website, page or app,
                         etc</p>
-                    <div class="d-flex flex-wrap mb-5">
-                        <div class="mr-5 mt-3">
-                            <p class="text-muted">Order value</p>
-                            <h3 class="text-primary fs-30 font-weight-medium">12.3k</h3>
-                        </div>
-                        <div class="mr-5 mt-3">
-                            <p class="text-muted">Orders</p>
-                            <h3 class="text-primary fs-30 font-weight-medium">14k</h3>
-                        </div>
-                        <div class="mr-5 mt-3">
-                            <p class="text-muted">Users</p>
-                            <h3 class="text-primary fs-30 font-weight-medium">71.56%</h3>
-                        </div>
-                        <div class="mt-3">
-                            <p class="text-muted">Downloads</p>
-                            <h3 class="text-primary fs-30 font-weight-medium">34040</h3>
-                        </div>
-                    </div>
-                    <canvas id="order-chart"></canvas>
+                    <div id="alumnigender-legend" class="chartjs-legend mt-4 mb-2"></div>
+                    <canvas id="alumnigender-chart"></canvas>
                 </div>
             </div>
         </div>
@@ -107,7 +93,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <p class="card-title">Alumni Details</p>
+                        <p class="card-title">Alumni by Course</p>
                         {{-- <a href="#" class="text-info">View all</a> --}}
                     </div>
                     <p class="font-weight-500">The total number of sessions within the date range. It
@@ -168,97 +154,6 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-
-                                                        <tr>
-                                                            <td class="text-muted">Illinois</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 70%"
-                                                                        aria-valuenow="70" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">713
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Washington</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-warning"
-                                                                        role="progressbar" style="width: 30%"
-                                                                        aria-valuenow="30" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">583
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Mississippi</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 95%"
-                                                                        aria-valuenow="95" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">924
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">California</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-info"
-                                                                        role="progressbar" style="width: 60%"
-                                                                        aria-valuenow="60" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">664
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Maryland</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 40%"
-                                                                        aria-valuenow="40" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">560
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Alaska</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 75%"
-                                                                        aria-valuenow="75" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">793
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -308,96 +203,6 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-                                                        <tr>
-                                                            <td class="text-muted">Illinois</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 70%"
-                                                                        aria-valuenow="70" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">713
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Washington</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-warning"
-                                                                        role="progressbar" style="width: 30%"
-                                                                        aria-valuenow="30" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">583
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Mississippi</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 95%"
-                                                                        aria-valuenow="95" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">924
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">California</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-info"
-                                                                        role="progressbar" style="width: 60%"
-                                                                        aria-valuenow="60" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">664
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Maryland</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 40%"
-                                                                        aria-valuenow="40" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">560
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Alaska</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 75%"
-                                                                        aria-valuenow="75" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">793
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
@@ -447,96 +252,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-                                                        <tr>
-                                                            <td class="text-muted">Illinois</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 70%"
-                                                                        aria-valuenow="70" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">713
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Washington</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-warning"
-                                                                        role="progressbar" style="width: 30%"
-                                                                        aria-valuenow="30" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">583
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Mississippi</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 95%"
-                                                                        aria-valuenow="95" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">924
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">California</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-info"
-                                                                        role="progressbar" style="width: 60%"
-                                                                        aria-valuenow="60" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">664
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Maryland</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 40%"
-                                                                        aria-valuenow="40" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">560
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Alaska</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 75%"
-                                                                        aria-valuenow="75" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">793
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
+
                                                     </table>
                                                 </div>
                                             </div>
@@ -774,6 +490,72 @@
     </div>
 
     @push('scripts')
+        <script>
+            if ($("#alumnigender-chart").length) {
+                var SalesChartCanvas = $("#alumnigender-chart").get(0).getContext("2d");
+                var SalesChart = new Chart(SalesChartCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: @json($data['alumniByGenderLabels']),
+                        datasets: [{
+                                label: 'Male',
+                                data: @json($data['alumniMale']),
+                                backgroundColor: '#98BDFF'
+                            },
+                            {
+                                label: 'Female',
+                                data: @json($data['alumniFemale']),
+                                backgroundColor: '#4B49AC'
+                            }
+                        ]
+                    },
+                    options: {
+                        cornerRadius: 5,
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 0,
+                                top: 20,
+                                bottom: 0
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                display: true,
+                                gridLines: {
+                                    display: true,
+                                    drawBorder: false,
+                                    color: "#F2F2F2"
+                                },
+                            }],
+                            xAxes: [{
+                                stacked: false,
+                                ticks: {
+                                    beginAtZero: true,
+                                    fontColor: "#6C7383"
+                                },
+                                gridLines: {
+                                    color: "rgba(0, 0, 0, 0)",
+                                    display: false
+                                },
+                                barPercentage: 1
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        elements: {
+                            point: {
+                                radius: 0
+                            }
+                        }
+                    },
+                });
+                document.getElementById('alumnigender-legend').innerHTML = SalesChart.generateLegend();
+            }
+        </script>
         <script>
             if ($("#alumni-chart").length) {
                 var SalesChartCanvas = $("#alumni-chart").get(0).getContext("2d");

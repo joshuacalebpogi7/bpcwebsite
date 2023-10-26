@@ -1,4 +1,4 @@
-<x-admin-manage-layout>
+<x-admin-layout>
     <div>
         <form action="/admin/update-courses/{{ $course->id }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -46,4 +46,4 @@
         </form>
     </div>
 
-</x-admin-manage-layout>
+</x-admin-layout>

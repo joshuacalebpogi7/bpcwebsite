@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     {{-- favicon --}}
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    {{-- font-awesome icons --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
@@ -53,56 +55,6 @@
                 </button>
 
                 <ul class="navbar-nav navbar-nav-right">
-                    {{-- <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-                            data-toggle="dropdown">
-                            <i class="icon-bell mx-0"></i>
-                            <span class="count"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                            aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-success">
-                                        <i class="ti-info-alt mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Just now
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-warning">
-                                        <i class="ti-settings mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">Settings</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Private message
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-info">
-                                        <i class="ti-user mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 days ago
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li> --}}
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             <img src="{{ auth()->user()->avatar }}" alt="profile" />
@@ -123,11 +75,6 @@
 
                         </div>
                     </li>
-                    {{-- <li class="nav-item nav-settings d-none d-lg-flex">
-                        <a class="nav-link" href="#">
-                            <i class="icon-ellipsis"></i>
-                        </a>
-                    </li> --}}
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                     data-toggle="offcanvas">
@@ -160,169 +107,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div id="right-sidebar" class="settings-panel">
-                <i class="settings-close ti-close"></i>
-                <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section"
-                            role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-                    </li>   
-                    <li class="nav-item">
-                        <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab"
-                            aria-controls="chats-section">CHATS</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="setting-content">
-                    <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
-                        aria-labelledby="todo-section">
-                        <div class="add-items d-flex px-3 mb-0">
-                            <form class="form w-100">
-                                <div class="form-group d-flex">
-                                    <input type="text" class="form-control todo-list-input"
-                                        placeholder="Add To-do">
-                                    <button type="submit" class="add btn btn-primary todo-list-add-btn"
-                                        id="add-task">Add</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="list-wrapper px-3">
-                            <ul class="d-flex flex-column-reverse todo-list">
-                                <li>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox">
-                                            Team review meeting at 3.00 PM
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox">
-                                            Prepare for presentation
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox">
-                                            Resolve all the low priority tickets due today
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                                <li class="completed">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox" checked>
-                                            Schedule meeting for next week
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                                <li class="completed">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox" checked>
-                                            Project review
-                                        </label>
-                                    </div>
-                                    <i class="remove ti-close"></i>
-                                </li>
-                            </ul>
-                        </div>
-                        <h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
-                        <div class="events pt-4 px-3">
-                            <div class="wrapper d-flex mb-2">
-                                <i class="ti-control-record text-primary mr-2"></i>
-                                <span>Feb 11 2018</span>
-                            </div>
-                            <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
-                            <p class="text-gray mb-0">The total number of sessions</p>
-                        </div>
-                        <div class="events pt-4 px-3">
-                            <div class="wrapper d-flex mb-2">
-                                <i class="ti-control-record text-primary mr-2"></i>
-                                <span>Feb 7 2018</span>
-                            </div>
-                            <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
-                            <p class="text-gray mb-0 ">Call Sarah Graves</p>
-                        </div>
-                    </div>
-                    <!-- To do section tab ends -->
-                    <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
-                        <div class="d-flex align-items-center justify-content-between border-bottom">
-                            <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-                            <small
-                                class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See
-                                All</small>
-                        </div>
-                        <ul class="chat-list">
-                            <li class="list active">
-                                <div class="profile"><img src="/admin-dashboard/images/faces/face1.jpg"
-                                        alt="image"><span class="online"></span></div>
-                                <div class="info">
-                                    <p>Thomas Douglas</p>
-                                    <p>Available</p>
-                                </div>
-                                <small class="text-muted my-auto">19 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="/admin-dashboard/images/faces/face2.jpg"
-                                        alt="image"><span class="offline"></span></div>
-                                <div class="info">
-                                    <div class="wrapper d-flex">
-                                        <p>Catherine</p>
-                                    </div>
-                                    <p>Away</p>
-                                </div>
-                                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
-                                <small class="text-muted my-auto">23 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="/admin-dashboard/images/faces/face3.jpg"
-                                        alt="image"><span class="online"></span></div>
-                                <div class="info">
-                                    <p>Daniel Russell</p>
-                                    <p>Available</p>
-                                </div>
-                                <small class="text-muted my-auto">14 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="/admin-dashboard/images/faces/face4.jpg"
-                                        alt="image"><span class="offline"></span></div>
-                                <div class="info">
-                                    <p>James Richardson</p>
-                                    <p>Away</p>
-                                </div>
-                                <small class="text-muted my-auto">2 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="/admin-dashboard/images/faces/face5.jpg"
-                                        alt="image"><span class="online"></span></div>
-                                <div class="info">
-                                    <p>Madeline Kennedy</p>
-                                    <p>Available</p>
-                                </div>
-                                <small class="text-muted my-auto">5 min</small>
-                            </li>
-                            <li class="list">
-                                <div class="profile"><img src="/admin-dashboard/images/faces/face6.jpg"
-                                        alt="image"><span class="online"></span></div>
-                                <div class="info">
-                                    <p>Sarah Graves</p>
-                                    <p>Available</p>
-                                </div>
-                                <small class="text-muted my-auto">47 min</small>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- chat tab ends -->
-                </div>
-            </div> --}}
+
             <!-- partial -->
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -335,7 +120,15 @@
                     </li>
 
                     @can('adminOnly')
-                        <li class="nav-item">
+                        <li class="nav-item @if (Request::is('admin/admins') ||
+                                Request::is('admin/add-admin') ||
+                                Request::is('admin/edit-admin*') ||
+                                Request::is('admin/users') ||
+                                Request::is('admin/add-alumni') ||
+                                Request::is('admin/edit-alumni*') ||
+                                Request::is('admin/courses') ||
+                                Request::is('admin/add-courses') ||
+                                Request::is('admin/edit-courses*')) active @endif">
                             <a class="nav-link" data-toggle="collapse" href="#ui-users" aria-expanded="false"
                                 aria-controls="ui-users">
                                 <i class="icon-layout menu-icon"></i>
@@ -345,14 +138,14 @@
                             <div class="collapse" id="ui-users">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"> <a
-                                            class="nav-link @if (Request::is('admin/admins')) text-warning @endif"
+                                            class="nav-link @if (Request::is('admin/admins') || Request::is('admin/add-admin') || Request::is('admin/edit-admin')) text-warning @endif"
                                             href="/admin/admins">Content Creator</a>
                                     </li>
                                     <li class="nav-item"> <a
-                                            class="nav-link @if (Request::is('admin/users')) text-warning @endif"
+                                            class="nav-link @if (Request::is('admin/users') || Request::is('admin/add-alumni') || Request::is('admin/edit-alumni*')) text-warning @endif"
                                             href="/admin/users">Alumni</a></li>
                                     <li class="nav-item"> <a
-                                            class="nav-link @if (Request::is('admin/courses')) text-warning @endif"
+                                            class="nav-link @if (Request::is('admin/courses') || Request::is('admin/add-courses') || Request::is('admin/edit-courses*')) text-warning @endif"
                                             href="/admin/courses">Courses</a></li>
                                 </ul>
                             </div>
@@ -393,9 +186,39 @@
                 </ul>
             </nav>
             <!-- partial -->
+
             <div class="main-panel">
                 <div class="content-wrapper">
-
+                    @if (Request::is('admin/edit-profile'))
+                        <a href="/">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-admin') || Request::is('admin/edit-admin/*'))
+                        <a href="/admin/admins">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-alumni') || Request::is('admin/edit-alumni/*'))
+                        <a href="/admin/users">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-courses') || Request::is('admin/edit-courses/*'))
+                        <a href="/admin/courses">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-survey') || Request::is('admin/edit-survey/*'))
+                        <a href="/admin/surveys">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-news') || Request::is('admin/edit-news/*'))
+                        <a href="/admin/news">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-events') || Request::is('admin/edit-events/*'))
+                        <a href="/admin/events">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-gallery') || Request::is('admin/edit-album/*'))
+                        <a href="/admin/gallery">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-jobs') || Request::is('admin/edit-jobs/*'))
+                        <a href="/admin/jobs">&laquo; Back</a>
+                    @endif
+                    @if (Request::is('admin/add-forums') || Request::is('admin/edit-forums/*'))
+                        <a href="/admin/forums">&laquo; Back</a>
+                    @endif
                     {{ $slot }}
                 </div>
                 <!-- content-wrapper ends -->
@@ -461,52 +284,86 @@
     {{-- datatables script --}}
     <script>
         $(document).ready(function() {
-            // Common export options for all buttons
-            var commonExportOptions = {
-                columns: function(idx, data, node) {
-                    // Check if the column contains "Action" or "Avatar" header, or if it's hidden
-                    if (
-                        node.innerHTML === "Action" ||
-                        node.innerHTML === "Avatar" ||
-                        node.innerHTML === "Thumbnail" ||
-                        node.innerHTML === "Album Cover" ||
-                        node.hidden
-                    ) {
-                        return false; // Exclude the column from export
-                    }
-                    return true; // Include the column in export
-                }
-            };
+            // Check if the table has the "users-table" class (replace with your actual class name)
+            if ($('#userstable').hasClass('users-table')) {
+                var userstable = $('#userstable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [{
+                            extend: "excel",
+                            // orientation: "landscape",
+                            // text: "Export to Excel",
+                            exportOptions: {
+                                columns: ':visible', // Export only visible columns
+                            }
+                        },
+                        {
+                            extend: "pdf",
+                            orientation: "landscape",
+                            // text: "Export to PDF",
+                            exportOptions: {
+                                columns: ':visible', // Export only visible columns
+                            }
+                        },
+                        {
+                            extend: "print",
+                            orientation: "landscape",
+                            // text: "Print - Results",
+                            exportOptions: {
+                                columns: ':visible', // Export only visible columns
+                            }
+                        },
+                        {
+                            extend: "csv",
+                            // orientation: "landscape",
+                            exportOptions: {
+                                columns: ':visible', // Export only visible columns
+                            }
+                        },
+                        'colvis', // ColVis button
 
-            var table = $('#example').DataTable({
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: "excel",
-                        orientation: "landscape",
-                        text: "Export to Excel",
-                        exportOptions: commonExportOptions,
-                    },
-                    {
-                        extend: "pdf",
-                        orientation: "landscape",
-                        text: "Export to PDF",
-                        exportOptions: commonExportOptions,
-                    },
-                    {
-                        extend: "print",
-                        orientation: "landscape",
-                        text: "Print - Results",
-                        exportOptions: commonExportOptions,
-                    }
-                ],
-                columnDefs: [{
-                    orderable: false,
-                    targets: [1, 2]
-                }],
-                lengthChange: false
-            });
+                    ],
+                    columnDefs: [{
+                        orderable: false,
+                        targets: [1, 2]
+                    }],
+                    lengthChange: false
+                });
 
-            table.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+                userstable.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+            }
+            if ($('#example')) {
+                var table = $('#example').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'colvis', // ColVis button
+
+                    ],
+                    columnDefs: [{
+                        orderable: false,
+                        targets: [1, 2]
+                    }],
+                    lengthChange: false
+                });
+
+
+                table.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+            }
+            if ($('#coursetable')) {
+                var table = $('#coursetable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'colvis', // ColVis button
+
+                    ],
+                    columnDefs: [{
+                        orderable: false,
+                        targets: [1]
+                    }],
+                    lengthChange: false
+                });
+
+                table.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+            }
         });
     </script>
 
@@ -569,6 +426,134 @@
                     $(this).off('submit').submit();
                 }
             });
+        });
+    </script>
+    <script>
+        //edit alumni form
+        window.addEventListener('email-success', event => {
+            Swal.fire({
+
+                icon: 'success',
+                title: 'Email sent successfully!',
+
+            })
+        });
+
+        window.addEventListener('show-send-acc-details-confirmation', event => {
+            Swal.fire({
+                title: "Are you sure you want to send the account details to this email?",
+                text: "Please confirm user's email!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, send it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('sendAccDetailsConfirmed');
+                }
+            })
+        });
+
+
+        window.addEventListener('show-reset-profile-confirmation', event => {
+            Swal.fire({
+                title: 'Are you sure you want to reset the form?',
+                text: "Your inputs will not be saved!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, reset it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('resetProfileConfirmed');
+                }
+            })
+        });
+
+        window.addEventListener('show-allow-restricted-edit-confirmation', event => {
+            Swal.fire({
+                title: 'Are you sure you also want to edit user inputs?',
+                text: "with great powers comes great responsibility!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, I\'m Spiderman!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('allowRestrictedEditConfirmed');
+                }
+            })
+        });
+
+        window.addEventListener('show-reset-restricted-edit-confirmation', event => {
+            Swal.fire({
+                title: 'Are you sure you want to cancel?',
+                text: "make sure to save your inputs!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, cancel!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('resetRestrictedEditConfirmed');
+                }
+            })
+        });
+
+
+
+
+        //add alumni form
+        window.addEventListener('show-reset-alumni-form-confirmation', event => {
+            Swal.fire({
+                title: 'Reset the form?',
+                text: "Your inputs will not be saved!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, reset it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('resetAlumniFormConfirmed');
+                }
+            })
+        });
+
+        window.addEventListener('show-course-delete-confirmation', event => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('deleteCourseConfirmed');
+                }
+            })
+        });
+
+        window.addEventListener('course-deleted', event => {
+            Swal.fire(
+                'Deleted!',
+                'Deleted successfully!',
+                'success'
+            )
+        });
+
+        window.addEventListener('course-error', event => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            })
         });
     </script>
 </body>

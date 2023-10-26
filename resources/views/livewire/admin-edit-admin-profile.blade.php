@@ -62,9 +62,10 @@
                 <!-- Profile picture image-->
                 @if ($avatar)
                     <img class="img-account-profile rounded-circle mb-2" src="{{ $avatar->temporaryUrl() }}"
-                        alt="">
+                        alt="" style="max-width: 100%; max-height: 200px; overflow: hidden; margin: 0 auto;">
                 @else
-                    <img class="img-account-profile rounded-circle mb-2" src="{{ $user->avatar }}" alt="">
+                    <img class="img-account-profile rounded-circle mb-2" src="{{ $user->avatar }}" alt=""
+                        style="max-width: 100%; max-height: 200px; overflow: hidden; margin: 0 auto;">
                 @endif
 
                 <!-- Profile picture help block-->

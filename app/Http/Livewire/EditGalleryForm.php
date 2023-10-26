@@ -21,12 +21,10 @@ class EditGalleryForm extends Component
 
 
     public $album_name;
-    public $description;
     public $album_cover;
     public $title;
     public $selectedAlbum;
     public $photo;
-    public $gallery_description;
     public $photos = [];
     public $temporaryPhotos = []; 
 
@@ -223,7 +221,6 @@ class EditGalleryForm extends Component
             'title',
             'selectedAlbum',
             'photo',
-            'gallery_description',
         ]);
     }
 
@@ -233,28 +230,20 @@ class EditGalleryForm extends Component
 
         $this->validate([
             'stateAlbum.album_name' => ['string', 'nullable'],
-            'stateAlbum.description' => ['string', 'nullable'],
         ]);
 
         // Create the Gallery Album
         $this->album->update([
             'album_name' => $this->stateAlbum['album_name'],
-            'description' => $this->stateAlbum['description'],
             'updated_by' => Auth::user()->username,
         ]);
 
         if (isset($this->statePhotos)) {
             foreach ($this->gallery as $index => $photo) {
-                $description = $this->statePhotos[$index]['description'];
 
                 // Assuming you have an 'id' attribute in your Gallery model.
                 $galleryPhoto = Gallery::find($photo['id']);
 
-                if ($galleryPhoto) {
-                    $galleryPhoto->update([
-                        'description' => $description,
-                    ]);
-                }
             }
         }
 
@@ -268,7 +257,6 @@ class EditGalleryForm extends Component
                 $newPhoto = Gallery::create([
                     'gallery_album_id' => $this->album->id,
                     'photo' => $tempPhoto['photo'], // Store only the filename
-                    'description' => $tempPhoto['gallery_description'] ?? null,
                     'posted_by' => Auth::user()->username,
                     'updated_by' => Auth::user()->username,
                 ]);
@@ -309,7 +297,6 @@ class EditGalleryForm extends Component
         $this->resetPhoto();
         $this->reset([
             'album_name',
-            'description',
         ]);
     }
 

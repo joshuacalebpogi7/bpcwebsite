@@ -157,21 +157,21 @@
         <span class="filter-item" data-filter='{{$newsCategory->category}}'>{{$newsCategory->category}}</span>
         @endforeach --}}
         @php
-        $uniqueCategories = [];
+            $uniqueCategories = [];
         @endphp
 
         @foreach ($news as $newsCategory)
-        @php
-        $category = $newsCategory->category;
-        $sentenceCaseCategory = ucfirst(strtolower($category));
-        @endphp
+            @php
+                $category = $newsCategory->category;
+                $sentenceCaseCategory = ucfirst(strtolower($category));
+            @endphp
 
-        @if (!in_array($sentenceCaseCategory, $uniqueCategories))
-        <span class="filter-item" data-filter='{{$sentenceCaseCategory}}'>{{$sentenceCaseCategory}}</span>
-        @php
-        $uniqueCategories[] = $sentenceCaseCategory;
-        @endphp
-        @endif
+            @if (!in_array($sentenceCaseCategory, $uniqueCategories))
+                <span class="filter-item" data-filter='{{ $sentenceCaseCategory }}'>{{ $sentenceCaseCategory }}</span>
+                @php
+                    $uniqueCategories[] = $sentenceCaseCategory;
+                @endphp
+            @endif
         @endforeach
 
         <span class="filter-item" data-filter='tech'>Tech</span>
@@ -181,22 +181,22 @@
     <section class="post container5">
 
         @foreach ($news as $newsItem)
+            <div class="post-box {{ $newsItem->category }}">
+                <img src="{{ $newsItem->thumbnail }}" alt="" class="post-img">
+                <h2 class="category">{{ $newsItem->title }}</h2>
+                <a href="/news/{{ $newsItem->title }}" class="post-title">
+                    {{ $newsItem->title }}
+                </a>
+                <span class="post-date">{{ $newsItem->created_at->format('F j, Y') }}</span>
+                <p>
+                <div class="post-description">{!! $newsItem->description !!}</div>
+                </p>
 
-        <div class="post-box {{$newsItem->category}}">
-            <img src="{{$newsItem->thumbnail}}" alt="" class="post-img">
-            <h2 class="category">{{$newsItem->title}}</h2>
-            <a href="/news/{{$newsItem->title}}" class="post-title">
-                {{$newsItem->title}}
-            </a>
-            <span class="post-date">{{ $newsItem->created_at->format('F j, Y') }}</span>
-            <p class="post-description">{!! $newsItem->description !!}</p>
-
-            <div class="profile">
-                <img src="/images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">{{$newsItem->author}}</span>
+                <div class="profile">
+                    <img src="/images/gab.png" alt="" class="profile-img">
+                    <span class="profile-name">{{ $newsItem->author }}</span>
+                </div>
             </div>
-        </div>
-
         @endforeach
 
         <div class="post-box tech">

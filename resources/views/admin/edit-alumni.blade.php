@@ -1,4 +1,4 @@
-<x-admin-manage-layout :user="$user">
+<x-admin-layout :user="$user">
     @livewire('admin-edit-alumni-profile', ['user' => $user])
     @push('styles')
         <style>
@@ -133,4 +133,4 @@
             }
         </style>
     @endpush
-</x-admin-manage-layout>
+</x-admin-layout>

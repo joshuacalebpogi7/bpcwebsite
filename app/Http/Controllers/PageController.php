@@ -158,15 +158,15 @@ class PageController extends Controller
         if ($verifiedUsersCount > 0) {
             $employmentPercentage = ($verifiedUsersCount / $alumniCount) * 100;
         }
-
+//bar alumni
         $labels = [];
         $dataAll = [];
         $dataVerified = [];
 
-        $allAlumniCountByCourse = 0;
-        $verifiedAlumniCountByCourse = 0;
-
         foreach ($courses as $course) {
+            $allAlumniCountByCourse = 0;
+            $verifiedAlumniCountByCourse = 0;
+
             if($users->where('course',$course->course)->count() > 0) {
                 $allAlumniCountByCourse = $users->where('course',$course->course)->count();
                 $verifiedAlumniCountByCourse = $users->where('course',$course->course)->whereNotNull('email_verified_at')->count();
@@ -176,7 +176,23 @@ class PageController extends Controller
             array_push($dataVerified, $verifiedAlumniCountByCourse);
         }
 
-        // dd($labels);
+       //bar alumnigender
+       $alumniByGenderLabels = [];
+       $alumniMale = [];
+       $alumniFemale = [];
+
+       foreach ($courses as $course) {    
+       $alumniMaleCount = 0;
+       $alumniFemaleCount = 0;
+
+           if($users->where('course',$course->course)->count() > 0) {
+               $alumniMaleCount = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
+               $alumniFemaleCount = $users->where('gender','female')->whereNotNull('email_verified_at')->count();
+           }
+           array_push($alumniByGenderLabels, $course->course);
+           array_push($alumniMale, $alumniMaleCount);
+           array_push($alumniFemale, $alumniFemaleCount);
+       }
 
         $data = [
             //users
@@ -192,9 +208,15 @@ class PageController extends Controller
             'unemployed_users' => User::where('employment_status', 'unemployed')->count(),
             'allAlumniCountByCourse' => $allAlumniCountByCourse,
             'verifiedAlumniCountByCourse' => $verifiedAlumniCountByCourse,
+            //alumni by verified (bar-chart)
             'labels' => $labels,
             'dataAll' => $dataAll,
             'dataVerified' => $dataVerified,
+
+            //alumni by gender (bar-chart)
+            'alumniByGenderLabels' => $alumniByGenderLabels,
+            'alumniMale' => $alumniMale,
+            'alumniFemale' => $alumniFemale,
 
             //employment status
             'employed' => User::where('employment_status', 'employed')->count(),
