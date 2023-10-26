@@ -19,10 +19,7 @@
         <div class="banner-text">
             <h3>Welcome Alumni</h3>
             <hr class="solid" style="border-top: 3px solid #46A094">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur.</p>
+            <p>We are thrilled to welcome you back to our virtual alumni community, where cherished memories and enduring connections come to life. Whether you're a recent graduate or a seasoned alum, this is your platform to reconnect, reminisce, and stay updated on all things related to our alma mater.</p>
         </div>
     </section>
 

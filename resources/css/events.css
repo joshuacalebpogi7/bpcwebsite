@@ -137,6 +137,7 @@ section{
     grid-template-columns: repeat(auto-fit, minmax(280px, auto));
     justify-content: center;
     gap: 1.5rem;
+    padding: 20px;
 }
 
 .post-box{
@@ -177,6 +178,7 @@ section{
     text-transform: uppercase;
     font-weight: 400;
     margin-top: 4px;
+    color: #012628 !important;
 }
 
 .post-description{
@@ -186,6 +188,7 @@ section{
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    color: #012628 !important;
 }
 
 .profile{
@@ -206,6 +209,7 @@ section{
 .profile-name{
     font-size: 0.82rem;
     font-weight: 500;
+    color: #012628 !important;
 }
 
 .footer{

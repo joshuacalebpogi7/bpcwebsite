@@ -237,7 +237,7 @@
             </div>
         @endif
 
-        <div class="action-buttons d-flex justify-content-between bg-white pt-2 pb-2">
+        <div class="action-buttons d-flex justify-content-between pt-2 pb-2">
 
             @if ($currentStep == 1)
                 <div></div>
@@ -258,3 +258,4 @@
         </div>
     </form>
 </div>
+
