@@ -71,6 +71,16 @@ img {
   margin-inline: 1.5rem;
 }
 
+.container2 {
+  width: 100%;
+  max-width: 1200px; /* Adjust the max-width as needed for responsiveness */
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
 .main {
   padding-top: 3rem;
 }
@@ -438,6 +448,6 @@ img {
 
   /* Add padding main */
   .main-pd {
-    padding-left: 120px;
+    padding-left: 20px;
   }
 }
