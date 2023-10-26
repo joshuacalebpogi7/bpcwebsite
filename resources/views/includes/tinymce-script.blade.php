@@ -4,6 +4,6 @@
         plugins: 'code table lists',
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | table',
         branding: false,
-        promotion: false
+        promotion: false,
     });
 </script>

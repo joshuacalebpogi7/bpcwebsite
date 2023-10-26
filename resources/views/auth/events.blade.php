@@ -84,29 +84,18 @@
                 </div>
 
                 <h3 class="sidebar__title">
-                    <span>Others</span>
                 </h3>
 
                 <div class="sidebar__list">
-                    <a href="#" class="sidebar__link">
-                        <i class="ri-customer-service-fill"></i>
-                        <span class="sidebar__link-name">Support</span>
-                        <span class="sidebar__link-floating">Support</span>
+                    <a href="/logout" class="sidebar__link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="ri-logout-box-r-line"></i>
+                        <span class="sidebar__link-name">Logout</span>
+                        <span class="sidebar__link-floating">Logout</span>
                     </a>
 
-                    <a href="#" class="sidebar__link">
-                        <i class="ri-settings-3-line"></i>
-                        <span class="sidebar__link-name">Settings</span>
-                        <span class="sidebar__link-floating">Settings</span>
-                    </a>
-
-                    <form action="/logout" method="POST">
+                    <form action="/logout" method="POST" id="logout-form" style="display: none">
                         @csrf
-                        <button type="submit" class="sidebar__link">
-                            <i class="ri-logout-box-r-line"></i>
-                            <span class="sidebar__link-name">Logout</span>
-                            <span class="sidebar__link-floating">Logout</span>
-                        </button>
                     </form>
                 </div>
             </div>
@@ -163,7 +152,7 @@
     <section class="post container5">
         @foreach ($events as $eventItem)
 
-        <div class="post-box mobile" style="background-color: rgb(78, 78, 78)">
+        <div class="post-box mobile">
             <img src="/images/bg.jpg" alt="" class="post-img">
             <h2 class="category">Mobile</h2>
             <a href="/events/{{$eventItem->title}}" class="post-title">

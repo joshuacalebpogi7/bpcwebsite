@@ -18,7 +18,7 @@ body{
 :root{
     --container-color: #1a1e21;
     --second-color: #fd8f44;
-    --text-color: #172317;
+    --text-color:hsl(210, 4%, 55%);
     --bg-color: #fff;
 }
 ::selection{
@@ -165,7 +165,7 @@ section{
 .post-title{
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--text-color);
+    color: #161616;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
