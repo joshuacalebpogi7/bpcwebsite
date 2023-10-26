@@ -28,6 +28,7 @@ class AddAlumniForm extends Component
     public $first_name;
     public $middle_name;
     public $last_name;
+    public $contact_no;
     public $gender;
     public $birthday;
     public $email;
@@ -52,77 +53,9 @@ class AddAlumniForm extends Component
         $this->updateCourses();
     }
 
-    public function editCourse($courseId)
-    {
-        $course = Course::findOrFail($courseId);
-
-        if ($course) {
-            $this->courseIdToUpdate = $course->id;
-            $this->courseName = $course->course;
-            $this->courseDescription = $course->description;
-        }
-    }
-
-    public function updateCourse()
-    {
-        $this->resetErrorBag();
-        $this->validate([
-            'courseName' => ['required'],
-            'courseDescription' => ['required'],
-        ]);
-
-        $course = Course::findOrFail($this->courseIdToUpdate);
-        $course->update([
-            'course' => $this->courseName,
-            'description' => $this->courseDescription,
-        ]);
-
-        $this->updateCourses();
-        $this->cancelEdit();
-        toastr()->success('Course updated successfully!');
-    }
-
-    public function cancelEdit()
-    {
-        $this->courseIdToUpdate = null;
-        $this->courseName = null;
-        $this->courseDescription = null;
-    }
-
-    public function toggleShowCourses()
-    {
-        $this->showCourses = !$this->showCourses;
-        $this->cancelEdit();
-    }
-
     public function updateCourses()
     {
         // Fetch the updated list of courses
-        $this->courses = Course::all();
-    }
-
-    public function deleteConfirmation($courseId)
-    {
-        $this->course_id = $courseId;
-        $this->dispatchBrowserEvent('show-course-delete-confirmation');
-    }
-    public function deleteCourse()
-    {
-        $courseId = $this->course_id;
-        $this->resetErrorBag();
-        // Find the course by ID
-        $course = Course::findOrFail($courseId);
-
-
-        if ($course) {
-            // Delete the course
-            $course->delete();
-            $this->dispatchBrowserEvent('course-deleted');
-        } else {
-            $this->dispatchBrowserEvent('course-error');
-        }
-
-        // Refresh the courses list after deletion
         $this->courses = Course::all();
     }
 
@@ -175,6 +108,7 @@ class AddAlumniForm extends Component
             !empty($this->birthday) ||
             !empty($this->gender) ||
             !empty($this->course_alumni) ||
+            !empty($this->contact_no) ||
             !empty($this->year_graduated)
         ) {
             $this->reset([
@@ -187,6 +121,7 @@ class AddAlumniForm extends Component
                 'birthday',
                 'gender',
                 'course_alumni',
+                'contact_no',
                 'year_graduated',
             ]);
         }
@@ -200,6 +135,7 @@ class AddAlumniForm extends Component
             'password' => ['required', 'regex:/^[^\s]+$/', 'min:8'],
             'first_name' => ['required'],
             'last_name' => ['required'],
+            'contact_no' => ['required'],
             'birthday' => ['required', 'date_format:Y-m-d'],
             'gender' => ['required', Rule::in(['male', 'female'])],
             'course_alumni' => ['required', Rule::exists('courses', 'course')],
@@ -226,6 +162,7 @@ class AddAlumniForm extends Component
             'password' => ['required', 'regex:/^[^\s]+$/', 'min:8'],
             'first_name' => ['required'],
             'last_name' => ['required'],
+            'contact_no' => ['required'],
             'birthday' => ['required', 'date_format:Y-m-d'],
             'gender' => ['required', Rule::in(['male', 'female'])],
             'course_alumni' => ['required', Rule::exists('courses', 'course')],
@@ -246,6 +183,7 @@ class AddAlumniForm extends Component
             'year_graduated' => $this->year_graduated,
             "age" => $age,
             'default_password' => $this->password,
+            'contact_no' => $this->contact_no,
         ]);
 
         if($user){
@@ -279,32 +217,6 @@ class AddAlumniForm extends Component
             }
         }
     }
-
-    public function resetCourseForm()
-    {
-        $this->reset(['course', 'description']);
-    }
-
-    public function addCourse()
-    {
-        $this->resetErrorBag();
-        $this->validate([
-            'course' => ['required', 'unique:users,course'],
-            'description' => ['required', 'max:255']
-        ]);
-
-        Course::create([
-            'course' => $this->course,
-            'description' => $this->description,
-        ]);
-
-        $this->resetCourseForm(); // Clear the input fields after adding the course
-
-        toastr()->success('Course added successfully!');
-        // $this->dispatchBrowserEvent('course-success'); //showing success popup
-        $this->emit('courseAdded');
-    }
-
 
     public function render()
     {

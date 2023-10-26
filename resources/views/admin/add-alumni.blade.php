@@ -1,4 +1,4 @@
-<x-admin-manage-layout :user="$user">
+<x-admin-layout :user="$user">
     @livewire('add-alumni-form')
     @push('styles')
         <style>
@@ -139,4 +139,4 @@
             });
         </script>
     @endpush
-</x-admin-manage-layout>
+</x-admin-layout>

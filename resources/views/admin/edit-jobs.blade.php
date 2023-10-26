@@ -3,34 +3,6 @@
         <form action="/admin/update-jobs/{{ $jobs->id }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Job's Thumbnail</div>
-                <div class="card-body text-center">
-
-
-                    <img class="rounded img-fluid" id="img-preview" src="{{ $jobs->image }}" alt=""
-                        data-prev-src="{{ $jobs->image }}">
-
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-
-                    <input id="getFile" class="form-control @error('image') is-invalid @enderror" name="image"
-                        type="file" onchange="loadFile(event)" hidden>
-
-                    @error('image')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-
-                    <button class="btn btn-primary"
-                        onclick="event.preventDefault(); document.getElementById('getFile').click()">Upload Job's
-                        Thumbnail</button>
-
-                    <button class="btn btn-danger" id="cancelButton" style="display: none"
-                        onclick="event.preventDefault(); cancelUpload()">Cancel</button>
-
-                </div>
-            </div>
 
             {{-- @php
                 dd($events->thumbnail);
@@ -40,21 +12,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                    placeholder="Title" name="title" id="title"
-                                    value="{{ old('title', $jobs->title) }}">
 
-                                @error('title')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
-                            </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="job-title">Job Title</label>
@@ -66,6 +24,21 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="job-type">Job Type</label>
+                                <input class="form-control @error('job_type') is-invalid @enderror" type="text"
+                                    placeholder="Job Type" name="job_type" id="job-type"
+                                    value="{{ old('job_type', $jobs->job_type) }}">
+
+                                @error('job_type')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
                             </div>
                         </div>
                     </div>

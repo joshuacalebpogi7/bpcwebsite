@@ -13,7 +13,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table id="example" class="display expandable-table" style="width:100%">
+                                <table id="userstable"
+                                    class="display expandable-table users-table table-hover rounded shadow-sm"
+                                    style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -24,7 +26,18 @@
                                             <th>Full Name</th>
                                             <th>Course</th>
                                             <th>Year Graduated</th>
+                                            <th>Birthday</th>
+                                            <th>Age</th>
+                                            <th>Gender</th>
+                                            <th>Contact No</th>
                                             <th>Status</th>
+                                            <th>Civil Status</th>
+                                            <th>Address</th>
+                                            <th>Employment Status</th>
+                                            <th>Job Type</th>
+                                            <th>Job Position</th>
+                                            <th>Job Location</th>
+                                            <th>Monthly Salary</th>
                                             <th>Date added</th>
                                             <th>Date updated</th>
                                         </tr>
@@ -54,22 +67,6 @@
                                                     </div>
                                                 </td>
 
-                                                {{-- same row --}}
-
-                                                {{-- <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="/admin/edit-alumni/{{ $user->username }}" class="flex-fill">
-                                                            <button class="btn btn-success me-1 w-100 h-100">View</button>
-                                                        </a>
-                                                        <form action="/admin/delete-alumni/{{ $user->username }}" method="post"
-                                                            class="deleteUser d-flex flex-fill">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger ms-1 w-100 h-100">Delete</button>
-                                                        </form>
-                                                    </div>
-                                                </td> --}}
-
                                                 <td><img src="{{ $user->avatar }}" alt="{{ $user->username }}'s avatar"
                                                         style="width: 40px; border-radius: 50%; margin: 10px;"></td>
                                                 <td>{{ $user->username }}</td>
@@ -78,21 +75,31 @@
                                                 </td>
                                                 <td>{{ $user->course }}</td>
                                                 <td>{{ $user->year_graduated }}</td>
+                                                <td>{{ $user->birthday }}</td>
+                                                <td>{{ $user->age }}</td>
+                                                <td>{{ $user->gender }}</td>
+                                                <td>{{ $user->contact_no }}</td>
                                                 <td>
                                                     @if ($user->email_sent == true)
                                                         Account details already sent
                                                     @else
                                                         Account details not yet sent
                                                     @endif
-                                                    @if (isset($user->email_verified_at))
-                                                        Verified
-                                                        @if (isset($user->default_password))
-                                                            Activated
-                                                        @endif
+                                                    @if (isset($user->email_verified_at) && isset($user->default_password))
+                                                        <strong>Verified</strong>
+                                                    @elseif (isset($user->email_verified_at) && !isset($user->default_password))
+                                                        <strong>Activated</strong>
                                                     @else
-                                                        Inactive
+                                                        <strong>Inactive</strong>
                                                     @endif
                                                 </td>
+                                                <td>{{ $user->civil_status }}</td>
+                                                <td>{{ $user->address }}</td>
+                                                <td>{{ $user->employment_status }}</td>
+                                                <td>{{ $user->job_type }}</td>
+                                                <td>{{ $user->job_position }}</td>
+                                                <td>{{ $user->job_location }}</td>
+                                                <td>{{ $user->monthly_salary }}</td>
                                                 <td>{{ $user->created_at->format('M d, Y h:i A') }}</td>
                                                 <td>{{ $user->updated_at->format('M d, Y h:i A') }}</td>
                                             </tr>

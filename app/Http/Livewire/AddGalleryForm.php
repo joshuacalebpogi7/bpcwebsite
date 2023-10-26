@@ -13,11 +13,9 @@ class AddGalleryForm extends Component
     use WithFileUploads;
 
     public $album_name;
-    public $description;
     public $album_cover;
     public $title;
     public $photo;
-    public $gallery_description;
     public $temporaryPhotos = []; 
 
     protected $listeners = ['deleteTemporaryPhotos' => 'deleteTemporaryPhotos']; //need listeners when emitting livewire
@@ -97,7 +95,6 @@ class AddGalleryForm extends Component
     {
         $this->reset([
             'photo',
-            'gallery_description',
         ]);
     }
 
@@ -107,13 +104,11 @@ class AddGalleryForm extends Component
         
         $this->validate([
             'album_name' => ['required'],
-            'description' => ['required'],
         ]);
         
         // Create the Gallery Album
         $galleryAlbum = GalleryAlbum::create([
             'album_name' => $this->album_name,
-            'description' => $this->description,
             'posted_by' => Auth::user()->username,
             'updated_by' => Auth::user()->username,
         ]);
@@ -128,7 +123,6 @@ class AddGalleryForm extends Component
                 $photos = Gallery::create([
                     'gallery_album_id' => $albumId,
                     'photo' => $tempPhoto['photo'], // Store only the filename
-                    'description' => $tempPhoto['gallery_description'] ?? null,
                     'posted_by' => Auth::user()->username,
                     'updated_by' => Auth::user()->username,
                 ]);
@@ -146,12 +140,27 @@ class AddGalleryForm extends Component
                 $sourcePath = public_path('storage/photos/' . $albumName);
                 $destinationPath = public_path('storage/album_covers/' . $albumName);
                 
+                $destinationPath = public_path('storage/album_covers');
+
+                // Check if the destination folder exists, and create it if it doesn't
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
                 if (file_exists($sourcePath)) {
-                    copy($sourcePath, $destinationPath);
-                    $galleryAlbum->update([
-                        'album_cover' => $albumName, // Set the album cover as the first photo name
-                    ]);
-            }
+                    if (copy($sourcePath, $destinationPath . '/' . $albumName)) {
+                        // File was successfully copied, update the album cover
+                        $galleryAlbum->update([
+                            'album_cover' => $albumName, // Set the album cover as the first photo name
+                        ]);
+                    } else {
+                        // Handle the case where copying the file failed
+                        return redirect('/admin/gallery')->with('error', 'Failed to set album cover.');
+                    }
+                } else {
+                    // Handle the case where the source file does not exist
+                    return redirect('/admin/gallery')->with('error', 'Source file not found.');
+                }
         }
             // Clear temporary photos
             $this->temporaryPhotos = [];
@@ -169,7 +178,6 @@ class AddGalleryForm extends Component
         $this->resetPhoto();
         $this->reset([
             'album_name',
-            'description',
         ]);
     }
 

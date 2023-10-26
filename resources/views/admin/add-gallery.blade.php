@@ -1,11 +1,11 @@
-<x-admin-manage-layout>
+<x-admin-layout>
     @livewire('add-gallery-form')
     @push('scripts')
-    <script>
-        window.addEventListener('beforeunload', function () {
+        <script>
+            window.addEventListener('beforeunload', function() {
                 Livewire.emit('deleteTemporaryPhotos');
             });
-    </script>
+        </script>
     @endpush
 
-</x-admin-manage-layout>
+</x-admin-layout>

@@ -12,107 +12,6 @@
         </div>
     </div>
 
-
-
-    {{-- <form wire:submit.prevent="addCourse">
-        @csrf
-
-        <div class="card mb-2 mt-3">
-            <div class="card-header bg-primary bg-gradient text-white">Add Course
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="form-group">
-                        <label for="course">Course</label>
-                        <input wire:model="course" class="form-control" type="text"
-                            placeholder="Course Name Abbreviation" name="course" id="course">
-                        <span class="text-danger">
-                            @error('course')
-                                <p>{{ $message }}</p>
-                            @enderror
-                        </span>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <input wire:model="description" class="form-control" name="description" id="description"
-                            type="text" placeholder="Full Course Name">
-                        <span class="text-danger">
-                            @error('description')
-                                <p>{{ $message }}</p>
-                            @enderror
-                        </span>
-                    </div>
-                </div>
-                <button class="btn btn-primary" type="submit">Add Course</button>
-                <button wire:click.prevent="resetCourseForm" class="btn btn-danger">Reset</button>
-            </div>
-        </div>
-    </form> --}}
-
-
-
-    {{-- @if (!$showCourses)
-        <button class="btn btn-success" wire:click.prevent="toggleShowCourses">Show Courses</button>
-    @else
-        <button class="btn btn-danger" wire:click.prevent="toggleShowCourses">Hide Courses</button>
-    @endif --}}
-
-    {{-- @if ($showCourses)
-        <h2>Course List</h2>
-        <div>
-            <table class="table table-dark table-striped table-hover rounded shadow-lg">
-                <thead>
-                    <tr>
-                        <th>Action</th>
-                        <th>Id</th>
-                        <th>Course Name|Abbreviation</th>
-                        <th>Course Description|Full Name</th>
-                    </tr>
-                </thead>
-                <!-- Table body -->
-                <tbody>
-                    @foreach ($courses as $course)
-                        @if ($courseIdToUpdate === $course->id)
-                            <!-- Edit form -->
-                            <tr>
-                                <td>
-                                    <button class="btn btn-success" wire:click="updateCourse">Save</button>
-                                    <button class="btn btn-danger" wire:click="cancelEdit">Cancel</button>
-                                </td>
-                                <td>{{ $course->id }}</td>
-                                <td>
-                                    <div class="form-group">
-                                        <input class="form-control" wire:model="courseName" type="text">
-                                    </div>
-                                </td>
-                                <td>
-                                    <input class="form-control" wire:model="courseDescription" type="text">
-                                </td>
-                            </tr>
-                        @else
-                            <!-- Display table row -->
-                            <tr>
-                                <td>
-                                    <button class="btn btn-primary"
-                                        wire:click="editCourse({{ $course->id }})">Edit</button>
-
-                                    <button class="btn btn-danger"
-                                        wire:click="deleteConfirmation({{ $course->id }})">Delete</button>
-                                </td>
-                                <td>{{ $course->id }}</td>
-                                <td>{{ $course->course }}</td>
-                                <td>{{ $course->description }}</td>
-                            </tr>
-                        @endif
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    @endif --}}
-
     <form wire:submit.prevent="addAlumniConfirmation">
         @csrf
 
@@ -209,7 +108,19 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="contact_no">Contact No</label>
+                            <input wire:model="contact_no" class="form-control" type="text" placeholder="Contact No"
+                                name="contact_no" id="contact_no">
+                            <span class="text-danger">
+                                @error('contact_no')
+                                    <p>{{ $message }}</p>
+                                @enderror
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="gender">Gender</label>
                             <select wire:model="gender" class="form-control" name="gender" id="gender">
@@ -229,7 +140,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="birthday">Birthday</label>
                             <input wire:model="birthday" class="form-control" type="date" placeholder="Birthday"

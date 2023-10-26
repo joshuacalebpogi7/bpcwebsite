@@ -215,9 +215,10 @@
                     <div class="card-body">
                         <div class="image-area mt-4">
                             @if ($avatar)
-                                Photo Preview:
+                                Preview:
                                 <img id="imageResult" src="{{ $avatar->temporaryUrl() }}" alt="avatar-image"
-                                    class="img-fluid rounded shadow-sm mx-auto d-block">
+                                    class="img-fluid rounded shadow-sm mx-auto d-block"
+                                    style="width: auto; height: 250px;">
                             @endif
                         </div>
                         <div class="row">
@@ -235,6 +236,7 @@
                     </div>
                 </div>
             </div>
+
         @endif
 
         <div class="action-buttons d-flex justify-content-between pt-2 pb-2">
@@ -258,4 +260,3 @@
         </div>
     </form>
 </div>
-

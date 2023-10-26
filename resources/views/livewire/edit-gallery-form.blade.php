@@ -38,17 +38,6 @@
                             </span>
                         </div>
 
-                        <!-- Album Description input -->
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <input wire:model="stateAlbum.description" class="form-control" name="description"
-                                id="description" type="text" placeholder="Description">
-                            <span class="text-danger">
-                                @error('description')
-                                    <p>{{ $message }}</p>
-                                @enderror
-                            </span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -57,12 +46,15 @@
                     <div class="card-header">Upload Photos</div>
                     <div class="card-body text-center">
                         @if ($photo)
-                            <img class="img-account-profile rounded-circle mb-2" src="{{ $photo->temporaryUrl() }}"
-                                alt="">
+                            <img class="img-account-profile mb-2" src="{{ $photo->temporaryUrl() }}" alt=""
+                                style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
                         @endif
 
                         <!-- Photo help block -->
-                        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                        <div class="small
+                                font-italic text-muted mb-4">JPG or PNG no
+                            larger than 5 MB
+                        </div>
 
                         <!-- Photo upload button -->
                         <input id="getFile" name="photo" type="file" wire:model="photo" hidden>
@@ -95,19 +87,7 @@
                     <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <img class="card-img-top" src="{{ $photo->photo }}" alt="Photo">
-
-                                <div class="card-body">
-                                    <input wire:model="statePhotos.{{ $index }}.description" class="form-control"
-                                        type="text" placeholder="Description"
-                                        name="statePhotos.{{ $index }}.description"
-                                        id="gallery-description-{{ $index }}">
-                                    <span class="text-danger">
-                                        @error('statePhotos.' . $index . '.description')
-                                            <p>{{ $message }}</p>
-                                        @enderror
-                                    </span>
-                                </div>
+                                <img class="card-img-top mb-2" src="{{ $photo->photo }}" alt="Photo">
 
                                 <button wire:click.prevent="setAlbumCover({{ $index }})" class="btn btn-primary"
                                     type="button"
@@ -129,20 +109,9 @@
                         <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <img class="card-img-top" src="{{ asset('storage/photos/' . $newPhoto['photo']) }}"
-                                        alt="New Photo">
+                                    <img class="card-img-top mb-2"
+                                        src="{{ asset('storage/photos/' . $newPhoto['photo']) }}" alt="New Photo">
 
-                                    <div class="card-body">
-                                        <input wire:model="temporaryPhotos.{{ $index }}.gallery_description"
-                                            class="form-control" type="text" placeholder="Description"
-                                            name="temporaryPhotos.{{ $index }}.gallery_description"
-                                            id="gallery-description-temp-{{ $index }}">
-                                        <span class="text-danger">
-                                            @error('temporaryPhotos.' . $index . '.gallery_description')
-                                                <p>{{ $message }}</p>
-                                            @enderror
-                                        </span>
-                                    </div>
                                     <button wire:click.prevent="setAlbumCover({{ $index }})"
                                         class="btn btn-primary" type="button">Make Album Cover</button>
                                     <button wire:click.prevent="removePhotoConfirmation({{ $index }})"
@@ -156,10 +125,6 @@
                 @endif
             </div>
         @endif
-
-
-
-
 
         <!-- Submit and Reset buttons -->
         <div class="row">

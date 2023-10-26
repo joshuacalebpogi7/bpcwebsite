@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->string('location');
             $table->string('salary');
             $table->string('link')->nullable();
-            $table->string('work_type');
-            $table->string('status')->default('hiring');
+            $table->string('job_type');
+            $table->string('status')->default('active');
             $table->string('posted_by');
             $table->string('updated_by');
             $table->timestamps();

@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <p class="mb-4">Alumni</p>
                             <p class="fs-30 mb-2">{{ $data['alumniCount'] }}</p>
-                            <p>{{ $data['verifiedPercentage'] }}% (Verified alumni)</p>
+                            <p>{{ number_format($data['verifiedPercentage'], 2) }}% (Verified alumni)</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <p class="mb-4">Courses</p>
                             <p class="fs-30 mb-2">{{ $data['courses']->count() }}</p>
-                            <p>{{ $data['courses']->count() }} (All Courses)</p>
+                            <p>{{ $data['courses']->count() }} (Total Number of Courses)</p>
                         </div>
                     </div>
                 </div>
@@ -77,29 +77,15 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Order Details</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-title">Alumni by Gender</p>
+                        {{-- <a href="#" class="text-info">View all</a> --}}
+                    </div>
                     <p class="font-weight-500">The total number of sessions within the date range. It
                         is the period time a user is actively engaged with your website, page or app,
                         etc</p>
-                    <div class="d-flex flex-wrap mb-5">
-                        <div class="mr-5 mt-3">
-                            <p class="text-muted">Order value</p>
-                            <h3 class="text-primary fs-30 font-weight-medium">12.3k</h3>
-                        </div>
-                        <div class="mr-5 mt-3">
-                            <p class="text-muted">Orders</p>
-                            <h3 class="text-primary fs-30 font-weight-medium">14k</h3>
-                        </div>
-                        <div class="mr-5 mt-3">
-                            <p class="text-muted">Users</p>
-                            <h3 class="text-primary fs-30 font-weight-medium">71.56%</h3>
-                        </div>
-                        <div class="mt-3">
-                            <p class="text-muted">Downloads</p>
-                            <h3 class="text-primary fs-30 font-weight-medium">34040</h3>
-                        </div>
-                    </div>
-                    <canvas id="order-chart"></canvas>
+                    <div id="alumnigender-legend" class="chartjs-legend mt-4 mb-2"></div>
+                    <canvas id="alumnigender-chart"></canvas>
                 </div>
             </div>
         </div>
@@ -107,7 +93,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <p class="card-title">Alumni Details</p>
+                        <p class="card-title">Alumni by Course</p>
                         {{-- <a href="#" class="text-info">View all</a> --}}
                     </div>
                     <p class="font-weight-500">The total number of sessions within the date range. It
@@ -168,103 +154,12 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-
-                                                        <tr>
-                                                            <td class="text-muted">Illinois</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 70%"
-                                                                        aria-valuenow="70" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">713
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Washington</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-warning"
-                                                                        role="progressbar" style="width: 30%"
-                                                                        aria-valuenow="30" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">583
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Mississippi</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 95%"
-                                                                        aria-valuenow="95" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">924
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">California</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-info"
-                                                                        role="progressbar" style="width: 60%"
-                                                                        aria-valuenow="60" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">664
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Maryland</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 40%"
-                                                                        aria-valuenow="40" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">560
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Alaska</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 75%"
-                                                                        aria-valuenow="75" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">793
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mt-3">
-                                                <canvas id="north-america-chart"></canvas>
-                                                <div id="north-america-legend"></div>
+                                                <canvas id="employed-chart"></canvas>
+                                                <div id="employed-legend"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -308,102 +203,12 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-                                                        <tr>
-                                                            <td class="text-muted">Illinois</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 70%"
-                                                                        aria-valuenow="70" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">713
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Washington</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-warning"
-                                                                        role="progressbar" style="width: 30%"
-                                                                        aria-valuenow="30" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">583
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Mississippi</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 95%"
-                                                                        aria-valuenow="95" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">924
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">California</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-info"
-                                                                        role="progressbar" style="width: 60%"
-                                                                        aria-valuenow="60" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">664
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Maryland</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 40%"
-                                                                        aria-valuenow="40" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">560
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Alaska</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 75%"
-                                                                        aria-valuenow="75" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">793
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
                                                     </table>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mt-3">
-                                                <canvas id="south-america-chart"></canvas>
-                                                <div id="south-america-legend"></div>
+                                                <canvas id="unemployed-chart"></canvas>
+                                                <div id="unemployed-legend"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -447,102 +252,13 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-                                                        <tr>
-                                                            <td class="text-muted">Illinois</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 70%"
-                                                                        aria-valuenow="70" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">713
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Washington</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-warning"
-                                                                        role="progressbar" style="width: 30%"
-                                                                        aria-valuenow="30" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">583
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Mississippi</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 95%"
-                                                                        aria-valuenow="95" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">924
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">California</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-info"
-                                                                        role="progressbar" style="width: 60%"
-                                                                        aria-valuenow="60" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">664
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Maryland</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 40%"
-                                                                        aria-valuenow="40" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">560
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-muted">Alaska</td>
-                                                            <td class="w-100 px-0">
-                                                                <div class="progress progress-md mx-4">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 75%"
-                                                                        aria-valuenow="75" aria-valuemin="0"
-                                                                        aria-valuemax="100"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <h5 class="font-weight-bold mb-0">793
-                                                                </h5>
-                                                            </td>
-                                                        </tr>
+
                                                     </table>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mt-3">
-                                                <canvas id="south-america-chart"></canvas>
-                                                <div id="south-america-legend"></div>
+                                                <canvas id="self-employed-chart"></canvas>
+                                                <div id="self-employed-legend"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -566,534 +282,540 @@
         <div class="col-md-7 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title mb-0">Top Products</p>
+                    <p class="card-title mb-0">Latest Alumni</p>
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Course</th>
+                                    <th>Batch</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Search Engine Marketing</td>
-                                    <td class="font-weight-bold">$362</td>
-                                    <td>21 Sep 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Search Engine Optimization</td>
-                                    <td class="font-weight-bold">$116</td>
-                                    <td>13 Jun 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Display Advertising</td>
-                                    <td class="font-weight-bold">$551</td>
-                                    <td>28 Sep 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Pay Per Click Advertising</td>
-                                    <td class="font-weight-bold">$523</td>
-                                    <td>30 Jun 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>E-Mail Marketing</td>
-                                    <td class="font-weight-bold">$781</td>
-                                    <td>01 Nov 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-danger">Cancelled</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Referral Marketing</td>
-                                    <td class="font-weight-bold">$283</td>
-                                    <td>20 Mar 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Social media marketing</td>
-                                    <td class="font-weight-bold">$897</td>
-                                    <td>26 Oct 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-5 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">To Do Lists</h4>
-                    <div class="list-wrapper pt-2">
-                        <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                            <li>
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Meeting with Urban Team
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li class="completed">
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox" checked>
-                                        Duplicate a project for new customer
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Project meeting with CEO
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li class="completed">
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox" checked>
-                                        Follow up of team zilla
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Level up for Antony
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="add-items d-flex mb-0 mt-2">
-                        <input type="text" class="form-control todo-list-input" placeholder="Add new task">
-                        <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i
-                                class="icon-circle-plus"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title mb-0">Projects</p>
-                    <div class="table-responsive">
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                    <th class="pl-0  pb-2 border-bottom">Places</th>
-                                    <th class="border-bottom pb-2">Orders</th>
-                                    <th class="border-bottom pb-2">Users</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="pl-0">Kentucky</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">65</span>(2.15%)</p>
-                                    </td>
-                                    <td class="text-muted">65</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">Ohio</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">54</span>(3.25%)</p>
-                                    </td>
-                                    <td class="text-muted">51</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">Nevada</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">22</span>(2.22%)</p>
-                                    </td>
-                                    <td class="text-muted">32</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">North Carolina</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">46</span>(3.27%)</p>
-                                    </td>
-                                    <td class="text-muted">15</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">Montana</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">17</span>(1.25%)</p>
-                                    </td>
-                                    <td class="text-muted">25</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">Nevada</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">52</span>(3.11%)</p>
-                                    </td>
-                                    <td class="text-muted">71</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0 pb-0">Louisiana</td>
-                                    <td class="pb-0">
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">25</span>(1.32%)</p>
-                                    </td>
-                                    <td class="pb-0">14</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title">Charts</p>
-                            <div class="charts-data">
-                                <div class="mt-3">
-                                    <p class="mb-0">Data 1</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-inf0" role="progressbar" style="width: 95%"
-                                                aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">5k</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">Data 2</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 35%"
-                                                aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">1k</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">Data 3</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 48%"
-                                                aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">992</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">Data 4</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 25%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">687</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 stretch-card grid-margin grid-margin-md-0">
-                    <div class="card data-icon-card-primary">
-                        <div class="card-body">
-                            <p class="card-title text-white">Number of Meetings</p>
-                            <div class="row">
-                                <div class="col-8 text-white">
-                                    <h3>34040</h3>
-                                    <p class="text-white font-weight-500 mb-0">The total number of
-                                        sessions within the date range.It is calculated as the sum .
-                                    </p>
-                                </div>
-                                <div class="col-4 background-icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title">Notifications</p>
-                    <ul class="icon-data-list">
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face1.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">Isabella Becker</p>
-                                    <p class="mb-0">Sales dashboard have been created</p>
-                                    <small>9:30 am</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face2.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">Adam Warren</p>
-                                    <p class="mb-0">You have done a great job #TW111</p>
-                                    <small>10:30 am</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face3.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">Leonard Thornton</p>
-                                    <p class="mb-0">Sales dashboard have been created</p>
-                                    <small>11:30 am</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face4.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">George Morrison</p>
-                                    <p class="mb-0">Sales dashboard have been created</p>
-                                    <small>8:50 am</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face5.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">Ryan Cortez</p>
-                                    <p class="mb-0">Herbs are fun and easy to grow.</p>
-                                    <small>9:00 am</small>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title">Alumni Table</p>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="table-responsive">
-                                <table id="example" class="display expandable-table" style="width:100%">
-                                    <thead>
+                                @foreach ($data['verifiedAlumni'] as $key => $alumni)
+                                    @if ($key < 5)
                                         <tr>
-                                            <th>Quote#</th>
-                                            <th>Product</th>
-                                            <th>Business type</th>
-                                            <th>Policy holder</th>
-                                            <th>Premium</th>
-                                            <th>Status</th>
-                                            <th>Updated at</th>
+                                            <td>{{ $alumni->first_name . ' ' . $alumni->last_name }}</td>
+                                            <td class="font-weight-bold">{{ $alumni->course }}</td>
+                                            <td>{{ $alumni->year_graduated }}</td>
+                                            <td class="font-weight-medium">
+                                                <div
+                                                    class="badge 
+                                        @if ($alumni->employment_status == 'employed') badge-success 
+                                        @elseif ($alumni->employment_status == 'self-employed')
+                                        badge-info
+                                        @else
+                                        badge-danger @endif">
+                                                    {{ $alumni->employment_status }}</div>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                    @else
+                                    @break
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title mb-0">Courses</p>
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th class="pl-0  pb-2 border-bottom">Course</th>
+                                <th class="border-bottom pb-2">Verified Alumni</th>
+                                <th class="border-bottom pb-2">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data['courses'] as $key => $course)
+                                @if ($key < 5)
+                                    <tr>
+                                        <td class="pl-0">{{ $course->course }}</td>
+                                        <td>
+                                            <p class="mb-0"><span class="font-weight-bold mr-2">
 
-    @push('scripts')
-        <script>
-            if ($("#alumni-chart").length) {
-    var SalesChartCanvas = $("#alumni-chart").get(0).getContext("2d");
+                                                    {{ $data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() }}
+                                                </span>(
+                                                @if ($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() <= 0)
+                                                    0%
+                                                @else
+                                                    ({{ number_format(($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%)
+                                                @endif
+                                                )
+                                            </p>
+                                        </td>
+                                        <td class="text-muted">
+                                            {{ $data['users']->where('course', $course->course)->count() }}
+                                        </td>
+                                    </tr>
+                                @else
+                                @break
+                            @endif
+                        @endforeach
 
-    var courseNames = {!! json_encode($data['courses']->pluck('course')) !!}
-    var alumniCounts = {!! json_encode($data['courses']->map(function(course) {
-        return course.verifiedAlumniCount;
-    })) !!}
-    var verifiedAlumniCounts = {!! json_encode($data['courses']->map(function(course) {
-        return course.verifiedAlumniCount;
-    })) !!}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-    var SalesChart = new Chart(SalesChartCanvas, {
-        type: 'bar',
-        data: {
-            labels: courseNames,
+<div class="col-md-6 stretch-card grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <p class="card-title">Notifications</p>
+            <ul class="icon-data-list">
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face1.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">Isabella Becker</p>
+                            <p class="mb-0">Sales dashboard have been created</p>
+                            <small>9:30 am</small>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face2.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">Adam Warren</p>
+                            <p class="mb-0">You have done a great job #TW111</p>
+                            <small>10:30 am</small>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face3.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">Leonard Thornton</p>
+                            <p class="mb-0">Sales dashboard have been created</p>
+                            <small>11:30 am</small>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face4.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">George Morrison</p>
+                            <p class="mb-0">Sales dashboard have been created</p>
+                            <small>8:50 am</small>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face5.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">Ryan Cortez</p>
+                            <p class="mb-0">Herbs are fun and easy to grow.</p>
+                            <small>9:00 am</small>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+@push('scripts')
+<script>
+    if ($("#employed-chart").length) {
+        var areaData = {
+            labels: ["Male", "Female"],
             datasets: [{
-                label: 'Total Alumni',
-                data: alumniCounts,
-                backgroundColor: '#98BDFF'
-            },
-            {
-                label: 'Verified Alumni',
-                data: verifiedAlumniCounts,
-                backgroundColor: '#4B49AC'
-            }
-            ]
-        },
-        options: {
-            cornerRadius: 5,
+                data: [@json($data['maleEmployedCount']),
+                    @json($data['femaleEmployedCount'])
+                ],
+                backgroundColor: [
+                    "#4B49AC", "#FFC100",
+                ],
+                // borderColor: "rgba(0,0,0,0)"
+            }]
+        };
+        var areaOptions = {
             responsive: true,
             maintainAspectRatio: true,
-            layout: {
-                padding: {
-                    left: 0,
-                    right: 0,
-                    top: 20,
-                    bottom: 0
+            segmentShowStroke: false,
+            cutoutPercentage: 78,
+            elements: {
+                arc: {
+                    borderWidth: 4
                 }
-            },
-            scales: {
-                yAxes: [{
-                    display: true,
-                    gridLines: {
-                        display: true,
-                        drawBorder: false,
-                        color: "#F2F2F2"
-                    },
-                    ticks: {
-                        display: true,
-                        min: 0,
-                        max: 560,
-                        callback: function(value, index, values) {
-                            return value + '$';
-                        },
-                        autoSkip: true,
-                        maxTicksLimit: 10,
-                        fontColor: "#6C7383"
-                    }
-                }],
-                xAxes: [{
-                    stacked: false,
-                    ticks: {
-                        beginAtZero: true,
-                        fontColor: "#6C7383"
-                    },
-                    gridLines: {
-                        color: "rgba(0, 0, 0, 0)",
-                        display: false
-                    },
-                    barPercentage: 1
-                }]
             },
             legend: {
                 display: false
             },
-            elements: {
-                point: {
-                    radius: 0
-                }
+            tooltips: {
+                enabled: true
+            },
+            legendCallback: function(chart) {
+                var text = [];
+                text.push('<div class="report-chart">');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[0] +
+                    '"></div><p class="mb-0">Male Employed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['maleEmployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[1] +
+                    '"></div><p class="mb-0">Female Employed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['femaleEmployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push('</div>');
+                return text.join("");
+            },
+        }
+        var northAmericaChartPlugins = {
+            beforeDraw: function(chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
+
+                ctx.restore();
+                var fontSize = 3.125;
+                ctx.font = "500 " + fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = "#13381B";
+
+                var text = @json($data['totalEmployedCount']),
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+
+                ctx.fillText(text, textX, textY);
+                ctx.save();
             }
-        },
-    });
-    document.getElementById('alumni-legend').innerHTML = SalesChart.generateLegend();
-}
+        }
+        var northAmericaChartCanvas = $("#employed-chart").get(0).getContext("2d");
+        var northAmericaChart = new Chart(northAmericaChartCanvas, {
+            type: 'doughnut',
+            data: areaData,
+            options: areaOptions,
+            plugins: northAmericaChartPlugins
+        });
+        document.getElementById('employed-legend').innerHTML = northAmericaChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#unemployed-chart").length) {
+        var areaData = {
+            labels: ["Male", "Female"],
+            datasets: [{
+                data: [@json($data['maleUnemployedCount']),
+                    @json($data['femaleUnemployedCount'])
+                ],
+                backgroundColor: [
+                    "#4B49AC", "#FFC100",
+                ],
+                // borderColor: "rgba(0,0,0,0)"
+            }]
+        };
+        var areaOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            segmentShowStroke: false,
+            cutoutPercentage: 78,
+            elements: {
+                arc: {
+                    borderWidth: 4
+                }
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            legendCallback: function(chart) {
+                var text = [];
+                text.push('<div class="report-chart">');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[0] +
+                    '"></div><p class="mb-0">Male Unemployed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['maleUnemployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[1] +
+                    '"></div><p class="mb-0">Female Unemployed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['femaleUnemployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push('</div>');
+                return text.join("");
+            },
+        }
+        var northAmericaChartPlugins = {
+            beforeDraw: function(chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
 
+                ctx.restore();
+                var fontSize = 3.125;
+                ctx.font = "500 " + fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = "#13381B";
 
-            if ($("#sales-chart-dark").length) {
-                var SalesChartCanvas = $("#sales-chart-dark").get(0).getContext("2d");
-                var SalesChart = new Chart(SalesChartCanvas, {
-                    type: 'bar',
-                    data: {
-                        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-                        datasets: [{
-                                label: 'Offline Sales',
-                                data: [480, 230, 470, 210, 330],
-                                backgroundColor: '#98BDFF'
-                            },
-                            {
-                                label: 'Online Sales',
-                                data: [400, 340, 550, 480, 170],
-                                backgroundColor: '#4B49AC'
-                            }
-                        ]
+                var text = @json($data['totalUnemployedCount']),
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        }
+        var northAmericaChartCanvas = $("#unemployed-chart").get(0).getContext("2d");
+        var northAmericaChart = new Chart(northAmericaChartCanvas, {
+            type: 'doughnut',
+            data: areaData,
+            options: areaOptions,
+            plugins: northAmericaChartPlugins
+        });
+        document.getElementById('unemployed-legend').innerHTML = northAmericaChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#self-employed-chart").length) {
+        var areaData = {
+            labels: ["Male", "Female"],
+            datasets: [{
+                data: [@json($data['femaleSelfEmployedCount']),
+                    @json($data['femaleSelfEmployedCount'])
+                ],
+                backgroundColor: [
+                    "#4B49AC", "#FFC100",
+                ],
+                // borderColor: "rgba(0,0,0,0)"
+            }]
+        };
+        var areaOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            segmentShowStroke: false,
+            cutoutPercentage: 78,
+            elements: {
+                arc: {
+                    borderWidth: 4
+                }
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            legendCallback: function(chart) {
+                var text = [];
+                text.push('<div class="report-chart">');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[0] +
+                    '"></div><p class="mb-0">Male Self Employed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['maleSelfEmployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[1] +
+                    '"></div><p class="mb-0">Female Self Employed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['femaleSelfEmployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push('</div>');
+                return text.join("");
+            },
+        }
+        var northAmericaChartPlugins = {
+            beforeDraw: function(chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
+
+                ctx.restore();
+                var fontSize = 3.125;
+                ctx.font = "500 " + fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = "#13381B";
+
+                var text = @json($data['totalSelfEmployedCount']),
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        }
+        var northAmericaChartCanvas = $("#self-employed-chart").get(0).getContext("2d");
+        var northAmericaChart = new Chart(northAmericaChartCanvas, {
+            type: 'doughnut',
+            data: areaData,
+            options: areaOptions,
+            plugins: northAmericaChartPlugins
+        });
+        document.getElementById('self-employed-legend').innerHTML = northAmericaChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#alumnigender-chart").length) {
+        var SalesChartCanvas = $("#alumnigender-chart").get(0).getContext("2d");
+        var SalesChart = new Chart(SalesChartCanvas, {
+            type: 'bar',
+            data: {
+                labels: @json($data['alumniByGenderLabels']),
+                datasets: [{
+                        label: 'Male',
+                        data: @json($data['alumniMale']),
+                        backgroundColor: '#98BDFF'
                     },
-                    options: {
-                        cornerRadius: 5,
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        layout: {
-                            padding: {
-                                left: 0,
-                                right: 0,
-                                top: 20,
-                                bottom: 0
-                            }
+                    {
+                        label: 'Female',
+                        data: @json($data['alumniFemale']),
+                        backgroundColor: '#ff9eb3'
+                    }
+                ]
+            },
+            options: {
+                cornerRadius: 5,
+                responsive: true,
+                maintainAspectRatio: true,
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            drawBorder: false,
+                            color: "#F2F2F2"
                         },
-                        scales: {
-                            yAxes: [{
-                                display: true,
-                                gridLines: {
-                                    display: true,
-                                    drawBorder: false,
-                                    color: "#575757"
-                                },
-                                ticks: {
-                                    display: true,
-                                    min: 0,
-                                    max: 500,
-                                    callback: function(value, index, values) {
-                                        return value + '$';
-                                    },
-                                    autoSkip: true,
-                                    maxTicksLimit: 10,
-                                    fontColor: "#F0F0F0"
-                                }
-                            }],
-                            xAxes: [{
-                                stacked: false,
-                                ticks: {
-                                    beginAtZero: true,
-                                    fontColor: "#F0F0F0"
-                                },
-                                gridLines: {
-                                    color: "#575757",
-                                    display: false
-                                },
-                                barPercentage: 1
-                            }]
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383",
+                            stepSize: 1, // Set the step size to 1 to display whole numbers
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: false,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383"
                         },
-                        legend: {
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
                             display: false
                         },
-                        elements: {
-                            point: {
-                                radius: 0
-                            }
-                        }
+                        barPercentage: 1
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+            },
+        });
+        document.getElementById('alumnigender-legend').innerHTML = SalesChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#alumni-chart").length) {
+        var SalesChartCanvas = $("#alumni-chart").get(0).getContext("2d");
+        var SalesChart = new Chart(SalesChartCanvas, {
+            type: 'bar',
+            data: {
+                labels: @json($data['labels']),
+                datasets: [{
+                        label: 'All Alumni',
+                        data: @json($data['dataAll']),
+                        backgroundColor: '#98BDFF'
                     },
-                });
-                document.getElementById('sales-legend').innerHTML = SalesChart.generateLegend();
-            }
-        </script>
-    @endpush
+                    {
+                        label: 'Verified Alumni',
+                        data: @json($data['dataVerified']),
+                        backgroundColor: '#4B49AC'
+                    }
+                ]
+            },
+            options: {
+                cornerRadius: 5,
+                responsive: true,
+                maintainAspectRatio: true,
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            drawBorder: false,
+                            color: "#F2F2F2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383",
+                            stepSize: 1, // Set the step size to 1 to display whole numbers
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: false,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383"
+                        },
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
+                            display: false
+                        },
+                        barPercentage: 1
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+            },
+        });
+        document.getElementById('alumni-legend').innerHTML = SalesChart.generateLegend();
+    }
+</script>
+@endpush
 </x-admin-layout>
