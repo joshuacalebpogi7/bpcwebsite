@@ -11,8 +11,8 @@ class Jobs extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
         'job_title',
+        'job_type',
         'description',
         'company',
         'location',
@@ -21,15 +21,8 @@ class Jobs extends Model
         'status',
         'posted_by',
         'updated_by',
-        'image'
     ];
 
-    protected function image(): Attribute
-    {
-        return Attribute::make(get: function ($value) {
-            return $value ? '/storage/jobs-image/' . $value : '/images/bpc_building2.jpg';
-        });
-    }
 
     public function users()
     {

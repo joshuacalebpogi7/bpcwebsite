@@ -9,10 +9,10 @@
                 <tr>
                     <th>Id</th>
                     <th>Action</th>
-                    <th>Image</th>
-                    <th>Title</th>
                     <th>Job Title</th>
+                    <th>Job Type</th>
                     <th>Company</th>
+                    <th>Salary</th>
                     <th>Status</th>
                     <th>Posted by</th>
                     <th>Updated by</th>
@@ -28,7 +28,7 @@
                         <td>
                             <div class="d-flex flex-column">
                                 <!-- First Row - Edit Button -->
-                                <a href="/admin/edit-jobs/{{ $job->id }}/{{ $job->title }}" class="flex-fill">
+                                <a href="/admin/edit-jobs/{{ $job->id }}/{{ $job->job_title }}" class="flex-fill">
                                     <button class="btn btn-success me-1 w-100 h-100">View</button>
                                 </a>
 
@@ -41,11 +41,10 @@
                             </div>
                         </td>
 
-                        <td><img src="{{ $job->image }}" alt="{{ $job->title }}'s thumbnail"
-                                style="width: 40px; margin: 10px;"></td>
-                        <td>{{ $job->title }}</td>
                         <td>{{ $job->job_title }}</td>
+                        <td>{{ $job->job_type }}</td>
                         <td>{{ $job->company }}</td>
+                        <td>{{ $job->salary }}</td>
                         <td>{{ $job->status }}</td>
                         <td>{{ $job->posted_by }}</td>
                         <td>{{ $job->updated_by }}</td>

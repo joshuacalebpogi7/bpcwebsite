@@ -158,8 +158,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mt-3">
-                                                <canvas id="north-america-chart"></canvas>
-                                                <div id="north-america-legend"></div>
+                                                <canvas id="employed-chart"></canvas>
+                                                <div id="employed-legend"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -207,8 +207,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mt-3">
-                                                <canvas id="south-america-chart"></canvas>
-                                                <div id="south-america-legend"></div>
+                                                <canvas id="unemployed-chart"></canvas>
+                                                <div id="unemployed-legend"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -257,8 +257,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mt-3">
-                                                <canvas id="south-america-chart"></canvas>
-                                                <div id="south-america-legend"></div>
+                                                <canvas id="self-employed-chart"></canvas>
+                                                <div id="self-employed-legend"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -282,345 +282,540 @@
         <div class="col-md-7 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title mb-0">Top Products</p>
+                    <p class="card-title mb-0">Latest Alumni</p>
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Course</th>
+                                    <th>Batch</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Search Engine Marketing</td>
-                                    <td class="font-weight-bold">$362</td>
-                                    <td>21 Sep 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Search Engine Optimization</td>
-                                    <td class="font-weight-bold">$116</td>
-                                    <td>13 Jun 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Display Advertising</td>
-                                    <td class="font-weight-bold">$551</td>
-                                    <td>28 Sep 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Pay Per Click Advertising</td>
-                                    <td class="font-weight-bold">$523</td>
-                                    <td>30 Jun 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>E-Mail Marketing</td>
-                                    <td class="font-weight-bold">$781</td>
-                                    <td>01 Nov 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-danger">Cancelled</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Referral Marketing</td>
-                                    <td class="font-weight-bold">$283</td>
-                                    <td>20 Mar 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Social media marketing</td>
-                                    <td class="font-weight-bold">$897</td>
-                                    <td>26 Oct 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                @foreach ($data['verifiedAlumni'] as $key => $alumni)
+                                    @if ($key < 5)
+                                        <tr>
+                                            <td>{{ $alumni->first_name . ' ' . $alumni->last_name }}</td>
+                                            <td class="font-weight-bold">{{ $alumni->course }}</td>
+                                            <td>{{ $alumni->year_graduated }}</td>
+                                            <td class="font-weight-medium">
+                                                <div
+                                                    class="badge 
+                                        @if ($alumni->employment_status == 'employed') badge-success 
+                                        @elseif ($alumni->employment_status == 'self-employed')
+                                        badge-info
+                                        @else
+                                        badge-danger @endif">
+                                                    {{ $alumni->employment_status }}</div>
+                                            </td>
+                                        </tr>
+                                    @else
+                                    @break
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 stretch-card grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title mb-0">Projects</p>
-                    <div class="table-responsive">
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                    <th class="pl-0  pb-2 border-bottom">Places</th>
-                                    <th class="border-bottom pb-2">Orders</th>
-                                    <th class="border-bottom pb-2">Users</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="pl-0">Kentucky</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">65</span>(2.15%)</p>
-                                    </td>
-                                    <td class="text-muted">65</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">Ohio</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">54</span>(3.25%)</p>
-                                    </td>
-                                    <td class="text-muted">51</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">Nevada</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">22</span>(2.22%)</p>
-                                    </td>
-                                    <td class="text-muted">32</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">North Carolina</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">46</span>(3.27%)</p>
-                                    </td>
-                                    <td class="text-muted">15</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">Montana</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">17</span>(1.25%)</p>
-                                    </td>
-                                    <td class="text-muted">25</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0">Nevada</td>
-                                    <td>
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">52</span>(3.11%)</p>
-                                    </td>
-                                    <td class="text-muted">71</td>
-                                </tr>
-                                <tr>
-                                    <td class="pl-0 pb-0">Louisiana</td>
-                                    <td class="pb-0">
-                                        <p class="mb-0"><span class="font-weight-bold mr-2">25</span>(1.32%)</p>
-                                    </td>
-                                    <td class="pb-0">14</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+</div>
+<div class="row">
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title mb-0">Courses</p>
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th class="pl-0  pb-2 border-bottom">Course</th>
+                                <th class="border-bottom pb-2">Verified Alumni</th>
+                                <th class="border-bottom pb-2">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data['courses'] as $key => $course)
+                                @if ($key < 5)
+                                    <tr>
+                                        <td class="pl-0">{{ $course->course }}</td>
+                                        <td>
+                                            <p class="mb-0"><span class="font-weight-bold mr-2">
 
-        <div class="col-md-6 stretch-card grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title">Notifications</p>
-                    <ul class="icon-data-list">
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face1.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">Isabella Becker</p>
-                                    <p class="mb-0">Sales dashboard have been created</p>
-                                    <small>9:30 am</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face2.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">Adam Warren</p>
-                                    <p class="mb-0">You have done a great job #TW111</p>
-                                    <small>10:30 am</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face3.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">Leonard Thornton</p>
-                                    <p class="mb-0">Sales dashboard have been created</p>
-                                    <small>11:30 am</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face4.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">George Morrison</p>
-                                    <p class="mb-0">Sales dashboard have been created</p>
-                                    <small>8:50 am</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <img src="/admin-dashboard/images/faces/face5.jpg" alt="user">
-                                <div>
-                                    <p class="text-info mb-1">Ryan Cortez</p>
-                                    <p class="mb-0">Herbs are fun and easy to grow.</p>
-                                    <small>9:00 am</small>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                                                    {{ $data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() }}
+                                                </span>(
+                                                @if ($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() <= 0)
+                                                    0%
+                                                @else
+                                                    ({{ number_format(($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%)
+                                                @endif
+                                                )
+                                            </p>
+                                        </td>
+                                        <td class="text-muted">
+                                            {{ $data['users']->where('course', $course->course)->count() }}
+                                        </td>
+                                    </tr>
+                                @else
+                                @break
+                            @endif
+                        @endforeach
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
-    @push('scripts')
-        <script>
-            if ($("#alumnigender-chart").length) {
-                var SalesChartCanvas = $("#alumnigender-chart").get(0).getContext("2d");
-                var SalesChart = new Chart(SalesChartCanvas, {
-                    type: 'bar',
-                    data: {
-                        labels: @json($data['alumniByGenderLabels']),
-                        datasets: [{
-                                label: 'Male',
-                                data: @json($data['alumniMale']),
-                                backgroundColor: '#98BDFF'
-                            },
-                            {
-                                label: 'Female',
-                                data: @json($data['alumniFemale']),
-                                backgroundColor: '#4B49AC'
-                            }
-                        ]
+<div class="col-md-6 stretch-card grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <p class="card-title">Notifications</p>
+            <ul class="icon-data-list">
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face1.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">Isabella Becker</p>
+                            <p class="mb-0">Sales dashboard have been created</p>
+                            <small>9:30 am</small>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face2.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">Adam Warren</p>
+                            <p class="mb-0">You have done a great job #TW111</p>
+                            <small>10:30 am</small>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face3.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">Leonard Thornton</p>
+                            <p class="mb-0">Sales dashboard have been created</p>
+                            <small>11:30 am</small>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face4.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">George Morrison</p>
+                            <p class="mb-0">Sales dashboard have been created</p>
+                            <small>8:50 am</small>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <img src="/admin-dashboard/images/faces/face5.jpg" alt="user">
+                        <div>
+                            <p class="text-info mb-1">Ryan Cortez</p>
+                            <p class="mb-0">Herbs are fun and easy to grow.</p>
+                            <small>9:00 am</small>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+@push('scripts')
+<script>
+    if ($("#employed-chart").length) {
+        var areaData = {
+            labels: ["Male", "Female"],
+            datasets: [{
+                data: [@json($data['maleEmployedCount']),
+                    @json($data['femaleEmployedCount'])
+                ],
+                backgroundColor: [
+                    "#4B49AC", "#FFC100",
+                ],
+                // borderColor: "rgba(0,0,0,0)"
+            }]
+        };
+        var areaOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            segmentShowStroke: false,
+            cutoutPercentage: 78,
+            elements: {
+                arc: {
+                    borderWidth: 4
+                }
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            legendCallback: function(chart) {
+                var text = [];
+                text.push('<div class="report-chart">');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[0] +
+                    '"></div><p class="mb-0">Male Employed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['maleEmployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[1] +
+                    '"></div><p class="mb-0">Female Employed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['femaleEmployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push('</div>');
+                return text.join("");
+            },
+        }
+        var northAmericaChartPlugins = {
+            beforeDraw: function(chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
+
+                ctx.restore();
+                var fontSize = 3.125;
+                ctx.font = "500 " + fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = "#13381B";
+
+                var text = @json($data['totalEmployedCount']),
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        }
+        var northAmericaChartCanvas = $("#employed-chart").get(0).getContext("2d");
+        var northAmericaChart = new Chart(northAmericaChartCanvas, {
+            type: 'doughnut',
+            data: areaData,
+            options: areaOptions,
+            plugins: northAmericaChartPlugins
+        });
+        document.getElementById('employed-legend').innerHTML = northAmericaChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#unemployed-chart").length) {
+        var areaData = {
+            labels: ["Male", "Female"],
+            datasets: [{
+                data: [@json($data['maleUnemployedCount']),
+                    @json($data['femaleUnemployedCount'])
+                ],
+                backgroundColor: [
+                    "#4B49AC", "#FFC100",
+                ],
+                // borderColor: "rgba(0,0,0,0)"
+            }]
+        };
+        var areaOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            segmentShowStroke: false,
+            cutoutPercentage: 78,
+            elements: {
+                arc: {
+                    borderWidth: 4
+                }
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            legendCallback: function(chart) {
+                var text = [];
+                text.push('<div class="report-chart">');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[0] +
+                    '"></div><p class="mb-0">Male Unemployed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['maleUnemployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[1] +
+                    '"></div><p class="mb-0">Female Unemployed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['femaleUnemployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push('</div>');
+                return text.join("");
+            },
+        }
+        var northAmericaChartPlugins = {
+            beforeDraw: function(chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
+
+                ctx.restore();
+                var fontSize = 3.125;
+                ctx.font = "500 " + fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = "#13381B";
+
+                var text = @json($data['totalUnemployedCount']),
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        }
+        var northAmericaChartCanvas = $("#unemployed-chart").get(0).getContext("2d");
+        var northAmericaChart = new Chart(northAmericaChartCanvas, {
+            type: 'doughnut',
+            data: areaData,
+            options: areaOptions,
+            plugins: northAmericaChartPlugins
+        });
+        document.getElementById('unemployed-legend').innerHTML = northAmericaChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#self-employed-chart").length) {
+        var areaData = {
+            labels: ["Male", "Female"],
+            datasets: [{
+                data: [@json($data['femaleSelfEmployedCount']),
+                    @json($data['femaleSelfEmployedCount'])
+                ],
+                backgroundColor: [
+                    "#4B49AC", "#FFC100",
+                ],
+                // borderColor: "rgba(0,0,0,0)"
+            }]
+        };
+        var areaOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            segmentShowStroke: false,
+            cutoutPercentage: 78,
+            elements: {
+                arc: {
+                    borderWidth: 4
+                }
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            legendCallback: function(chart) {
+                var text = [];
+                text.push('<div class="report-chart">');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[0] +
+                    '"></div><p class="mb-0">Male Self Employed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['maleSelfEmployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push(
+                    '<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' +
+                    chart.data.datasets[0].backgroundColor[1] +
+                    '"></div><p class="mb-0">Female Self Employed</p></div>');
+                text.push('<p class="mb-0">' + @json($data['femaleSelfEmployedCount']) +
+                    '</p>');
+                text.push('</div>');
+                text.push('</div>');
+                return text.join("");
+            },
+        }
+        var northAmericaChartPlugins = {
+            beforeDraw: function(chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
+
+                ctx.restore();
+                var fontSize = 3.125;
+                ctx.font = "500 " + fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = "#13381B";
+
+                var text = @json($data['totalSelfEmployedCount']),
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        }
+        var northAmericaChartCanvas = $("#self-employed-chart").get(0).getContext("2d");
+        var northAmericaChart = new Chart(northAmericaChartCanvas, {
+            type: 'doughnut',
+            data: areaData,
+            options: areaOptions,
+            plugins: northAmericaChartPlugins
+        });
+        document.getElementById('self-employed-legend').innerHTML = northAmericaChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#alumnigender-chart").length) {
+        var SalesChartCanvas = $("#alumnigender-chart").get(0).getContext("2d");
+        var SalesChart = new Chart(SalesChartCanvas, {
+            type: 'bar',
+            data: {
+                labels: @json($data['alumniByGenderLabels']),
+                datasets: [{
+                        label: 'Male',
+                        data: @json($data['alumniMale']),
+                        backgroundColor: '#98BDFF'
                     },
-                    options: {
-                        cornerRadius: 5,
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        layout: {
-                            padding: {
-                                left: 0,
-                                right: 0,
-                                top: 20,
-                                bottom: 0
-                            }
+                    {
+                        label: 'Female',
+                        data: @json($data['alumniFemale']),
+                        backgroundColor: '#ff9eb3'
+                    }
+                ]
+            },
+            options: {
+                cornerRadius: 5,
+                responsive: true,
+                maintainAspectRatio: true,
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            drawBorder: false,
+                            color: "#F2F2F2"
                         },
-                        scales: {
-                            yAxes: [{
-                                display: true,
-                                gridLines: {
-                                    display: true,
-                                    drawBorder: false,
-                                    color: "#F2F2F2"
-                                },
-                            }],
-                            xAxes: [{
-                                stacked: false,
-                                ticks: {
-                                    beginAtZero: true,
-                                    fontColor: "#6C7383"
-                                },
-                                gridLines: {
-                                    color: "rgba(0, 0, 0, 0)",
-                                    display: false
-                                },
-                                barPercentage: 1
-                            }]
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383",
+                            stepSize: 1, // Set the step size to 1 to display whole numbers
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: false,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383"
                         },
-                        legend: {
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
                             display: false
                         },
-                        elements: {
-                            point: {
-                                radius: 0
-                            }
+                        barPercentage: 1
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+            },
+        });
+        document.getElementById('alumnigender-legend').innerHTML = SalesChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#alumni-chart").length) {
+        var SalesChartCanvas = $("#alumni-chart").get(0).getContext("2d");
+        var SalesChart = new Chart(SalesChartCanvas, {
+            type: 'bar',
+            data: {
+                labels: @json($data['labels']),
+                datasets: [{
+                        label: 'All Alumni',
+                        data: @json($data['dataAll']),
+                        backgroundColor: '#98BDFF'
+                    },
+                    {
+                        label: 'Verified Alumni',
+                        data: @json($data['dataVerified']),
+                        backgroundColor: '#4B49AC'
+                    }
+                ]
+            },
+            options: {
+                cornerRadius: 5,
+                responsive: true,
+                maintainAspectRatio: true,
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            drawBorder: false,
+                            color: "#F2F2F2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383",
+                            stepSize: 1, // Set the step size to 1 to display whole numbers
                         }
-                    },
-                });
-                document.getElementById('alumnigender-legend').innerHTML = SalesChart.generateLegend();
-            }
-        </script>
-        <script>
-            if ($("#alumni-chart").length) {
-                var SalesChartCanvas = $("#alumni-chart").get(0).getContext("2d");
-                var SalesChart = new Chart(SalesChartCanvas, {
-                    type: 'bar',
-                    data: {
-                        labels: @json($data['labels']),
-                        datasets: [{
-                                label: 'All Alumni',
-                                data: @json($data['dataAll']),
-                                backgroundColor: '#98BDFF'
-                            },
-                            {
-                                label: 'Verified Alumni',
-                                data: @json($data['dataVerified']),
-                                backgroundColor: '#4B49AC'
-                            }
-                        ]
-                    },
-                    options: {
-                        cornerRadius: 5,
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        layout: {
-                            padding: {
-                                left: 0,
-                                right: 0,
-                                top: 20,
-                                bottom: 0
-                            }
+                    }],
+                    xAxes: [{
+                        stacked: false,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383"
                         },
-                        scales: {
-                            yAxes: [{
-                                display: true,
-                                gridLines: {
-                                    display: true,
-                                    drawBorder: false,
-                                    color: "#F2F2F2"
-                                },
-                            }],
-                            xAxes: [{
-                                stacked: false,
-                                ticks: {
-                                    beginAtZero: true,
-                                    fontColor: "#6C7383"
-                                },
-                                gridLines: {
-                                    color: "rgba(0, 0, 0, 0)",
-                                    display: false
-                                },
-                                barPercentage: 1
-                            }]
-                        },
-                        legend: {
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
                             display: false
                         },
-                        elements: {
-                            point: {
-                                radius: 0
-                            }
-                        }
-                    },
-                });
-                document.getElementById('alumni-legend').innerHTML = SalesChart.generateLegend();
-            }
-        </script>
-    @endpush
+                        barPercentage: 1
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+            },
+        });
+        document.getElementById('alumni-legend').innerHTML = SalesChart.generateLegend();
+    }
+</script>
+@endpush
 </x-admin-layout>
