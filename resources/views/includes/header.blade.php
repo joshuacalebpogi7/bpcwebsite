@@ -15,16 +15,16 @@
                     <button type="submit" class="btn btn-danger">Sign Out</button>
                 </form>
             @else
+            </nav>
                 <a href="/login">
                     <div class="icons">
                         <div id="user-btn" class="fas fa-user"></div>
                     </div>
                 </a>
             @endauth
-        </nav>
+        
         <div class="icons">
             <div id="menu-btn" class="fas fa-bars"></div>
-            {{-- <div id="user-btn" class="fas fa-user"></div> --}}
         </div>
     </div>
 </header>

@@ -678,7 +678,6 @@ footer p{
       display: flex;
       flex-direction: column;
       align-items: center;
-      align-content: flex-start;
       background-color: #120b0b5e;
       position: absolute;
       top:99%; left:0; right:0;
@@ -845,7 +844,7 @@ footer p{
 
    html
    {
-      font-size: 50%;
+      font-size: 100%;
    }
 
    .flex-btn
