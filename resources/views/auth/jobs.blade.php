@@ -18,14 +18,6 @@
             </div>
         </div>
         <div class="filter-wrapper">
-            <p>Recommendation</p>
-            <div class="filter">
-                <button class="btn-filter">Data Science</button>
-                <button class="btn-filter">Data Engineer</button>
-                <button class="btn-filter">Data Analyst</button>
-                <button class="btn-filter">Data Visualization</button>
-                <button class="btn-filter">CRM Analyst</button>
-            </div>
         </div>
         <div class="sort">
             <p>Sort</p>
@@ -79,104 +71,6 @@
 
             @endforeach
 
-            <div class="card">
-                <div class="card-left yellow-bg">
-                    <img src="/images/desktop.png">
-                </div>
-                <div class="card-center">
-                    <h3>Tiktok</h3>
-                    <p class="card-detail">Data Analytics, Product Analyst</p>
-                    <p class="card-loc">
-                        <ion-icon name="location-outline"></ion-icon>Abcd street
-                    </p>
-                    <div class="card-sub">
-                        <p>
-                            <ion-icon name="today-outline"></ion-icon>10 mins ago
-                        </p>
-                        <p>
-                            <ion-icon name="hourglass-outline"></ion-icon>Full-time
-                        </p>
-                        <p>
-                            <ion-icon name="people-outline"></ion-icon>130 Applicants
-                        </p>
-                    </div>
-                </div>
-                <div class="card-right">
-                    <div class="card-tag">
-                        <h5>Division</h5>
-                        <a href="#">Data Science</a>
-                    </div>
-                    <div class="card-salary">
-                        <p><b>$200k</b> <span>/ year</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-left red-bg">
-                    <img src="images/news.png">
-                </div>
-                <div class="card-center">
-                    <h3>Youtube</h3>
-                    <p class="card-detail">Data Analyst, Product Analyst</p>
-                    <p class="card-loc">
-                        <ion-icon name="location-outline"></ion-icon>Abcd street
-                    </p>
-                    <div class="card-sub">
-                        <p>
-                            <ion-icon name="today-outline"></ion-icon>1 hour ago
-                        </p>
-                        <p>
-                            <ion-icon name="hourglass-outline"></ion-icon>Full-time
-                        </p>
-                        <p>
-                            <ion-icon name="people-outline"></ion-icon>240 Applicants
-                        </p>
-                    </div>
-                </div>
-                <div class="card-right">
-                    <div class="card-tag">
-                        <h5>Division</h5>
-                        <a href="#">Engineer, Product</a>
-                    </div>
-                    <div class="card-salary">
-                        <p><b>$485k</b> <span>/ year</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-left purple-bg">
-                    <img src="images/job.png">
-                </div>
-                <div class="card-center">
-                    <h3>Apple</h3>
-                    <p class="card-detail">UI UX Designer</p>
-                    <p class="card-loc">
-                        <ion-icon name="location-outline"></ion-icon>Abcd street
-                    </p>
-                    <div class="card-sub">
-                        <p>
-                            <ion-icon name="today-outline"></ion-icon>1 mins ago
-                        </p>
-                        <p>
-                            <ion-icon name="hourglass-outline"></ion-icon>Full-time
-                        </p>
-                        <p>
-                            <ion-icon name="people-outline"></ion-icon>175 Applicants
-                        </p>
-                    </div>
-                </div>
-                <div class="card-right">
-                    <div class="card-tag">
-                        <h5>Division</h5>
-                        <a href="#">Designer App</a>
-                    </div>
-                    <div class="card-salary">
-                        <p><b>$230k</b> <span>/ year</span></p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 

@@ -84,33 +84,23 @@
                 </div>
 
                 <h3 class="sidebar__title">
-                    <span>Others</span>
                 </h3>
 
                 <div class="sidebar__list">
-                    <a href="#" class="sidebar__link">
-                        <i class="ri-customer-service-fill"></i>
-                        <span class="sidebar__link-name">Support</span>
-                        <span class="sidebar__link-floating">Support</span>
+                    <a href="/logout" class="sidebar__link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="ri-logout-box-r-line"></i>
+                        <span class="sidebar__link-name">Logout</span>
+                        <span class="sidebar__link-floating">Logout</span>
                     </a>
 
-                    <a href="#" class="sidebar__link">
-                        <i class="ri-settings-3-line"></i>
-                        <span class="sidebar__link-name">Settings</span>
-                        <span class="sidebar__link-floating">Settings</span>
-                    </a>
-
-                    <form action="/logout" method="POST">
+                    <form action="/logout" method="POST" id="logout-form" style="display: none">
                         @csrf
-                        <button type="submit" class="sidebar__link">
-                            <i class="ri-logout-box-r-line"></i>
-                            <span class="sidebar__link-name">Logout</span>
-                            <span class="sidebar__link-floating">Logout</span>
-                        </button>
                     </form>
                 </div>
             </div>
 
+            <a href="/edit-profile">
             <div class="sidebar__account">
                 <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
 
@@ -121,6 +111,7 @@
 
                 <i class="ri-arrow-right-s-line"></i>
             </div>
+            </a>
         </nav>
     </div>
 
@@ -189,7 +180,7 @@
                 {{$newsItem->title}}
             </a>
             <span class="post-date">{{ $newsItem->created_at->format('F j, Y') }}</span>
-            <p class="post-description">{!! $newsItem->description !!}</p>
+            <p><div class="post-description">{!! $newsItem->description !!}</div></p>
 
             <div class="profile">
                 <img src="/images/gab.png" alt="" class="profile-img">

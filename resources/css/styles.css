@@ -297,6 +297,7 @@ img {
 .sidebar__email {
   font-size: var(--small-font-size);
   font-weight: var(--font-medium);
+  color: var(--white-color);
 }
 
 .sidebar__account i {
@@ -409,7 +410,7 @@ img {
   }
 
   .main {
-    padding-left: 300px;
+    padding-left: 200px;
     padding-top: 6rem;
     transition: padding .4s;
   }
