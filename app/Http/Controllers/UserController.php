@@ -122,7 +122,7 @@ public function resetPassword(Request $request){
                         return redirect('/additional-info')->with('info', 'Please Add Your Information.');
                     }
                     # code...
-                } else if ($user->user_type == 'admin') {
+                } else if ($user->user_type != 'alumni') {
 
                     return redirect('/admin/dashboard')->with('success', "Welcome back " . ucfirst(auth()->user()->username));
                 }

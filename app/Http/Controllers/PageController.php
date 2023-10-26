@@ -178,12 +178,15 @@ class PageController extends Controller
             'selfEmployed' => User::where('employment_status', 'self-employed')->count(),
 
             //events
-            'events' => Events::count(),
+            'events' => Events::all(),
             'activeEvents' => Events::where('event_end', '>', Carbon::now())->count(),
 
             //course
             'courses' => Course::all(),
             'employmentPercentageByCourse' => $employmentPercentageByCourse,
+
+            //course
+            'jobs' => Jobs::all(),
         ];
         
         return view('admin.dashboard', compact('user', 'data'));
@@ -192,11 +195,15 @@ class PageController extends Controller
 
     public function adminAdmins(User $user)
     {
-        return view('admin.admins', ['users' => $user->latest()->get()->where('user_type', '!=', 'alumni')]);
+        return view('admin.admins', ['users' => $user->latest()->get()->where('user_type', '===', 'content creator')]);
     }
     public function adminUsers(User $user)
     {
         return view('admin.users', ['users' => $user->latest()->get()->where('user_type', '===', 'alumni')]);
+    }
+    public function adminCourses(Course $courses)
+    {
+        return view('admin.courses', ['courses' => $courses->latest()->get()]);
     }
     public function adminSurvey(Survey $survey)
     {
@@ -252,6 +259,10 @@ class PageController extends Controller
     {
         return view('admin.edit-news', ['news' => $news]);
     }
+    public function editCoursesPage(Course $course)
+    {
+        return view('admin.edit-courses', ['course' => $course]);
+    }
     public function editAlumniPage(User $user)
     {
         if ($user->user_type === 'alumni') {
@@ -300,6 +311,11 @@ class PageController extends Controller
     {
         $user = auth()->user();
         return view('admin.add-alumni', ['user' => $user]);
+    }
+    public function addCoursesPage(Course $course)
+    {
+        $user = auth()->user();
+        return view('admin.add-courses', ['course' => $course]);
     }
     public function addAdminPage(User $user)
     {

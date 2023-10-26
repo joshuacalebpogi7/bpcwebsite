@@ -17,7 +17,7 @@
         @endif
     </div>
 
-    <div wire:loading.delay>
+    <div wire:loading.delay.longest>
         <div class="screen">
             <div class="loader">
                 <div class="scene">

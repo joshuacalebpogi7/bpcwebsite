@@ -1,7 +1,7 @@
 <x-admin-layout>
-    <h2>Admins list</h2>
+    <h2>Content Creators list</h2>
     <div>
-        <a href="/admin/add-admin"><button class="btn btn-primary mb-3">Add Admin</button></a>
+        <a href="/admin/add-admin"><button class="btn btn-primary mb-3">Add Content Creators</button></a>
     </div>
     <div>
         <table id="example" class="table table-light table-striped table-hover rounded shadow-sm" style="width:100%">

@@ -44,9 +44,9 @@
                 <div class="col-md-6 mb-4 stretch-card transparent">
                     <div class="card card-dark-blue">
                         <div class="card-body">
-                            <p class="mb-4">Events</p>
-                            <p class="fs-30 mb-2">{{ $data['events'] }}</p>
-                            <p>{{ $data['activeEvents'] }} (Active events)</p>
+                            <p class="mb-4">Courses</p>
+                            <p class="fs-30 mb-2">{{ $data['courses']->count() }}</p>
+                            <p>{{ $data['courses']->count() }} (All Courses)</p>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="card card-light-blue">
                         <div class="card-body">
                             <p class="mb-4">Events</p>
-                            <p class="fs-30 mb-2">{{ $data['events'] }}</p>
+                            <p class="fs-30 mb-2">{{ $data['events']->count() }}</p>
                             <p>{{ $data['activeEvents'] }} (Active events)</p>
                         </div>
                     </div>
@@ -64,9 +64,9 @@
                 <div class="col-md-6 stretch-card transparent">
                     <div class="card card-light-danger">
                         <div class="card-body">
-                            <p class="mb-4">Number of Clients</p>
-                            <p class="fs-30 mb-2">47033</p>
-                            <p>0.22% (30 days)</p>
+                            <p class="mb-4">Jobs</p>
+                            <p class="fs-30 mb-2">{{ $data['jobs']->count() }}</p>
+                            <p>{{ $data['jobs']->where('status, active')->count() }} (Active Job Openings)</p>
                         </div>
                     </div>
                 </div>
@@ -107,14 +107,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <p class="card-title">Employment Status</p>
-                        <a href="#" class="text-info">View all</a>
+                        <p class="card-title">Alumni Details</p>
+                        {{-- <a href="#" class="text-info">View all</a> --}}
                     </div>
                     <p class="font-weight-500">The total number of sessions within the date range. It
                         is the period time a user is actively engaged with your website, page or app,
                         etc</p>
-                    <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
-                    <canvas id="sales-chart"></canvas>
+                    <div id="alumni-legend" class="chartjs-legend mt-4 mb-2"></div>
+                    <canvas id="alumni-chart"></canvas>
                 </div>
             </div>
         </div>
@@ -152,9 +152,13 @@
                                                                     <div class="progress progress-md mx-4 mb-1">
                                                                         <div class="progress-bar bg-info"
                                                                             role="progressbar"
-                                                                            style="width: {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'employed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }}%"
+                                                                            style="width: 
+                        @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'employed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'employed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }}% @else
+                            0% @endif 
+                    "
                                                                             aria-valuenow="70" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
+                                                                            aria-valuemax="100">
+                                                                        </div>
                                                                     </div>
                                                                 </td>
                                                                 <td>
@@ -164,6 +168,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
+
                                                         <tr>
                                                             <td class="text-muted">Illinois</td>
                                                             <td class="w-100 px-0">
@@ -291,7 +296,7 @@
                                                                     <div class="progress progress-md mx-4 mb-1">
                                                                         <div class="progress-bar bg-info"
                                                                             role="progressbar"
-                                                                            style="width: {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'unemployed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }}%"
+                                                                            style="width: @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'unemployed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'unemployed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }}%  @else 0% @endif"
                                                                             aria-valuenow="70" aria-valuemin="0"
                                                                             aria-valuemax="100"></div>
                                                                     </div>
@@ -430,7 +435,7 @@
                                                                     <div class="progress progress-md mx-4 mb-1">
                                                                         <div class="progress-bar bg-info"
                                                                             role="progressbar"
-                                                                            style="width: {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'self-employed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }}%"
+                                                                            style="width: @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'self-employed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'self-employed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }} @else 0% @endif"
                                                                             aria-valuenow="70" aria-valuemin="0"
                                                                             aria-valuemax="100"></div>
                                                                     </div>
@@ -928,81 +933,92 @@
 
     @push('scripts')
         <script>
-            if ($("#sales-chart").length) {
-                var SalesChartCanvas = $("#sales-chart").get(0).getContext("2d");
-                var SalesChart = new Chart(SalesChartCanvas, {
-                    type: 'bar',
-                    data: {
-                        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-                        datasets: [{
-                                label: 'Offline Sales',
-                                data: [480, 230, 470, 210, 330],
-                                backgroundColor: '#98BDFF'
-                            },
-                            {
-                                label: 'Online Sales',
-                                data: [400, 340, 550, 480, 170],
-                                backgroundColor: '#4B49AC'
-                            }
-                        ]
-                    },
-                    options: {
-                        cornerRadius: 5,
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        layout: {
-                            padding: {
-                                left: 0,
-                                right: 0,
-                                top: 20,
-                                bottom: 0
-                            }
-                        },
-                        scales: {
-                            yAxes: [{
-                                display: true,
-                                gridLines: {
-                                    display: true,
-                                    drawBorder: false,
-                                    color: "#F2F2F2"
-                                },
-                                ticks: {
-                                    display: true,
-                                    min: 0,
-                                    max: 560,
-                                    callback: function(value, index, values) {
-                                        return value + '$';
-                                    },
-                                    autoSkip: true,
-                                    maxTicksLimit: 10,
-                                    fontColor: "#6C7383"
-                                }
-                            }],
-                            xAxes: [{
-                                stacked: false,
-                                ticks: {
-                                    beginAtZero: true,
-                                    fontColor: "#6C7383"
-                                },
-                                gridLines: {
-                                    color: "rgba(0, 0, 0, 0)",
-                                    display: false
-                                },
-                                barPercentage: 1
-                            }]
-                        },
-                        legend: {
-                            display: false
-                        },
-                        elements: {
-                            point: {
-                                radius: 0
-                            }
-                        }
-                    },
-                });
-                document.getElementById('sales-legend').innerHTML = SalesChart.generateLegend();
+            if ($("#alumni-chart").length) {
+    var SalesChartCanvas = $("#alumni-chart").get(0).getContext("2d");
+
+    var courseNames = {!! json_encode($data['courses']->pluck('course')) !!}
+    var alumniCounts = {!! json_encode($data['courses']->map(function(course) {
+        return course.verifiedAlumniCount;
+    })) !!}
+    var verifiedAlumniCounts = {!! json_encode($data['courses']->map(function(course) {
+        return course.verifiedAlumniCount;
+    })) !!}
+
+    var SalesChart = new Chart(SalesChartCanvas, {
+        type: 'bar',
+        data: {
+            labels: courseNames,
+            datasets: [{
+                label: 'Total Alumni',
+                data: alumniCounts,
+                backgroundColor: '#98BDFF'
+            },
+            {
+                label: 'Verified Alumni',
+                data: verifiedAlumniCounts,
+                backgroundColor: '#4B49AC'
             }
+            ]
+        },
+        options: {
+            cornerRadius: 5,
+            responsive: true,
+            maintainAspectRatio: true,
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                }
+            },
+            scales: {
+                yAxes: [{
+                    display: true,
+                    gridLines: {
+                        display: true,
+                        drawBorder: false,
+                        color: "#F2F2F2"
+                    },
+                    ticks: {
+                        display: true,
+                        min: 0,
+                        max: 560,
+                        callback: function(value, index, values) {
+                            return value + '$';
+                        },
+                        autoSkip: true,
+                        maxTicksLimit: 10,
+                        fontColor: "#6C7383"
+                    }
+                }],
+                xAxes: [{
+                    stacked: false,
+                    ticks: {
+                        beginAtZero: true,
+                        fontColor: "#6C7383"
+                    },
+                    gridLines: {
+                        color: "rgba(0, 0, 0, 0)",
+                        display: false
+                    },
+                    barPercentage: 1
+                }]
+            },
+            legend: {
+                display: false
+            },
+            elements: {
+                point: {
+                    radius: 0
+                }
+            }
+        },
+    });
+    document.getElementById('alumni-legend').innerHTML = SalesChart.generateLegend();
+}
+
+
             if ($("#sales-chart-dark").length) {
                 var SalesChartCanvas = $("#sales-chart-dark").get(0).getContext("2d");
                 var SalesChart = new Chart(SalesChartCanvas, {
