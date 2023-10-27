@@ -6,6 +6,8 @@ use App\Http\Controllers\EventsController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\ForumsController;
 use App\Models\Course;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
@@ -133,3 +135,34 @@ Route::delete('admin/delete-jobs/{jobs:id}', [JobsController::class, 'deleteJobs
 Route::delete('admin/delete-album/{galleryAlbum:id}', [GalleryController::class, 'deleteAlbum'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-photo/{gallery:id}', [GalleryController::class, 'deletePhoto'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-course/{course:id}', [CourseController::class, 'deleteCourse'])->middleware('can:visitAdminPages');
+
+/* ROUTE FOR SURVEY */
+Route::get('/new_survey', function () {
+    return view('auth.new_survey');
+});
+
+Route::get('/posted_surveys', function () {
+    return view('auth.posted_surveys');
+})->name('posted_surveys');
+
+Route::get('/survey', function () {
+    return view('auth.survey');
+})->name('survey');
+
+Route::get('/answer_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeAnswered'])->name('answer_survey');
+Route::get('/edit_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeEdited'])->name('edit_survey');
+Route::get('/delete_survey/{survey_selected}', [SurveyController::class, 'deleteSurvey'])->name('delete_survey');
+/* ROUTE FOR SURVEY */
+
+/* ROUTE FOR FORUMS */
+Route::get('/new_forum', function () {
+    return view('auth.new_forum');
+});
+
+Route::get('/posted_forums', function () {
+    return view('auth.posted_forums');
+})->name('posted_forums');
+
+Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->name('view_forum');
+Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->name('delete_forum');
+/* ROUTE FOR FORUMS */

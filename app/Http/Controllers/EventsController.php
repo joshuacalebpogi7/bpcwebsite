@@ -30,17 +30,16 @@ class EventsController extends Controller
             'event_start' => 'required|date',
             'event_end' => 'required|date|after:event_start',
             'thumbnail' => 'nullable|image|max:5000',
-            'link' => ['nullable', 'string', 'url'],
+            
         ]);
         // dd(date('Y-m-d H:i:s', strtotime($events->event_start)) !== date('Y-m-d H:i:s', strtotime(($incomingFields['event_start']))));
-        if ($events->title !== $incomingFields['title'] || $events->category !== $incomingFields['category'] || $events->description !== $incomingFields['description'] || date('Y-m-d H:i:s', strtotime($events->event_start)) !== date('Y-m-d H:i:s', strtotime($incomingFields['event_start'])) || date('Y-m-d H:i:s', strtotime($events->event_end)) !== date('Y-m-d H:i:s', strtotime($incomingFields['event_end'])) || $request->hasFile('thumbnail') || $events->link !== $incomingFields['link']) {
+        if ($events->title !== $incomingFields['title'] || $events->category !== $incomingFields['category'] || $events->description !== $incomingFields['description'] || date('Y-m-d H:i:s', strtotime($events->event_start)) !== date('Y-m-d H:i:s', strtotime($incomingFields['event_start'])) || date('Y-m-d H:i:s', strtotime($events->event_end)) !== date('Y-m-d H:i:s', strtotime($incomingFields['event_end'])) || $request->hasFile('thumbnail')) {
             // Update the existing fields
             $events->title = trim(strip_tags(ucwords($incomingFields['title'])));
             $events->category = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
             $events->description = $incomingFields['description'];
             $events->event_start = $incomingFields['event_start'];
             $events->event_end = $incomingFields['event_end'];
-            $events->link = $incomingFields['link'];
             $incomingFields['updated_by'] = auth()->user()->username;
 
             // Handle the thumbnail if provided
@@ -84,7 +83,7 @@ class EventsController extends Controller
             'event_start' => 'required|date|after:now',
             'event_end' => 'required|date|after:event_start',
             'thumbnail' => 'nullable|image|max:5000',
-            'link' => ['nullable', 'string', 'url'],
+            
         ]);
 
         // will not encode the image to jpg
