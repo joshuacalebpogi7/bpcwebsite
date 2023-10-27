@@ -24,7 +24,7 @@ class CourseController extends Controller
     public function updateCourse(Course $course, Request $request)
     {
         $incomingFields = $request->validate([
-            'course' => 'required|unique:course,course',
+            'course' => 'required|unique:courses,course',
             'description' => 'required',
         ]);
         if ($course->course !== $incomingFields['course'] || $course->description !== $incomingFields['description']) {
@@ -58,7 +58,7 @@ class CourseController extends Controller
     {
 
         $incomingFields = $request->validate([
-            'course' => 'required|unique:course,course',
+            'course' => 'required|unique:courses,course',
             'description' => 'required',
         ]);
 

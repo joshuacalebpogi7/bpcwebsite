@@ -11,10 +11,12 @@ use App\Models\Course;
 use App\Models\Events;
 use App\Models\Survey;
 use App\Models\Gallery;
+use App\Models\surveys_posted;
 use Illuminate\Support\Str;
 use App\Models\GalleryAlbum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Livewire\Components\SurveyList;
 
 class PageController extends Controller
 {
@@ -63,10 +65,20 @@ class PageController extends Controller
         return view('auth.additional-info');
     }
 
+/*     public function survey()
+    {
+        // You don't need to fetch the survey list here, as the Livewire component handles it.
+    
+        return view('auth.posted_surveys')
+            ->with('component', SurveyList::class); // Pass the Livewire component to the view
+    } */
+
     public function survey()
     {
         return view('auth.survey');
     }
+
+    
 
     public function news(News $news)
     {
