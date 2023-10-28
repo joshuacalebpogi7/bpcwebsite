@@ -79,6 +79,12 @@
                         <span class="sidebar__link-name">Gallery</span>
                         <span class="sidebar__link-floating">Gallery</span>
                     </a>
+
+                    <a href="/survey" class="sidebar__link {{ request()->is('survey') ? 'active-link' : '' }}">
+                        <i class="ri-gallery-fill"></i>
+                        <span class="sidebar__link-name">Survey</span>
+                        <span class="sidebar__link-floating">Survey</span>
+                    </a>
                 </div>
 
                 <h3 class="sidebar__title">

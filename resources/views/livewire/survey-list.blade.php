@@ -50,7 +50,7 @@
                 @else
                     <p>No surveys available.</p>
                 @endif
-            @elseif (auth()->user()->user_type === 'admin')
+            @elseif (auth()->user()->user_type === 'admin' || auth()->user()->user_type === 'content creator')
                 <div class="card_notification">
                     <div class="notiglow"></div>
                     <div class="notiborderglow"></div>

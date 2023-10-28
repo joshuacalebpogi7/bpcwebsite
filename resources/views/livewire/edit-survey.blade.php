@@ -1,7 +1,7 @@
 <!-- resources/views/livewire/edit-survey/edit-survey.blade.php -->
 
 <div class="container">
-    <a href="{{ url('posted_surveys') }}"><button type = "button" class = "go-back-link">Go back</button></a>
+    <a href="{{ url('admin/surveys') }}"><button type = "button" class = "go-back-link">Go back</button></a>
     <header class="header">
         <h1 id="title" class="text-center">Edit "{{ $survey_selected->surveyTitle }}"</h1>
     </header>

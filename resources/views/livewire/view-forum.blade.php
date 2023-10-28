@@ -17,14 +17,14 @@
 
         .narrow-cell {
             width: 20%;
-            
+
             text-align: center;
             /* Adjust the width as needed */
         }
 
         .wide-cell {
             width: 80%;
-            
+
             text-align: left;
             /* Adjust the width as needed */
         }
@@ -38,7 +38,7 @@
         <h1>Title: {{ $forum_selected->forumTitle }}</h1>
         <table class="forum-table">
             <tr>
-                <td class="narrow-cell">Posted by
+                                <td class="narrow-cell">Posted by
                     <br>[Picture]
                     <br>
                     @if ($forum_selected->authorID == $forumBody->authorID)
@@ -48,10 +48,23 @@
                 <td class="wide-cell">{{ $forumBody->replyBody }}
                     <br><button class = "reply-button" type = "button">Reply</button>
                 </td>
+
+{{--                 @foreach ($forumReplies as $forumReply)
+                    <div class="reply">
+                        <table>
+                            <tr>
+                                <td>Username:</td>
+                                <td>{{ $forumReply['replyBody'] }}<br><button class = "reply-button"
+                                        type = "button">Reply</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                @endforeach --}}
             </tr>
         </table>
         <br>
-        {{-- @foreach ($forumReplies as $forumReply)
+
+        {{--  @foreach ($forumReplies as $forumReply)
             <div class="reply">
                 <table>
                     <tr>
@@ -60,7 +73,6 @@
                     </tr>
                 </table>
             </div>
-        @endforeach
- --}}
+        @endforeach --}}
     </div>
 </div>

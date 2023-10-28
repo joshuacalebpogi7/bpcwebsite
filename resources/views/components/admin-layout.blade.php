@@ -331,12 +331,29 @@
 
                 userstable.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
             }
-            if ($('#example')) {
+            /*             if ($('#example')) {
+                            var table = $('#example').DataTable({
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    'colvis', // ColVis button
+
+                                ],
+                                columnDefs: [{
+                                    orderable: false,
+                                    targets: [1, 2]
+                                }],
+                                lengthChange: false
+                            });
+
+
+                            table.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+                        } */
+
+            if ($('#example').length) {
                 var table = $('#example').DataTable({
                     dom: 'Bfrtip',
                     buttons: [
-                        'colvis', // ColVis button
-
+                        'colvis' // ColVis button
                     ],
                     columnDefs: [{
                         orderable: false,
@@ -345,9 +362,22 @@
                     lengthChange: false
                 });
 
-
                 table.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+
+                // Update the search based on visible columns
+                table.on('column-visibility.dt', function(e, settings, column, state) {
+                    // Get an array of column indices for visible columns
+                    var visibleColumns = table.columns(':visible').indexes().toArray();
+
+                    // Clear the global search
+                    table.search('').columns().search('');
+
+                    // Apply the search to visible columns
+                    table.columns(visibleColumns).search('').draw();
+                });
             }
+
+
             if ($('#coursetable')) {
                 var table = $('#coursetable').DataTable({
                     dom: 'Bfrtip',
