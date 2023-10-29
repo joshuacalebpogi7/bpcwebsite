@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-    @vite(['resources/css/style.css'])
+    {{-- @vite(['resources/css/style.css']) --}}
     @vite(['resources/css/styles.css'])
     @vite(['resources/js/main.js'])
     @vite(['resources/css/events.css'])
@@ -80,6 +80,12 @@
                         <i class="ri-gallery-fill"></i>
                         <span class="sidebar__link-name">Gallery</span>
                         <span class="sidebar__link-floating">Gallery</span>
+                    </a>
+
+                    <a href="/survey" class="sidebar__link {{ request()->is('survey') ? 'active-link' : '' }}">
+                        <i class="ri-survey-line"></i>
+                        <span class="sidebar__link-name">Survey</span>
+                        <span class="sidebar__link-floating">Survey</span>
                     </a>
                 </div>
 
