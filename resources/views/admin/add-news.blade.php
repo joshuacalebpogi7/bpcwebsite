@@ -70,9 +70,11 @@
                                 <select class="form-control" name="category" id="category">
                                     <option value="" selected>--Select Category--
                                     </option>
-                                    <option value="All">All</option>
-                                    <option value="Campus">Campus</option>
-                                    <option value="Programs">Programs</option>
+                                    <option value="Campus" {{ old('category') == 'Campus' ? 'selected' : '' }}>Campus
+                                    </option>
+                                    <option value="Programs" {{ old('category') == 'Programs' ? 'selected' : '' }}>
+                                        Programs
+                                    </option>
                                 </select>
                                 <span class="text-danger">
                                     @error('category')
@@ -87,7 +89,7 @@
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
-                                cols="30" rows="10">{{ old('description', '**delete this text**<br> - feel free to format your text. <br> - no need to change font size or family. <br> - you can add emoticons if you want. <br> - every paragraph will be automatically indented so no need to indent it yourself.') }}</textarea>
+                                cols="30" rows="10">{{ old('description') }}</textarea>
 
                             @error('description')
                                 <div class="invalid-feedback">

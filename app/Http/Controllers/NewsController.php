@@ -38,7 +38,7 @@ class NewsController extends Controller
             $news->author = trim(strip_tags(ucwords($incomingFields['author'])));
             $news->category = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
             $news->description = $incomingFields['description'];
-            $news->updated_by = auth()->user()->username;
+            $news->updated_by = auth()->user()->id;
 
             // Handle the thumbnail if provided
             if ($request->hasFile('thumbnail')) {
@@ -94,8 +94,8 @@ class NewsController extends Controller
         $incomingFields['author'] = trim(strip_tags(ucwords($incomingFields['author'])));
         $incomingFields['category'] = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
 
-        $incomingFields['posted_by'] = auth()->user()->username;
-        $incomingFields['updated_by'] = auth()->user()->username;
+        $incomingFields['posted_by'] = auth()->user()->id;
+        $incomingFields['updated_by'] = auth()->user()->id;
 
         // dd($incomingFields);
         News::create($incomingFields);

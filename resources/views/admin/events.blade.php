@@ -13,7 +13,7 @@
                     <th>Title</th>
                     <th>Event start</th>
                     <th>Event end</th>
-                    <th>Posted by</th>
+                    <th>Updated by</th>
                     <th>Created at</th>
                     <th>Updated at</th>
                 </tr>
@@ -43,11 +43,11 @@
                         <td><img src="{{ $event->thumbnail }}" alt="{{ $event->title }}'s thumbnail"
                                 style="width: 40px; margin: 10px;"></td>
                         <td>{{ $event->title }}</td>
-                        <td>{{ $event->event_start }}</td>
-                        <td>{{ $event->event_end }}</td>
-                        <td>{{ $event->posted_by }}</td>
-                        <td>{{ $event->created_at }}</td>
-                        <td>{{ $event->updated_at }}</td>
+                        <td>{{ \Carbon\Carbon::parse($event->event_start)->format('F j, Y g:i A') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($event->event_end)->format('F j, Y g:i A') }}</td>
+                        <td>{{ $event->updatedBy->username }}</td>
+                        <td>{{ \Carbon\Carbon::parse($event->created_at)->format('F j, Y g:i A') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($event->updated_at)->format('F j, Y g:i A') }}</td>
                     </tr>
                 @endforeach
             </tbody>

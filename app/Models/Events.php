@@ -27,4 +27,8 @@ class Events extends Model
             return $value ? '/storage/events-thumbnail/' . $value : '/images/prog-pic.jpg';
         });
     }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }
