@@ -151,7 +151,7 @@ class NewSurvey extends Component
         $this->surveyDesc = '';
         $this->active = false;
         $this->questions = [];
-        return redirect()->to('/posted_surveys');
+        return redirect()->to('admin/surveys');
     }
 
     public function saveGForm()
@@ -202,7 +202,7 @@ class NewSurvey extends Component
         $this->surveyLink = '';
         $this->surveyEditorLink = '';
         $this->active = false;
-        return redirect()->to('/survey');
+        return redirect()->to('admin/surveys');
     }
 
     public function render()

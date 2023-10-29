@@ -3,13 +3,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\forums_posted;
 use Carbon\Carbon;
 use App\Models\Jobs;
 use App\Models\News;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Events;
-use App\Models\Survey;
 use App\Models\Gallery;
 use App\Models\surveys_posted;
 use Illuminate\Support\Str;
@@ -315,9 +315,9 @@ class PageController extends Controller
     {
         return view('admin.courses', ['courses' => $courses->latest()->get()]);
     }
-    public function adminSurvey(Survey $survey)
+    public function adminSurvey(surveys_posted $survey_list)
     {
-        return view('admin.surveys', ['surveys' => $survey->surveyQuestions()->latest()->get()]);
+        return view('admin.surveys', ['survey_list' => $survey_list->get()]);
     }
     public function adminNews(News $news)
     {
@@ -342,9 +342,9 @@ class PageController extends Controller
     {
         return view('admin.jobs', ['jobs' => $jobs->latest()->get()]);
     }
-    public function adminForums(User $user)
+    public function adminForums(forums_posted $forum_list)
     {
-        return view('admin.forums', ['surveys' => $user->latest()->get()]);
+        return view('admin.forums', ['forum_list' => $forum_list->get()]);
     }
     public function adminAnalytics(User $user, News $news, Events $events, Jobs $jobs)
     {

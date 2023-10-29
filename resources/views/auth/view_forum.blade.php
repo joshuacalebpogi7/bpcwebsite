@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create Forum Post</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,15 +12,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href = "{{ asset('css/form.css') }}">
-    <link rel="stylesheet" type="text/css" href = "{{ asset('css/survey.css') }}">
     <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href = "{{ asset('css/survey.css') }}">
+    {{-- @vite(['resources/css/style.css']) --}}
     @vite(['resources/css/styles.css'])
     @vite(['resources/js/main.js'])
     @livewireStyles
 </head>
 
-<body>
+<body class="antialiased">
     <!-- Sidebar bg -->
 
     <!--=============== HEADER ===============-->
@@ -127,18 +126,22 @@
 
         </nav>
     </div>
+
     <!--=============== MAIN ===============-->
     <main class="main container" id="main">
-        <img src="/images/bg2.png" class="background-image">
-        @livewire('new-forum') <!-- Include the Livewire component -->
+
+
+        @livewire('view-forum', ['forum_selected' => $forum_selected]) <!-- Include the Livewire component -->
     </main>
     @livewireScripts
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{-- @stack('scripts') --}}
+
 </body>
 
 </html>
