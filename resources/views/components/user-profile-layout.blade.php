@@ -18,18 +18,20 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    @vite(['resources/css/app.css'])
+    {{-- @vite(['resources/css/newstyle.css']) --}}
 
     @livewireStyles
 </head>
 
 <body
-    style="background-image: linear-gradient(to bottom, #007000cd, #ffffff4f), url('images/bpc_building.jpeg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+    style="background: linear-gradient(270deg, rgba(15,73,52,0.9557072829131653) 0%, rgba(131,200,58,0.8884803921568627) 100%), url('images/bpc_building.jpeg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     <header>
         <div>
-            <div class="container-xl px-4 mt-4">
+            <div class="container-xl px-4 mt-4" style="padding: 10px">
                 <nav class="nav nav-borders">
+                    <button type="button" class="btn btn-secondary">
                     <a class="nav-link ms-0 text-light" href="/">Back to Home</a>
+                </button>
                 </nav>
             </div>
         </div>

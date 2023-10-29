@@ -39,7 +39,7 @@ body{
   .header-home h1{
     color: #666;
     display: flex;
-    font-size: 48px;
+    font-size: 42px;
     align-items: center;
     padding-left: 20px;
     max-width: 100%;
@@ -51,6 +51,8 @@ body{
     justify-content: flex-start;
     position: relative;
     padding: 20px;
+    align-items: center;
+    flex-wrap: nowrap;
   }
 
   .header-home2 h1{
