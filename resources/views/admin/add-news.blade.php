@@ -1,4 +1,4 @@
-<x-admin-manage-layout>
+<x-admin-layout>
     <div>
         <form action="/admin/add-news" method="POST" enctype="multipart/form-data">
             @csrf
@@ -8,7 +8,8 @@
                 <div class="card-body text-center">
 
 
-                    <img class="rounded img-fluid" id="img-preview" src="{{ old('thumbnail') }}" alt="">
+                    <img class="rounded img-fluid" id="img-preview" src="{{ old('thumbnail') }}" alt=""
+                        style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
 
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
 
@@ -67,7 +68,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="category">Category</label>
-                                <select class="form-control" name="category" id="category">
+                                <select class="form-control @error('category') is-invalid @enderror" name="category"
+                                    id="category">
                                     <option value="" selected>--Select Category--
                                     </option>
                                     <option value="Campus" {{ old('category') == 'Campus' ? 'selected' : '' }}>Campus
@@ -107,4 +109,4 @@
         </form>
     </div>
 
-</x-admin-manage-layout>
+</x-admin-layout>

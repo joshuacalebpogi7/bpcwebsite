@@ -1,4 +1,4 @@
-<x-admin-manage-layout :events="$events">
+<x-admin-layout :events="$events">
     <div>
         <form action="/admin/update-events/{{ $events->id }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -9,7 +9,8 @@
 
 
                     <img class="rounded img-fluid" id="img-preview" src="{{ $events->thumbnail }}" alt=""
-                        data-prev-src="{{ $events->thumbnail }}">
+                        data-prev-src="{{ $events->thumbnail }}"
+                        style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
 
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
 
@@ -58,7 +59,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="category">Category</label>
-                                <select class="form-control" name="category" id="category">
+                                <select class="form-control @error('category') is-invalid @enderror" name="category"
+                                    id="category">
                                     <option value="" selected>--Select Category--
                                     </option>
                                     <option value="Campus"
@@ -127,4 +129,4 @@
         </form>
     </div>
 
-</x-admin-manage-layout>
+</x-admin-layout>
