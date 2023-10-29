@@ -31,7 +31,7 @@ class MailNotify extends Mailable
     {
         return new Envelope(
             subject: $this->data['subject'],
-            from: new Address('admin@bpc.edu.ph', 'Bulacan Polytechnic College')
+            from: new Address('bulpolcol@gmail.com', 'Bulacan Polytechnic College')
         );
     }
 
