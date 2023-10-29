@@ -18,6 +18,20 @@
                     <div class="form-group" wire:key="question-{{ $questionIndex }}">
                         <hr>
                         <label id="name-label">{{ $question['questionNum'] }}: {{ $question['questionDesc'] }}</label>
+                        @dump($question)
+                        @if ($question['questionType'] == 'dropdown')
+                                    <label>
+                                        <select id="question-{{ $questionIndex }}"
+                                                class="input-select"
+                                                name="questions.{{ $questionIndex }}.answers.select.choiceID"
+                                                wire:model="questions.{{ $questionIndex }}.answers.select.choiceID" required>
+                                                <option value = "" disabled selected>Select an option</option>
+                                            @foreach ($question['choices'] as $choiceIndex => $choice)
+                                                <option value="{{ $choice['id'] }}">{{ $choice['choiceDesc'] }}</option>
+                                            @endforeach
+                                        </select>
+                                    </label>
+                                    @endif
                         <div class="choices" id="choices_{{ $questionIndex }}">
                             @foreach ($question['choices'] as $choiceIndex => $choice)
                                 <div class="form-group"
@@ -67,7 +81,8 @@
             <div class="form-group">
                 <hr>
                 <label for="surveyTitle">Finished Answering:</label>
-                <input type="checkbox" class="form-control" id="surveyTitle" wire:model="answerDesc" wire:model="answerDesc" required>
+                <input type="checkbox" class="form-control" id="surveyTitle" wire:model="answerDesc"
+                    wire:model="answerDesc" required>
             </div>
             <hr>
             <button type="submit" class="submit-button">Submit</button>

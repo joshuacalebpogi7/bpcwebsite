@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,15 +15,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('forumTitle');
             $table->string('forumBody')->nullable();
-            $table->string('forumAuthor')->nullable();
+            $table->unsignedBigInteger('forumAuthor')->nullable();
             $table->tinyInteger('active')->default(0);
-
-            // Uncomment the following lines to add a foreign key constraint
-            /*$table->unsignedBigInteger('surveyAuthor')->nullable();
-            $table->foreign('surveyAuthor')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');*/
         }); //
 
         Schema::create('forum_replies', function (Blueprint $table) {
@@ -33,16 +25,33 @@ return new class extends Migration
             $table->string('parentForum');
             $table->string('replyingTo');
             $table->string('replyBody')->nullable();
-            $table->string('authorID')->nullable();
+            $table->unsignedBigInteger('authorID')->nullable();
             $table->tinyInteger('active')->default(0);
-
-            // Uncomment the following lines to add a foreign key constraint
-            /*$table->unsignedBigInteger('surveyAuthor')->nullable();
-            $table->foreign('surveyAuthor')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');*/
         }); //
+
+        // Insert into the 'forums_posted' table
+        DB::table('forums_posted')->insert([
+            'forumTitle' => 'YourForumTitle',
+            'forumBody' => 'YourForumBody',
+            'forumAuthor' => 1,
+            // Replace with the author's ID
+            'active' => 0,
+            // Set the active status as needed (0 for inactive)
+        ]);
+
+        // Insert into the 'forum_replies' table
+        DB::table('forum_replies')->insert([
+            'parentForum' => 'YourParentForum',
+            // Replace with the parent forum
+            'replyingTo' => 'YourReplyingTo',
+            // Replace with the ID of the message being replied to
+            'replyBody' => 'YourReplyBody',
+            'authorID' => 1,
+            // Replace with the author's ID
+            'active' => 0,
+            // Set the active status as needed (0 for inactive)
+        ]);
+
     }
 
     /**
@@ -50,6 +59,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        // Drop the tables if they exist
+        Schema::dropIfExists('forums_posted');
+        Schema::dropIfExists('forum_replies');
     }
 };

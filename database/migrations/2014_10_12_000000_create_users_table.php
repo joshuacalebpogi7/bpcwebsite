@@ -70,6 +70,8 @@ return new class extends Migration {
             'job_location' => null,
             'monthly_salary' => null,
             'default_password' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
             // Add more columns and values as needed
         ]);
         //INSERT ADMIN CREDENTIALS
@@ -102,6 +104,8 @@ return new class extends Migration {
             'job_location' => null,
             'monthly_salary' => null,
             'default_password' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
             // Add more columns and values as needed
         ]);
         //INSERT ALUMNI CREDENTIALS (To be removed upon deployment)
@@ -134,6 +138,8 @@ return new class extends Migration {
             'job_location' => null,
             'monthly_salary' => null,
             'default_password' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
             // Add more columns and values as needed
         ]);
         //INSERT ALUMNI CREDENTIALS (To be removed upon deployment)
