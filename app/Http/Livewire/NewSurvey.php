@@ -15,7 +15,8 @@ class NewSurvey extends Component
     public $surveyDesc;
     public $surveyLink;
     public $surveyEditorLink;
-    public $active = false;
+    public $active = true;
+    public $forFirstTimers = false;
     public $questions = [];
 
 
@@ -88,11 +89,12 @@ class NewSurvey extends Component
     //try {
         // Create the survey and get its ID
         $questionnaire = surveys_posted::create([
+            'surveyAuthor' => auth()->user()->id,
             'surveyType' => 'built_in',
             'surveyTitle' => $this->surveyTitle,
-            'authorID' => auth()->user()->id,
             'surveyDesc' => $this->surveyDesc,
             'active' => $this->active,
+            'forFirstTimers' => $this->forFirstTimers,
         ]);
 
         if (!$questionnaire) {
@@ -149,7 +151,6 @@ class NewSurvey extends Component
     {
         $this->surveyTitle = '';
         $this->surveyDesc = '';
-        $this->active = false;
         $this->questions = [];
         return redirect()->to('admin/surveys');
     }
@@ -165,12 +166,14 @@ class NewSurvey extends Component
         try {
             // Create the survey and get its ID
             $questionnaire = surveys_posted::create([
+                'surveyAuthor' => auth()->user()->id,
                 'surveyType' => 'google_forms',
                 'surveyTitle' => $this->surveyTitle,
                 'surveyDesc' => $this->surveyDesc,
                 'surveyLink' => $this->surveyLink,
                 'surveyEditorLink' => $this->surveyEditorLink,
                 'active' => $this->active,
+                'forFirstTimers' => $this->forFirstTimers,
             ]);
     
             // Commit the transaction
@@ -201,7 +204,6 @@ class NewSurvey extends Component
         $this->surveyDesc = '';
         $this->surveyLink = '';
         $this->surveyEditorLink = '';
-        $this->active = false;
         return redirect()->to('admin/surveys');
     }
 

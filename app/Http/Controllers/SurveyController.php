@@ -11,7 +11,7 @@ class SurveyController extends Controller
 {
     public function fetchSurveyToBeEdited(surveys_posted $survey_selected)
     {
-        return view ('auth.edit_survey', [
+        return view ('admin.edit_survey', [
             'survey_selected' => $survey_selected
         ]);
     }
@@ -53,6 +53,6 @@ class SurveyController extends Controller
         $survey->delete();
 
         // Optionally, you can redirect back to the survey list with a success message
-        return redirect()->route('posted_surveys')->with('success', 'Survey deleted successfully.');
+        return redirect()->route('admin/surveys')->with('success', 'Survey deleted successfully.');
     }
 }

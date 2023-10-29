@@ -3,8 +3,8 @@
         Jobs
     </x-slot>
     @push('assets')
-    @vite(['resources/css/job.css'])
-    {{-- @vite(['resources/js/job.js']) --}}
+        @vite(['resources/css/job.css'])
+        {{-- @vite(['resources/js/job.js']) --}}
     @endpush
 
     <div class="main-5">
@@ -33,42 +33,40 @@
         </div>
         <div class="wrapper">
             @foreach ($jobs as $job)
-
-            <div class="card">
-                <div class="card-left blue-bg">
-                    <a href="/jobs/{{ $job->title }}"> <img src="/images/chat.png"></a>
-                </div>
-                <div class="card-center">
-                    <a href="/jobs/{{ $job->title }}">
-                        <h3>{{ $job->company }}</h3>
-                        <p class="card-detail">{{ $job->title }}</p>
-                        <p class="card-loc">
-                            <ion-icon name="location-outline"></ion-icon>{{ $job->company }}
-                        </p>
-                        <div class="card-sub">
-                            <p>
-                                <ion-icon name="today-outline"></ion-icon>{{ $job->created_at->diffForHumans() }}
+                <div class="card">
+                    <div class="card-left blue-bg">
+                        <a href="/jobs/{{ $job->title }}"> <img src="/images/chat.png"></a>
+                    </div>
+                    <div class="card-center">
+                        <a href="/jobs/{{ $job->title }}">
+                            <h3>{{ $job->company }}</h3>
+                            <p class="card-detail">{{ $job->title }}</p>
+                            <p class="card-loc">
+                                <ion-icon name="location-outline"></ion-icon>{{ $job->company }}
                             </p>
-                            <p>
-                                <ion-icon name="hourglass-outline"></ion-icon>Full-time
-                            </p>
-                            <p>
-                                <ion-icon name="people-outline"></ion-icon>200 Applicants
-                            </p>
+                            <div class="card-sub">
+                                <p>
+                                    <ion-icon name="today-outline"></ion-icon>{{ $job->created_at->diffForHumans() }}
+                                </p>
+                                <p>
+                                    <ion-icon name="hourglass-outline"></ion-icon>{{ $job->job_type }}
+                                </p>
+                                <p>
+                                    <ion-icon name="people-outline"></ion-icon>200 Applicants
+                                </p>
+                            </div>
+                    </div>
+                    <div class="card-right">
+                        <div class="card-tag">
+                            <h5>Division</h5>
+                            <a href="/jobs/{{ $job->title }}">{{ $job->job_title }}</a>
                         </div>
-                </div>
-                <div class="card-right">
-                    <div class="card-tag">
-                        <h5>Division</h5>
-                        <a href="/jobs/{{ $job->title }}">{{ $job->job_title }}</a>
+                        <div class="card-salary">
+                            <p><b>$350k</b> <span>/ year</span></p>
+                        </div>
+                        </a>
                     </div>
-                    <div class="card-salary">
-                        <p><b>$350k</b> <span>/ year</span></p>
-                    </div>
-                    </a>
                 </div>
-            </div>
-
             @endforeach
 
         </div>

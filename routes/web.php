@@ -36,11 +36,13 @@ Route::get('/', [PageController::class, "home"])->name('home');
 Route::get('/news', [PageController::class, "news"])->middleware('restrictAdmin');
 Route::get('/events', [PageController::class, "events"])->middleware('restrictAdmin');
 Route::get('/jobs', [PageController::class, "jobs"])->middleware('restrictAdmin');
+Route::get('/survey', [PageController::class, "survey"])->middleware('restrictAdmin');
 Route::get('/forums', [PageController::class, "forums"])->middleware('restrictAdmin');
 Route::get('/gallery', [PageController::class, "gallery"])->middleware('restrictAdmin');
 Route::get('/login', [PageController::class, "login"])->name('login')->middleware('guest');
 
-Route::get('/survey', [PageController::class, "survey"])->middleware('checkAuthRequirements');
+
+Route::get('/survey_first_time', [PageController::class, "surveyFirstTime"])->middleware('checkAuthRequirements');
 Route::get('/additional-info', [PageController::class, "addInfo"])->middleware('checkAuthRequirements');
 Route::get('/edit-profile', [PageController::class, "editProfile"])->middleware('authUser');
 
@@ -76,9 +78,9 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/forgot-password', [PageController::class, "forgotPassword"])->middleware('guest');
 Route::post('/submit-forgot-password', [UserController::class, "submitForgotPassword"])->middleware('guest');
 
-Route::post('/password/forgot',[UserController::class,'sendResetLink'])->name('forgot.password.link');
-Route::get('/password/reset/{token}',[UserController::class,'showResetForm'])->name('reset.password.form');
-Route::post('/password/reset',[UserController::class,'resetPassword'])->name('reset.password');
+Route::post('/password/forgot', [UserController::class, 'sendResetLink'])->name('forgot.password.link');
+Route::get('/password/reset/{token}', [UserController::class, 'showResetForm'])->name('reset.password.form');
+Route::post('/password/reset', [UserController::class, 'resetPassword'])->name('reset.password');
 
 //Admin GET related routes
 Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->middleware('can:visitAdminPages', 'verified');
@@ -137,32 +139,27 @@ Route::delete('admin/delete-photo/{gallery:id}', [GalleryController::class, 'del
 Route::delete('admin/delete-course/{course:id}', [CourseController::class, 'deleteCourse'])->middleware('can:visitAdminPages');
 
 /* ROUTE FOR SURVEY */
-Route::get('/new_survey', function () {
-    return view('auth.new_survey');
-});
-
-Route::get('/posted_surveys', function () {
-    return view('auth.posted_surveys');
-})->name('posted_surveys');
-
-Route::get('/survey', function () {
+Route::get('admin/new_survey', function () {
+    return view('admin.new_survey');
+})->middleware('can:visitAdminPages');
+Route::get('admin/edit_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeEdited'])->name('edit_survey')->middleware('can:visitAdminPages');
+Route::get('admin/delete_survey/{survey_selected}', [SurveyController::class, 'deleteSurvey'])->name('delete_survey')->middleware('can:visitAdminPages');
+/* Route::get('/survey', function () {
     return view('auth.survey');
-})->name('survey');
+})->name('survey'); */
 
-Route::get('/answer_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeAnswered'])->name('answer_survey');
-Route::get('/edit_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeEdited'])->name('edit_survey');
-Route::get('/delete_survey/{survey_selected}', [SurveyController::class, 'deleteSurvey'])->name('delete_survey');
+Route::get('/answer_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeAnswered'])->middleware('authUser')->name('answer_survey');
 /* ROUTE FOR SURVEY */
 
 /* ROUTE FOR FORUMS */
 Route::get('/new_forum', function () {
     return view('auth.new_forum');
-});
+})->middleware('mustBeLoggedIn');
 
 Route::get('/posted_forums', function () {
     return view('auth.posted_forums');
-})->name('posted_forums');
+})->middleware('mustBeLoggedIn')->name('posted_forums');
 
-Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->name('view_forum');
-Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->name('delete_forum');
+Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->middleware('authUser')->name('view_forum');
+Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->middleware('authUser')->name('delete_forum');
 /* ROUTE FOR FORUMS */

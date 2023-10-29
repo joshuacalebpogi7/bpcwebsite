@@ -12,38 +12,23 @@
         <div class="leftcolumn">
 
 
-            <div class="card_0">
-                <a class="card1" href="#">
-                    <img src="images/news.png" class="news" align="left" height="120px" width="100px">
-                    <h1>University News</h1>
-                    <h2>Graduation 2023</h2>
-                    <h6>Posted 40 minutes ago</h6>
-                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <div class="go-corner" href="#">
-                        <div class="go-arrow">
-                            →
-                        </div>
+            @foreach ($news as $index => $news)
+                @if ($index < 7)
+                    <div class="card_0">
+                        <a class="card1" href="/news/{{ $news->title }}">
+                            <img src="{{ $news->thumbnail }}" class="news" align="left" height="120px" width="100px">
+                            <h1>University News</h1>
+                            <h2>{{ $news->title }}</h2>
+                            <h6>Posted {{ $news->created_at->diffForHumans() }}</h6>
+                            <p class="small">{!! $news->description !!}</p>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-
-            @foreach ($news as $news)
-            <div class="card_0">
-                <a class="card1" href="#">
-                    <img src="{{ $news->thumbnail }}" class="news" align="left" height="120px" width="100px">
-                    <h1>University News</h1>
-                    <h2>{{ $news->title }}</h2>
-                    <h6>Posted {{ $news->created_at->diffForHumans() }}</h6>
-                    <p class="small">{!! $news->description !!}</p>
-                    <div class="go-corner" href="#">
-                        <div class="go-arrow">
-                            →
-                        </div>
-                    </div>
-                </a>
-            </div>
+                @endif
             @endforeach
 
         </div>
@@ -53,49 +38,51 @@
         </div>
         <div class="rightcolumn">
 
-        @foreach ($events as $index => $event)
-        @if ($index < 3) 
-            <div class="cards">
-                <div class="image"><img src="images/prog-pic.jpg"></div>
-                <div class="content">
-                    <a href="#">
-                        <span class="title">
-                            {{ $event->title }}
-                        </span>
-                    </a>
-                    <hr class="solid" style="border-top: 2px solid #E9EEF2">
-                    <p class="desc">
-                        {{ \Carbon\Carbon::parse($event->event_start)->format('F j, Y g:i A') }} -
-                        {{ \Carbon\Carbon::parse($event->event_end)->format('F j, Y g:i A') }}
-                    </p>
-                    <a class="action" href="#">
-                        Find out more
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </a>
-                </div>
+            @foreach ($events as $index => $event)
+                @if ($index < 3)
+                    <div class="cards">
+                        <div class="image"><img src="images/prog-pic.jpg"></div>
+                        <div class="content">
+                            <a href="#">
+                                <span class="title">
+                                    {{ $event->title }}
+                                </span>
+                            </a>
+                            <hr class="solid" style="border-top: 2px solid #E9EEF2">
+                            <p class="desc">
+                                {{ \Carbon\Carbon::parse($event->event_start)->format('F j, Y g:i A') }} -
+                                {{ \Carbon\Carbon::parse($event->event_end)->format('F j, Y g:i A') }}
+                            </p>
+                            <a class="action" href="#">
+                                Find out more
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+
+
+
+            <div class="header-home2">
+                <img src="images/job.png" class="job" height="100px" width="98px">
+                <h1>Active Job Post</h1>
             </div>
-        @endif
-        @endforeach
 
-
-
-        <div class="header-home2">
-            <img src="images/job.png" class="job" height="100px" width="98px">
-            <h1>Active Job Post</h1>
-        </div>
-
-        @foreach ($jobs as $job)
-        <div class="cookieCard">
-            <a href="#">
-                <p class="cookieHeading">{{ $job->job_title }}</p>
-                <hr class="solid" style="border-top: 2px solid #E9EEF2">
-                <a href="#">
-                    <p class="cookieDescription">{{ $job->company }}<a href="#"></a></p>
-                    <button class="acceptButton">{{ $job->status }}</button>
-        </div>
-        @endforeach
+            @foreach ($jobs as $index => $job)
+                @if ($index < 3)
+                    <div class="cookieCard">
+                        <a href="#">
+                            <p class="cookieHeading">{{ $job->job_title }}</p>
+                            <hr class="solid" style="border-top: 2px solid #E9EEF2">
+                            <a href="#">
+                                <p class="cookieDescription">{{ $job->company }}<a href="#"></a></p>
+                                <button class="acceptButton">{{ $job->status }}</button>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
 </x-home-layout>
