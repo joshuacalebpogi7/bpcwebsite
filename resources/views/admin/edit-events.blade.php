@@ -1,4 +1,4 @@
-<x-admin-manage-layout :events="$events">
+<x-admin-layout :events="$events">
     <div>
         <form action="/admin/update-events/{{ $events->id }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -9,7 +9,8 @@
 
 
                     <img class="rounded img-fluid" id="img-preview" src="{{ $events->thumbnail }}" alt=""
-                        data-prev-src="{{ $events->thumbnail }}">
+                        data-prev-src="{{ $events->thumbnail }}"
+                        style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
 
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
 
@@ -17,9 +18,9 @@
                         type="file" onchange="loadFile(event)" hidden>
 
                     @error('thumbnail')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
 
                     <button class="btn btn-primary"
@@ -48,9 +49,9 @@
                                     value="{{ old('title', $events->title) }}">
 
                                 @error('title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -58,16 +59,24 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="category">Category</label>
-                                <input class="form-control @error('category') is-invalid @enderror" type="text"
-                                    placeholder="Category" name="category" id="category"
-                                    value="{{ old('category', $events->category) }}">
+                                <select class="form-control @error('category') is-invalid @enderror" name="category"
+                                    id="category">
+                                    <option value="" selected>--Select Category--
+                                    </option>
+                                    <option value="Campus"
+                                        {{ old('category', $events->category) == 'Campus' ? 'selected' : '' }}>Campus
+                                    </option>
+                                    <option value="Programs"
+                                        {{ old('category', $events->category) == 'Programs' ? 'selected' : '' }}>
+                                        Programs
+                                    </option>
+                                </select>
 
                                 @error('category')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
-
                             </div>
                         </div>
                     </div>
@@ -75,14 +84,13 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description"
-                                id="myeditorinstance" cols="30"
-                                rows="10">{{ old('description', $events->description) }}</textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
+                                cols="30" rows="10">{{ old('description', $events->description) }}</textarea>
 
                             @error('description')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
 
                         </div>
@@ -95,9 +103,9 @@
                                 placeholder="Event Start" name="event_start" id="event_start"
                                 value="{{ old('event_start', $events->event_start) }}">
                             @error('event_start')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
 
@@ -107,28 +115,13 @@
                                 placeholder="Event End" name="event_end" id="event_end"
                                 value="{{ old('event_end', $events->event_end) }}">
                             @error('event_end')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="link">Link</label>
-                            <input class="form-control @error('link') is-invalid @enderror" name="link" id="link"
-                                type="text" placeholder="Event's link" value="{{ old('link', $events->link) }}">
-
-
-                            @error('link')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-
-                        </div>
-                    </div>
                     <button class="btn btn-primary">Update Event</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </div>
@@ -136,4 +129,4 @@
         </form>
     </div>
 
-</x-admin-manage-layout>
+</x-admin-layout>

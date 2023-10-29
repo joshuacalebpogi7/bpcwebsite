@@ -28,4 +28,8 @@ class Gallery extends Model
     {
         return $this->belongsTo(GalleryAlbum::class, 'gallery_album_id');
     }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }

@@ -185,6 +185,7 @@ section{
     font-size: 0.9rem;
     line-height: 1.5rem;
     margin: 5px 0 10px;
+    display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;

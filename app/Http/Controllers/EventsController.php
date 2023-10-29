@@ -36,11 +36,11 @@ class EventsController extends Controller
         if ($events->title !== $incomingFields['title'] || $events->category !== $incomingFields['category'] || $events->description !== $incomingFields['description'] || date('Y-m-d H:i:s', strtotime($events->event_start)) !== date('Y-m-d H:i:s', strtotime($incomingFields['event_start'])) || date('Y-m-d H:i:s', strtotime($events->event_end)) !== date('Y-m-d H:i:s', strtotime($incomingFields['event_end'])) || $request->hasFile('thumbnail')) {
             // Update the existing fields
             $events->title = trim(strip_tags(ucwords($incomingFields['title'])));
-            $events->category = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
+            $events->category = $incomingFields['category'];
             $events->description = $incomingFields['description'];
             $events->event_start = $incomingFields['event_start'];
             $events->event_end = $incomingFields['event_end'];
-            $incomingFields['updated_by'] = auth()->user()->username;
+            $events->updated_by = auth()->user()->id;
 
             // Handle the thumbnail if provided
             if ($request->hasFile('thumbnail')) {
@@ -85,11 +85,7 @@ class EventsController extends Controller
             'thumbnail' => 'nullable|image|max:5000',
             
         ]);
-
-        // will not encode the image to jpg
-        // $thumbnail_name = $incomingFields['title'] . uniqid() . '.' . $request->file('thumbnail')->getClientOriginalExtension();
-        // $imgData = Image::make($request->file('thumbnail'));
-        // Storage::put('public/events-thumbnail/' . $thumbnail_name, $imgData);
+        dd($incomingFields);
 
         if ($request->hasFile('thumbnail')) {
             $thumbnail_name = $incomingFields['title'] . uniqid() . '.jpg';
@@ -99,9 +95,8 @@ class EventsController extends Controller
         }
 
         $incomingFields['title'] = trim(strip_tags(ucwords($incomingFields['title'])));
-        $incomingFields['category'] = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
-        $incomingFields['posted_by'] = auth()->user()->username;
-        $incomingFields['updated_by'] = auth()->user()->username;
+        $incomingFields['posted_by'] = auth()->user()->id;
+        $incomingFields['updated_by'] = auth()->user()->id;
 
         // dd($incomingFields);
         Events::create($incomingFields);

@@ -131,19 +131,19 @@ class PageController extends Controller
     //single pages
     public function jobsSinglePage(Jobs $jobs)
     {
-        return view('auth-single-pages.jobs-single-page', ['jobs' => $jobs->latest()->get(), 'jobsclass' => $jobs]);
+        return view('auth-single-pages.jobs-single-page', ['jobs' => $jobs]);
     }
     public function newsSinglePage(News $news)
     {
-        return view('auth-single-pages.news-single-page', ['news' => $news->latest()->get(), 'newsclass' => $news]);
+        return view('auth-single-pages.news-single-page', ['news' => $news]);
     }
     public function eventsSinglePage(Events $events)
     {
-        return view('auth-single-pages.events-single-page', ['events' => $events->latest()->get(), 'eventsclass' => $events]);
+        return view('auth-single-pages.events-single-page', ['events' => $events]);
     }
     public function gallerySinglePage(Gallery $gallery)
     {
-        return view('auth-single-pages.gallery-single-page', ['gallery' => $gallery->latest()->get(), 'galleryclass' => $gallery]);
+        return view('auth-single-pages.gallery-single-page', ['gallery' => $gallery]);
     }
 
     //--------------------------------ADMIN----------------------------

@@ -1,4 +1,4 @@
-<x-admin-manage-layout :news="$news">
+<x-admin-layout :news="$news">
     <div>
         <form action="/admin/update-news/{{ $news->id }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -9,7 +9,8 @@
 
 
                     <img class="rounded img-fluid" id="img-preview" src="{{ $news->thumbnail }}" alt=""
-                        data-prev-src="{{ $news->thumbnail }}">
+                        data-prev-src="{{ $news->thumbnail }}"
+                        style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
 
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
 
@@ -17,9 +18,9 @@
                         type="file" onchange="loadFile(event)" hidden>
 
                     @error('thumbnail')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
 
                     <button class="btn btn-primary"
@@ -48,56 +49,33 @@
                                     value="{{ old('title', $news->title) }}">
 
                                 @error('title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="author">Author</label>
-                                <input class="form-control @error('author') is-invalid @enderror" type="text"
-                                    placeholder="News author" name="author" id="author"
-                                    value="{{ old('author', $news->author) }}">
-
-                                @error('author')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="category">Category</label>
-                                <input class="form-control @error('category') is-invalid @enderror" type="text"
-                                    placeholder="Category" name="category" id="category"
-                                    value="{{ old('category', $news->category) }}">
-
-                                @error('category')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="link">Link</label>
-                                <input class="form-control @error('link') is-invalid @enderror" name="link" id="link"
-                                    type="text" placeholder="News link" value="{{ old('link', $news->link) }}">
-
-
-                                @error('link')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
+                                <select class="form-control @error('category') is-invalid @enderror" name="category"
+                                    id="category">
+                                    <option value="" selected>--Select Category--
+                                    </option>
+                                    <option value="Campus"
+                                        {{ old('category', $news->category) == 'Campus' ? 'selected' : '' }}>Campus
+                                    </option>
+                                    <option value="Programs"
+                                        {{ old('category', $news->category) == 'Programs' ? 'selected' : '' }}>
+                                        Programs
+                                    </option>
+                                </select>
+                                <span class="text-danger">
+                                    @error('category')
+                                        <p>{{ $message }}</p>
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -105,14 +83,13 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description"
-                                id="myeditorinstance" cols="30"
-                                rows="10">{{ old('description', $news->description) }}</textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
+                                cols="30" rows="10">{{ old('description', $news->description) }}</textarea>
 
                             @error('description')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
 
                         </div>
@@ -125,4 +102,4 @@
         </form>
     </div>
 
-</x-admin-manage-layout>
+</x-admin-layout>
