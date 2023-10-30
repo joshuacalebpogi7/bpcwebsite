@@ -343,111 +343,173 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6 stretch-card grid-margin">
+    <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <p class="card-title mb-0">Courses</p>
+                <div class="d-flex justify-content-between">
+                    <p class="card-title mb-0">Alumni Jobs Relation to Course</p>
+                    <a href="/admin/users" class="text-info">View all</a>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-borderless">
+                    <table class="table table-striped table-borderless">
                         <thead>
                             <tr>
-                                <th class="pl-0  pb-2 border-bottom">Course</th>
-                                <th class="border-bottom pb-2">Verified Alumni</th>
-                                <th class="border-bottom pb-2">Total</th>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>Job</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data['courses'] as $key => $course)
+                            @foreach ($data['verifiedAlumni'] as $key => $alumni)
                                 @if ($key < 5)
                                     <tr>
-                                        <td class="pl-0">{{ $course->course }}</td>
-                                        <td>
-                                            <p class="mb-0"><span class="font-weight-bold mr-2">
-
-                                                    {{ $data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() }}
-                                                </span>(
-                                                @if ($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() <= 0)
-                                                    0%
-                                                @else
-                                                    ({{ number_format(($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%)
-                                                @endif
-                                                )
-                                            </p>
-                                        </td>
-                                        <td class="text-muted">
-                                            {{ $data['users']->where('course', $course->course)->count() }}
+                                        <td>Joshua Caleb</td>
+                                        <td class="font-weight-bold">BSIT</td>
+                                        <td>Software Engineer</td>
+                                        <td class="font-weight-medium">
+                                            <div
+                                                class="badge 
+                                    @if ($alumni->employment_status == 'employed') badge-success 
+                                    @elseif ($alumni->employment_status == 'self-employed')
+                                    badge-info
+                                    @else
+                                    badge-danger @endif">
+                                                Related</div>
                                         </td>
                                     </tr>
                                 @else
                                 @break
                             @endif
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <p class="card-title">Job Related to Course</p>
+                {{-- <a href="#" class="text-info">View all</a> --}}
+            </div>
+            <p class="font-weight-500">The total number of sessions within the date range. It
+                is the period time a user is actively engaged with your website, page or app,
+                etc</p>
+            <div id="jobrelated-legend" class="chartjs-legend mt-4 mb-2"></div>
+            <canvas id="jobrelated-chart"></canvas>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row">
 <div class="col-md-6 stretch-card grid-margin">
     <div class="card">
         <div class="card-body">
-            <p class="card-title">Notifications</p>
-            <ul class="icon-data-list">
-                <li>
-                    <div class="d-flex">
-                        <img src="/admin-dashboard/images/faces/face1.jpg" alt="user">
-                        <div>
-                            <p class="text-info mb-1">Isabella Becker</p>
-                            <p class="mb-0">Sales dashboard have been created</p>
-                            <small>9:30 am</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="d-flex">
-                        <img src="/admin-dashboard/images/faces/face2.jpg" alt="user">
-                        <div>
-                            <p class="text-info mb-1">Adam Warren</p>
-                            <p class="mb-0">You have done a great job #TW111</p>
-                            <small>10:30 am</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="d-flex">
-                        <img src="/admin-dashboard/images/faces/face3.jpg" alt="user">
-                        <div>
-                            <p class="text-info mb-1">Leonard Thornton</p>
-                            <p class="mb-0">Sales dashboard have been created</p>
-                            <small>11:30 am</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="d-flex">
-                        <img src="/admin-dashboard/images/faces/face4.jpg" alt="user">
-                        <div>
-                            <p class="text-info mb-1">George Morrison</p>
-                            <p class="mb-0">Sales dashboard have been created</p>
-                            <small>8:50 am</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="d-flex">
-                        <img src="/admin-dashboard/images/faces/face5.jpg" alt="user">
-                        <div>
-                            <p class="text-info mb-1">Ryan Cortez</p>
-                            <p class="mb-0">Herbs are fun and easy to grow.</p>
-                            <small>9:00 am</small>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+            <p class="card-title mb-0">Courses</p>
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th class="pl-0  pb-2 border-bottom">Course</th>
+                            <th class="border-bottom pb-2">Verified Alumni</th>
+                            <th class="border-bottom pb-2">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data['courses'] as $key => $course)
+                            @if ($key < 5)
+                                <tr>
+                                    <td class="pl-0">{{ $course->course }}</td>
+                                    <td>
+                                        <p class="mb-0"><span class="font-weight-bold mr-2">
+
+                                                {{ $data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() }}
+                                            </span>(
+                                            @if ($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() <= 0)
+                                                0%
+                                            @else
+                                                ({{ number_format(($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%)
+                                            @endif
+                                            )
+                                        </p>
+                                    </td>
+                                    <td class="text-muted">
+                                        {{ $data['users']->where('course', $course->course)->count() }}
+                                    </td>
+                                </tr>
+                            @else
+                            @break
+                        @endif
+                    @endforeach
+
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
+</div>
+
+<div class="col-md-6 stretch-card grid-margin">
+<div class="card">
+    <div class="card-body">
+        <p class="card-title">Notifications</p>
+        <ul class="icon-data-list">
+            <li>
+                <div class="d-flex">
+                    <img src="/admin-dashboard/images/faces/face1.jpg" alt="user">
+                    <div>
+                        <p class="text-info mb-1">Isabella Becker</p>
+                        <p class="mb-0">Sales dashboard have been created</p>
+                        <small>9:30 am</small>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <img src="/admin-dashboard/images/faces/face2.jpg" alt="user">
+                    <div>
+                        <p class="text-info mb-1">Adam Warren</p>
+                        <p class="mb-0">You have done a great job #TW111</p>
+                        <small>10:30 am</small>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <img src="/admin-dashboard/images/faces/face3.jpg" alt="user">
+                    <div>
+                        <p class="text-info mb-1">Leonard Thornton</p>
+                        <p class="mb-0">Sales dashboard have been created</p>
+                        <small>11:30 am</small>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <img src="/admin-dashboard/images/faces/face4.jpg" alt="user">
+                    <div>
+                        <p class="text-info mb-1">George Morrison</p>
+                        <p class="mb-0">Sales dashboard have been created</p>
+                        <small>8:50 am</small>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex">
+                    <img src="/admin-dashboard/images/faces/face5.jpg" alt="user">
+                    <div>
+                        <p class="text-info mb-1">Ryan Cortez</p>
+                        <p class="mb-0">Herbs are fun and easy to grow.</p>
+                        <small>9:00 am</small>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 </div>
 </div>
 
@@ -693,6 +755,77 @@
             plugins: northAmericaChartPlugins
         });
         document.getElementById('self-employed-legend').innerHTML = northAmericaChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#jobrelated-chart").length) {
+        var SalesChartCanvas = $("#jobrelated-chart").get(0).getContext("2d");
+        var SalesChart = new Chart(SalesChartCanvas, {
+            type: 'bar',
+            data: {
+                labels: @json($data['alumniByGenderLabels']),
+                datasets: [{
+                        label: 'Related',
+                        data: @json($data['employedByBatch']),
+                        backgroundColor: '#98BDFF'
+                    },
+                    {
+                        label: 'Not Related',
+                        data: @json($data['unemployedByBatch']),
+                        backgroundColor: '#ff9eb3'
+                    }
+                ]
+            },
+            options: {
+                cornerRadius: 5,
+                responsive: true,
+                maintainAspectRatio: true,
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            drawBorder: false,
+                            color: "#F2F2F2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383",
+                            stepSize: 1, // Set the step size to 1 to display whole numbers
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: false,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383"
+                        },
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
+                            display: false
+                        },
+                        barPercentage: 1
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+            },
+        });
+        document.getElementById('jobrelated-legend').innerHTML = SalesChart.generateLegend();
     }
 </script>
 <script>
