@@ -190,6 +190,13 @@
 
 
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ $job->location }}</p>
+                            @if (isset($job->link))
+                                <p><i class="fa fa-angle-right text-primary me-2"></i>Company Website: <a
+                                        href="{{ $job->link }}" target="_blank"
+                                        rel="noopener noreferrer">{{ $job->link }}</a>
+                                </p>
+                            @endif
+
                             <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Status:
                                 {{ $job->status }}</p>
                         </div>
