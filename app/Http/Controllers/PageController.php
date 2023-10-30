@@ -91,20 +91,19 @@ class PageController extends Controller
         return view('jobs');
     }
 
-    public function survey(surveys_posted $survey_list)
+    public function survey(surveys_posted $survey_list, User $authors)
     {
         if (auth()->check()) {
-            return view('auth.survey', ['survey_list' => $survey_list->get()]);
+            return view('auth.survey', ['survey_list' => $survey_list->get(), 'authors' => $authors->get()]);
         }
         /* return view('auth.survdwaday'); */
     }
-
-    public function forums()
+    public function forums(forums_posted $forum_list, User $authors)
     {
         if (auth()->check()) {
-            return view('auth.forums');
+            return view('auth.forums', ['forum_list' => $forum_list->get(), 'authors' => $authors->get()]);
         }
-        return view('forums');
+        return view('forums', ['forum_list' => $forum_list->get(), 'authors' => $authors->get()]);
     }
 
     public function gallery()
@@ -337,9 +336,9 @@ class PageController extends Controller
     {
         return view('admin.jobs', ['jobs' => $jobs->latest()->get()]);
     }
-    public function adminForums(forums_posted $forum_list)
+    public function adminForums(forums_posted $forum_list, User $authors)
     {
-        return view('admin.forums', ['forum_list' => $forum_list->get()]);
+        return view('admin.forums', ['forum_list' => $forum_list->get(), 'authors' => $authors->get()]);
     }
     public function adminAnalytics(User $user, News $news, Events $events, Jobs $jobs)
     {
