@@ -66,13 +66,11 @@
                         @endif
                         {{ __('Before proceeding, please check your email for a verification link.') }}
                         {{ __('If you did not receive the email') }},
-                        <form class="d-inline" method="POST" action="{{ route('verification.send') }}">
+                        <form method="POST" action="{{ route('verification.send') }}" id="verification-form">
                             @csrf
-                            <div class="card-footer text-right">
-                                <button class="btn btn-success">
-                                    {{ __('click here to request another') }}
-                                </button>
-                            </div>
+                            <button id="requestButton" class="btn btn-success">
+                                {{ __('click here to request another') }}
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -93,6 +91,52 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const requestButton = document.getElementById("requestButton");
+            const form = document.getElementById("verification-form");
+            let isCooldown = false;
+            let cooldownTime = 20; // Cooldown time in seconds;
+            let formSubmitted = false;
+
+            requestButton.addEventListener("click", function() {
+                if (!isCooldown && !formSubmitted) {
+                    // Disable the button
+                    requestButton.disabled = true;
+
+                    // Start the cooldown
+                    isCooldown = true;
+
+                    // Update the button text with countdown
+                    let countdown = cooldownTime;
+                    requestButton.innerText = `Cooldown: ${countdown} seconds`;
+
+                    // Create a countdown timer
+                    const countdownInterval = setInterval(function() {
+                        countdown--;
+                        requestButton.innerText = `Cooldown: ${countdown} seconds`;
+
+                        if (countdown <= 0) {
+                            // Re-enable the button when cooldown is over
+                            requestButton.disabled = false;
+                            requestButton.innerText = "Click here to request another";
+                            isCooldown = false;
+                            clearInterval(countdownInterval);
+                        }
+                    }, 1000); // Update every 1 second
+
+                    // Submit the form
+                    form.submit();
+                    formSubmitted = true; // Set the form as submitted
+                }
+            });
+        });
+    </script>
+
+
+
+
 </body>
 
 </html>

@@ -32,7 +32,7 @@
 
         @foreach ($events as $eventsCategory)
             @php
-                $category = $newsCategory->category;
+                $category = $eventsCategory->category;
                 $sentenceCaseCategory = ucfirst(strtolower($category));
             @endphp
 

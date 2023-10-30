@@ -17,7 +17,7 @@ class AuthUser
     public function handle(Request $request, Closure $next): Response
     {
         $user = auth()->user();
-        if ((auth()->check() && $user->user_type != 'admin') && ($user->add_info_completed == true && $user->survey_completed == true)) {
+        if ((auth()->check() && $user->user_type == 'alumni') && isset($user->email_verified_at) && ($user->add_info_completed == true && $user->survey_completed == true)) {
             return $next($request);
         }
         return redirect('/');
