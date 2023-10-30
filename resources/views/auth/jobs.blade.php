@@ -25,8 +25,6 @@
                     <option value="0">All</option>
                     <option value="1">Newest Post</option>
                     <option value="2">Oldest Post</option>
-                    <option value="3">Most Relevant</option>
-                    <option value="4">Highest Paid</option>
                 </select>
             </div>
         </div>
@@ -61,7 +59,7 @@
                             <a href="/jobs/{{ $job->job_title }}">{{ $job->job_title }}</a>
                         </div>
                         <div class="card-salary">
-                            <p><b>$350k</b> <span>/ year</span></p>
+                            <p><b>{{ $job->salary }}</b> <span>/ month</span></p>
                         </div>
                         </a>
                     </div>
