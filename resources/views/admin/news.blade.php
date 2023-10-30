@@ -37,7 +37,8 @@
                                                         <a href="/admin/edit-news/{{ $news->id }}/{{ $news->title }}"
                                                             class="flex-fill">
                                                             <button
-                                                                class="btn btn-light me-1 w-100 h-100 p-1 border mb-1">
+                                                                class="btn btn-light me-1 w-100 h-100 p-1 border mb-1"
+                                                                style="width: 150px;">
                                                                 <div
                                                                     class="d-flex justify-content-center align-items-center">
                                                                     <img src="{{ URL::asset('/images/icon-edit.svg') }}"
@@ -53,7 +54,8 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button
-                                                                class="btn btn-light mt-1 flex-fill w-100 h-100 p-1 border">
+                                                                class="btn btn-light mt-1 flex-fill w-100 h-100 p-1 border"
+                                                                style="width: 150px;">
                                                                 <div
                                                                     class="d-flex justify-content-center align-items-center">
                                                                     <img src="{{ URL::asset('/images/icon-delete.svg') }}"
