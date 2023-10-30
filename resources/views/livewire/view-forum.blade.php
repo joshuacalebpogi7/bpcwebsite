@@ -1,8 +1,7 @@
 <div>
     <div class="form-group">
         <hr>
-        <h1>{{ $forum_selected->forumTitle }}</h1>
-        <h2>{{ $forum_selected->forumBody }}</h2>
+        <h2>{{ $forum_selected->forumTitle }}</h2><br><h4>{{ $forum_selected->forumBody }}</h4>
         <br>
 
          @foreach ($forumReplies as $forumReply)
