@@ -12,8 +12,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table id="example"
-                                    class="table table-light table-striped table-hover rounded shadow-sm"
+                                <table id="example" class="display expandable-table table-hover rounded shadow-sm"
                                     style="width:100%">
                                     <thead>
                                         <tr>
@@ -66,5 +65,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </x-admin-layout>
