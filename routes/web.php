@@ -148,7 +148,7 @@ Route::get('admin/delete_survey/{survey_selected}', [SurveyController::class, 'd
     return view('auth.survey');
 })->name('survey'); */
 
-Route::get('/answer_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeAnswered'])->middleware('authUser')->name('answer_survey');
+Route::get('/answer_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeAnswered'])->middleware('mustBeLoggedIn')->name('answer_survey');
 /* ROUTE FOR SURVEY */
 
 /* ROUTE FOR FORUMS */
@@ -160,6 +160,6 @@ Route::get('/posted_forums', function () {
     return view('auth.posted_forums');
 })->middleware('mustBeLoggedIn')->name('posted_forums');
 
-Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->middleware('authUser')->name('view_forum');
-Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->middleware('authUser')->name('delete_forum');
+Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->middleware('mustBeLoggedIn')->name('view_forum');
+Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->middleware('mustBeLoggedIn')->name('delete_forum');
 /* ROUTE FOR FORUMS */

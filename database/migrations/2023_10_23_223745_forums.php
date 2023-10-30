@@ -28,30 +28,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('authorID')->nullable();
             $table->tinyInteger('active')->default(0);
         }); //
-
-        // Insert into the 'forums_posted' table
-        DB::table('forums_posted')->insert([
-            'forumTitle' => 'YourForumTitle',
-            'forumBody' => 'YourForumBody',
-            'forumAuthor' => 1,
-            // Replace with the author's ID
-            'active' => 0,
-            // Set the active status as needed (0 for inactive)
-        ]);
-
-        // Insert into the 'forum_replies' table
-        DB::table('forum_replies')->insert([
-            'parentForum' => 'YourParentForum',
-            // Replace with the parent forum
-            'replyingTo' => 'YourReplyingTo',
-            // Replace with the ID of the message being replied to
-            'replyBody' => 'YourReplyBody',
-            'authorID' => 1,
-            // Replace with the author's ID
-            'active' => 0,
-            // Set the active status as needed (0 for inactive)
-        ]);
-
     }
 
     /**

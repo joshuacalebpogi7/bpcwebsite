@@ -9,12 +9,18 @@ use App\Models\surveys_posted; // Import the Survey model
 
 class SurveyList extends Component
 {
+    public $user;
     public $survey_list;
     public $surveyTitle;
     public $surveyDesc;
     public $surveyLink;
     public $surveyEditorLink;
     public $active;
+
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
 
     public function render()
     {

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class AnswerSurvey extends Component
 {
+    public $user;
     public $survey_selected;
     public $surveyType;
     public $surveyTitle;
@@ -27,6 +28,11 @@ class AnswerSurvey extends Component
     public $questionsToBeDeleted = [];
 
     public $choicesToBeDeleted = [];
+
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
 
     public function mount($survey_selected)
     {

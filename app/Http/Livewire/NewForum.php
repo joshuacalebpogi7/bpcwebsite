@@ -9,9 +9,15 @@ use App\Models\forum_replies;
 
 class NewForum extends Component
 {
+    public $user;
     public $forumTitle;
     public $forumBody;
     public $active = false;
+
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
 
     public function createForumPost()
     {

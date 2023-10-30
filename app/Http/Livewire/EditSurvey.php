@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class EditSurvey extends Component
 {
+    public $user;
     public $surveyType = '';
     public $surveyTitle;
     public $surveyDesc;
@@ -19,6 +20,11 @@ class EditSurvey extends Component
     public $active;
     public $forFirstTimers;
     public $questions = [];
+
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
 
     public function mount($survey_selected)
     {

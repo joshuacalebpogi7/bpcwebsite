@@ -63,56 +63,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('parentSurvey');
             $table->unsignedBigInteger('respondentID')->nullable();
         });
-
-        DB::table('surveys_posted')->insert([
-            'surveyAuthor' => 1,
-            // Replace with the author's ID
-            'surveyType' => 'built_in',
-            'surveyTitle' => 'YourSurveyTitle',
-            'surveyDesc' => 'YourSurveyDescription',
-            // Add other fields with dummy values
-        ]);
-
-        DB::table('survey_questions')->insert([
-            'parentSurvey' => 1,
-            // Assuming 1 is the ID of the survey
-            'questionNum' => 1,
-            'questionType' => 'dropdown',
-            'questionDesc' => 'YourQuestionDescription',
-            // Add other fields with dummy values
-        ]);
-
-        DB::table('survey_choices')->insert([
-            'choiceNum' => 1,
-            'choiceDesc' => 'ChoiceDescription',
-            'parentSurvey' => 1,
-            // Assuming 1 is the ID of the survey
-            'parentQuestion' => 1,
-            // Assuming 1 is the ID of the question
-            // Add other fields with dummy values
-        ]);
-
-        DB::table('survey_answers')->insert([
-            'answerDesc' => 'AnswerDescription',
-            'choiceID' => 1,
-            // Assuming 1 is the ID of the choice
-            'respondentID' => 1,
-            // Assuming 1 is the ID of the respondent
-            'parentSurvey' => 1,
-            // Assuming 1 is the ID of the survey
-            'questionAnswered' => 1,
-            // Assuming 1 is the ID of the question answered
-            'finishedGoogleForms' => 1,
-            // Add your value for this field
-        ]);
-
-        DB::table('finished_surveys')->insert([
-            'parentSurvey' => 1,
-            // Assuming 1 is the ID of the survey
-            'respondentID' => 1,
-            // Assuming 1 is the ID of the respondent
-        ]);
-
     }
 
     /**

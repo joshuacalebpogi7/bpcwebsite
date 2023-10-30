@@ -23,23 +23,48 @@
                 @endphp
 
                 @foreach ($survey_list as $survey_posted)
-                    @if ($survey_posted['active'] > 0)
-                        @php
-                            $allSurveysInactive = false;
-                        @endphp
+                    @if ($user->survey_completed == true)
+                        @if ($survey_posted['active'] > 0)
+                            @if ($survey_posted['forFirstTimers'] === 0)
+                                @php
+                                    $allSurveysInactive = false;
+                                @endphp
 
-                        <div class="card_notification">
-                            <div class="notification">
-                                <div class="notiglow"></div>
-                                <div class="notiborderglow"></div>
-                                <div class="notititle">Survey #{{ $survey_posted->id }}:
-                                    {{ $survey_posted->surveyTitle }}</div>
+                                <div class="card_notification">
+                                    <div class="notification">
+                                        <div class="notiglow"></div>
+                                        <div class="notiborderglow"></div>
+                                        <div class="notititle">Survey #{{ $survey_posted->id }}:
+                                            {{ $survey_posted->surveyTitle }}</div>
 
-                                <div class="notibody">{{ $survey_posted->surveyDesc }}</div>
-                                <a class="start_survey"
-                                    href="{{ route('answer_survey', ['survey_selected' => $survey_posted->id]) }}">START</a>
-                            </div>
-                        </div>
+                                        <div class="notibody">{{ $survey_posted->surveyDesc }}</div>
+                                        <a class="start_survey"
+                                            href="{{ route('answer_survey', ['survey_selected' => $survey_posted->id]) }}">START</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+                    @elseif ($user->survey_completed == false)
+                        @if ($survey_posted['active'] > 0)
+                            @if ($survey_posted['forFirstTimers'] === 1)
+                                @php
+                                    $allSurveysInactive = false;
+                                @endphp
+
+                                <div class="card_notification">
+                                    <div class="notification">
+                                        <div class="notiglow"></div>
+                                        <div class="notiborderglow"></div>
+                                        <div class="notititle">Survey #{{ $survey_posted->id }}:
+                                            {{ $survey_posted->surveyTitle }}</div>
+
+                                        <div class="notibody">{{ $survey_posted->surveyDesc }}</div>
+                                        <a class="start_survey"
+                                            href="{{ route('answer_survey', ['survey_selected' => $survey_posted->id]) }}">START</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     @endif
                 @endforeach
 
@@ -52,3 +77,4 @@
 
         </div>
     </div>
+</div>
