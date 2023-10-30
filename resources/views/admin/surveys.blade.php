@@ -26,9 +26,9 @@
                             <div class="table-responsive">
                                 <table id="example" class="display expandable-table table-hover rounded shadow-sm"
                                     style="width:100%">
-                                            @if (!$survey_list->isEmpty())
-                                                <thead>
-                                                    <tr>
+                                    @if (!$survey_list->isEmpty())
+                                        <thead>
+                                            <tr>
 
                                                 <th>Id</th>
                                                 <th>Action</th>
