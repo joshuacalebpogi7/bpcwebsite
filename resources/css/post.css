@@ -12,9 +12,9 @@
 }
 
 :root{
-    --container-color: #1a1e21;
+    --container-color: linear-gradient(270deg, rgba(15, 73, 52, 0.9557072829131653) 50%, rgba(131, 200, 58, 0.8884803921568627) 100%), url("/public/images/bg.jpg") no-repeat;;
     --second-color: #fd8f44;
-    --text-color: #172317;
+    --texts-color: #172317;
     --bg-color: #fff;
 }
 ::selection{
@@ -37,11 +37,7 @@ section{
     padding: 3rem 0 2rem;
 }
 
-.container{
-    max-width: 1068px;
-    margin: auto;
-    width: 100%;
-}
+
 /*
 {
 header{
@@ -246,6 +242,7 @@ header.shadow .logo{
     margin-top: -20px;
     height: 500px;
     background: var(--container-color);
+    margin-inline: 0 !important;
 }
 
 .post-container{
@@ -282,7 +279,7 @@ header.shadow .logo{
 }
 
 .post-content{
-    margin-top: 10rem !important;
+    margin-top: 4rem !important;
     color: #1e1f22 !important;
 }
 
@@ -416,7 +413,7 @@ header.shadow .logo{
     }
 
     .post-content{
-        margin-top: 5rem !important;
+        margin-top: 12rem !important;
     }
 
     .post-text{

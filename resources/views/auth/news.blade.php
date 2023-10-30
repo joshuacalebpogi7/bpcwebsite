@@ -12,8 +12,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href='https:/unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-    {{-- @vite(['resources/css/style.css']) --}}
+    @vite(['resources/css/style.css'])
     @vite(['resources/css/styles.css'])
     @vite(['resources/js/main.js'])
     @vite(['resources/css/events.css'])
