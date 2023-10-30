@@ -91,7 +91,8 @@
                                                 </td>
                                                 <td>{{ $user->course }}</td>
                                                 <td>{{ $user->year_graduated }}</td>
-                                                <td>{{ $user->birthday }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($user->birthday)->format('M d, Y') }}
+                                                </td>
                                                 <td>{{ $user->age }}</td>
                                                 <td>{{ $user->gender }}</td>
                                                 <td>{{ $user->contact_no }}</td>

@@ -34,12 +34,12 @@
             @foreach ($jobs as $job)
                 <div class="card">
                     <div class="card-left blue-bg">
-                        <a href="/jobs/{{ $job->title }}"> <img src="/images/chat.png"></a>
+                        <a href="/jobs/{{ $job->job_title }}"> <img src="/images/chat.png"></a>
                     </div>
                     <div class="card-center">
-                        <a href="/jobs/{{ $job->title }}">
+                        <a href="/jobs/{{ $job->job_title }}">
                             <h3>{{ $job->company }}</h3>
-                            <p class="card-detail">{{ $job->title }}</p>
+                            <p class="card-detail">{{ $job->job_title }}</p>
                             <p class="card-loc">
                                 <ion-icon name="location-outline"></ion-icon>{{ $job->company }}
                             </p>
@@ -58,7 +58,7 @@
                     <div class="card-right">
                         <div class="card-tag">
                             <h5>Division</h5>
-                            <a href="/jobs/{{ $job->title }}">{{ $job->job_title }}</a>
+                            <a href="/jobs/{{ $job->job_title }}">{{ $job->job_title }}</a>
                         </div>
                         <div class="card-salary">
                             <p><b>$350k</b> <span>/ year</span></p>

@@ -184,6 +184,30 @@ class PageController extends Controller
             array_push($dataVerified, $verifiedAlumniCountByCourse);
         }
 
+        //bar alumnibatch
+        $alumniByBatchLabels = [];
+        $employed = [];
+        $unemployed = [];
+
+        $batches = User::whereNotNull('year_graduated')->where('user_type', 'alumni')
+        ->distinct()
+        ->pluck('year_graduated');
+ 
+
+        foreach ($batches as $batch) {
+            $employedCount = 0;
+            $unemployedCount = 0;
+
+            if ($users->where('year_graduated', $batch)->count() > 0) {
+                $employedCount = $users->where('employment_status', 'employed', 'self-employed')->whereNotNull('email_verified_at')->count();
+                $unemployedCount = $users->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
+            }
+            array_push($alumniByBatchLabels, $batch);
+            array_push($employed, $employedCount);
+            array_push($unemployed, $unemployedCount);
+        }
+        // dd($unemployed);
+
         //bar alumnigender
         $alumniByGenderLabels = [];
         $alumniMale = [];
@@ -257,6 +281,11 @@ class PageController extends Controller
             'labels' => $labels,
             'dataAll' => $dataAll,
             'dataVerified' => $dataVerified,
+
+            //alumni by batch (bar-chart)
+            'alumniByBatchLabels' => $alumniByBatchLabels,
+            'employedByBatch' => $employed,
+            'unemployedByBatch' => $unemployed,
 
             //alumni by gender (bar-chart)
             'alumniByGenderLabels' => $alumniByGenderLabels,

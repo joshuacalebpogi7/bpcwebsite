@@ -18,12 +18,13 @@
                     <div class="weather-info">
                         <div class="d-flex">
                             <div>
-                                <h2 class="mb-0 font-weight-bolder"><i class="icon-sun mr-2"></i>{{ date('d') }}
+                                <h2 class="mb-0 font-weight-bolder text-info"><i
+                                        class="icon-sun mr-2"></i>{{ date('d') }}
                                 </h2>
                             </div>
                             <div class="ml-2">
-                                <h4 class="location font-weight-bolder">{{ date('F') }}</h4>
-                                <h6 class="font-weight-bold">{{ date('l') }}</h6>
+                                <h4 class="location font-weight-bolder text-info">{{ date('F') }}</h4>
+                                <h6 class="font-weight-bold text-info">{{ date('l') }}</h6>
                             </div>
                         </div>
                     </div>
@@ -280,7 +281,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-7 grid-margin stretch-card">
+        <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -322,6 +323,21 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <p class="card-title">Alumni by Batch</p>
+                    {{-- <a href="#" class="text-info">View all</a> --}}
+                </div>
+                <p class="font-weight-500">The total number of sessions within the date range. It
+                    is the period time a user is actively engaged with your website, page or app,
+                    etc</p>
+                <div id="alumnibatch-legend" class="chartjs-legend mt-4 mb-2"></div>
+                <canvas id="alumnibatch-chart"></canvas>
             </div>
         </div>
     </div>
@@ -677,6 +693,77 @@
             plugins: northAmericaChartPlugins
         });
         document.getElementById('self-employed-legend').innerHTML = northAmericaChart.generateLegend();
+    }
+</script>
+<script>
+    if ($("#alumnibatch-chart").length) {
+        var SalesChartCanvas = $("#alumnibatch-chart").get(0).getContext("2d");
+        var SalesChart = new Chart(SalesChartCanvas, {
+            type: 'bar',
+            data: {
+                labels: @json($data['alumniByBatchLabels']),
+                datasets: [{
+                        label: 'Employed',
+                        data: @json($data['employedByBatch']),
+                        backgroundColor: '#98BDFF'
+                    },
+                    {
+                        label: 'Unemployed',
+                        data: @json($data['unemployedByBatch']),
+                        backgroundColor: '#ff9eb3'
+                    }
+                ]
+            },
+            options: {
+                cornerRadius: 5,
+                responsive: true,
+                maintainAspectRatio: true,
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 20,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            drawBorder: false,
+                            color: "#F2F2F2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383",
+                            stepSize: 1, // Set the step size to 1 to display whole numbers
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: false,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#6C7383"
+                        },
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
+                            display: false
+                        },
+                        barPercentage: 1
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+            },
+        });
+        document.getElementById('alumnibatch-legend').innerHTML = SalesChart.generateLegend();
     }
 </script>
 <script>
