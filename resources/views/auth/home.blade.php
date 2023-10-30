@@ -11,7 +11,7 @@
                 @if ($index < 7)
                     <div class="card_0">
                         <a class="card1" href="/news/{{ $news->title }}">
-                            <img src="{{ $news->thumbnail }}" class="news" align="left" height="120px" width="100px">
+                            <img src="/images/news.png" class="news" align="left" height="120px" width="100px">
                             <h1>University News</h1>
                             <h2>{{ $news->title }}</h2>
                             <h6>Posted {{ $news->created_at->diffForHumans() }}</h6>

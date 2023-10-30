@@ -67,9 +67,6 @@ img {
 }
 
 /*=============== LAYOUT ===============*/
-.container {
-  margin-inline: 1.5rem;
-}
 
 .container2 {
   width: 100%;
@@ -122,6 +119,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-inline: 1.5rem;
 }
 
 .header__toggle {
