@@ -46,7 +46,7 @@
                                                     <td>
 
                                                         <a
-                                                            href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}">
+                                                            href="{{-- route('view_forum', ['forum_selected' => $forum_posted->id]) --}}">
                                                             <button class = "survey_action">
                                                                 {{ $forum_posted->forumTitle }}
                                                             </button>
@@ -55,9 +55,9 @@
                                                     <td>{{ $forum_posted->forumDesc }}</td>
                                                     <td>
                                                         @php
-                                                            $author = $authors->firstWhere('id', $forum_posted->authorID);
+                                                            $author = $authors->firstWhere('id', $forum_posted->forumAuthor);
                                                         @endphp
-                                                        {{ $author ? $author->name : 'Author not found' }}
+                                                        {{ $author ? '[ID ' . $author->id . '] ' . $author->first_name . ' ' . $author->last_name : 'Author not found' }}
                                                     </td>
 
                                                     <td>{{ $forum_posted->created_at }}</td>
