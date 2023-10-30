@@ -46,7 +46,7 @@
                                                     <td>
 
                                                         <a
-                                                            href="{{-- route('view_forum', ['forum_selected' => $forum_posted->id]) --}}">
+                                                            href="{{ route('admin/view_forum', ['forum_selected' => $forum_posted->id]) }}">
                                                             <button class = "survey_action">
                                                                 {{ $forum_posted->forumTitle }}
                                                             </button>
@@ -63,15 +63,16 @@
                                                     <td>{{ $forum_posted->created_at }}</td>
                                                     <td>
                                                         <div>
-                                                            <a
-                                                                href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}"><button
+                                                            <a href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}"><button
                                                                     class = "survey_action">
                                                                     <img
-                                                                        src="{{ URL::asset('/images/icon-edit.svg') }}"></button></a>
+                                                                        src="{{ URL::asset('/images/icon-edit.svg') }}">
+                                                                    Edit</button></a>
                                                             <br>
                                                             <button class = "survey_action"
                                                                 onclick="confirmDeleteForum({{ json_encode($forum_posted) }})"><img
-                                                                    src="{{ URL::asset('/images/icon-delete.svg') }}"></button>
+                                                                    src="{{ URL::asset('/images/icon-delete.svg') }}">
+                                                                Delete</button>
                                                         </div>
                                                     </td>
                                                 </tr>

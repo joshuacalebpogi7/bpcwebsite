@@ -28,21 +28,9 @@ class NewForum extends Component
             // Create the survey and get its ID
             $new_forum = forums_posted::create([
                 'forumTitle' => $this->forumTitle,
+                'forumBody' => $this->forumBody,
                 'active' => $this->active,
             ]);
-
-            if (!$new_forum) {
-                throw new \Exception('Failed to create the survey.');
-            } else {
-                $forum_body = forum_replies::create([
-                    'parentForum' => $new_forum->id,
-                    'replyingTo' => $new_forum->id,
-                    'replyBody' => $this->forumBody,
-                    'authorID' => auth()->user()->id,
-                    'active' => $this->active,
-
-                ]);
-            }
 
             // Commit the transaction upon successful query
             DB::commit();

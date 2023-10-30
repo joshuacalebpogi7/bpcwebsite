@@ -33,6 +33,7 @@
                                                         <th>#</th>
                                                         <th>Title</th>
                                                         <th>Description</th>
+                                                        <th>Author</th>
                                                         <th>Survey Type</th>
                                                         <th>Date Created</th>
                                                         <th>Actions</th>
@@ -54,6 +55,12 @@
                                                     </a>
                                                 </td>
                                                 <td>{{ $survey_posted->surveyDesc }}</td>
+                                                <td>
+                                                    @php
+                                                        $author = $authors->firstWhere('id', $survey_posted->surveyAuthor);
+                                                    @endphp
+                                                    {{ $author ? '[ID ' . $author->id . '] ' . $author->first_name . ' ' . $author->last_name : 'Author not found' }}
+                                                </td>
                                                 @if ($survey_posted->surveyType === 'built_in')
                                                     <td>Built-in</td>
                                                 @endif
@@ -67,11 +74,11 @@
                                                             href="{{ route('edit_survey', ['survey_selected' => $survey_posted->id]) }}"><button
                                                                 class = "survey_action">
                                                                 <img
-                                                                    src="{{ URL::asset('/images/icon-edit.svg') }}"></button></a>
+                                                                    src="{{ URL::asset('/images/icon-edit.svg') }}"> Edit</button></a>
                                                         <br>
                                                         <button class = "survey_action"
                                                             onclick="confirmDeleteSurvey({{ json_encode($survey_posted) }})"><img
-                                                                src="{{ URL::asset('/images/icon-delete.svg') }}"></button>
+                                                                src="{{ URL::asset('/images/icon-delete.svg') }}"> Delete</button>
                                                     </div>
                                                 </td>
                                             </tr>
