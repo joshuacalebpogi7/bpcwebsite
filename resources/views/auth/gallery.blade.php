@@ -36,7 +36,6 @@
                 <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
                     <div class="card11_body">
                         <h6 class="card11_title">Clothes</h6>
-                        <p class="card11_text">Lorem ipsum dollar...</p>
                     </div>
                 </a>
             </div>
@@ -45,7 +44,6 @@
                 <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
                     <div class="card11_body">
                         <h6 class="card11_title">Phone</h6>
-                        <p class="card11_text">Lorem ipsum dollar...</p>
                     </div>
                 </a>
             </div>
@@ -54,7 +52,6 @@
                 <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
                     <div class="card11_body">
                         <h6 class="card11_title">Shoe</h6>
-                        <p class="card11_text">Lorem ipsum dollar...</p>
                     </div>
                 </a>
             </div>
@@ -63,7 +60,6 @@
                 <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
                     <div class="card11_body">
                         <h6 class="card11_title">Phone</h6>
-                        <p class="card11_text">Lorem ipsum dollar...</p>
                     </div>
                 </a>
             </div>
@@ -72,7 +68,6 @@
                 <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
                     <div class="card11_body">
                         <h6 class="card11_title">Phone</h6>
-                        <p class="card11_text">Lorem ipsum dollar...</p>
                     </div>
                 </a>
             </div>
@@ -81,7 +76,6 @@
                 <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
                     <div class="card11_body">
                         <h6 class="card11_title">Phone</h6>
-                        <p class="card11_text">Lorem ipsum dollar...</p>
                     </div>
                 </a>
             </div>
