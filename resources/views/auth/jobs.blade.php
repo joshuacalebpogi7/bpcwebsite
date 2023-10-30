@@ -34,7 +34,7 @@
             @foreach ($jobs as $job)
                 <div class="card">
                     <div class="card-left blue-bg">
-                        <a href="/jobs/{{ $job->job_title }}"> <img src="/images/chat.png"></a>
+                        <a href="/jobs/{{ $job->job_title }}"> <img src="/images/job.png"></a>
                     </div>
                     <div class="card-center">
                         <a href="/jobs/{{ $job->job_title }}">

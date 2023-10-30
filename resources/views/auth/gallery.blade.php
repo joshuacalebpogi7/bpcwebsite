@@ -3,7 +3,7 @@
         Gallery
     </x-slot>
     <section id="page-header">
-        <h2>● GALLERY ●</h2>
+        <h2 style="color: #fafafa">● GALLERY ●</h2>
     </section>
     <div class="svg1">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
