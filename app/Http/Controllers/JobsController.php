@@ -28,14 +28,15 @@ class JobsController extends Controller
             'job_title' => 'required',
             'job_type' => ['required', Rule::in('full-time', 'part-time','freelance')],
             'company' => 'required',
+            'category' => 'required',
             'description' => 'required',
             'responsibilities' => 'required',
             'requirements' => 'required',
             'location' => 'required',
             'salary' => 'nullable|numeric',
             'status' => ['required', Rule::in('active', 'archived')],
-            'link' => ['nullable', 'string', 'url', 'required_if:email,null'],
-            'email' => ['nullable', 'email', 'required_if:link,null'],
+            'link' => ['nullable', 'string', 'url'],
+            'email' => ['required', 'email'],
 
         ]);
 
@@ -83,6 +84,7 @@ class JobsController extends Controller
             'job_title' => 'required',
             'job_type' => ['required', Rule::in('full-time', 'part-time','freelance')],
             'company' => 'required',
+            'category' => 'required',
             'description' => 'required',
             'responsibilities' => 'required',
             'requirements' => 'required',
@@ -90,7 +92,7 @@ class JobsController extends Controller
             'salary' => 'nullable|numeric',
             'status' => ['required', Rule::in('active', 'archived')],
             'link' => ['nullable', 'string', 'url', 'required_if:email,null'],
-            'email' => ['nullable', 'email', 'required_if:link,null'],
+            'email' => ['required', 'email', 'required_if:link,null'],
         ]);
 
         $incomingFields['job_title'] = trim(strip_tags(ucwords($incomingFields['job_title'])));

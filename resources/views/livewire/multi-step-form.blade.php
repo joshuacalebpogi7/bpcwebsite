@@ -168,7 +168,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="category">Job Category</label>
                                     <select wire:model="category" class="form-control" name="category"
@@ -214,7 +214,7 @@
                                     @enderror
                                     </span>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

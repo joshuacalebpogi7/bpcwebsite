@@ -55,6 +55,7 @@ Route::get('/gallery/{gallery:title}', [PageController::class, "gallerySinglePag
 Route::post('/login', [UserController::class, "login"])->middleware('guest');
 Route::post('/logout', [UserController::class, "logout"])->middleware('mustBeLoggedIn');
 Route::post('/submit-survey', [UserController::class, "submitSurvey"])->middleware('mustBeLoggedIn');
+Route::post('/submit-application/{jobs:id}', [UserController::class, "submitApplication"])->middleware('authUser');
 
 
 Route::get('/email/verify', function () {

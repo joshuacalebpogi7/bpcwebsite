@@ -50,9 +50,9 @@
                                 <p>
                                     <ion-icon name="hourglass-outline"></ion-icon>{{ $job->job_type }}
                                 </p>
-                                <p>
+                                {{-- <p>
                                     <ion-icon name="people-outline"></ion-icon>200 Applicants
-                                </p>
+                                </p> --}}
                             </div>
                     </div>
                     <div class="card-right">
@@ -61,7 +61,17 @@
                             <a href="/jobs/{{ $job->job_title }}">{{ $job->job_title }}</a>
                         </div>
                         <div class="card-salary">
-                            <p><b>$350k</b> <span>/ year</span></p>
+                            <p><b>@php
+                                $salary = $job->salary;
+                                if ($salary >= 1000000) {
+                                    $formattedSalary = '$' . number_format($salary / 1000000) . 'm';
+                                } elseif ($salary >= 1000) {
+                                    $formattedSalary = '$' . number_format($salary / 1000) . 'k';
+                                } else {
+                                    $formattedSalary = '$' . number_format($salary, 0, '', ',');
+                                }
+                            @endphp
+                                    {{ $formattedSalary }}</b> <span>/ year</span></p>
                         </div>
                         </a>
                     </div>
