@@ -1,17 +1,17 @@
 <x-admin-layout>
     @push('scripts')
-    <script>
-        function confirmDeleteForum(forumData) {
-            if (confirm('Are you sure you want to delete "' + forumData.forumTitle + '"?')) {
-                // If the user confirms, redirect to the delete route
-                window.location.href = "/delete_forum/" + forumData.id;
+        <script>
+            function confirmDeleteForum(forumData) {
+                if (confirm('Are you sure you want to delete "' + forumData.forumTitle + '"?')) {
+                    // If the user confirms, redirect to the delete route
+                    window.location.href = "/delete_forum/" + forumData.id;
+                }
             }
-        }
-    </script>
+        </script>
     @endpush
     <h2>Forum Records</h2>
     <div>
-        <a href="{{ url('new_forum') }}"><button class="btn btn-primary mb-3"><img
+        <a href="{{ url('admin/new_forum') }}"><button class="btn btn-primary mb-3"><img
                     src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Forum</button></a>
     </div>
 
@@ -25,32 +25,46 @@
                         <div class="col-12">
                             <div class="table-responsive">
                                 <table id="example" class="display expandable-table table-hover rounded shadow-sm"
-                                style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Title</th>
-                                            <th>Body</th>
-                                            <th>Date Created</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
+                                    style="width:100%">
+                                    @if (!$forum_list->isEmpty())
+                                        <thead>
+                                            <tr>
+
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Description</th>
+                                                <th>Author</th>
+                                                <th>Date Created</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+
                                         <tbody>
-                                        @foreach ($forum_list as $forum_posted)
+                                            @foreach ($forum_list as $forum_posted)
                                                 <tr>
                                                     <td>{{ $forum_posted->id }}</td>
                                                     <td>
+
                                                         <a
-                                                            href="{{ route('view_forum', ['forum_selected' => $forum_posted->id]) }}">
-                                                            {{ $forum_posted->forumTitle }}
+                                                            href="{{-- route('view_forum', ['forum_selected' => $forum_posted->id]) --}}">
+                                                            <button class = "survey_action">
+                                                                {{ $forum_posted->forumTitle }}
+                                                            </button>
                                                         </a>
                                                     </td>
-                                                    <td>{{ $forum_posted->forumBody }}</td>
+                                                    <td>{{ $forum_posted->forumDesc }}</td>
+                                                    <td>
+                                                        @php
+                                                            $author = $authors->firstWhere('id', $forum_posted->forumAuthor);
+                                                        @endphp
+                                                        {{ $author ? '[ID ' . $author->id . '] ' . $author->first_name . ' ' . $author->last_name : 'Author not found' }}
+                                                    </td>
+
                                                     <td>{{ $forum_posted->created_at }}</td>
                                                     <td>
                                                         <div>
                                                             <a
-                                                                href="{{-- route('edit_survey', ['survey_selected' => $survey_posted->id]) --}}"><button
+                                                                href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}"><button
                                                                     class = "survey_action">
                                                                     <img
                                                                         src="{{ URL::asset('/images/icon-edit.svg') }}"></button></a>
@@ -61,7 +75,8 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                        @endforeach
+                                            @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>

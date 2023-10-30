@@ -43,7 +43,7 @@
                             @endif
                         @elseif ($user->survey_completed == false)
                             @if ($survey_posted['forFirstTimers'] == true)
-                            <p class="message">Before you continue, we need your participation in the following surveys</p>
+                            <p class="message">Before you can continue, we need your participation in the following surveys</p>
                                 <div class="card_notification">
                                     <div class="notification">
                                         <div class="notiglow"></div>
