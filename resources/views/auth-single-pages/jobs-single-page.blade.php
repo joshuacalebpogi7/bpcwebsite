@@ -102,7 +102,7 @@
             <a href="/edit-profile">
                 <div class="sidebar__account">
 
-                    <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
+                    <img src="{{ auth()->user()->avatar }}" alt="sidebar image" class="sidebar__perfil">
 
                     <div class="sidebar__names">
                         <h3 class="sidebar__name"> {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
@@ -215,6 +215,21 @@
                             <i class="fa fa-angle-right text-primary me-2"></i> Salary:
                             ${{ number_format($job->salary, 0, '', ',') }}
                         </p>
+                        <p>
+                            <i class="fa fa-angle-right text-primary me-2"></i> Salary:
+                            @php
+                                $salary = $job->salary;
+                                if ($salary >= 1000000) {
+                                    $formattedSalary = '$' . number_format($salary / 1000000) . 'm';
+                                } elseif ($salary >= 1000) {
+                                    $formattedSalary = '$' . number_format($salary / 1000) . 'k';
+                                } else {
+                                    $formattedSalary = '$' . number_format($salary, 0, '', ',');
+                                }
+                            @endphp
+                            {{ $formattedSalary }}
+                        </p>
+
 
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ $job->location }}</p>
                         <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Status:

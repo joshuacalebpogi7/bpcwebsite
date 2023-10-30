@@ -29,10 +29,13 @@ class JobsController extends Controller
             'job_type' => ['required', Rule::in('full-time', 'part-time','freelance')],
             'company' => 'required',
             'description' => 'required',
+            'responsibilities' => 'required',
+            'requirements' => 'required',
             'location' => 'required',
             'salary' => 'nullable|numeric',
             'status' => ['required', Rule::in('active', 'archived')],
-            'link' => ['nullable', 'string', 'url'],
+            'link' => ['nullable', 'string', 'url', 'required_if:email,null'],
+            'email' => ['nullable', 'email', 'required_if:link,null'],
 
         ]);
 
@@ -44,7 +47,10 @@ class JobsController extends Controller
             $jobs->salary = trim($incomingFields['salary']);
             $jobs->status = $incomingFields['status'];
             $jobs->description = $incomingFields['description'];
+            $jobs->responsibilities = $incomingFields['responsibilities'];
+            $jobs->requirements = $incomingFields['requirements'];
             $jobs->link = $incomingFields['link'];
+            $jobs->email = $incomingFields['email'];
             $incomingFields['updated_by'] = auth()->user()->id;
 
             // Save the updated News instance
@@ -78,10 +84,13 @@ class JobsController extends Controller
             'job_type' => ['required', Rule::in('full-time', 'part-time','freelance')],
             'company' => 'required',
             'description' => 'required',
+            'responsibilities' => 'required',
+            'requirements' => 'required',
             'location' => 'required',
             'salary' => 'nullable|numeric',
             'status' => ['required', Rule::in('active', 'archived')],
-            'link' => ['nullable', 'string', 'url'],
+            'link' => ['nullable', 'string', 'url', 'required_if:email,null'],
+            'email' => ['nullable', 'email', 'required_if:link,null'],
         ]);
 
         $incomingFields['job_title'] = trim(strip_tags(ucwords($incomingFields['job_title'])));
