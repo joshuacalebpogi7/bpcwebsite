@@ -48,9 +48,9 @@
 
     <section class="post container5">
         @foreach ($events as $eventItem)
-            <div class="post-box mobile">
+            <div class="post-box {{ $eventItem->category }}">
                 <img src="/images/bg.jpg" alt="" class="post-img">
-                <h2 class="category">Mobile</h2>
+                <h2 class="category">{{ $eventItem->category }}</h2>
                 <a href="/events/{{ $eventItem->title }}" class="post-title">
                     {{ $eventItem->title }}
                 </a>
