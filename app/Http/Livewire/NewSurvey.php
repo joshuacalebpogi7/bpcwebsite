@@ -10,17 +10,20 @@ use App\Models\survey_choices;
 
 class NewSurvey extends Component
 {
+    public $user;
     public $surveyType = '';
     public $surveyTitle;
     public $surveyDesc;
     public $surveyLink;
     public $surveyEditorLink;
-    public $active = false;
+    public $active = true;
+    public $forFirstTimers = false;
     public $questions = [];
 
 
     public function __construct()
     {
+        $this->user = auth()->user();
         parent::__construct();
 
         // Initialize the questions array with an initial question
@@ -65,14 +68,15 @@ class NewSurvey extends Component
     {
         $questionNum = $this->questions[$questionIndex]['questionNum'];
         $choiceNum = count($this->questions[$questionIndex]['choices']) + 1;
-        
+
         $this->questions[$questionIndex]['choices'][] = [
             'questionNum' => $questionNum,
-            'choiceNum' => $choiceNum, // Add choiceNum here
+            'choiceNum' => $choiceNum,
+            // Add choiceNum here
             'choiceDesc' => '',
         ];
     }
-    
+
 
     public function removeChoice($questionIndex, $choiceIndex)
     {
@@ -81,18 +85,19 @@ class NewSurvey extends Component
     }
 
     public function saveBuiltIn()
-{
-    // Start a database transaction
-    //DB::beginTransaction();
+    {
+        // Start a database transaction
+        //DB::beginTransaction();
 
-    //try {
+        //try {
         // Create the survey and get its ID
         $questionnaire = surveys_posted::create([
+            'surveyAuthor' => auth()->user()->id,
             'surveyType' => 'built_in',
             'surveyTitle' => $this->surveyTitle,
-            'authorID' => auth()->user()->id,
             'surveyDesc' => $this->surveyDesc,
             'active' => $this->active,
+            'forFirstTimers' => $this->forFirstTimers,
         ]);
 
         if (!$questionnaire) {
@@ -132,24 +137,23 @@ class NewSurvey extends Component
 
         // Reset the form upon successful query
         $this->resetForm();
-    //}
-    /*
-    catch (\Exception $e) {
-        // Rollback the transaction in case of any errors
-        DB::rollback();
+        //}
+        /*
+        catch (\Exception $e) {
+            // Rollback the transaction in case of any errors
+            DB::rollback();
 
-        // Handle the error, log it, or display a message to the user
-        // You can add your error handling logic here
+            // Handle the error, log it, or display a message to the user
+            // You can add your error handling logic here
+        }
+        */
     }
-    */
-}
 
 
     private function resetForm()
     {
         $this->surveyTitle = '';
         $this->surveyDesc = '';
-        $this->active = false;
         $this->questions = [];
         return redirect()->to('admin/surveys');
     }
@@ -158,36 +162,38 @@ class NewSurvey extends Component
     {
         // Initialize an error message variable
         $errorMessage = '';
-    
+
         // Start a database transaction
         DB::beginTransaction();
-    
+
         try {
             // Create the survey and get its ID
             $questionnaire = surveys_posted::create([
+                'surveyAuthor' => auth()->user()->id,
                 'surveyType' => 'google_forms',
                 'surveyTitle' => $this->surveyTitle,
                 'surveyDesc' => $this->surveyDesc,
                 'surveyLink' => $this->surveyLink,
                 'surveyEditorLink' => $this->surveyEditorLink,
                 'active' => $this->active,
+                'forFirstTimers' => $this->forFirstTimers,
             ]);
-    
+
             // Commit the transaction
             DB::commit();
-    
+
             // Reset the form upon successful query
             $this->resetGForm();
-            
+
         } catch (\Exception $e) {
             // Rollback the transaction in case of any errors
             DB::rollBack();
-    
+
             // Handle the error, log it, or display a message to the user
             // You can add your error handling logic here
             $errorMessage = 'An error occurred while saving the survey. Please try again.';
         }
-    
+
         // Optionally, you can display the error message if there was an issue
         if (!empty($errorMessage)) {
             // You can use this error message in your Blade template to show an alert to the user.
@@ -201,7 +207,6 @@ class NewSurvey extends Component
         $this->surveyDesc = '';
         $this->surveyLink = '';
         $this->surveyEditorLink = '';
-        $this->active = false;
         return redirect()->to('admin/surveys');
     }
 

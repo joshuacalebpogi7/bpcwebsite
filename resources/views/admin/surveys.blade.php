@@ -11,7 +11,7 @@
     @endpush
     <h2>Survey Records</h2>
     <div>
-        <a href="{{ url('new_survey') }}"><button class="btn btn-primary mb-3"><img
+        <a href="{{ url('admin/new_survey') }}"><button class="btn btn-primary mb-3"><img
                     src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Survey</button></a>
     </div>
 

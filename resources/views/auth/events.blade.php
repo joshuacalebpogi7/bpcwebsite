@@ -81,6 +81,12 @@
                         <span class="sidebar__link-name">Gallery</span>
                         <span class="sidebar__link-floating">Gallery</span>
                     </a>
+
+                    <a href="/survey" class="sidebar__link {{ request()->is('survey') ? 'active-link' : '' }}">
+                        <i class="ri-survey-line"></i>
+                        <span class="sidebar__link-name">Survey</span>
+                        <span class="sidebar__link-floating">Survey</span>
+                    </a>
                 </div>
 
                 <h3 class="sidebar__title">
@@ -151,97 +157,25 @@
 
     <section class="post container5">
         @foreach ($events as $eventItem)
+            <div class="post-box mobile">
+                <img src="/images/bg.jpg" alt="" class="post-img">
+                <h2 class="category">Mobile</h2>
+                <a href="/events/{{ $eventItem->title }}" class="post-title">
+                    {{ $eventItem->title }}
+                </a>
+                <span class="post-date">{{ $eventItem->created_at->format('F j, Y') }}</span>
+                <p>
+                <div class="post-description">
+                    {!! $eventItem->description !!}
+                </div>
+                </p>
 
-        <div class="post-box mobile">
-            <img src="/images/bg.jpg" alt="" class="post-img">
-            <h2 class="category">Mobile</h2>
-            <a href="/events/{{$eventItem->title}}" class="post-title">
-                {{$eventItem->title}}
-            </a>
-            <span class="post-date">{{$eventItem->created_at->format('F j, Y')}}</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="/images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
+                <div class="profile">
+                    <img src="{{ $eventItem->updatedBy->avatar }}" alt="" class="profile-img">
+                    <span class="profile-name">{{ $eventItem->updatedBy->username }}</span>
+                </div>
             </div>
-        </div>
-
         @endforeach
-        <div class="post-box tech">
-            <img src="/images/prog-pic.jpg" alt="" class="post-img">
-            <h2 class="category">Tech</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="/images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
-
-        <div class="post-box mobile">
-            <img src="/images/study-pic.jpg" alt="" class="post-img">
-            <h2 class="category">Mobile</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="/images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
-
-        <div class="post-box design">
-            <img src="/images/bg.jpg" alt="" class="post-img">
-            <h2 class="category">Design</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="/images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
-
-        <div class="post-box tech">
-            <img src="/images/prog-pic.jpg" alt="" class="post-img">
-            <h2 class="category">Tech</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="/images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
-
-        <div class="post-box design">
-            <img src="/images/goal-pic.jpg" alt="" class="post-img">
-            <h2 class="category">Design</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="/images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
     </section>
 
     <div class="footer container5">

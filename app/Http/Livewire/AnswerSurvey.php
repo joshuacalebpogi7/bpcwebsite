@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class AnswerSurvey extends Component
 {
+    public $user;
     public $survey_selected;
     public $surveyType;
     public $surveyTitle;
@@ -27,6 +28,11 @@ class AnswerSurvey extends Component
     public $questionsToBeDeleted = [];
 
     public $choicesToBeDeleted = [];
+
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
 
     public function mount($survey_selected)
     {
@@ -118,6 +124,16 @@ class AnswerSurvey extends Component
                         'parentSurvey' => $this->survey_selected->id,
                         'questionAnswered' => $question["id"],
                     ]);
+                } elseif ($question["questionType"] === "dropdown") {
+                    $choiceData = survey_choices::where('id', $answer['choiceID'])->first();
+                    $choiceDesc = $choiceData["choiceDesc"];
+                    survey_answers::create([
+                        'answerDesc' => $choiceDesc,
+                        'choiceID' => $answer["choiceID"],
+                        'respondentID' => auth()->user()->id,
+                        'parentSurvey' => $this->survey_selected->id,
+                        'questionAnswered' => $question['id'],
+                    ]);
                 } elseif ($question["questionType"] === "checkbox") {
                     $choiceData = survey_choices::where('id', $answer['choiceID'])->first();
                     $choiceDesc = $choiceData["choiceDesc"];
@@ -135,9 +151,11 @@ class AnswerSurvey extends Component
             "parentSurvey" => $this->survey_selected->id,
             'respondentID' => auth()->user()->id,
         ]);
-        $user = auth()->user();
-        $user->survey_completed = true;
-        $user->save();
+        if ($this->survey_selected->forFirstTimers == true && $this->user->survey_completed == false) {
+            $user = auth()->user();
+            $user->survey_completed = true;
+            $user->save();
+        }
         $this->resetForm();
     }
 

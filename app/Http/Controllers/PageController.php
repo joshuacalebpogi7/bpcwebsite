@@ -65,20 +65,7 @@ class PageController extends Controller
         return view('auth.additional-info');
     }
 
-/*     public function survey()
-    {
-        // You don't need to fetch the survey list here, as the Livewire component handles it.
-    
-        return view('auth.posted_surveys')
-            ->with('component', SurveyList::class); // Pass the Livewire component to the view
-    } */
 
-    public function survey()
-    {
-        return view('auth.survey');
-    }
-
-    
 
     public function news(News $news)
     {
@@ -102,6 +89,14 @@ class PageController extends Controller
             return view('auth.jobs', ['jobs' => $jobs->latest()->get()]);
         }
         return view('jobs');
+    }
+
+    public function survey(surveys_posted $survey_list)
+    {
+        if (auth()->check()) {
+            return view('auth.survey', ['survey_list' => $survey_list->get()]);
+        }
+        /* return view('auth.survdwaday'); */
     }
 
     public function forums()
@@ -136,22 +131,22 @@ class PageController extends Controller
     //single pages
     public function jobsSinglePage(Jobs $jobs)
     {
-        return view('auth-single-pages.jobs-single-page', ['jobs' => $jobs->latest()->get(), 'jobsclass' => $jobs]);
+        return view('auth-single-pages.jobs-single-page', ['jobs' => $jobs]);
     }
     public function newsSinglePage(News $news)
     {
-        return view('auth-single-pages.news-single-page', ['news' => $news->latest()->get(), 'newsclass' => $news]);
+        return view('auth-single-pages.news-single-page', ['news' => $news]);
     }
     public function eventsSinglePage(Events $events)
     {
-        return view('auth-single-pages.events-single-page', ['events' => $events->latest()->get(), 'eventsclass' => $events]);
+        return view('auth-single-pages.events-single-page', ['events' => $events]);
     }
     public function gallerySinglePage(Gallery $gallery)
     {
-        return view('auth-single-pages.gallery-single-page', ['gallery' => $gallery->latest()->get(), 'galleryclass' => $gallery]);
+        return view('auth-single-pages.gallery-single-page', ['gallery' => $gallery]);
     }
 
-//--------------------------------ADMIN----------------------------
+    //--------------------------------ADMIN----------------------------
 
     //GET
     public function adminDashboard()
@@ -161,7 +156,7 @@ class PageController extends Controller
         $alumniCount = User::where('user_type', 'alumni')->count();
         $verifiedUsersCount = User::where('user_type', 'alumni')->where('survey_completed', true)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count();
         $verifiedUsers = User::where('user_type', 'alumni')->where('survey_completed', true)->where('add_info_completed', true)->whereNotNull('email_verified_at')->get();
-        
+
         $percentageChange = 0;
         if ($verifiedUsersCount > 0) {
             $percentageChange = ($verifiedUsersCount / $alumniCount) * 100;
@@ -171,7 +166,7 @@ class PageController extends Controller
         if ($verifiedUsersCount > 0) {
             $employmentPercentage = ($verifiedUsersCount / $alumniCount) * 100;
         }
-//bar alumni
+        //bar alumni
         $labels = [];
         $dataAll = [];
         $dataVerified = [];
@@ -181,34 +176,34 @@ class PageController extends Controller
             $allAlumniCountByCourse = 0;
             $verifiedAlumniCountByCourse = 0;
 
-            if($users->where('course',$course->course)->count() > 0) {
-                $allAlumniCountByCourse = $users->where('course',$course->course)->count();
-                $verifiedAlumniCountByCourse = $users->where('course',$course->course)->where('user_type', 'alumni')->where('survey_completed', true)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count();
+            if ($users->where('course', $course->course)->count() > 0) {
+                $allAlumniCountByCourse = $users->where('course', $course->course)->count();
+                $verifiedAlumniCountByCourse = $users->where('course', $course->course)->where('user_type', 'alumni')->where('survey_completed', true)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count();
             }
             array_push($labels, $course->course);
             array_push($dataAll, $allAlumniCountByCourse);
             array_push($dataVerified, $verifiedAlumniCountByCourse);
         }
 
-       //bar alumnigender
-       $alumniByGenderLabels = [];
-       $alumniMale = [];
-       $alumniFemale = [];
+        //bar alumnigender
+        $alumniByGenderLabels = [];
+        $alumniMale = [];
+        $alumniFemale = [];
 
-       foreach ($courses as $course) {    
-       $alumniMaleCount = 0;
-       $alumniFemaleCount = 0;
+        foreach ($courses as $course) {
+            $alumniMaleCount = 0;
+            $alumniFemaleCount = 0;
 
-           if($users->where('course',$course->course)->count() > 0) {
-               $alumniMaleCount = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-               $alumniFemaleCount = $users->where('gender','female')->whereNotNull('email_verified_at')->count();
-           }
-           array_push($alumniByGenderLabels, $course->course);
-           array_push($alumniMale, $alumniMaleCount);
-           array_push($alumniFemale, $alumniFemaleCount);
-       }
+            if ($users->where('course', $course->course)->count() > 0) {
+                $alumniMaleCount = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
+                $alumniFemaleCount = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+            }
+            array_push($alumniByGenderLabels, $course->course);
+            array_push($alumniMale, $alumniMaleCount);
+            array_push($alumniFemale, $alumniFemaleCount);
+        }
 
-       //pie emp status
+        //pie emp status
         $maleEmployedData = [];
         $femaleEmployedData = [];
         $maleUnemployedData = [];
@@ -222,28 +217,28 @@ class PageController extends Controller
         $maleSelfEmployed = 0;
         $femaleSelfEmployed = 0;
 
-        foreach ($verifiedUsers as $alumni) {    
+        foreach ($verifiedUsers as $alumni) {
 
 
-           if($alumni->where('employment_status', 'employed')->count() > 0) {
-               $maleEmployed = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-               $femaleEmployed = $users->where('gender','female')->whereNotNull('email_verified_at')->count();
-           }
-           if($alumni->where('employment_status', 'unemployed')->count() > 0) {
-            $maleUnemployed = $users->where('gender', 'male')->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
-            $femaleUnemployed = $users->where('gender','female')->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
+            if ($alumni->where('employment_status', 'employed')->count() > 0) {
+                $maleEmployed = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
+                $femaleEmployed = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+            }
+            if ($alumni->where('employment_status', 'unemployed')->count() > 0) {
+                $maleUnemployed = $users->where('gender', 'male')->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
+                $femaleUnemployed = $users->where('gender', 'female')->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
+            }
+            if ($alumni->where('employment_status', 'self-employed')->count() > 0) {
+                $maleSelfEmployed = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
+                $femaleSelfEmployed = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+            }
+            array_push($maleEmployedData, $maleEmployed);
+            array_push($femaleEmployedData, $femaleEmployed);
+            array_push($maleUnemployedData, $maleUnemployed);
+            array_push($femaleUnemployedData, $femaleUnemployed);
+            array_push($maleSelfEmployedData, $maleSelfEmployed);
+            array_push($femaleSelfEmployedData, $femaleSelfEmployed);
         }
-        if($alumni->where('employment_status', 'self-employed')->count() > 0) {
-            $maleSelfEmployed = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-            $femaleSelfEmployed = $users->where('gender','female')->whereNotNull('email_verified_at')->count();
-        }
-           array_push($maleEmployedData, $maleEmployed);
-           array_push($femaleEmployedData, $femaleEmployed);
-           array_push($maleUnemployedData, $maleUnemployed);
-           array_push($femaleUnemployedData, $femaleUnemployed);
-           array_push($maleSelfEmployedData, $maleSelfEmployed);
-           array_push($femaleSelfEmployedData, $femaleSelfEmployed);
-       }
 
         $data = [
             //users
@@ -331,7 +326,7 @@ class PageController extends Controller
     {
         return view('admin.gallery', [
             'galleryAlbum' => $galleryAlbum
-                ->where('id', '!=', 1000)  // Exclude the album with ID 1000
+                ->where('id', '!=', 1000) // Exclude the album with ID 1000
                 ->latest()
                 ->get(),
             'photos' => $photos->latest()->get()
@@ -395,8 +390,8 @@ class PageController extends Controller
     {
         return view('admin.edit-profile', ['user' => auth()->user()]);
     }
-    
-    
+
+
 
 
 

@@ -152,7 +152,24 @@
                         </li>
                     @endcan
 
-                    <li class="nav-item">
+                    <li class="nav-item @if (Request::is('admin/events') ||
+                            Request::is('admin/add-events') ||
+                            Request::is('admin/edit-events*') ||
+                            Request::is('admin/news') ||
+                            Request::is('admin/add-news') ||
+                            Request::is('admin/edit-news*') ||
+                            Request::is('admin/jobs') ||
+                            Request::is('admin/add-jobs') ||
+                            Request::is('admin/edit-jobs*') ||
+                            Request::is('admin/forums') ||
+                            Request::is('admin/add-forums') ||
+                            Request::is('admin/edit_forum*') ||
+                            Request::is('admin/surveys') ||
+                            Request::is('admin/new_survey') ||
+                            Request::is('admin/edit_survey*') ||
+                            Request::is('admin/gallery') ||
+                            Request::is('admin/add-gallery') ||
+                            Request::is('admin/edit-album*')) active @endif">
                         <a class="nav-link" data-toggle="collapse" href="#ui-contents" aria-expanded="false"
                             aria-controls="ui-contents">
                             <i class="icon-layout menu-icon"></i>
@@ -162,23 +179,23 @@
                         <div class="collapse" id="ui-contents">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/events')) text-warning @endif"
+                                        class="nav-link @if (Request::is('admin/events') || Request::is('admin/add-events') || Request::is('admin/edit-events*')) text-warning @endif"
                                         href="/admin/events">Events</a>
                                 </li>
                                 <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/news')) text-warning @endif"
+                                        class="nav-link @if (Request::is('admin/news') || Request::is('admin/add-news') || Request::is('admin/edit-news*')) text-warning @endif"
                                         href="/admin/news">News</a></li>
                                 <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/jobs')) text-warning @endif"
+                                        class="nav-link @if (Request::is('admin/jobs') || Request::is('admin/add-jobs') || Request::is('admin/edit-jobs*')) text-warning @endif"
                                         href="/admin/jobs">Jobs</a></li>
                                 <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/forums')) text-warning @endif"
+                                        class="nav-link @if (Request::is('admin/forums') || Request::is('admin/add-forums') || Request::is('admin/edit_forum*')) text-warning @endif"
                                         href="/admin/forums">Forums</a></li>
                                 <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/surveys')) text-warning @endif"
+                                        class="nav-link @if (Request::is('admin/surveys') || Request::is('admin/new_survey') || Request::is('admin/edit_survey*')) text-warning @endif"
                                         href="/admin/surveys">Surveys</a></li>
                                 <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/gallery')) text-warning @endif"
+                                        class="nav-link @if (Request::is('admin/gallery') || Request::is('admin/add-gallery') || Request::is('admin/edit-album*')) text-warning @endif"
                                         href="/admin/gallery">Gallery</a></li>
                             </ul>
                         </div>
@@ -201,7 +218,7 @@
                     @if (Request::is('admin/add-courses') || Request::is('admin/edit-courses/*'))
                         <a href="/admin/courses">&laquo; Back</a>
                     @endif
-                    @if (Request::is('admin/add-survey') || Request::is('admin/edit-survey/*'))
+                    @if (Request::is('admin/new_survey') || Request::is('admin/edit_survey/*'))
                         <a href="/admin/surveys">&laquo; Back</a>
                     @endif
                     @if (Request::is('admin/add-news') || Request::is('admin/edit-news/*'))
@@ -216,7 +233,7 @@
                     @if (Request::is('admin/add-jobs') || Request::is('admin/edit-jobs/*'))
                         <a href="/admin/jobs">&laquo; Back</a>
                     @endif
-                    @if (Request::is('admin/add-forums') || Request::is('admin/edit-forums/*'))
+                    @if (Request::is('admin/new_forum') || Request::is('admin/edit_forum/*'))
                         <a href="/admin/forums">&laquo; Back</a>
                     @endif
                     {{ $slot }}

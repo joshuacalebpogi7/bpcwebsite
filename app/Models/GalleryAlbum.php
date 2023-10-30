@@ -29,4 +29,8 @@ class GalleryAlbum extends Model
     {
         return $this->hasMany(Gallery::class, 'gallery_album_id');
     }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }

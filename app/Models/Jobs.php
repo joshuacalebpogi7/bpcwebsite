@@ -28,4 +28,8 @@ class Jobs extends Model
     {
         return $this->belongsToMany(User::class, 'user_jobs', 'job_id', 'user_id');
     }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }

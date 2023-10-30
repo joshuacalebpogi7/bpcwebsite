@@ -17,7 +17,8 @@ class surveys_posted extends Model
         'surveyDesc',
         'surveyLink',
         'surveyEditorLink',
-        'active'
+        'active',
+        'forFirstTimers'
     ];
 
     public function survey_questions()

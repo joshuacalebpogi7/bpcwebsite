@@ -8,12 +8,17 @@ use App\Models\forum_replies;
 
 class ViewForum extends Component
 {
+    public $user;
     public $forum_selected;
-
     public $forumTitle;
     public $forumBody;
     public $forumReplies = [];
     public $active;
+
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
     public function mount($forum_selected)
     {
         $this->loadForumData($forum_selected);

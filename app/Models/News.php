@@ -27,4 +27,10 @@ class News extends Model
             return $value ? '/storage/news-thumbnail/' . $value : '/images/news.png';
         });
     }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
 }

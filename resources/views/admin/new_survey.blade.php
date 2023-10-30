@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<x-admin-layout>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -16,7 +17,7 @@
 
     <!-- Scripts -->
     @livewireStyles
-</head>
+</head> --}}
 
 <body>
     <hr>
@@ -29,3 +30,4 @@
 </body>
 
 </html>
+</x-admin-layout>

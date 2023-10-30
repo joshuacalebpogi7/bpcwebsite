@@ -54,7 +54,7 @@
             @if (Request::is('admin/add-courses') || Request::is('admin/edit-courses/*'))
                 <a href="/admin/courses">&laquo; Back</a>
             @endif
-            @if (Request::is('admin/add-survey') || Request::is('admin/edit-survey/*'))
+            @if (Request::is('admin/new_survey') || Request::is('admin/edit_survey/*'))
                 <a href="/admin/surveys">&laquo; Back</a>
             @endif
             @if (Request::is('admin/add-news') || Request::is('admin/edit-news/*'))
@@ -69,7 +69,7 @@
             @if (Request::is('admin/add-jobs') || Request::is('admin/edit-jobs/*'))
                 <a href="/admin/jobs">&laquo; Back</a>
             @endif
-            @if (Request::is('admin/add-forums') || Request::is('admin/edit-forums/*'))
+            @if (Request::is('admin/new_forum') || Request::is('admin/edit_forum/*'))
                 <a href="/admin/forums">&laquo; Back</a>
             @endif
 

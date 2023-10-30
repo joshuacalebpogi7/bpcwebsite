@@ -10,35 +10,25 @@ return new class extends Migration {
      */
     public function up(): void
     {
+
         Schema::create('surveys_posted', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('surveyAuthor')->nullable();
             $table->string('surveyType');
             $table->string('surveyTitle');
-            $table->string('authorID')->nullable();
             $table->string('surveyDesc')->nullable();
             $table->string('surveyLink')->nullable();
             $table->string('surveyEditorLink')->nullable();
-            $table->tinyInteger('active')->default(0);
-
-            // Uncomment the following lines to add a foreign key constraint
-            /*$table->unsignedBigInteger('surveyAuthor')->nullable();
-            $table->foreign('surveyAuthor')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');*/
+            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('forFirstTimers')->default(0);
         });
 
         Schema::create('survey_questions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('parentSurvey');
-            /*             $table->foreign('parentSurvey')
-                            ->references('id')
-                            ->on('surveys_posted')
-                            ->onDelete('cascade'); */
             $table->unsignedBigInteger('questionNum');
-            //$table->index('questionNum'); // Add this line to create an index on 'questionNum'
             $table->string('questionType');
             $table->string('questionDesc');
         });
@@ -51,18 +41,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('choiceNum');
             $table->string('choiceDesc');
             $table->unsignedBigInteger('parentSurvey');
-            /*             $table->foreign('parentSurvey')
-                            ->references('id')
-                            ->on('surveys_posted')
-                            ->onDelete('cascade'); */
             $table->unsignedBigInteger('parentQuestion');
-            /*
-            $table->index('parentQuestion'); // Add this line to create an index on 'parentQuestion'
-            $table->foreign('parentQuestion')
-                ->references('questionNum')
-                ->on('survey_questions')
-                ->onDelete('cascade');
-                */
         });
 
 
@@ -74,25 +53,14 @@ return new class extends Migration {
             $table->string('choiceID')->nullable();
             $table->unsignedBigInteger('respondentID')->nullable();
             $table->unsignedBigInteger('parentSurvey');
-            /*             $table->foreign('parentSurvey')
-                            ->references('id')
-                            ->on('surveys_posted')
-                            ->onDelete('cascade'); */
             $table->unsignedBigInteger('questionAnswered')->nullable();
             $table->tinyInteger('finishedGoogleForms')->nullable();
-            /*
-            $table->foreign('questionAnswered')
-                ->references('questionNum')
-                ->on('survey_questions')
-                ->onDelete('cascade');
-                */
         });
 
         Schema::create('finished_surveys', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('parentSurvey');
-            
             $table->unsignedBigInteger('respondentID')->nullable();
         });
     }
