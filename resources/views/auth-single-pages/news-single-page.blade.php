@@ -112,8 +112,9 @@
                     <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
 
                     <div class="sidebar__names">
-                        <h3 class="sidebar__name">Gab Pogi</h3>
-                        <span class="sidebar__email">bpc@email.com</span>
+                        <h3 class="sidebar__name"> {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
+                        </h3>
+                        <span class="sidebar__email">{{ auth()->user()->email }}</span>
                     </div>
 
                     <i class="ri-arrow-right-s-line"></i>
@@ -128,13 +129,13 @@
     <main class="main container" id="main">
 
     </main>
-    
+
     <x-slot name="title">
         {{ $news->title }}
     </x-slot>
-        @vite(['resources/css/styles.css'])
-        @vite(['resources/css/post.css'])
-        @vite(['resources/js/post.js'])
+    @vite(['resources/css/styles.css'])
+    @vite(['resources/css/post.css'])
+    @vite(['resources/js/post.js'])
 
 
     <section class="post-header">
@@ -162,4 +163,3 @@
 
         </div>
     </div>
-

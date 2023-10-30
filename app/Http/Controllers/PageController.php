@@ -130,7 +130,7 @@ class PageController extends Controller
     //single pages
     public function jobsSinglePage(Jobs $jobs)
     {
-        return view('auth-single-pages.jobs-single-page', ['jobs' => $jobs]);
+        return view('auth-single-pages.jobs-single-page', ['job' => $jobs]);
     }
     public function newsSinglePage(News $news)
     {

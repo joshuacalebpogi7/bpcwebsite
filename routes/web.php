@@ -46,7 +46,7 @@ Route::get('/survey_first_time', [PageController::class, "surveyFirstTime"])->mi
 Route::get('/additional-info', [PageController::class, "addInfo"])->middleware('checkAuthRequirements');
 Route::get('/edit-profile', [PageController::class, "editProfile"])->middleware('authUser');
 
-Route::get('/jobs/{jobs:title}', [PageController::class, "jobsSinglePage"])->middleware('authUser');
+Route::get('/jobs/{jobs:job_title}', [PageController::class, "jobsSinglePage"])->middleware('authUser');
 Route::get('/events/{events:title}', [PageController::class, "eventsSinglePage"])->middleware('authUser');
 Route::get('/news/{news:title}', [PageController::class, "newsSinglePage"])->middleware('authUser');
 Route::get('/gallery/{gallery:title}', [PageController::class, "gallerySinglePage"])->middleware('authUser');
