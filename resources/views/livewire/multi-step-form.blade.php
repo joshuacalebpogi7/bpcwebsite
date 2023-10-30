@@ -154,17 +154,66 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group">
-                                <label for="monthly-salary">Monthly salary</label>
-                                <input wire:model="monthly_salary"
-                                    {{ in_array($employment_status, ['unemployed', 'self-employed', '']) ? 'disabled' : '' }}
-                                    class="form-control" type="text" placeholder="Monthly salary"
-                                    name="monthly_salary" id="monthly-salary">
-                                <span class="text-danger">
-                                    @error('monthly_salary')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="monthly-salary">Monthly salary</label>
+                                    <input wire:model="monthly_salary"
+                                        {{ in_array($employment_status, ['unemployed', 'self-employed', '']) ? 'disabled' : '' }}
+                                        class="form-control" type="text" placeholder="Monthly salary"
+                                        name="monthly_salary" id="monthly-salary">
+                                    <span class="text-danger">
+                                        @error('monthly_salary')
+                                            <p>{{ $message }}</p>
+                                        @enderror
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="category">Job Category</label>
+                                    <select wire:model="category" class="form-control" name="category"
+                                        id="category">
+                                        <option value="" selected>--Job Category--</option>
+                                        <option value="Sales and Marketing">
+                                            Sales and Marketing
+                                        </option>
+                                        <option value="Customer Service">
+                                            Customer Service
+                                        </option>
+                                        <option value="Human Resources">
+                                            Human Resources</option>
+                                        <option value="Accounting and Finance">
+                                            Accounting and Finance</option>
+                                        <option value="Engineering">
+                                            Engineering</option>
+                                        <option value="Information Technology (IT)">
+                                            Information Technology (IT)</option>
+                                        <option value="Research and Development">
+                                            Research and Development</option>
+                                        <option value="Management">
+                                            Management</option>
+                                        <option value="Healthcare and Medical">
+                                            Healthcare and Medical</option>
+                                        <option value="Legal">
+                                            Legal</option>
+                                        <option value="Teaching and Education">
+                                            Teaching and Education</option>
+                                        <option value="Design and Creative">
+                                            HDesign and Creative</option>
+                                        <option value="Manufacturing and Production">
+                                            Manufacturing and Production</option>
+                                        <option value="Operations">
+                                            Operations</option>
+                                        <option value="Customer Support">
+                                            Customer Support</option>
+                                        <option value="Administration">
+                                            Administration</option>
+                                    </select>
+                                    @error('category')
                                         <p>{{ $message }}</p>
                                     @enderror
-                                </span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

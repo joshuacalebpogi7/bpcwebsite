@@ -109,7 +109,7 @@
 
             <a href="/edit-profile">
                 <div class="sidebar__account">
-                    <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
+                    <img src="{{ auth()->user()->avatar }}" alt="sidebar image" class="sidebar__perfil">
 
                     <div class="sidebar__names">
                         <h3 class="sidebar__name"> {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
@@ -163,3 +163,6 @@
 
         </div>
     </div>
+</body>
+
+</html>

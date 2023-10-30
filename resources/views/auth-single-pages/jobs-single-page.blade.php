@@ -102,7 +102,7 @@
             <a href="/edit-profile">
                 <div class="sidebar__account">
 
-                    <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
+                    <img src="{{ auth()->user()->avatar }}" alt="sidebar image" class="sidebar__perfil">
 
                     <div class="sidebar__names">
                         <h3 class="sidebar__name"> {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
@@ -130,7 +130,8 @@
                                 style="width: 80px; height: 80px;">
                             <div class="text-start ps-4">
                                 <h3 class="mb-3">{{ $job->job_title }}</h3>
-                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New
+                                <span class="text-truncate me-3"><i
+                                        class="fa fa-map-marker-alt text-primary me-2"></i>New
                                     York, USA</span>
                                 <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full
                                     Time</span>
@@ -138,7 +139,7 @@
                                         class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
                             </div>
                         </div>
-    
+
                         <div class="mb-5">
                             <h4 class="mb-3">Job description</h4>
                             <p>{!! $job->description !!}</p>
@@ -174,7 +175,7 @@
                             </ul>
                         </div>
                     </div>
-    
+
                     <div class="col-lg-4">
                         <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                             <h4 class="mb-4">Job Summery</h4>
@@ -187,7 +188,22 @@
                                 <i class="fa fa-angle-right text-primary me-2"></i> Salary:
                                 ${{ number_format($job->salary, 0, '', ',') }}
                             </p>
-    
+                            <p>
+                                <i class="fa fa-angle-right text-primary me-2"></i> Salary:
+                                @php
+                                    $salary = $job->salary;
+                                    if ($salary >= 1000000) {
+                                        $formattedSalary = '$' . number_format($salary / 1000000) . 'm';
+                                    } elseif ($salary >= 1000) {
+                                        $formattedSalary = '$' . number_format($salary / 1000) . 'k';
+                                    } else {
+                                        $formattedSalary = '$' . number_format($salary, 0, '', ',');
+                                    }
+                                @endphp
+                                {{ $formattedSalary }}
+                            </p>
+
+
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ $job->location }}</p>
                             <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Status:
                                 {{ $job->status }}</p>
@@ -200,7 +216,7 @@
             </div>
         </div>
     </main>
-    
+
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
