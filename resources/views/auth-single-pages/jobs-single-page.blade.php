@@ -195,7 +195,7 @@
                         </div>
                         <div class="col-12">
                             <div>
-                                <form action="/submit-application/{{ $job->id }}" method="POST">
+                                <form action="{{-- /submit-application/{{ $job->id }} --}}#" method="POST">
                                     @csrf
                                     <!-- Your form fields go here -->
                                     <a href="mailto:{{ $job->email }}"><button class="btn btn-primary w-100"
