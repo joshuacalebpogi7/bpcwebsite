@@ -179,20 +179,20 @@ return new class extends Migration {
             'forumBody' => 'YourForumBody',
             'forumAuthor' => 1,
             // Replace with the author's ID
-            'active' => 0,
+            'active' => 1,
             // Set the active status as needed (0 for inactive)
         ]);
 
         // Insert into the 'forum_replies' table
         DB::table('forum_replies')->insert([
-            'parentForum' => 'YourParentForum',
+            'parentForum' => 1,
             // Replace with the parent forum
-            'replyingTo' => 'YourReplyingTo',
+            'replyingTo' => 1,
             // Replace with the ID of the message being replied to
             'replyBody' => 'YourReplyBody',
             'authorID' => 1,
             // Replace with the author's ID
-            'active' => 0,
+            'active' => 1,
             // Set the active status as needed (0 for inactive)
         ]);
         /* INSERT FORUM VALUES */

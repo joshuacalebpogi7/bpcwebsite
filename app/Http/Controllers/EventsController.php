@@ -85,7 +85,7 @@ class EventsController extends Controller
             'thumbnail' => 'nullable|image|max:5000',
             
         ]);
-        dd($incomingFields);
+        ($incomingFields);
 
         if ($request->hasFile('thumbnail')) {
             $thumbnail_name = $incomingFields['title'] . uniqid() . '.jpg';

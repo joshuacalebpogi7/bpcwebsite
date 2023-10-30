@@ -22,8 +22,8 @@ return new class extends Migration {
         Schema::create('forum_replies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('parentForum');
-            $table->string('replyingTo');
+            $table->unsignedBigInteger('parentForum');
+            $table->unsignedBigInteger('replyingTo');
             $table->string('replyBody')->nullable();
             $table->unsignedBigInteger('authorID')->nullable();
             $table->tinyInteger('active')->default(0);

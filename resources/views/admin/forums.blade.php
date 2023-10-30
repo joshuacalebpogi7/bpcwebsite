@@ -11,7 +11,7 @@
     @endpush
     <h2>Forums Records</h2>
     <div>
-        <a href="{{ url('new_forum') }}"><button class="btn btn-primary mb-3"><img
+        <a href="{{ url('admin/new_forum') }}"><button class="btn btn-primary mb-3"><img
                     src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Forum</button></a>
     </div>
 
@@ -31,11 +31,10 @@
                                             <th>Id</th>
                                             <th>Action</th>
                                             <th>Title</th>
-                                            <th>Body</th>
-                                            <th>Posted By</th>
-                                            <th>Updated By</th>
+                                            <th>Description</th>
+                                            <th>Author</th>
                                             <th>Date Created</th>
-                                            <th>Date Updated</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,17 +67,21 @@
 
                                                 </td>
                                                 <td>
-                                                    <a
-                                                        href="{{ route('view_forum', ['forum_selected' => $forum_posted->id]) }}">
-                                                        {{ $forum_posted->forumTitle }}
+
+                                                    <a href="{{-- route('view_forum', ['forum_selected' => $forum_posted->id]) --}}">
+                                                        <button class = "survey_action">
+                                                            {{ $forum_posted->forumTitle }}
+                                                        </button>
                                                     </a>
                                                 </td>
-                                                <td>{{ $forum_posted->forumBody }}</td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $forum_posted->forumDesc }}</td>
+                                                <td>
+                                                    @php
+                                                        $author = $authors->firstWhere('id', $forum_posted->forumAuthor);
+                                                    @endphp
+                                                    {{ $author ? '[ID ' . $author->id . '] ' . $author->first_name . ' ' . $author->last_name : 'Author not found' }}
+                                                </td>
                                                 <td>{{ $forum_posted->created_at }}</td>
-                                                <td>{{ $forum_posted->updated_at }}</td>
-
                                             </tr>
                                         @endforeach
                                     </tbody>
