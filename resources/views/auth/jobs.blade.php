@@ -48,9 +48,14 @@
                                 <p>
                                     <ion-icon name="hourglass-outline"></ion-icon>{{ $job->job_type }}
                                 </p>
-                                {{-- <p>
-                                    <ion-icon name="people-outline"></ion-icon>200 Applicants
-                                </p> --}}
+                                <p>
+                                    {{-- @php
+                                        dd($userJobs->where('job_id', $job->id)->count());
+                                    @endphp --}}
+                                    <ion-icon
+                                        name="people-outline"></ion-icon>{{ $userJobs->where('job_id', $job->id)->count() }}
+                                    Applicants
+                                </p>
                             </div>
                     </div>
                     <div class="card-right">
