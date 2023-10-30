@@ -1,7 +1,8 @@
 <x-admin-layout>
-    <h2>Content Creators list</h2>
+    <h2>Content Creators Records</h2>
     <div>
-        <a href="/admin/add-admin"><button class="btn btn-primary mb-3">Add Content Creators</button></a>
+        <a href="/admin/add-admin"><button class="btn btn-primary mb-3"><img
+                    src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Content Creators</button></a>
     </div>
 
     <div class="row">
@@ -16,9 +17,6 @@
                                     style="width:100%">
                                     <thead>
                                         <tr>
-                                            {{-- @if (data - tables)
-                    <th>Action</th>
-                    @endif --}}
                                             <th>Id</th>
                                             <th>Action</th>
                                             <th>Avatar</th>
@@ -42,7 +40,14 @@
                                                         <a href="/admin/edit-admin/{{ $user->username }}"
                                                             class="flex-fill">
                                                             <button
-                                                                class="btn btn-success me-1 w-100 h-100">View</button>
+                                                                class="btn btn-light me-1 w-100 h-100 p-1 border mb-1">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                        class="mr-2" alt="Edit Icon">
+                                                                    Edit
+                                                                </div>
+                                                            </button>
                                                         </a>
 
                                                         <!-- Second Row - Delete Button -->
@@ -51,7 +56,14 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button
-                                                                class="btn btn-danger mt-1 flex-fill w-100 h-100">Delete</button>
+                                                                class="btn btn-light mt-1 flex-fill w-100 h-100 p-1 border">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                        class="mr-2" alt="Delete Icon">
+                                                                    Delete
+                                                                </div>
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </td>

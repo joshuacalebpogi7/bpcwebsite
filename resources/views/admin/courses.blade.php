@@ -1,7 +1,8 @@
 <x-admin-layout>
-    <h2>Course List</h2>
+    <h2>Courses Records</h2>
     <div>
-        <a href="/admin/add-courses"><button class="btn btn-primary mb-3">Add Courses</button></a>
+        <a href="/admin/add-courses"><button class="btn btn-primary mb-3"><img
+                    src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Courses</button></a>
     </div>
 
 
@@ -13,13 +14,17 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table id="coursetable" class="display expandable-table" style="width:100%">
+                                <table id="coursetable" class="display expandable-table table-hover rounded shadow-sm"
+                                    style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Action</th>
                                             <th>Course Abbreviation</th>
                                             <th>Full Course Name</th>
+                                            <th>Employed</th>
+                                            <th>Self-employed</th>
+                                            <th>Unemployed</th>
                                             <th>Date added</th>
                                             <th>Date updated</th>
                                         </tr>
@@ -35,7 +40,14 @@
                                                         <a href="/admin/edit-courses/{{ $course->course }}"
                                                             class="flex-fill">
                                                             <button
-                                                                class="btn btn-success me-1 w-100 h-100">View</button>
+                                                                class="btn btn-light me-1 w-100 h-100 p-1 border mb-1">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                        class="mr-2" alt="Edit Icon">
+                                                                    Edit
+                                                                </div>
+                                                            </button>
                                                         </a>
 
                                                         <!-- Second Row - Delete Button -->
@@ -44,12 +56,24 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button
-                                                                class="btn btn-danger mt-1 flex-fill w-100 h-100">Delete</button>
+                                                                class="btn btn-light mt-1 flex-fill w-100 h-100 p-1 border">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                        class="mr-2" alt="Delete Icon">Delete
+                                                                </div>
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </td>
                                                 <td>{{ $course->course }}</td>
                                                 <td>{{ $course->description }}</td>
+                                                <td>{{ $user->where('course', $course->course)->where('employment_status', 'employed')->count() }}
+                                                </td>
+                                                <td>{{ $user->where('course', $course->course)->where('employment_status', 'self-employed')->count() }}
+                                                </td>
+                                                <td>{{ $user->where('course', $course->course)->where('employment_status', 'unemployed')->count() }}
+                                                </td>
                                                 <td>{{ $course->created_at->format('M d, Y h:i A') }}</td>
                                                 <td>{{ $course->updated_at->format('M d, Y h:i A') }}</td>
                                             </tr>

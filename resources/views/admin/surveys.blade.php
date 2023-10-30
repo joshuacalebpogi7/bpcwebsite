@@ -1,13 +1,13 @@
 <x-admin-layout>
     @push('scripts')
-    <script>
-        function confirmDeleteSurvey(surveyData) {
-            if (confirm('Are you sure you want to delete "' + surveyData.surveyTitle + '"?')) {
-                // If the user confirms, redirect to the delete route
-                window.location.href = "/delete_survey/" + surveyData.id;
+        <script>
+            function confirmDeleteSurvey(surveyData) {
+                if (confirm('Are you sure you want to delete "' + surveyData.surveyTitle + '"?')) {
+                    // If the user confirms, redirect to the delete route
+                    window.location.href = "/delete_survey/" + surveyData.id;
+                }
             }
-        }
-    </script>
+        </script>
     @endpush
     <h2>Survey Records</h2>
     <div>
@@ -30,60 +30,65 @@
                                                 <thead>
                                                     <tr>
 
-                                                        <th>#</th>
-                                                        <th>Title</th>
-                                                        <th>Description</th>
-                                                        <th>Author</th>
-                                                        <th>Survey Type</th>
-                                                        <th>Date Created</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                
-                                    <tbody>
-                                        @foreach ($survey_list as $survey_posted)
-                                        
-                                            <tr>
-                                                <td>{{ $survey_posted->id }}</td>
-                                                <td>
+                                                <th>Id</th>
+                                                <th>Action</th>
+                                                <th>Title</th>
+                                                <th>Description</th>
+                                                <th>Survey Type</th>
+                                                <th>Posted By</th>
+                                                <th>Updated By</th>
+                                                <th>Date Created</th>
+                                                <th>Date Updated</th>
 
-                                                    <a
-                                                        href="{{ route('edit_survey', ['survey_selected' => $survey_posted->id]) }}">
-                                                        <button class = "survey_action">
-                                                            {{ $survey_posted->surveyTitle }}
-                                                        </button>
-                                                    </a>
-                                                </td>
-                                                <td>{{ $survey_posted->surveyDesc }}</td>
-                                                <td>
-                                                    @php
-                                                        $author = $authors->firstWhere('id', $survey_posted->surveyAuthor);
-                                                    @endphp
-                                                    {{ $author ? '[ID ' . $author->id . '] ' . $author->first_name . ' ' . $author->last_name : 'Author not found' }}
-                                                </td>
-                                                @if ($survey_posted->surveyType === 'built_in')
-                                                    <td>Built-in</td>
-                                                @endif
-                                                @if ($survey_posted->surveyType === 'google_forms')
-                                                    <td>Google Forms</td>
-                                                @endif
-                                                <td>{{ $survey_posted->created_at }}</td>
-                                                <td>
-                                                    <div>
-                                                        <a
-                                                            href="{{ route('edit_survey', ['survey_selected' => $survey_posted->id]) }}"><button
-                                                                class = "survey_action">
-                                                                <img
-                                                                    src="{{ URL::asset('/images/icon-edit.svg') }}"> Edit</button></a>
-                                                        <br>
-                                                        <button class = "survey_action"
-                                                            onclick="confirmDeleteSurvey({{ json_encode($survey_posted) }})"><img
-                                                                src="{{ URL::asset('/images/icon-delete.svg') }}"> Delete</button>
-                                                    </div>
-                                                </td>
                                             </tr>
-                                        @endforeach
-                                        @endif
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach ($survey_list as $survey_posted)
+                                                <tr>
+                                                    <td>{{ $survey_posted->id }}</td>
+                                                    <td>
+                                                        <div>
+                                                            <a href="{{ route('edit_survey', ['survey_selected' => $survey_posted->id]) }}"
+                                                                class="flex-fill">
+                                                                <button class="btn btn-light me-1 p-1 border mb-1"
+                                                                    style="width: 150px;">
+                                                                    <div
+                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        <img src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                            class="mr-2" alt="Edit Icon">
+                                                                        Edit
+                                                                    </div>
+                                                                </button>
+                                                            </a>
+                                                            <br>
+                                                            <button class="btn btn-light mt-1 p-1 border"
+                                                                style="width: 150px;"
+                                                                onclick="confirmDeleteSurvey({{ json_encode($survey_posted) }})">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                        class="mr-2" alt="Delete Icon">Delete
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $survey_posted->surveyTitle }}</td>
+                                                    <td>{{ $survey_posted->surveyDesc }}</td>
+                                                    @if ($survey_posted->surveyType === 'built_in')
+                                                        <td>Built-in</td>
+                                                    @endif
+                                                    @if ($survey_posted->surveyType === 'google_forms')
+                                                        <td>Google Forms</td>
+                                                    @endif
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>{{ $survey_posted->created_at }}</td>
+                                                    <td>{{ $survey_posted->updated_at }}</td>
+
+                                                </tr>
+                                            @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
