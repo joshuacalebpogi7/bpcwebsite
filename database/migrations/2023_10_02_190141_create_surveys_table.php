@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        
+
         Schema::create('surveys_posted', function (Blueprint $table) {
             $table->id();
             $table->timestamps();

@@ -1,7 +1,5 @@
-{{-- <livewire:edit-survey :key="$refreshView" :survey_selected="$survey_selected"> --}}
-
-
-<!DOCTYPE html>
+<x-admin-layout>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -19,7 +17,7 @@
 
     <!-- Scripts -->
     @livewireStyles
-</head>
+</head> --}}
 
 <body>
     @livewire('edit-survey', ['survey_selected' => $survey_selected])
@@ -28,3 +26,4 @@
 </body>
 
 </html>
+</x-admin-layout>

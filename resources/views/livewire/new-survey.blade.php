@@ -1,5 +1,5 @@
 <div class="container">
-    <a href="{{ url('admin/surveys') }}"><button type = "button" class = "go-back-link">Go back</button></a>
+    {{-- <a href="{{ url('admin/surveys') }}"><button type = "button" class = "go-back-link">Go back</button></a> --}}
     <header class="header">
         <h1 id="title" class="text-center">Create New Questionnaire</h1>
         {{-- <label id="name-label">Survey Type</label>
@@ -11,22 +11,23 @@
     </header>
     <div>
         {{-- @if ($surveyType === 'Built_in') --}}
-        @dump($forFirstTimers)
         <form id="survey-form" wire:submit.prevent="saveBuiltIn">
             @csrf
             <div class="form-group">
                 <label>
                     <input type="checkbox" class="input-checkbox" id="active" wire:model="active">
                     Enabled</label>
+                <br>
                 <label>
                     <input type="checkbox" class="input-checkbox" id="forFirstTimers" wire:model="forFirstTimers">
                     For first time users</label>
                 <hr>
                 <label for="surveyTitle">Title:</label>
-                <input type="text" class="form-control" id="surveyTitle" wire:model="surveyTitle" required>
+                <input type="text" class="form-control" id="surveyTitle" autocomplete="off" wire:model="surveyTitle"
+                    required>
 
                 <label for="surveyDesc">Description:</label>
-                <input type="text" class="form-control" id="surveyDesc" wire:model="surveyDesc">
+                <input type="text" class="form-control" id="surveyDesc" autocomplete="off" wire:model="surveyDesc">
 
             </div>
             <div class = "form-group">
@@ -50,7 +51,7 @@
                     </label>
                     <select class="form-control" name="question_type" id="choiceType_for_question_{{ $questionIndex }}"
                         wire:model="questions.{{ $questionIndex }}.questionType">
-                        <option value="text">&#128292; User Input</option>
+                        <option value="text">&#128292; Textbox</option>
                         <option value="radio">&#128280; Multiple Choice</option>
                         <option value="checkbox">[&#10003;] Checkbox</option>
                         <option value="dropdown">[&#9660;] Dropdown</option>
@@ -61,7 +62,7 @@
                         id="question_num_{{ $questionIndex }}"
                         wire:model="questions.{{ $questionIndex + 1 }}.questionNum">
                     <input type="text" name="question_desc" class="form-control" id="question_{{ $questionIndex }}"
-                        placeholder="Question {{ $questionIndex + 1 }}"
+                        autocomplete="off" placeholder="Question {{ $questionIndex + 1 }}"
                         wire:model="questions.{{ $questionIndex }}.questionDesc" required>
 
                     {{-- @if ($questions[$questionIndex]['questionType'] != 'text') --}}
@@ -85,7 +86,7 @@
                                     </button>
                                 @endif
                                 <input class = "form-control input_choice" type="text" name="choiceDesc"
-                                    placeholder="Choice {{ $choiceIndex + 1 }}"
+                                    autocomplete="off" placeholder="Choice {{ $choiceIndex + 1 }}"
                                     wire:model="questions.{{ $questionIndex }}.choices.{{ $choiceIndex }}.choiceDesc">
                             </div>
                         @endforeach

@@ -81,7 +81,7 @@
                     </a>
 
                     <a href="/survey" class="sidebar__link {{ request()->is('survey') ? 'active-link' : '' }}">
-                        <i class="ri-gallery-fill"></i>
+                        <i class="ri-survey-line"></i>
                         <span class="sidebar__link-name">Survey</span>
                         <span class="sidebar__link-floating">Survey</span>
                     </a>

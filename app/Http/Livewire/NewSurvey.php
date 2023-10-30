@@ -10,6 +10,7 @@ use App\Models\survey_choices;
 
 class NewSurvey extends Component
 {
+    public $user;
     public $surveyType = '';
     public $surveyTitle;
     public $surveyDesc;
@@ -22,6 +23,7 @@ class NewSurvey extends Component
 
     public function __construct()
     {
+        $this->user = auth()->user();
         parent::__construct();
 
         // Initialize the questions array with an initial question
@@ -66,14 +68,15 @@ class NewSurvey extends Component
     {
         $questionNum = $this->questions[$questionIndex]['questionNum'];
         $choiceNum = count($this->questions[$questionIndex]['choices']) + 1;
-        
+
         $this->questions[$questionIndex]['choices'][] = [
             'questionNum' => $questionNum,
-            'choiceNum' => $choiceNum, // Add choiceNum here
+            'choiceNum' => $choiceNum,
+            // Add choiceNum here
             'choiceDesc' => '',
         ];
     }
-    
+
 
     public function removeChoice($questionIndex, $choiceIndex)
     {
@@ -82,11 +85,11 @@ class NewSurvey extends Component
     }
 
     public function saveBuiltIn()
-{
-    // Start a database transaction
-    //DB::beginTransaction();
+    {
+        // Start a database transaction
+        //DB::beginTransaction();
 
-    //try {
+        //try {
         // Create the survey and get its ID
         $questionnaire = surveys_posted::create([
             'surveyAuthor' => auth()->user()->id,
@@ -134,17 +137,17 @@ class NewSurvey extends Component
 
         // Reset the form upon successful query
         $this->resetForm();
-    //}
-    /*
-    catch (\Exception $e) {
-        // Rollback the transaction in case of any errors
-        DB::rollback();
+        //}
+        /*
+        catch (\Exception $e) {
+            // Rollback the transaction in case of any errors
+            DB::rollback();
 
-        // Handle the error, log it, or display a message to the user
-        // You can add your error handling logic here
+            // Handle the error, log it, or display a message to the user
+            // You can add your error handling logic here
+        }
+        */
     }
-    */
-}
 
 
     private function resetForm()
@@ -159,10 +162,10 @@ class NewSurvey extends Component
     {
         // Initialize an error message variable
         $errorMessage = '';
-    
+
         // Start a database transaction
         DB::beginTransaction();
-    
+
         try {
             // Create the survey and get its ID
             $questionnaire = surveys_posted::create([
@@ -175,22 +178,22 @@ class NewSurvey extends Component
                 'active' => $this->active,
                 'forFirstTimers' => $this->forFirstTimers,
             ]);
-    
+
             // Commit the transaction
             DB::commit();
-    
+
             // Reset the form upon successful query
             $this->resetGForm();
-            
+
         } catch (\Exception $e) {
             // Rollback the transaction in case of any errors
             DB::rollBack();
-    
+
             // Handle the error, log it, or display a message to the user
             // You can add your error handling logic here
             $errorMessage = 'An error occurred while saving the survey. Please try again.';
         }
-    
+
         // Optionally, you can display the error message if there was an issue
         if (!empty($errorMessage)) {
             // You can use this error message in your Blade template to show an alert to the user.

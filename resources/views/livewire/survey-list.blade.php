@@ -17,7 +17,6 @@
             <span class="title">Bulacan Polytechnic College Questionnaires</span>
             <hr class="solid" style="border-top: 3px solid #9f9d9d">
             @if (!$survey_list->isEmpty())
-                <p class="message">Before you continue, we need your participation in the following surveys</p>
                 @php
                     $allSurveysInactive = true;
                 @endphp
@@ -27,19 +26,38 @@
                         @php
                             $allSurveysInactive = false;
                         @endphp
+                        @if ($user->survey_completed == true)
+                            @if ($survey_posted['forFirstTimers'] == false)
+                                <div class="card_notification">
+                                    <div class="notification">
+                                        <div class="notiglow"></div>
+                                        <div class="notiborderglow"></div>
+                                        <div class="notititle">Survey #{{ $survey_posted->id }}:
+                                            {{ $survey_posted->surveyTitle }}</div>
 
-                        <div class="card_notification">
-                            <div class="notification">
-                                <div class="notiglow"></div>
-                                <div class="notiborderglow"></div>
-                                <div class="notititle">Survey #{{ $survey_posted->id }}:
-                                    {{ $survey_posted->surveyTitle }}</div>
+                                        <div class="notibody">{{ $survey_posted->surveyDesc }}</div>
+                                        <a class="start_survey"
+                                            href="{{ route('answer_survey', ['survey_selected' => $survey_posted->id]) }}">START</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @elseif ($user->survey_completed == false)
+                            @if ($survey_posted['forFirstTimers'] == true)
+                            <p class="message">Before you continue, we need your participation in the following surveys</p>
+                                <div class="card_notification">
+                                    <div class="notification">
+                                        <div class="notiglow"></div>
+                                        <div class="notiborderglow"></div>
+                                        <div class="notititle">Survey #{{ $survey_posted->id }}:
+                                            {{ $survey_posted->surveyTitle }}</div>
 
-                                <div class="notibody">{{ $survey_posted->surveyDesc }}</div>
-                                <a class="start_survey"
-                                    href="{{ route('answer_survey', ['survey_selected' => $survey_posted->id]) }}">START</a>
-                            </div>
-                        </div>
+                                        <div class="notibody">{{ $survey_posted->surveyDesc }}</div>
+                                        <a class="start_survey"
+                                            href="{{ route('answer_survey', ['survey_selected' => $survey_posted->id]) }}">START</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     @endif
                 @endforeach
 
@@ -52,3 +70,4 @@
 
         </div>
     </div>
+</div>
