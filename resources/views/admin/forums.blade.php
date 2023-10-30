@@ -59,8 +59,7 @@
                                                     </td>
                                                     <td>
 
-                                                        <a
-                                                            href="{{-- route('view_forum', ['forum_selected' => $forum_posted->id]) --}}">
+                                                        <a href="{{ route('admin/view_forum', ['forum_selected' => $forum_posted->id]) }}">
                                                             <button class = "survey_action">
                                                                 {{ $forum_posted->forumTitle }}
                                                             </button>

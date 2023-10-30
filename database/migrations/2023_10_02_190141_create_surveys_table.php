@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('surveyAuthor')->nullable();
+            $table->unsignedBigInteger('surveyUpdateAuthor')->nullable();
             $table->string('surveyType');
             $table->string('surveyTitle');
             $table->string('surveyDesc')->nullable();
