@@ -15,7 +15,9 @@ return new class extends Migration {
             $table->timestamps();
             $table->string('forumTitle');
             $table->string('forumBody')->nullable();
+            $table->string('forumCategory')->nullable();
             $table->unsignedBigInteger('forumAuthor')->nullable();
+            $table->unsignedBigInteger('forumUpdateAuthor')->nullable();
             $table->tinyInteger('active')->default(0);
         }); //
 
@@ -25,7 +27,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('parentForum');
             $table->unsignedBigInteger('replyingTo');
             $table->string('replyBody')->nullable();
-            $table->unsignedBigInteger('authorID')->nullable();
+            $table->unsignedBigInteger('replyAuthor')->nullable();
             $table->tinyInteger('active')->default(0);
         }); //
     }

@@ -25,8 +25,6 @@
                     <option value="0">All</option>
                     <option value="1">Newest Post</option>
                     <option value="2">Oldest Post</option>
-                    <option value="3">Most Relevant</option>
-                    <option value="4">Highest Paid</option>
                 </select>
             </div>
         </div>

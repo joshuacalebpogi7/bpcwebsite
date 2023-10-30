@@ -117,6 +117,7 @@ return new class extends Migration {
         /* INSERT SURVEY VALUES */
         DB::table('surveys_posted')->insert([
             'surveyAuthor' => 1,
+            'surveyUpdateAuthor' => 1,
             'created_at' => now(),
             'updated_at' => now(),
             // Replace with the author's ID
@@ -178,6 +179,7 @@ return new class extends Migration {
             'forumTitle' => 'YourForumTitle',
             'forumBody' => 'YourForumBody',
             'forumAuthor' => 1,
+            'forumUpdateAuthor' => 1,
             // Replace with the author's ID
             'active' => 1,
             // Set the active status as needed (0 for inactive)
@@ -190,7 +192,7 @@ return new class extends Migration {
             'replyingTo' => 1,
             // Replace with the ID of the message being replied to
             'replyBody' => 'YourReplyBody',
-            'authorID' => 1,
+            'replyAuthor' => 1,
             // Replace with the author's ID
             'active' => 1,
             // Set the active status as needed (0 for inactive)
