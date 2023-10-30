@@ -306,9 +306,9 @@ class PageController extends Controller
     {
         return view('admin.users', ['users' => $user->latest()->get()->where('user_type', '===', 'alumni')]);
     }
-    public function adminCourses(Course $courses)
+    public function adminCourses(Course $courses, User $user)
     {
-        return view('admin.courses', ['courses' => $courses->latest()->get()]);
+        return view('admin.courses', ['courses' => $courses->latest()->get(), 'user' => $user]);
     }
     public function adminSurvey(surveys_posted $survey_list)
     {

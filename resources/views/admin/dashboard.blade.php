@@ -218,6 +218,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
                                         <div class="ml-xl-4 mt-3">
+
                                             <p class="card-title">Employment Status by Course</p>
                                             <h1 class="text-primary">
                                                 {{ $data['verifiedAlumni']->where('employment_status', 'self-employed')->count() }}
@@ -282,7 +283,10 @@
         <div class="col-md-7 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title mb-0">Latest Alumni</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-title mb-0">Latest Alumni</p>
+                        <a href="/admin/users" class="text-info">View all</a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
