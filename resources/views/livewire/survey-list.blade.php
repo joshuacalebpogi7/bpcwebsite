@@ -17,19 +17,17 @@
             <span class="title">Bulacan Polytechnic College Questionnaires</span>
             <hr class="solid" style="border-top: 3px solid #9f9d9d">
             @if (!$survey_list->isEmpty())
-                <p class="message">Before you continue, we need your participation in the following surveys</p>
                 @php
                     $allSurveysInactive = true;
                 @endphp
 
                 @foreach ($survey_list as $survey_posted)
-                    @if ($user->survey_completed == true)
-                        @if ($survey_posted['active'] > 0)
-                            @if ($survey_posted['forFirstTimers'] === 0)
-                                @php
-                                    $allSurveysInactive = false;
-                                @endphp
-
+                    @if ($survey_posted['active'] > 0)
+                        @php
+                            $allSurveysInactive = false;
+                        @endphp
+                        @if ($user->survey_completed == true)
+                            @if ($survey_posted['forFirstTimers'] == false)
                                 <div class="card_notification">
                                     <div class="notification">
                                         <div class="notiglow"></div>
@@ -43,14 +41,9 @@
                                     </div>
                                 </div>
                             @endif
-                        @endif
-                    @elseif ($user->survey_completed == false)
-                        @if ($survey_posted['active'] > 0)
-                            @if ($survey_posted['forFirstTimers'] === 1)
-                                @php
-                                    $allSurveysInactive = false;
-                                @endphp
-
+                        @elseif ($user->survey_completed == false)
+                            @if ($survey_posted['forFirstTimers'] == true)
+                            <p class="message">Before you continue, we need your participation in the following surveys</p>
                                 <div class="card_notification">
                                     <div class="notification">
                                         <div class="notiglow"></div>

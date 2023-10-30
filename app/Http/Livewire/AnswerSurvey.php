@@ -124,6 +124,16 @@ class AnswerSurvey extends Component
                         'parentSurvey' => $this->survey_selected->id,
                         'questionAnswered' => $question["id"],
                     ]);
+                } elseif ($question["questionType"] === "dropdown") {
+                    $choiceData = survey_choices::where('id', $answer['choiceID'])->first();
+                    $choiceDesc = $choiceData["choiceDesc"];
+                    survey_answers::create([
+                        'answerDesc' => $choiceDesc,
+                        'choiceID' => $answer["choiceID"],
+                        'respondentID' => auth()->user()->id,
+                        'parentSurvey' => $this->survey_selected->id,
+                        'questionAnswered' => $question['id'],
+                    ]);
                 } elseif ($question["questionType"] === "checkbox") {
                     $choiceData = survey_choices::where('id', $answer['choiceID'])->first();
                     $choiceDesc = $choiceData["choiceDesc"];
@@ -141,9 +151,11 @@ class AnswerSurvey extends Component
             "parentSurvey" => $this->survey_selected->id,
             'respondentID' => auth()->user()->id,
         ]);
-        $user = auth()->user();
-        $user->survey_completed = true;
-        $user->save();
+        if ($this->survey_selected->forFirstTimers == true && $this->user->survey_completed == false) {
+            $user = auth()->user();
+            $user->survey_completed = true;
+            $user->save();
+        }
         $this->resetForm();
     }
 

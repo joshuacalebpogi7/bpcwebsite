@@ -18,7 +18,7 @@
             @endif
             @csrf
             @foreach ($questions as $questionIndex => $question)
-                {{-- @dump($question) --}}
+            @dump($question)
                 <div class="form-group" wire:key="question-{{ $questionIndex }}">
                     <hr>
                     <label id="name-label">{{ $question['questionNum'] }}:
