@@ -32,11 +32,10 @@ class NewsController extends Controller
             'thumbnail' => 'nullable|image|max:5000',
         ]);
 
-        if ($news->title !== $incomingFields['title'] || $news->author !== $incomingFields['author'] || $news->category !== $incomingFields['category'] || $news->description !== $incomingFields['description'] || $request->hasFile('thumbnail')) {
+        if ($news->title !== $incomingFields['title'] || $news->category !== $incomingFields['category'] || $news->description !== $incomingFields['description'] || $request->hasFile('thumbnail')) {
             // Update the existing fields
             $news->title = trim(strip_tags(ucwords($incomingFields['title'])));
-            $news->author = trim(strip_tags(ucwords($incomingFields['author'])));
-            $news->category = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
+            $news->category = $incomingFields['category'];
             $news->description = $incomingFields['description'];
             $news->updated_by = auth()->user()->id;
 
@@ -91,10 +90,8 @@ class NewsController extends Controller
         }
 
         $incomingFields['title'] = trim(strip_tags(ucwords($incomingFields['title'])));
-        $incomingFields['author'] = trim(strip_tags(ucwords($incomingFields['author'])));
-        $incomingFields['category'] = trim(strip_tags(ucwords(strtoupper($incomingFields['category']))));
-
-        $incomingFields['posted_by'] = auth()->user()->id;
+        $incomingFields['author'] = auth()->user()->id;
+        $incomingFields['posted_by'] = auth()->user()->username;
         $incomingFields['updated_by'] = auth()->user()->id;
 
         // dd($incomingFields);

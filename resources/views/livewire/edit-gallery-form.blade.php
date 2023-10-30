@@ -131,7 +131,7 @@
         <div class="row">
             <div class="col-md-6">
                 <button class="btn btn-primary" type="submit">Save</button>
-                <button wire:click.prevent="resetAlbumForm" class="btn btn-danger">Reset</button>
+                <button wire:click.prevent="resetAlbumForm" class="btn btn-danger">Clear changes</button>
             </div>
         </div>
     </form>

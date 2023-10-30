@@ -1,7 +1,8 @@
 <x-admin-layout>
     <h2>News Records</h2>
     <div>
-        <a href="/admin/add-news"><button class="btn btn-primary mb-3">Add News</button></a>
+        <a href="/admin/add-news"><button class="btn btn-primary mb-3"><img
+                    src="{{ URL::asset('/images/icon-plus.svg') }}"> Add News</button></a>
     </div>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -19,6 +20,7 @@
                                             <th>Action</th>
                                             <th>Thumbnail</th>
                                             <th>Title</th>
+                                            <th>Category</th>
                                             <th>Author</th>
                                             <th>Posted by</th>
                                             <th>Updated by</th>
@@ -70,9 +72,10 @@
                                                         alt="{{ $news->title }}'s thumbnail"
                                                         style="width: 40px; margin: 10px;"></td>
                                                 <td>{{ $news->title }}</td>
-                                                <td>{{ $news->author }}</td>
+                                                <td>{{ $news->category }}</td>
+                                                <td>{{ $news->updatedBy->username }}</td>
                                                 <td>{{ $news->posted_by }}</td>
-                                                <td>{{ $news->updated_by }}</td>
+                                                <td>{{ $news->updatedBy->username }}</td>
                                                 <td>{{ $news->created_at }}</td>
                                                 <td>{{ $news->updated_at }}</td>
                                             </tr>

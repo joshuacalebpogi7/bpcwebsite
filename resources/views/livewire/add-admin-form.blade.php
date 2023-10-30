@@ -149,7 +149,7 @@
 
                 </div>
                 <button class="btn btn-primary" type="submit">Add</button>
-                <button wire:click.prevent="resetAdminFormConfirmation" class="btn btn-danger">Reset</button>
+                <button wire:click.prevent="resetAdminFormConfirmation" class="btn btn-danger">Clear changes</button>
             </div>
         </div>
 

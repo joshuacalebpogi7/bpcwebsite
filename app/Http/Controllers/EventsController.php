@@ -95,7 +95,7 @@ class EventsController extends Controller
         }
 
         $incomingFields['title'] = trim(strip_tags(ucwords($incomingFields['title'])));
-        $incomingFields['posted_by'] = auth()->user()->id;
+        $incomingFields['posted_by'] = auth()->user()->username;
         $incomingFields['updated_by'] = auth()->user()->id;
 
         // dd($incomingFields);

@@ -1,4 +1,4 @@
-<x-admin-manage-layout :jobs="$jobs">
+<x-admin-layout :jobs="$jobs">
     <div>
         <form action="/admin/update-jobs/{{ $jobs->id }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -112,41 +112,43 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
-                                cols="30" rows="10">{{ old('description', $jobs->description) }}</textarea>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
+                                    cols="30" rows="10">{{ old('description', $jobs->description) }}</textarea>
 
-                            @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
+                                @error('description')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="form-group">
-                            <label for="link">Link (Optional)</label>
-                            <input class="form-control @error('link') is-invalid @enderror" name="link"
-                                id="link" type="text" placeholder="News link"
-                                value="{{ old('link', $jobs->link) }}">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="link">Link (Optional)</label>
+                                <input class="form-control @error('link') is-invalid @enderror" name="link"
+                                    id="link" type="text" placeholder="Job link"
+                                    value="{{ old('link', $jobs->link) }}">
 
 
-                            @error('link')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
+                                @error('link')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <button class="btn btn-primary">Update Job</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="reset" class="btn btn-danger">Clear changes</button>
                 </div>
             </div>
         </form>
     </div>
 
-</x-admin-manage-layout>
+</x-admin-layout>

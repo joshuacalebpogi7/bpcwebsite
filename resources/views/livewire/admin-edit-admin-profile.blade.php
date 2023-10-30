@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     <button class="btn btn-primary" type="submit">Save changes</button>
-                    <button wire:click.prevent="resetAccountSecurity" class="btn btn-danger">Reset</button>
+                    <button wire:click.prevent="resetAccountSecurity" class="btn btn-danger">Clear changes</button>
                 </form>
             </div>
         </div>
@@ -376,7 +376,8 @@
                         </div>
                     </div>
                     <button class="btn btn-primary" type="submit">Save changes</button>
-                    <button wire:click.prevent="resetProfileConfirmation" class="btn btn-danger">Reset</button>
+                    <button wire:click.prevent="resetProfileConfirmation" class="btn btn-danger">Clear
+                        changes</button>
                 </form>
             </div>
         </div>

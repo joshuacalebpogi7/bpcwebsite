@@ -110,7 +110,7 @@ class AddGalleryForm extends Component
         $galleryAlbum = GalleryAlbum::create([
             'album_name' => $this->album_name,
             'posted_by' => Auth::user()->username,
-            'updated_by' => Auth::user()->username,
+            'updated_by' => Auth::user()->id,
         ]);
         
         // Retrieve the ID of the newly created Album
@@ -124,7 +124,7 @@ class AddGalleryForm extends Component
                     'gallery_album_id' => $albumId,
                     'photo' => $tempPhoto['photo'], // Store only the filename
                     'posted_by' => Auth::user()->username,
-                    'updated_by' => Auth::user()->username,
+                    'updated_by' => Auth::user()->id,
                 ]);
                 
                 // Set the first photo as the album cover

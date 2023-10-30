@@ -235,7 +235,7 @@ class EditGalleryForm extends Component
         // Create the Gallery Album
         $this->album->update([
             'album_name' => $this->stateAlbum['album_name'],
-            'updated_by' => Auth::user()->username,
+            'updated_by' => Auth::user()->id,
         ]);
 
         if (isset($this->statePhotos)) {
@@ -258,7 +258,7 @@ class EditGalleryForm extends Component
                     'gallery_album_id' => $this->album->id,
                     'photo' => $tempPhoto['photo'], // Store only the filename
                     'posted_by' => Auth::user()->username,
-                    'updated_by' => Auth::user()->username,
+                    'updated_by' => Auth::user()->id,
                 ]);
 
                 // Store the ID of the new photo

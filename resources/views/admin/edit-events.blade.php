@@ -37,7 +37,7 @@
             dd($events->thumbnail);
             @endphp --}}
             <div class="card mb-2 mt-3">
-                <div class="card-header bg-primary bg-gradient text-white">Add Events
+                <div class="card-header bg-primary bg-gradient text-white">Edit Event
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -82,48 +82,52 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
-                                cols="30" rows="10">{{ old('description', $events->description) }}</textarea>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
+                                    cols="30" rows="10">{{ old('description', $events->description) }}</textarea>
 
-                            @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
+                                @error('description')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="form-group">
-                            <label for="event-start">Event Start</label>
-                            <input class="form-control @error('event_start') is-invalid @enderror" type="datetime-local"
-                                placeholder="Event Start" name="event_start" id="event_start"
-                                value="{{ old('event_start', $events->event_start) }}">
-                            @error('event_start')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="event-start">Event Start</label>
+                                <input class="form-control @error('event_start') is-invalid @enderror"
+                                    type="datetime-local" placeholder="Event Start" name="event_start" id="event_start"
+                                    value="{{ old('event_start', $events->event_start) }}">
+                                @error('event_start')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="event-end">Event End</label>
-                            <input class="form-control @error('event_end') is-invalid @enderror" type="datetime-local"
-                                placeholder="Event End" name="event_end" id="event_end"
-                                value="{{ old('event_end', $events->event_end) }}">
-                            @error('event_end')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="event-end">Event End</label>
+                                <input class="form-control @error('event_end') is-invalid @enderror"
+                                    type="datetime-local" placeholder="Event End" name="event_end" id="event_end"
+                                    value="{{ old('event_end', $events->event_end) }}">
+                                @error('event_end')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <button class="btn btn-primary">Update Event</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="reset" class="btn btn-danger">Clear changes</button>
                 </div>
             </div>
         </form>

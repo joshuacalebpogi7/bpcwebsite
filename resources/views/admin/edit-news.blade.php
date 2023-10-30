@@ -81,17 +81,18 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
-                                cols="30" rows="10">{{ old('description', $news->description) }}</textarea>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
+                                    cols="30" rows="10">{{ old('description', $news->description) }}</textarea>
 
-                            @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
+                                @error('description')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 

@@ -23,6 +23,7 @@
                                             <th>Title</th>
                                             <th>Event start</th>
                                             <th>Event end</th>
+                                            <th>Posted by</th>
                                             <th>Updated by</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
@@ -76,6 +77,7 @@
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($event->event_end)->format('F j, Y g:i A') }}
                                                 </td>
+                                                <td>{{ $event->posted_by }}</td>
                                                 <td>{{ $event->updatedBy->username }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($event->created_at)->format('F j, Y g:i A') }}
                                                 </td>

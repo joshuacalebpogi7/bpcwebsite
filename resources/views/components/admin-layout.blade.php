@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ asset('admin-dashboard/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
 
-    {{-- @vite(['resources/js/app.js']) --}}
+    @vite(['resources/js/app.js'])
     @stack('styles')
     @livewireStyles
 
@@ -300,7 +300,7 @@
             (isset($jobs) && Request::is('admin/edit-jobs/' . $jobs->id . '/' . $jobs->title)))
         @include('includes.img-preview')
     @endif
-
+    <script src="/js/tinymce/tinymce.min.js"></script>
     @include('includes.data-tables-script')
     @stack('scripts')
 

@@ -45,7 +45,7 @@ class JobsController extends Controller
             $jobs->status = $incomingFields['status'];
             $jobs->description = $incomingFields['description'];
             $jobs->link = $incomingFields['link'];
-            $incomingFields['updated_by'] = auth()->user()->username;
+            $incomingFields['updated_by'] = auth()->user()->id;
 
             // Save the updated News instance
             $jobs->save();
@@ -89,7 +89,7 @@ class JobsController extends Controller
         $incomingFields['salary'] = trim($incomingFields['salary']);
         $incomingFields['location'] = trim($incomingFields['location']);
         $incomingFields['posted_by'] = auth()->user()->username;
-        $incomingFields['updated_by'] = auth()->user()->username;
+        $incomingFields['updated_by'] = auth()->user()->id;
 
         // dd($incomingFields);
         Jobs::create($incomingFields);

@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <button class="btn btn-primary">Add Course</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="reset" class="btn btn-danger">Clear changes</button>
                 </div>
             </div>
         </form>

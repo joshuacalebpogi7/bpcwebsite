@@ -23,7 +23,8 @@
     </div>
     <div class="col-xl-4">
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0" style="margin-bottom: 20px!important; background: rgba(74, 71, 68, 0.68);
+        <div class="card mb-4 mb-xl-0"
+            style="margin-bottom: 20px!important; background: rgba(74, 71, 68, 0.68);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(4.3px);
@@ -41,7 +42,8 @@
                 @endif
 
                 <!-- Profile picture help block-->
-                <div class="small font-italic text-muted mb-4" style="color: azure!important">JPG or PNG no larger than 5 MB</div>
+                <div class="small font-italic text-muted mb-4" style="color: azure!important">JPG or PNG no larger than
+                    5 MB</div>
                 <!-- Profile picture upload button-->
 
                 <input id="getFile" name="avatar" type="file" wire:model="avatar" hidden>
@@ -60,7 +62,8 @@
         </div>
 
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0" style="
+        <div class="card mb-4 mb-xl-0"
+            style="
         background: rgba(74, 71, 68, 0.68);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -71,7 +74,8 @@
             <div class="card-body">
                 <form wire:submit.prevent="updateAccountSecurity">
                     @csrf
-                    <div class="card" style="
+                    <div class="card"
+                        style="
                     background: rgba(185, 199, 211, 0.73);
                     border-radius: 16px;
                     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -84,7 +88,7 @@
                                     <label for="email">Email</label>
                                     <input wire:model="state.email" class="form-control" type="email"
                                         placeholder="Email" name="email" id="email" style="cursor: not-allowed;"
-                                        disabled readonly >
+                                        disabled readonly>
                                     <span class="text-danger">
                                         @error('email')
                                             <p>{{ $message }}</p>
@@ -153,7 +157,7 @@
                         </div>
                     </div>
                     <button class="btn btn-success" type="submit" style="margin: 10px">Save changes</button>
-                    <button wire:click.prevent="resetAccountSecurity" class="btn btn-danger">Reset</button>
+                    <button wire:click.prevent="resetAccountSecurity" class="btn btn-danger">Clear changes</button>
                 </form>
             </div>
         </div>
@@ -161,7 +165,8 @@
 
     <div class="col-xl-8">
         <!-- Account details card-->
-        <div class="card mb-4" style="
+        <div class="card mb-4"
+            style="
         background: rgba(74, 71, 68, 0.68);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -170,9 +175,10 @@
         border: 1px solid rgba(253, 191, 84, 0.2);">
             <div class="card-header" style="color: azure!important">Account Details</div>
             <div class="card-body">
-                <form wire:submit.prevent="updateProfile" >
+                <form wire:submit.prevent="updateProfile">
                     @csrf
-                    <div class="card" style="
+                    <div class="card"
+                        style="
                     background: rgba(185, 199, 211, 0.73);
                     border-radius: 16px;
                     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -482,7 +488,7 @@
                         </div>
                     </div>
                     <button class="btn btn-success" type="submit" style="margin: 10px">Save changes</button>
-                    <button wire:click.prevent="resetProfile" class="btn btn-danger">Reset</button>
+                    <button wire:click.prevent="resetProfile" class="btn btn-danger">Clear changes</button>
                 </form>
             </div>
         </div>

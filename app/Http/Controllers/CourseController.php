@@ -31,7 +31,7 @@ class CourseController extends Controller
             // Update the existing fields
             $course->course = $incomingFields['title'];
             $course->description = $incomingFields['category'];
-            $incomingFields['updated_by'] = auth()->user()->username;
+            $incomingFields['updated_by'] = auth()->user()->id;
             $course->save();
 
             toastr()->success('', 'Course updated successfully!', [
@@ -63,7 +63,7 @@ class CourseController extends Controller
         ]);
 
         $incomingFields['posted_by'] = auth()->user()->username;
-        $incomingFields['updated_by'] = auth()->user()->username;
+        $incomingFields['updated_by'] = auth()->user()->id;
 
         // dd($incomingFields);
         Course::create($incomingFields);

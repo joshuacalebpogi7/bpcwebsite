@@ -37,7 +37,15 @@
                                                         <a href="/admin/edit-album/{{ $album->id }}/{{ $album->album_name }}"
                                                             class="flex-fill">
                                                             <button
-                                                                class="btn btn-success me-1 w-100 h-100">View</button>
+                                                                class="btn btn-light me-1 w-100 h-100 p-1 border mb-1"
+                                                                style="width: 150px;">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                        class="mr-2" alt="Edit Icon">
+                                                                    Edit
+                                                                </div>
+                                                            </button>
                                                         </a>
 
                                                         <!-- Second Row - Delete Button -->
@@ -46,7 +54,14 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button
-                                                                class="btn btn-danger mt-1 flex-fill w-100 h-100">Delete</button>
+                                                                class="btn btn-light mt-1 flex-fill w-100 h-100 p-1 border"
+                                                                style="width: 150px;">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                        class="mr-2" alt="Delete Icon">Delete
+                                                                </div>
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </td>

@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                    placeholder="News title" name="title" id="title" value="{{ old('title') }}">
+                                    placeholder="Event title" name="title" id="title" value="{{ old('title') }}">
 
                                 @error('title')
                                     <div class="invalid-feedback">
@@ -121,7 +121,7 @@
                     </div>
 
                     <button class="btn btn-primary">Add Event</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="reset" class="btn btn-danger">Clear changes</button>
                 </div>
             </div>
         </form>

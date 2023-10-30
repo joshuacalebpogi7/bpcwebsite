@@ -37,7 +37,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input class="form-control @error('title') is-invalid @enderror" type="text"
@@ -51,21 +51,8 @@
 
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="author">Author</label>
-                                <input class="form-control @error('author') is-invalid @enderror" type="text"
-                                    placeholder="News author" name="author" id="author" value="{{ old('author') }}">
 
-                                @error('author')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="category">Category</label>
                                 <select class="form-control @error('category') is-invalid @enderror" name="category"
@@ -88,22 +75,23 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
-                                cols="30" rows="10">{{ old('description') }}</textarea>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="myeditorinstance"
+                                    cols="30" rows="10">{{ old('description') }}</textarea>
 
-                            @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
+                                @error('description')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <button class="btn btn-primary">Add News</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="reset" class="btn btn-danger">Clear changes</button>
                 </div>
             </div>
         </form>
