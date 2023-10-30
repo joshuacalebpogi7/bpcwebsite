@@ -36,13 +36,14 @@ class ViewForum extends Component
 
         // You can directly access the properties of $survey_selected
         $this->forumTitle = $forum_selected->forumTitle;
+        $this->forumBody = $forum_selected->forumBody;
         $this->active = $forum_selected->active;
-        //$replies = forum_replies::where('parentForum', $this->forum_selected->id)->get();
+        $replies = forum_replies::where('parentForum', $this->forum_selected->id)->get();
+        $this->forumReplies = $replies;
+    }
 
-        $forum = forums_posted::find($forum_selected->id);
-        $this->forumBody = $forum->replies->shift();
-        $forumReplies = $forum->replies;
-
+    public function replyForum()
+    {
     }
 
     public function render(forums_posted $forum_selected)

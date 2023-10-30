@@ -138,6 +138,9 @@ Route::delete('admin/delete-album/{galleryAlbum:id}', [GalleryController::class,
 Route::delete('admin/delete-photo/{gallery:id}', [GalleryController::class, 'deletePhoto'])->middleware('can:visitAdminPages');
 Route::delete('admin/delete-course/{course:id}', [CourseController::class, 'deleteCourse'])->middleware('can:visitAdminPages');
 
+//Admin VIEW related routes
+Route::get('admin/view_forum/{forum_selected}', [PageController::class, 'adminViewForum'])->middleware('can:visitAdminPages')->name('admin/view_forum');
+
 /* ROUTE FOR SURVEY */
 Route::get('admin/new_survey', function () {
     return view('admin.new_survey');
@@ -155,6 +158,10 @@ Route::get('/answer_survey/{survey_selected}', [SurveyController::class, 'fetchS
 Route::get('/new_forum', function () {
     return view('auth.new_forum');
 })->middleware('mustBeLoggedIn');
+
+Route::get('/forum_post', function () {
+    return view('forum_post');
+});
 
 Route::get('/posted_forums', function () {
     return view('auth.posted_forums');

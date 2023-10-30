@@ -26,64 +26,58 @@
                             <div class="table-responsive">
                                 <table id="example" class="display expandable-table table-hover rounded shadow-sm"
                                     style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Action</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Author</th>
-                                            <th>Date Created</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($forum_list as $forum_posted)
+                                    @if (!$forum_list->isEmpty())
+                                        <thead>
                                             <tr>
-                                                <td>{{ $forum_posted->id }}</td>
-                                                <td>
-                                                    <div class="d-flex flex-column">
-                                                        <a href="{{-- route('edit_survey', ['survey_selected' => $survey_posted->id]) --}}" class="flex-fill">
-                                                            <button class="btn btn-light me-1 p-1 border mb-1"
-                                                                style="width: 150px;">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center">
-                                                                    <img src="{{ URL::asset('/images/icon-edit.svg') }}"
-                                                                        class="mr-2" alt="Edit Icon">
-                                                                    Edit
-                                                                </div>
+
+                                                <th>ID</th>
+                                                <th>Actions</th>
+                                                <th>Title</th>
+                                                <th>Description</th>
+                                                <th>Author</th>
+                                                <th>Date Created</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach ($forum_list as $forum_posted)
+                                                <tr>
+                                                    <td>{{ $forum_posted->id }}</td>
+                                                    <td>
+                                                        <div>
+                                                            <a
+                                                                href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}"><button
+                                                                    class = "survey_action">
+                                                                    <img
+                                                                        src="{{ URL::asset('/images/icon-edit.svg') }}"> Edit</button></a>
+                                                            <br>
+                                                            <button class = "survey_action"
+                                                                onclick="confirmDeleteForum({{ json_encode($forum_posted) }})"><img
+                                                                    src="{{ URL::asset('/images/icon-delete.svg') }}"> Delete</button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+
+                                                        <a
+                                                            href="{{-- route('view_forum', ['forum_selected' => $forum_posted->id]) --}}">
+                                                            <button class = "survey_action">
+                                                                {{ $forum_posted->forumTitle }}
                                                             </button>
                                                         </a>
-                                                        <button class="btn btn-light mt-1 p-1 border"
-                                                            style="width: 150px;"
-                                                            onclick="confirmDeleteForum({{ json_encode($forum_posted) }})">
-                                                            <div
-                                                                class="d-flex justify-content-center align-items-center">
-                                                                <img src="{{ URL::asset('/images/icon-delete.svg') }}"
-                                                                    class="mr-2" alt="Delete Icon">Delete
-                                                            </div>
-                                                        </button>
-                                                    </div>
+                                                    </td>
+                                                    <td>{{ $forum_posted->forumDesc }}</td>
+                                                    <td>
+                                                        @php
+                                                            $author = $authors->firstWhere('id', $forum_posted->forumAuthor);
+                                                        @endphp
+                                                        {{ $author ? '[ID ' . $author->id . '] ' . $author->first_name . ' ' . $author->last_name : 'Author not found' }}
+                                                    </td>
 
-                                                </td>
-                                                <td>
-
-                                                    <a href="{{-- route('view_forum', ['forum_selected' => $forum_posted->id]) --}}">
-                                                        <button class = "survey_action">
-                                                            {{ $forum_posted->forumTitle }}
-                                                        </button>
-                                                    </a>
-                                                </td>
-                                                <td>{{ $forum_posted->forumDesc }}</td>
-                                                <td>
-                                                    @php
-                                                        $author = $authors->firstWhere('id', $forum_posted->forumAuthor);
-                                                    @endphp
-                                                    {{ $author ? '[ID ' . $author->id . '] ' . $author->first_name . ' ' . $author->last_name : 'Author not found' }}
-                                                </td>
-                                                <td>{{ $forum_posted->created_at }}</td>
-                                            </tr>
-                                        @endforeach
+                                                    <td>{{ $forum_posted->created_at }}</td>
+                                                </tr>
+                                            @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
