@@ -106,12 +106,12 @@ class PageController extends Controller
         return view('forums', ['forum_list' => $forum_list->get(), 'authors' => $authors->get()]);
     }
 
-    public function gallery()
+    public function gallery(GalleryAlbum $album)
     {
         if (auth()->check()) {
-            return view('auth.gallery');
+            return view('auth.gallery', ['album' => $album->latest()->get()]);
         }
-        return view('gallery');
+        return view('gallery', ['album' => $album->latest()->get()]);
     }
     public function login()
     {
@@ -140,9 +140,9 @@ class PageController extends Controller
     {
         return view('auth-single-pages.events-single-page', ['events' => $events]);
     }
-    public function gallerySinglePage(Gallery $gallery)
+    public function gallerySinglePage(GalleryAlbum $album)
     {
-        return view('auth-single-pages.gallery-single-page', ['gallery' => $gallery]);
+        return view('auth-single-pages.gallery-single-page', ['album' => $album->latest()->get()]);
     }
 
     //--------------------------------ADMIN----------------------------

@@ -90,23 +90,11 @@
                     </a>
                 </div>
 
-                <h3 class="sidebar__title">
+                {{-- <h3 class="sidebar__title">
                     <span>Others</span>
-                </h3>
+                </h3> --}}
 
                 <div class="sidebar__list">
-                    <a href="#" class="sidebar__link">
-                        <i class="ri-customer-service-fill"></i>
-                        <span class="sidebar__link-name">Support</span>
-                        <span class="sidebar__link-floating">Support</span>
-                    </a>
-
-                    <a href="#" class="sidebar__link">
-                        <i class="ri-settings-3-line"></i>
-                        <span class="sidebar__link-name">Settings</span>
-                        <span class="sidebar__link-floating">Settings</span>
-                    </a>
-
                     <a href="/logout" class="sidebar__link"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="ri-logout-box-r-line"></i>

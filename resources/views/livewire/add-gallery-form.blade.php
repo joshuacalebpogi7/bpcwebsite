@@ -42,7 +42,7 @@
                     <div class="card-body text-center">
                         @if ($photo)
                             <img class="img-account-profile mb-2" src="{{ $photo->temporaryUrl() }}" alt=""
-                                style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
+                                style="max-width: 100%; max-height: 250px; object-fit: contain; overflow: hidden; margin: 0 auto;">
                         @endif
 
                         <!-- Photo help block -->
@@ -77,7 +77,7 @@
                             <div class="card-body">
                                 <img class="card-img-top mb-2" src="{{ asset('storage/photos/' . $photo['photo']) }}"
                                     alt=""
-                                    style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
+                                    style="max-width: 100%; max-height: 250px; object-fit: contain; overflow: hidden; margin: 0 auto;">
 
                                 <button wire:click.prevent="removePhoto({{ $index }})" class="btn btn-primary"
                                     type="button">Remove Photo</button>

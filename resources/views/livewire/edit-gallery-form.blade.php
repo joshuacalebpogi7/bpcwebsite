@@ -47,7 +47,7 @@
                     <div class="card-body text-center">
                         @if ($photo)
                             <img class="img-account-profile mb-2" src="{{ $photo->temporaryUrl() }}" alt=""
-                                style="max-width: 100%; max-height: 250px; overflow: hidden; margin: 0 auto;">
+                                style="max-width: 100%; max-height: 250px; object-fit: contain; overflow: hidden; margin: 0 auto;">
                         @endif
 
                         <!-- Photo help block -->
@@ -87,7 +87,8 @@
                     <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <img class="card-img-top mb-2" src="{{ $photo->photo }}" alt="Photo">
+                                <img class="card-img-top mb-2" src="{{ $photo->photo }}" alt="Photo"
+                                    style="max-width: 100%; max-height: 250px; object-fit: contain; overflow: hidden; margin: 0 auto;">
 
                                 <button wire:click.prevent="setAlbumCover({{ $index }})" class="btn btn-primary"
                                     type="button"

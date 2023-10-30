@@ -2,11 +2,6 @@
     <x-slot name="title">
         Gallery
     </x-slot>
-    <x-slot name="assets">
-        @vite(['resources/css/style.css'])
-        @vite(['resources/css/styles.css'])
-        @vite(['resources/js/main.js'])
-    </x-slot>
     <section id="page-header">
         <h2>● GALLERY ●</h2>
     </section>
@@ -27,15 +22,15 @@
     </div>
     <div class="container1">
         <div class="filterable_cards">
-            @foreach ($gallery as $galleryItem)
-            <div class="card11" data-name="phone">
-                <a href="/gallery/{gallery:title}"><img src="images/study-pic.jpg" alt="">
-                    <div class="card11_body">
-                        <h6 class="card11_title">Phone</h6>
-                        <p class="card11_text">Lorem ipsum dollar...</p>
-                    </div>
-                </a>
-            </div>
+            @foreach ($album as $album)
+                <div class="card11" data-name="phone">
+                    <a href="/gallery/{gallery:title}"><img src="{{ $album->album_cover }}" alt="">
+                        <div class="card11_body">
+                            <h6 class="card11_title">{{ $album->album_name }}</h6>
+                            <p class="card11_text">{{ $album->description }}</p>
+                        </div>
+                    </a>
+                </div>
             @endforeach
             <div class="card11" data-name="clothes">
                 <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">

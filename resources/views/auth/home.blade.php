@@ -2,11 +2,6 @@
     <x-slot name="title">
         Home
     </x-slot>
-    <x-slot name="assets">
-        @vite(['resources/css/style.css'])
-        @vite(['resources/css/styles.css'])
-        @vite(['resources/js/main.js'])
-    </x-slot>
 
     <div class="row">
         <div class="leftcolumn">
