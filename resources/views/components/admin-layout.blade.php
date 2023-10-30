@@ -292,6 +292,15 @@
     <script src="{{ asset('admin-dashboard/js/Chart.roundedBarCharts.js') }}"></script>
     <!-- End custom js for this page-->
 
+    @if (Request::is('admin/add-news') ||
+            (isset($news) && Request::is('admin/edit-news/' . $news->id . '/' . $news->title)) ||
+            Request::is('admin/add-events') ||
+            (isset($events) && Request::is('admin/edit-events/' . $events->id . '/' . $events->title)) ||
+            Request::is('admin/add-jobs') ||
+            (isset($jobs) && Request::is('admin/edit-jobs/' . $jobs->id . '/' . $jobs->title)))
+        @include('includes.img-preview')
+    @endif
+
     @include('includes.data-tables-script')
     @stack('scripts')
 
