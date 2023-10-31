@@ -45,25 +45,39 @@
                                                 <tr>
                                                     <td>{{ $forum_posted->id }}</td>
                                                     <td>
-                                                        <div>
-                                                            <a
-                                                                href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}"><button
-                                                                    class = "survey_action">
-                                                                    <img
-                                                                        src="{{ URL::asset('/images/icon-edit.svg') }}"> Edit</button></a>
-                                                            <br>
-                                                            <button class = "survey_action"
-                                                                onclick="confirmDeleteForum({{ json_encode($forum_posted) }})"><img
-                                                                    src="{{ URL::asset('/images/icon-delete.svg') }}"> Delete</button>
+                                                        <div class="d-flex flex-column">
+                                                            <a href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}" class="flex-fill"><button
+                                                                    class="btn btn-light me-1 w-100 h-100 p-1 border mb-1"
+                                                                    style="width: 150px;">
+                                                                    <div
+                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        <img src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                            class="mr-2" alt="Edit Icon">
+                                                                        Edit
+                                                                    </div>
+                                                                </button>
+                                                            </a>
+                                                            <button
+                                                                class="btn btn-light mt-1 flex-fill w-100 h-100 p-1 border"
+                                                                style="width: 150px;"
+                                                                onclick="confirmDeleteForum({{ json_encode($forum_posted) }})">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                        class="mr-2" alt="Delete Icon">Delete
+                                                                </div>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                     <td>
 
-                                                        <a href="{{ route('admin/view_forum', ['forum_selected' => $forum_posted->id]) }}">
+                                                        <a
+                                                            href="{{ route('admin/view_forum', ['forum_selected' => $forum_posted->id]) }}">
                                                             <button class = "survey_action">
                                                                 {{ $forum_posted->forumTitle }}
                                                             </button>
                                                         </a>
+                                                        {{ $forum_posted->forumTitle }}
                                                     </td>
                                                     <td>{{ $forum_posted->forumDesc }}</td>
                                                     <td>
