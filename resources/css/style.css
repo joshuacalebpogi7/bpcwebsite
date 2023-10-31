@@ -137,6 +137,10 @@ body{
     display: flex;
     justify-content: flex-start;
     padding-left: 50px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add an ellipsis (...) when text overflows */
+    max-width: 90%; /* Adjust the width to your design */
   }
 
   .card_0 h1{
