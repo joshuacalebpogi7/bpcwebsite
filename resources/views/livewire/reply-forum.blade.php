@@ -44,10 +44,10 @@
             </tbody>
         </table>
         <hr>
-        <form>
+        <form wire:submit.prevent = "replyForum">
             <input size = "20" type = "text" name = "replyBody" style = "resize: none;"
                 placeholder="Replying to {{ $author->first_name }} @if ($author->first_name !== $author->last_name) {{ $author->last_name }} @endif"
-                required onkeydown="return event.key != 'Enter';">{{-- </textarea> --}}
+                required onkeydown="return event.key != 'Enter';" wire:model = "replyBody">{{-- </textarea> --}}
             <div style = "text-align: right;">
                 <input type = "submit" value = "Post Reply">
             </div>

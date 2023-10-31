@@ -7,7 +7,10 @@
         <hr>
 
         @foreach ($forumReplies as $forumReply)
+        @if($forumReply["replyingTo"] == null)
             <div class="reply">
+                <p>Comments</p>
+                <hr>
                 <table>
                     <tr>
                         <td>
@@ -30,6 +33,33 @@
                 </table>
                 <hr>
             </div>
+            @endif
+            @if($forumReply["replyingTo"] > 0)
+            <div class="reply-within-a-reply">
+                <p>Replies to comments</p>
+                <hr>
+                <table>
+                    <tr>
+                        <td>
+                            @php
+                                $author = $authors->firstWhere('id', $forumReply->replyAuthor);
+                            @endphp
+                            <img class = "forum-avatar" src="{{ $author ? $author->avatar : 'Author not found' }}">
+                            <br>
+                            {{ $author ? ($author->first_name !== $author->last_name ? $author->first_name . ' ' . $author->last_name : $author->first_name) : 'Author not found' }}
+                        </td>
+
+                        <td>{{ $forumReply['replyBody'] }}
+                            <div class = "forum-reply-button" style = "text-align: right;">
+                                <a
+                                    href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReply->id]) }}">Reply</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            @endif
         @endforeach
     </div>
 </div>
