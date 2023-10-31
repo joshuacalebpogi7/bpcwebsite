@@ -56,6 +56,12 @@
                     <span class="sidebar__link-name">Gallery</span>
                     <span class="sidebar__link-floating">Gallery</span>
                 </a>
+
+                <a href="#" class="sidebar__link">
+                    <i class="ri-survey-line"></i>
+                    <span class="sidebar__link-name">Survey</span>
+                    <span class="sidebar__link-floating">Survey</span>
+                </a>
             </div>
 
             <h3 class="sidebar__title">
