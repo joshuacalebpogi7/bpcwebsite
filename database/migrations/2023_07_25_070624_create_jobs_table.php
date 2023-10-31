@@ -15,6 +15,10 @@ return new class extends Migration {
             $table->string('job_title');
             $table->longText('description');
             $table->string('company');
+            $table->string('category');
+            $table->string('responsibilities');
+            $table->string('requirements');
+            $table->string('email');
             $table->string('location');
             $table->string('salary');
             $table->string('link')->nullable();

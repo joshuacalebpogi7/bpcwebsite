@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="job-title">Job Title</label>
                                 <input class="form-control @error('job_title') is-invalid @enderror" type="text"
@@ -26,12 +26,79 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="job-type">Job Type</label>
                                 <input class="form-control @error('job_type') is-invalid @enderror" type="text"
                                     placeholder="Job Type" name="job_type" id="job-type"
                                     value="{{ old('job_type', $jobs->job_type) }}">
+
+                                @error('job_type')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="category">Job Category</label>
+                                <select wire:model="category"
+                                    class="form-control @error('category') is-invalid @enderror" name="category"
+                                    id="category">
+                                    <option value="" selected>--Select Job Category--
+                                    </option>
+                                    <option value="Sales and Marketing"
+                                        {{ old('category', $jobs->category) == 'Sales and Marketing' ? 'selected' : '' }}>
+                                        Sales and Marketing
+                                    </option>
+                                    <option value="Customer Service"
+                                        {{ old('category', $jobs->category) == 'Customer Service' ? 'selected' : '' }}>
+                                        Customer Service
+                                    </option>
+                                    <option value="Human Resources"
+                                        {{ old('category', $jobs->category) == 'Human Resources' ? 'selected' : '' }}>
+                                        Human Resources</option>
+                                    <option value="Accounting and Finance"
+                                        {{ old('category', $jobs->category) == 'Accounting and Finance' ? 'selected' : '' }}>
+                                        Accounting and Finance</option>
+                                    <option value="Engineering"
+                                        {{ old('category', $jobs->category) == 'Engineering' ? 'selected' : '' }}>
+                                        Engineering</option>
+                                    <option value="Information Technology (IT)"
+                                        {{ old('category', $jobs->category) == 'Information Technology (IT)' ? 'selected' : '' }}>
+                                        Information Technology (IT)</option>
+                                    <option value="Research and Development"
+                                        {{ old('category', $jobs->category) == 'Research and Development' ? 'selected' : '' }}>
+                                        Research and Development</option>
+                                    <option value="Management"
+                                        {{ old('category', $jobs->category) == 'Management' ? 'selected' : '' }}>
+                                        Management</option>
+                                    <option value="Healthcare and Medical"
+                                        {{ old('category', $jobs->category) == 'Healthcare and Medical' ? 'selected' : '' }}>
+                                        Healthcare and Medical</option>
+                                    <option value="Legal"
+                                        {{ old('category', $jobs->category) == 'Legal' ? 'selected' : '' }}>
+                                        Legal</option>
+                                    <option value="Teaching and Education"
+                                        {{ old('category', $jobs->category) == 'eaching and Education' ? 'selected' : '' }}>
+                                        Teaching and Education</option>
+                                    <option value="Design and Creative"
+                                        {{ old('category', $jobs->category) == 'Design and Creative' ? 'selected' : '' }}>
+                                        HDesign and Creative</option>
+                                    <option value="Manufacturing and Production"
+                                        {{ old('category', $jobs->category) == 'Manufacturing and Production' ? 'selected' : '' }}>
+                                        Manufacturing and Production</option>
+                                    <option value="Operations" {{ old('category') == 'Operations' ? 'selected' : '' }}>
+                                        Operations</option>
+                                    <option value="Customer Support"
+                                        {{ old('category', $jobs->category) == 'Customer Support' ? 'selected' : '' }}>
+                                        Customer Support</option>
+                                    <option value="Administration"
+                                        {{ old('category', $jobs->category) == 'Administration' ? 'selected' : '' }}>
+                                        Administration</option>
+                                </select>
 
                                 @error('job_type')
                                     <div class="invalid-feedback">
@@ -126,9 +193,39 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="responsibilities">Responsibilities</label>
+                                <textarea class="form-control @error('responsibilities') is-invalid @enderror" name="responsibilities"
+                                    id="responsibilities" cols="30" rows="10">{{ old('responsibilities', $jobs->responsibilities) }}</textarea>
+
+                                @error('responsibilities')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="requirements">Requirements</label>
+                                <textarea class="form-control @error('requirements') is-invalid @enderror" name="requirements" id="requirements"
+                                    cols="30" rows="10">{{ old('requirements', $jobs->requirements) }}</textarea>
+
+                                @error('requirements')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="link">Link (Optional)</label>
                                 <input class="form-control @error('link') is-invalid @enderror" name="link"
@@ -137,6 +234,21 @@
 
 
                                 @error('link')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input class="form-control @error('email') is-invalid @enderror" name="email"
+                                    id="email" type="text" placeholder="Job Company Email"
+                                    value="{{ old('email', $jobs->email) }}">
+
+
+                                @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

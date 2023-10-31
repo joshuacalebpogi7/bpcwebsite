@@ -18,7 +18,7 @@ return new class extends Migration {
             'user_type' => 'admin',
             'email_verified_at' => now(),
             'email_sent' => true,
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('admin123'),
             'survey_completed' => true,
             'add_info_completed' => true,
             'first_name' => 'admin',
@@ -52,7 +52,7 @@ return new class extends Migration {
             'user_type' => 'alumni',
             'email_verified_at' => now(),
             'email_sent' => true,
-            'password' => Hash::make('alumni'),
+            'password' => Hash::make('alumni123'),
             'survey_completed' => true,
             'add_info_completed' => true,
             'first_name' => 'alumni',
@@ -86,7 +86,7 @@ return new class extends Migration {
             'user_type' => 'content creator',
             'email_verified_at' => now(),
             'email_sent' => true,
-            'password' => Hash::make('content_creator'),
+            'password' => Hash::make('content_creator123'),
             'survey_completed' => true,
             'add_info_completed' => true,
             'first_name' => 'content',
@@ -117,6 +117,7 @@ return new class extends Migration {
         /* INSERT SURVEY VALUES */
         DB::table('surveys_posted')->insert([
             'surveyAuthor' => 1,
+            'surveyUpdateAuthor' => 1,
             'created_at' => now(),
             'updated_at' => now(),
             // Replace with the author's ID
@@ -177,7 +178,9 @@ return new class extends Migration {
         DB::table('forums_posted')->insert([
             'forumTitle' => 'YourForumTitle',
             'forumBody' => 'YourForumBody',
+            'forumCategory' => 'YourForumCategory',
             'forumAuthor' => 1,
+            'forumUpdateAuthor' => 1,
             // Replace with the author's ID
             'active' => 1,
             // Set the active status as needed (0 for inactive)
@@ -187,10 +190,22 @@ return new class extends Migration {
         DB::table('forum_replies')->insert([
             'parentForum' => 1,
             // Replace with the parent forum
-            'replyingTo' => 1,
+            'replyingTo' => null,
             // Replace with the ID of the message being replied to
-            'replyBody' => 'YourReplyBody',
-            'authorID' => 1,
+            'replyBody' => 'This is the first reply',
+            'replyAuthor' => 1,
+            // Replace with the author's ID
+            'active' => 1,
+            // Set the active status as needed (0 for inactive)
+        ]);
+
+        DB::table('forum_replies')->insert([
+            'parentForum' => 1,
+            // Replace with the parent forum
+            'replyingTo' => null,
+            // Replace with the ID of the message being replied to
+            'replyBody' => 'Nice forum bro',
+            'replyAuthor' => 2,
             // Replace with the author's ID
             'active' => 1,
             // Set the active status as needed (0 for inactive)
