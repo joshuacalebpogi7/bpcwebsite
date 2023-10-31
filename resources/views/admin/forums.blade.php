@@ -52,7 +52,7 @@
                                                                 <div
                                                                     class="d-flex justify-content-center align-items-center">
                                                                     <img src="{{ URL::asset('/images/icon-view.svg') }}"
-                                                                        class="mr-2" alt="View Icon">
+                                                                        class="mr-2" alt="view_icon">
                                                                     View
                                                                 </div>
                                                             </button>
@@ -63,7 +63,7 @@
                                                                     <div
                                                                         class="d-flex justify-content-center align-items-center">
                                                                         <img src="{{ URL::asset('/images/icon-edit.svg') }}"
-                                                                            class="mr-2" alt="Edit Icon">
+                                                                            class="mr-2" alt="edit_icon">
                                                                         Edit
                                                                     </div>
                                                                 </button>
@@ -75,7 +75,7 @@
                                                                 <div
                                                                     class="d-flex justify-content-center align-items-center">
                                                                     <img src="{{ URL::asset('/images/icon-delete.svg') }}"
-                                                                        class="mr-2" alt="Delete Icon">Delete
+                                                                        class="mr-2" alt="delete_icon">Delete
                                                                 </div>
                                                             </button>
                                                         </div>

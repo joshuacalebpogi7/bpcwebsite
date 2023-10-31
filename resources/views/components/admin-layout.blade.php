@@ -233,7 +233,7 @@
                     @if (Request::is('admin/add-jobs') || Request::is('admin/edit-jobs/*'))
                         <a href="/admin/jobs">&laquo; Back</a>
                     @endif
-                    @if (Request::is('admin/new_forum') || Request::is('admin/edit_forum/*'))
+                    @if (Request::is('admin/view_forum/*') || Request::is('admin/new_forum') || Request::is('admin/edit_forum/*'))
                         <a href="/admin/forums">&laquo; Back</a>
                     @endif
                     {{ $slot }}

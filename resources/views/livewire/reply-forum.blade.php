@@ -1,4 +1,6 @@
 <div>
+    <a href="/admin/view_forum/{{ $forum_selected->id }}">&laquo; Back</a>
+    <hr>
     <div class="form-group">
         <p>{{ $forum_selected->forumCategory }}
             {{ $forum_selected->forumTitle }}
@@ -43,9 +45,9 @@
         </table>
         <hr>
         <form>
-            <textarea name = "replyBody" style = "resize: none;"
+            <input size = "20" type = "text" name = "replyBody" style = "resize: none;"
                 placeholder="Replying to {{ $author->first_name }} @if ($author->first_name !== $author->last_name) {{ $author->last_name }} @endif"
-                required>{{-- </textarea> --}}
+                required onkeydown="return event.key != 'Enter';">{{-- </textarea> --}}
             <div style = "text-align: right;">
                 <input type = "submit" value = "Post Reply">
             </div>
