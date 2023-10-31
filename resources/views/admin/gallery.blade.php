@@ -21,7 +21,7 @@
                                             <th>Album Cover</th>
                                             <th>Album Name</th>
                                             <th>Photos</th>
-                                            <th>Posted by</th>
+                                            <th>Created by</th>
                                             <th>Created at</th>
                                             <th>Updated at</th>
                                         </tr>
@@ -72,7 +72,7 @@
                                                 <td>{{ $album->album_name }}</td>
                                                 {{-- <td>{{ $photos->where('gallery_album_id', $album->id)->count() }}</td> --}}
                                                 <td>{{ $album->pictures->count() }}</td>
-                                                <td>{{ $album->updated_by }}</td>
+                                                <td>{{ $album->posted_by }}</td>
                                                 <td>{{ $album->created_at }}</td>
                                                 <td>{{ $album->updated_at }}</td>
                                             </tr>

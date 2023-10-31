@@ -49,7 +49,7 @@ Route::get('/edit-profile', [PageController::class, "editProfile"])->middleware(
 Route::get('/jobs/{jobs:job_title}', [PageController::class, "jobsSinglePage"])->middleware('authUser');
 Route::get('/events/{events:title}', [PageController::class, "eventsSinglePage"])->middleware('authUser');
 Route::get('/news/{news:title}', [PageController::class, "newsSinglePage"])->middleware('authUser');
-Route::get('/gallery/{gallery:title}', [PageController::class, "gallerySinglePage"])->middleware('authUser');
+Route::get('/gallery/{album:album_name}', [PageController::class, "gallerySinglePage"])->middleware('authUser');
 
 //User POST related routes
 Route::post('/login', [UserController::class, "login"])->middleware('guest');
@@ -122,6 +122,9 @@ Route::post('admin/add-news', [NewsController::class, 'addNews'])->middleware('c
 Route::post('admin/add-events', [EventsController::class, 'addEvents'])->middleware('can:visitAdminPages');
 Route::post('admin/add-jobs', [JobsController::class, 'addJobs'])->middleware('can:visitAdminPages');
 Route::post('admin/add-courses', [CourseController::class, 'addCourse'])->middleware('can:visitAdminPages');
+
+Route::post('/import', [AdminController::class, 'import'])->middleware('can:visitAdminPages');
+Route::post('/import-courses', [AdminController::class, 'importCourses'])->middleware('can:visitAdminPages');
 
 //Admin UPDATE related routes
 Route::put('admin/update-news/{news:id}', [NewsController::class, 'updateNews'])->middleware('can:visitAdminPages');

@@ -34,8 +34,9 @@ return new class extends Migration {
             $table->string('course')->nullable();
             $table->string('year_graduated')->nullable();
             $table->string('employment_status')->nullable();
+            $table->string('category')->nullable();
             $table->string('job_type')->nullable();
-            $table->string('job_position')->nullable();
+            $table->string('job_title')->nullable();
             $table->string('job_location')->nullable();
             $table->string('monthly_salary')->nullable();
             $table->string('default_password')->nullable();

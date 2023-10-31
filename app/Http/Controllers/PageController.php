@@ -142,9 +142,9 @@ class PageController extends Controller
     {
         return view('auth-single-pages.events-single-page', ['events' => $events]);
     }
-    public function gallerySinglePage(GalleryAlbum $album)
+    public function gallerySinglePage(GalleryAlbum $album, Gallery $photos)
     {
-        return view('auth-single-pages.gallery-single-page', ['album' => $album->latest()->get()]);
+        return view('auth-single-pages.gallery-single-page', ['album' => $album, 'photos' => $photos->where('gallery_album_id', $album->id)->get()]);
     }
 
     //--------------------------------ADMIN----------------------------
@@ -467,9 +467,9 @@ public function adminViewForum(forums_posted $forum_selected, User $authors)
     return view('admin.view_forum', ['forum_selected' => $forum_selected, 'authors' => $authors->get()]);
 }
 
-public function adminReplyForum(forums_posted $forum_selected, forum_replies $forum_reply_selected, User $authors)
+public function adminReplyForum(forum_replies $forum_reply_selected, User $authors)
 {
-    return view('admin.reply_forum', ['forum_selected' => $forum_selected, 'forum_reply_selected' => $forum_reply_selected, 'authors' => $authors->get()]);
+    return view('admin.reply_forum', ['forum_reply_selected' => $forum_reply_selected, 'authors' => $authors->get()]);
 }
 
 public function viewForum(forums_posted $forum_selected)

@@ -406,12 +406,24 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="job-type">Job type</label>
-                                        <input wire:model="state.job_type"
+                                        <select wire:model="state.job_type"
                                             {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', ''])
                                                 ? 'disabled'
                                                 : '' }}
                                             class="form-control @error('job_type') is-invalid @enderror"
-                                            type="text" placeholder="Job type" name="job_type" id="job-type">
+                                            name="job_type" id="job-type">
+                                            <option value="" selected>--Select Job Type--
+                                            </option>
+                                            <option value="full-time">
+                                                Full Time
+                                            </option>
+                                            <option value="part-time">
+                                                Part Time
+                                            </option>
+                                            <option value="freelance">
+                                                Freelance
+                                            </option>
+                                        </select>
 
                                         @error('job_type')
                                             <div class="invalid-feedback">
@@ -424,17 +436,15 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="job-position">Job position</label>
-                                        <input wire:model="state.job_position"
-                                            {{ isset($state['employment_status']) &&
-                                            in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
+                                        <label for="job-title">Job Title</label>
+                                        <input wire:model="state.job_title"
+                                            {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', ''])
                                                 ? 'disabled'
                                                 : '' }}
-                                            class="form-control @error('job_position') is-invalid @enderror"
-                                            type="text" placeholder="Job position" name="job_position"
-                                            id="job-position">
+                                            class="form-control @error('job_title') is-invalid @enderror"
+                                            type="text" placeholder="Job Title" name="job_title" id="job-title">
 
-                                        @error('job_position')
+                                        @error('job_title')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -466,23 +476,74 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group">
-                                    <label for="monthly-salary">Monthly salary</label>
-                                    <input wire:model="state.monthly_salary"
-                                        {{ isset($state['employment_status']) &&
-                                        in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
-                                            ? 'disabled'
-                                            : '' }}
-                                        class="form-control @error('monthly_salary') is-invalid @enderror"
-                                        type="text" placeholder="Monthly salary" name="monthly_salary"
-                                        id="monthly-salary">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="monthly-salary">Monthly salary</label>
+                                        <input wire:model="state.monthly_salary"
+                                            {{ isset($state['employment_status']) &&
+                                            in_array($state['employment_status'], ['unemployed', 'self-employed', ''])
+                                                ? 'disabled'
+                                                : '' }}
+                                            class="form-control @error('monthly_salary') is-invalid @enderror"
+                                            type="text" placeholder="Monthly salary" name="monthly_salary"
+                                            id="monthly-salary">
 
-                                    @error('monthly_salary')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
+                                        @error('monthly_salary')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category">Job Category</label>
+                                        <select wire:model="state.category"
+                                            class="form-control @error('category') is-invalid @enderror"
+                                            name="category" id="category"
+                                            {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', '']) ? 'disabled' : '' }}>
+                                            <option value="" selected>--Job Category--</option>
+                                            <option value="Sales and Marketing">
+                                                Sales and Marketing
+                                            </option>
+                                            <option value="Customer Service">
+                                                Customer Service
+                                            </option>
+                                            <option value="Human Resources">
+                                                Human Resources</option>
+                                            <option value="Accounting and Finance">
+                                                Accounting and Finance</option>
+                                            <option value="Engineering">
+                                                Engineering</option>
+                                            <option value="Information Technology (IT)">
+                                                Information Technology (IT)</option>
+                                            <option value="Research and Development">
+                                                Research and Development</option>
+                                            <option value="Management">
+                                                Management</option>
+                                            <option value="Healthcare and Medical">
+                                                Healthcare and Medical</option>
+                                            <option value="Legal">
+                                                Legal</option>
+                                            <option value="Teaching and Education">
+                                                Teaching and Education</option>
+                                            <option value="Design and Creative">
+                                                Design and Creative</option>
+                                            <option value="Manufacturing and Production">
+                                                Manufacturing and Production</option>
+                                            <option value="Operations">
+                                                Operations</option>
+                                            <option value="Customer Support">
+                                                Customer Support</option>
+                                            <option value="Administration">
+                                                Administration</option>
+                                        </select>
+                                        <span class="text-danger">
+                                            @error('category')
+                                                <p>{{ $message }}</p>
+                                            @enderror
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

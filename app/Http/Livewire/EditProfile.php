@@ -146,22 +146,26 @@ class EditProfile extends Component
         $this->resetErrorBag();
         if ($value === 'unemployed') {
             $this->state['job_type'] = null;
-            $this->state['job_position'] = null;
+            $this->state['job_title'] = null;
+            $this->state['category'] = null;
             $this->state['job_location'] = null;
             $this->state['monthly_salary'] = null;
         } elseif ($value === 'self-employed') {
             $this->state['job_type'] = $this->user->job_type;
-            $this->state['job_position'] = null;
+            $this->state['job_title'] = $this->user->job_title;
+            $this->state['category'] = $this->user->category;
             $this->state['job_location'] = null;
             $this->state['monthly_salary'] = null;
         } elseif ($value === '') {
             $this->state['job_type'] = null;
-            $this->state['job_position'] = null;
+            $this->state['category'] = null;
+            $this->state['job_title'] = null;
             $this->state['job_location'] = null;
             $this->state['monthly_salary'] = null;
         } else {
             $this->state['job_type'] = $this->user->job_type;
-            $this->state['job_position'] = $this->user->job_position;
+            $this->state['job_title'] = $this->user->job_title;
+            $this->state['category'] = $this->user->category;
             $this->state['job_location'] = $this->user->job_location;
             $this->state['monthly_salary'] = $this->user->monthly_salary;
         }
@@ -178,7 +182,8 @@ class EditProfile extends Component
             $this->state['postal_code'] !== auth()->user()->postal_code ||
             $this->state['employment_status'] !== auth()->user()->employment_status ||
             $this->state['job_type'] !== auth()->user()->job_type ||
-            $this->state['job_position'] !== auth()->user()->job_position ||
+            $this->state['job_title'] !== auth()->user()->job_title ||
+            $this->state['category'] !== auth()->user()->category ||
             $this->state['job_location'] !== auth()->user()->job_location ||
             $this->state['monthly_salary'] !== auth()->user()->monthly_salary
         ) {
@@ -190,7 +195,8 @@ class EditProfile extends Component
                 'postal_code' => ['required'],
                 'employment_status' => ['required', Rule::in(['unemployed', 'employed', 'self-employed'])],
                 'job_type' => ['required_if:employment_status,employed,self-employed'],
-                'job_position' => ['required_if:employment_status,employed'],
+                'job_title' => ['required_if:employment_status,employed,self-employed'],
+                'category' => ['required_if:employment_status,employed,self-employed'],
                 'job_location' => ['required_if:employment_status,employed'],
                 'monthly_salary' => ['required_if:employment_status,employed', 'nullable', 'numeric'],
             ])->validate();
@@ -201,8 +207,9 @@ class EditProfile extends Component
                 'address' => trim(strip_tags($this->state['address'])),
                 'postal_code' => trim(strip_tags($this->state['postal_code'])),
                 'employment_status' => $this->state['employment_status'],
-                'job_type' => trim(strip_tags(ucwords($this->state['job_type']))),
-                'job_position' => trim(strip_tags(ucwords($this->state['job_position']))),
+                'job_type' => $this->state['job_type'],
+                'job_title' => trim(strip_tags(ucwords($this->state['job_title']))),
+                'category' => $this->state['category'],
                 'job_location' => trim(strip_tags($this->state['job_location'])),
                 'monthly_salary' => trim($this->state['monthly_salary']),
             ]);

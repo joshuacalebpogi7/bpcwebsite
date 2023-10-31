@@ -1,9 +1,25 @@
 <x-admin-layout>
     <h2>Alumni Records</h2>
-    <div>
-        <a href="/admin/add-alumni"><button class="btn btn-primary mb-3"><img
-                    src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Alumni</button></a>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="/admin/add-alumni">
+            <button class="btn btn-primary">
+                <img src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Alumni
+            </button>
+        </a>
+        <form action="/import" method="post" enctype="multipart/form-data">
+            @csrf
+            <div style="display: flex; align-items: center;">
+                <input class="form-control @error('excel_file') is-invalid @enderror" name="excel_file" type="file">
+                @error('excel_file')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+                <button class="btn btn-primary"> Import</button>
+            </div>
+        </form>
     </div>
+
 
 
     <div class="row">
