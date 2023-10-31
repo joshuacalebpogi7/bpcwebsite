@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('parentForum');
-            $table->unsignedBigInteger('replyingTo');
+            $table->unsignedBigInteger('replyingTo')->nullable();
             $table->string('replyBody')->nullable();
             $table->unsignedBigInteger('replyAuthor')->nullable();
             $table->tinyInteger('active')->default(0);

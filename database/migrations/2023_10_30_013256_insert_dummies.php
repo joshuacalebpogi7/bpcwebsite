@@ -178,6 +178,7 @@ return new class extends Migration {
         DB::table('forums_posted')->insert([
             'forumTitle' => 'YourForumTitle',
             'forumBody' => 'YourForumBody',
+            'forumCategory' => 'YourForumCategory',
             'forumAuthor' => 1,
             'forumUpdateAuthor' => 1,
             // Replace with the author's ID
@@ -189,10 +190,22 @@ return new class extends Migration {
         DB::table('forum_replies')->insert([
             'parentForum' => 1,
             // Replace with the parent forum
-            'replyingTo' => 1,
+            'replyingTo' => null,
             // Replace with the ID of the message being replied to
-            'replyBody' => 'YourReplyBody',
+            'replyBody' => 'This is the first reply',
             'replyAuthor' => 1,
+            // Replace with the author's ID
+            'active' => 1,
+            // Set the active status as needed (0 for inactive)
+        ]);
+
+        DB::table('forum_replies')->insert([
+            'parentForum' => 1,
+            // Replace with the parent forum
+            'replyingTo' => null,
+            // Replace with the ID of the message being replied to
+            'replyBody' => 'Nice forum bro',
+            'replyAuthor' => 2,
             // Replace with the author's ID
             'active' => 1,
             // Set the active status as needed (0 for inactive)

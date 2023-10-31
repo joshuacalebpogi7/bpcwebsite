@@ -7,8 +7,9 @@ use App\Models\forums_posted;
 use App\Models\forum_replies;
 use App\Models\User;
 
-class ViewForum extends Component
+class ReplyForum extends Component
 {
+
     public $user;
     public $authors;
     public $forum_selected;
@@ -56,8 +57,8 @@ class ViewForum extends Component
     {
     }
 
-    public function render(forums_posted $forum_selected)
+    public function render(forum_replies $forum_reply_selected)
     {
-        return view('livewire.view-forum', ['forum_selected' => $forum_selected]);
+        return view('livewire.reply-forum', ['forum_reply_selected' => $forum_reply_selected]);
     }
 }

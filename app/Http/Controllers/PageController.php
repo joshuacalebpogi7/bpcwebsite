@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\forums_posted;
+use App\Models\forum_replies;
 use Carbon\Carbon;
 use App\Models\Jobs;
 use App\Models\News;
@@ -463,6 +464,11 @@ class PageController extends Controller
 public function adminViewForum(forums_posted $forum_selected, User $authors)
 {
     return view('admin.view_forum', ['forum_selected' => $forum_selected, 'authors' => $authors->get()]);
+}
+
+public function adminReplyForum(forums_posted $forum_selected, forum_replies $forum_reply_selected, User $authors)
+{
+    return view('admin.reply_forum', ['forum_selected' => $forum_selected, 'forum_reply_selected' => $forum_reply_selected, 'authors' => $authors->get()]);
 }
 
 public function viewForum(forums_posted $forum_selected)
