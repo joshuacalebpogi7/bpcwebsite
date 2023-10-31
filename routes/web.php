@@ -123,6 +123,9 @@ Route::post('admin/add-events', [EventsController::class, 'addEvents'])->middlew
 Route::post('admin/add-jobs', [JobsController::class, 'addJobs'])->middleware('can:visitAdminPages');
 Route::post('admin/add-courses', [CourseController::class, 'addCourse'])->middleware('can:visitAdminPages');
 
+Route::post('/import', [AdminController::class, 'import'])->middleware('can:visitAdminPages');
+Route::post('/import-courses', [AdminController::class, 'importCourses'])->middleware('can:visitAdminPages');
+
 //Admin UPDATE related routes
 Route::put('admin/update-news/{news:id}', [NewsController::class, 'updateNews'])->middleware('can:visitAdminPages');
 Route::put('admin/update-events/{events:id}', [EventsController::class, 'updateEvents'])->middleware('can:visitAdminPages');

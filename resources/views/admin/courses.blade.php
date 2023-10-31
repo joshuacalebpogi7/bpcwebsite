@@ -1,10 +1,23 @@
 <x-admin-layout>
     <h2>Courses Records</h2>
-    <div>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
         <a href="/admin/add-courses"><button class="btn btn-primary mb-3"><img
                     src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Courses</button></a>
-    </div>
+        <form action="/import-courses" method="post" enctype="multipart/form-data">
+            @csrf
+            <div style="display: flex; align-items: center;">
+                <input class="form-control @error('excel_file') is-invalid @enderror" name="excel_file" type="file">
+                @error('excel_file')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
 
+                <button class="btn btn-primary">
+                    Import</button>
+            </div>
+        </form>
+    </div>
 
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">

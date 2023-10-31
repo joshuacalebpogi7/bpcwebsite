@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jobs;
-use App\Models\UserJobs;
+use Exception;
 use Carbon\Carbon;
+use App\Models\Jobs;
 use App\Models\User;
+use App\Models\UserJobs;
 use Illuminate\Support\Str;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Event;
 use Intervention\Image\Facades\Image;
 use Illuminate\Auth\Events\Registered;
@@ -21,14 +24,16 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
-    public function submitApplication(Request $request, Jobs $jobs, UserJobs $userJobs){
-        // dd($jobs->id);
-        $userJobs->user_id = auth()->user()->id;
-        $userJobs->job_id = $jobs->id;
-        $userJobs->status = 'applied';
-        $userJobs->save();
-        return back()->with('success', 'applied success');
-    }
+    // public function submitApplication(Request $request, Jobs $jobs, UserJobs $userJobs){
+    //     // dd($jobs->id);
+    //     $userJobs->user_id = auth()->user()->id;
+    //     $userJobs->job_id = $jobs->id;
+    //     $userJobs->status = 'applied';
+    //     $userJobs->save();
+    //     return back()->with('success', 'applied success');
+    // }
+
+    
     public function submitForgotPassword(Request $request)
     {
         $request->validate([
