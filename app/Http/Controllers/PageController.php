@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\forums_posted;
 use App\Models\forum_replies;
+use App\Models\UserJobs;
 use Carbon\Carbon;
 use App\Models\Jobs;
 use App\Models\News;
@@ -84,10 +85,10 @@ class PageController extends Controller
         return view('events');
     }
 
-    public function jobs(Jobs $jobs)
+    public function jobs(Jobs $jobs, UserJobs $userJobs)
     {
         if (auth()->check()) {
-            return view('auth.jobs', ['jobs' => $jobs->latest()->get()]);
+            return view('auth.jobs', ['jobs' => $jobs->latest()->get(), 'userJobs' => $userJobs]);
         }
         return view('jobs');
     }
