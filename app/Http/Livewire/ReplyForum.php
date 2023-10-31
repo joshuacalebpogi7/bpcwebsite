@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use App\Models\forums_posted;
 use App\Models\forum_replies;
 use App\Models\User;
@@ -15,6 +16,7 @@ class ReplyForum extends Component
     public $forum_author;
     public $forum_selected;
     public $forum_reply_selected;
+    public $replyBody;
     public $forumReplies = [];
     public $active;
 
@@ -33,10 +35,33 @@ class ReplyForum extends Component
 
     public function replyForum()
     {
+        DB::beginTransaction();
+
+        try {
+            forum_replies::create([
+                'parentForum' => $this->forum_selected->id,
+                'replyingTo' => $this->forum_reply_selected->id,
+                'replyBody' => $this->replyBody,
+                'replyAuthor' => auth()->user()->id,
+                'active' => true,
+            ]);
+            DB::commit();
+            $this->resetForm();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
     }
 
-    public function render(forum_replies $forum_reply_selected)
+    private function resetForm()
     {
-        return view('livewire.reply-forum', ['forum_reply_selected' => $forum_reply_selected]);
+        $this->forumBody = '';
+        return redirect("/admin/view_forum/{$this->forum_selected->id}");
+
+
+    }
+
+    public function render(forums_posted $forum_selected, forum_replies $forum_reply_selected)
+    {
+        return view('livewire.reply-forum', ['forum_reply_selected' => $forum_reply_selected, 'forum_selected' => $forum_selected]);
     }
 }

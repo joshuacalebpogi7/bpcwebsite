@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('forumTitle');
             $table->string('forumBody')->nullable();
             $table->string('forumCategory')->nullable();
+            $table->unsignedBigInteger('replyCount')->nullable();
             $table->unsignedBigInteger('forumAuthor')->nullable();
             $table->unsignedBigInteger('forumUpdateAuthor')->nullable();
             $table->tinyInteger('active')->default(0);

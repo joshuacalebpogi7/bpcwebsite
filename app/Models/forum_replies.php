@@ -13,7 +13,7 @@ class forum_replies extends Model
         "parentForum",
         "replyingTo",
         "replyBody",
-        "authorID",
+        "replyAuthor",
         "active",
     ];
 }
