@@ -22,8 +22,9 @@ class MultiStepForm extends Component
     public $address;
     public $postal_code;
     public $employment_status;
+    public $category;
     public $job_type;
-    public $job_position;
+    public $job_title;
     public $job_location;
     public $monthly_salary;
     public $new_password;
@@ -47,20 +48,21 @@ class MultiStepForm extends Component
         if ($value === 'unemployed') {
             $this->reset([
                 'job_type',
-                'job_position',
+                'category',
+                'job_title',
                 'job_location',
                 'monthly_salary',
             ]);
         } elseif ($value === 'self-employed') {
             $this->reset([
-                'job_position',
                 'job_location',
                 'monthly_salary',
             ]);
         } elseif ($value === '') {
             $this->reset([
                 'job_type',
-                'job_position',
+                'category',
+                'job_title',
                 'job_location',
                 'monthly_salary',
             ]);
@@ -97,8 +99,9 @@ class MultiStepForm extends Component
         } elseif ($this->currentStep == 2) {
             $this->validate([
                 'employment_status' => ['required', Rule::in(['unemployed', 'employed', 'self-employed'])],
+                'category' => ['required_if:employment_status,employed,self-employed'],
                 'job_type' => ['required_if:employment_status,employed,self-employed'],
-                'job_position' => ['required_if:employment_status,employed'],
+                'job_title' => ['required_if:employment_status,employed,self-employed'],
                 'job_location' => ['required_if:employment_status,employed'],
                 'monthly_salary' => ['required_if:employment_status,employed', 'nullable', 'numeric'],
             ]);
@@ -130,8 +133,9 @@ class MultiStepForm extends Component
                 "address" => trim(strip_tags($this->address)),
                 "postal_code" => $this->postal_code,
                 "employment_status" => $this->employment_status,
-                "job_type" => trim(strip_tags(ucwords($this->job_type))),
-                "job_position" => trim(strip_tags(ucwords($this->job_position))),
+                "category" => $this->category,
+                "job_type" => $this->job_type,
+                "job_title" => trim(strip_tags(ucwords($this->job_title))),
                 "job_location" => trim(strip_tags($this->job_location)),
                 "monthly_salary" => $this->monthly_salary,
                 "add_info_completed" => true,

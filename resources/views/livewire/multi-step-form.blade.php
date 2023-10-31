@@ -13,8 +13,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="civil-status">Civil status</label>
-                                    <select wire:model="civil_status" class="form-control" name="civil_status"
-                                        id="civil-status">
+                                    <select wire:model="civil_status"
+                                        class="form-control @error('civil_status') is-invalid @enderror"
+                                        name="civil_status" id="civil-status">
                                         <option value="" selected>--Select Civil Status--</option>
                                         <option value="single">
                                             Single</option>
@@ -36,7 +37,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="contact-no">Contact number</label>
-                                    <input wire:model="contact_no" class="form-control" type="text"
+                                    <input wire:model="contact_no"
+                                        class="form-control @error('contact_no') is-invalid @enderror" type="text"
                                         placeholder="Contact number" name="contact_no" id="contact-no">
                                     <span class="text-danger">
                                         @error('contact_no')
@@ -49,7 +51,8 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="address">Full address</label>
-                                <input wire:model="address" class="form-control" type="text"
+                                <input wire:model="address" class="form-control @error('address') is-invalid @enderror"
+                                    type="text"
                                     placeholder="Street address, apt, suite, unit, building, floor, barangay, city, province, etc."
                                     name="address" id="address">
                                 <span class="text-danger">
@@ -62,7 +65,8 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="postal-code">Postal code</label>
-                                <input wire:model="postal_code" class="form-control" type="text"
+                                <input wire:model="postal_code"
+                                    class="form-control @error('postal_code') is-invalid @enderror" type="text"
                                     placeholder="Postal code" name="postal_code" id="postal-code">
                                 <span class="text-danger">
                                     @error('postal_code')
@@ -87,8 +91,9 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="employment-status">Employment status</label>
-                                    <select wire:model="employment_status" class="form-control" name="employment_status"
-                                        id="employment-status">
+                                    <select wire:model="employment_status"
+                                        class="form-control @error('employment_status') is-invalid @enderror"
+                                        name="employment_status" id="employment-status">
                                         <option value="" selected>--Select Employment Status--</option>
                                         <option value="unemployed">
                                             Unemployed
@@ -109,11 +114,26 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="job-type">Job type</label>
-                                    <input wire:model="job_type"
+                                    <label for="job-type">Job Type</label>
+                                    <select wire:model="job_type"
                                         {{ in_array($employment_status, ['unemployed', '']) ? 'disabled' : '' }}
-                                        class="form-control" type="text" placeholder="Job type" name="job_type"
+                                        class="form-control @error('job_type') is-invalid @enderror" name="job_type"
                                         id="job-type">
+                                        <option value="" selected>--Select Job Type--
+                                        </option>
+                                        <option value="full-time"
+                                            {{ old('job_type') == 'full-time' ? 'selected' : '' }}>
+                                            Full Time
+                                        </option>
+                                        <option value="part-time"
+                                            {{ old('job_type') == 'part-time' ? 'selected' : '' }}>
+                                            Part Time
+                                        </option>
+                                        <option value="freelance"
+                                            {{ old('job_type') == 'freelance' ? 'selected' : '' }}>
+                                            Freelance
+                                        </option>
+                                    </select>
                                     <span class="text-danger">
                                         @error('job_type')
                                             <p>{{ $message }}</p>
@@ -124,13 +144,14 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="job-position">Job position</label>
-                                    <input wire:model="job_position"
-                                        {{ in_array($employment_status, ['unemployed', 'self-employed', '']) ? 'disabled' : '' }}
-                                        class="form-control" type="text" placeholder="Job position"
-                                        name="job_position" id="job-position">
+                                    <label for="job-title">Job Title</label>
+                                    <input wire:model="job_title"
+                                        {{ in_array($employment_status, ['unemployed', '']) ? 'disabled' : '' }}
+                                        class="form-control @error('job_title') is-invalid @enderror" type="text"
+                                        placeholder="Job Title @if (in_array($employment_status, ['self-employed'])) eg. writer, developer @endif"
+                                        name="job_title" id="job-title">
                                     <span class="text-danger">
-                                        @error('job_position')
+                                        @error('job_title')
                                             <p>{{ $message }}</p>
                                         @enderror
                                     </span>
@@ -143,8 +164,8 @@
                                 <label for="job-location">Job location</label>
                                 <input wire:model="job_location"
                                     {{ in_array($employment_status, ['unemployed', 'self-employed', '']) ? 'disabled' : '' }}
-                                    class="form-control" type="text" placeholder="Job location" name="job_location"
-                                    id="job-location">
+                                    class="form-control @error('job_location') is-invalid @enderror" type="text"
+                                    placeholder="Job location" name="job_location" id="job-location">
                                 <span class="text-danger">
                                     @error('job_location')
                                         <p>{{ $message }}</p>
@@ -159,8 +180,9 @@
                                     <label for="monthly-salary">Monthly salary</label>
                                     <input wire:model="monthly_salary"
                                         {{ in_array($employment_status, ['unemployed', 'self-employed', '']) ? 'disabled' : '' }}
-                                        class="form-control" type="text" placeholder="Monthly salary"
-                                        name="monthly_salary" id="monthly-salary">
+                                        class="form-control @error('monthly_salary') is-invalid @enderror"
+                                        type="text" placeholder="Monthly salary" name="monthly_salary"
+                                        id="monthly-salary">
                                     <span class="text-danger">
                                         @error('monthly_salary')
                                             <p>{{ $message }}</p>
@@ -168,11 +190,13 @@
                                     </span>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="category">Job Category</label>
-                                    <select wire:model="category" class="form-control" name="category"
-                                        id="category">
+                                    <select wire:model="category"
+                                        class="form-control @error('category') is-invalid @enderror" name="category"
+                                        id="category"
+                                        {{ in_array($employment_status, ['unemployed', '']) ? 'disabled' : '' }}>
                                         <option value="" selected>--Job Category--</option>
                                         <option value="Sales and Marketing">
                                             Sales and Marketing
@@ -199,7 +223,7 @@
                                         <option value="Teaching and Education">
                                             Teaching and Education</option>
                                         <option value="Design and Creative">
-                                            HDesign and Creative</option>
+                                            Design and Creative</option>
                                         <option value="Manufacturing and Production">
                                             Manufacturing and Production</option>
                                         <option value="Operations">
@@ -209,12 +233,13 @@
                                         <option value="Administration">
                                             Administration</option>
                                     </select>
-                                    @error('category')
-                                        <p>{{ $message }}</p>
-                                    @enderror
+                                    <span class="text-danger">
+                                        @error('category')
+                                            <p>{{ $message }}</p>
+                                        @enderror
                                     </span>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -230,7 +255,8 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="new-password">New Password</label>
-                                <input wire:model="new_password" class="form-control" type="password"
+                                <input wire:model="new_password"
+                                    class="form-control @error('new_password') is-invalid @enderror" type="password"
                                     placeholder="New Password" name="new_password" id="new-password">
                                 <span class="text-danger">
                                     @error('new_password')
@@ -241,8 +267,10 @@
 
                             <div class="form-group">
                                 <label for="confirm-password">Confirm Password</label>
-                                <input wire:model="confirm_password" class="form-control" type="password"
-                                    placeholder="Confirm Password" name="confirm_password" id="confirm-password">
+                                <input wire:model="confirm_password"
+                                    class="form-control @error('confirm_password') is-invalid @enderror"
+                                    type="password" placeholder="Confirm Password" name="confirm_password"
+                                    id="confirm-password">
                                 <span class="text-danger">
                                     @error('confirm_password')
                                         <p>{{ $message }}</p>
@@ -273,8 +301,8 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="avatar">Avatar</label>
-                                <input wire:model="avatar" class="form-control" type="file" name="avatar"
-                                    id="avatar">
+                                <input wire:model="avatar" class="form-control @error('avatar') is-invalid @enderror"
+                                    type="file" name="avatar" id="avatar">
                                 <span class="text-danger">
                                     @error('avatar')
                                         <p>{{ $message }}</p>
