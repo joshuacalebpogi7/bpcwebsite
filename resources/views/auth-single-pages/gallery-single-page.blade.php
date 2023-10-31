@@ -1,6 +1,6 @@
 <x-home-layout>
     <x-slot name="title">
-        {{ $eventclass->title }}
+        {{ $album->title }}
     </x-slot>
     <x-slot name="assets">
         @vite(['resources/css/style.css'])
@@ -31,43 +31,15 @@
     </div>
     <section class="post-header">
         <div class="header-content post-container">
-            <a href="news.php" class="back-home">Back To Gallery</a>
+            <a href="/gallery" class="back-home">Back To Gallery</a>
             <div class="container1">
 
                 <div class="gallery">
-
-                    <a href="pictures/prog-pic.jpg" data-lightbox="models" data-title="Caption1">
-                        <img src="pictures/prog-pic.jpg">
-                    </a>
-
-                    <a href="pictures/study-pic.jpg" data-lightbox="models" data-title="Caption2">
-                        <img src="pictures/study-pic.jpg">
-                    </a>
-
-                    <a href="pictures/goal-pic.jpg" data-lightbox="models" data-title="Caption3">
-                        <img src="pictures/goal-pic.jpg">
-                    </a>
-
-                    <a href="pictures/grad-pic.jpg" data-lightbox="models" data-title="Caption4">
-                        <img src="pictures/grad-pic.jpg">
-                    </a>
-
-                    <a href="pictures/prog-pic.jpg" data-lightbox="models" data-title="Caption5">
-                        <img src="pictures/prog-pic.jpg">
-                    </a>
-
-                    <a href="pictures/study-pic.jpg" data-lightbox="models" data-title="Caption6">
-                        <img src="pictures/study-pic.jpg">
-                    </a>
-
-                    <a href="pictures/goal-pic.jpg" data-lightbox="models" data-title="Caption7">
-                        <img src="pictures/goal-pic.jpg">
-                    </a>
-
-                    <a href="pictures/grad-pic.jpg" data-lightbox="models" data-title="Caption8">
-                        <img src="pictures/grad-pic.jpg">
-                    </a>
-
+                    @foreach ($photos as $photo)
+                        <a href="{{ $photo->photo }}" data-lightbox="models" data-title="Caption1">
+                            <img src="{{ $photo->photo }}">
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>

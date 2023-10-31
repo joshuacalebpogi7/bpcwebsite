@@ -24,7 +24,7 @@
         <div class="filterable_cards">
             @foreach ($album as $album)
                 <div class="card11" data-name="phone">
-                    <a href="/gallery/{gallery:title}"><img src="{{ $album->album_cover }}" alt="">
+                    <a href="/gallery/{{ $album->album_name }}"><img src="{{ $album->album_cover }}" alt="">
                         <div class="card11_body">
                             <h6 class="card11_title">{{ $album->album_name }}</h6>
                             <p class="card11_text">{{ $album->description }}</p>
@@ -32,55 +32,6 @@
                     </a>
                 </div>
             @endforeach
-            <div class="card11" data-name="clothes">
-                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
-                    <div class="card11_body">
-                        <h6 class="card11_title">Clothes</h6>
-                    </div>
-                </a>
-            </div>
-
-            <div class="card11" data-name="shoes">
-                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
-                    <div class="card11_body">
-                        <h6 class="card11_title">Phone</h6>
-                    </div>
-                </a>
-            </div>
-
-            <div class="card11" data-name="shoes">
-                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
-                    <div class="card11_body">
-                        <h6 class="card11_title">Shoe</h6>
-                    </div>
-                </a>
-            </div>
-
-            <div class="card11" data-name="phone">
-                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
-                    <div class="card11_body">
-                        <h6 class="card11_title">Phone</h6>
-                    </div>
-                </a>
-            </div>
-
-            <div class="card11" data-name="phone">
-                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
-                    <div class="card11_body">
-                        <h6 class="card11_title">Phone</h6>
-                    </div>
-                </a>
-            </div>
-
-            <div class="card11" data-name="phone">
-                <a href="gallery-view-page.php"><img src="images/study-pic.jpg" alt="">
-                    <div class="card11_body">
-                        <h6 class="card11_title">Phone</h6>
-                    </div>
-                </a>
-            </div>
-
-
         </div>
 
     </div>

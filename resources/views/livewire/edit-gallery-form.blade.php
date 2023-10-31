@@ -111,7 +111,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <img class="card-img-top mb-2"
-                                        src="{{ asset('storage/photos/' . $newPhoto['photo']) }}" alt="New Photo">
+                                        src="{{ asset('storage/photos/' . $newPhoto['photo']) }}" alt="New Photo"
+                                        style="max-width: 100%; max-height: 250px; object-fit: contain; overflow: hidden; margin: 0 auto;">
 
                                     <button wire:click.prevent="setAlbumCover({{ $index }})"
                                         class="btn btn-primary" type="button">Make Album Cover</button>

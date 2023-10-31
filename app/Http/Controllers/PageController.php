@@ -142,9 +142,9 @@ class PageController extends Controller
     {
         return view('auth-single-pages.events-single-page', ['events' => $events]);
     }
-    public function gallerySinglePage(GalleryAlbum $album)
+    public function gallerySinglePage(GalleryAlbum $album, Gallery $photos)
     {
-        return view('auth-single-pages.gallery-single-page', ['album' => $album->latest()->get()]);
+        return view('auth-single-pages.gallery-single-page', ['album' => $album, 'photos' => $photos->where('gallery_album_id', $album->id)->get()]);
     }
 
     //--------------------------------ADMIN----------------------------

@@ -49,7 +49,7 @@ Route::get('/edit-profile', [PageController::class, "editProfile"])->middleware(
 Route::get('/jobs/{jobs:job_title}', [PageController::class, "jobsSinglePage"])->middleware('authUser');
 Route::get('/events/{events:title}', [PageController::class, "eventsSinglePage"])->middleware('authUser');
 Route::get('/news/{news:title}', [PageController::class, "newsSinglePage"])->middleware('authUser');
-Route::get('/gallery/{gallery:title}', [PageController::class, "gallerySinglePage"])->middleware('authUser');
+Route::get('/gallery/{album:album_name}', [PageController::class, "gallerySinglePage"])->middleware('authUser');
 
 //User POST related routes
 Route::post('/login', [UserController::class, "login"])->middleware('guest');
