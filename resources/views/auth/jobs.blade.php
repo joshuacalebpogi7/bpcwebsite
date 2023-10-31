@@ -67,11 +67,11 @@
                             <p><b>@php
                                 $salary = $job->salary;
                                 if ($salary >= 1000000) {
-                                    $formattedSalary = '$' . number_format($salary / 1000000) . 'm';
+                                    $formattedSalary = '₱' . number_format($salary / 1000000) . 'm';
                                 } elseif ($salary >= 1000) {
-                                    $formattedSalary = '$' . number_format($salary / 1000) . 'k';
+                                    $formattedSalary = '₱' . number_format($salary / 1000) . 'k';
                                 } else {
-                                    $formattedSalary = '$' . number_format($salary, 0, '', ',');
+                                    $formattedSalary = '₱' . number_format($salary, 0, '', ',');
                                 }
                             @endphp
                                     {{ $formattedSalary }}</b> <span>/ year</span></p>
