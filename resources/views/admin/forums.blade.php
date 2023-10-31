@@ -46,6 +46,17 @@
                                                     <td>{{ $forum_posted->id }}</td>
                                                     <td>
                                                         <div class="d-flex flex-column">
+                                                            <a href="{{ route('admin/view_forum', ['forum_selected' => $forum_posted->id]) }}" class="flex-fill"><button
+                                                                class="btn btn-light me-1 w-100 h-100 p-1 border mb-1"
+                                                                style="width: 150px;">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <img src="{{ URL::asset('/images/icon-view.svg') }}"
+                                                                        class="mr-2" alt="View Icon">
+                                                                    View
+                                                                </div>
+                                                            </button>
+                                                        </a>
                                                             <a href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}" class="flex-fill"><button
                                                                     class="btn btn-light me-1 w-100 h-100 p-1 border mb-1"
                                                                     style="width: 150px;">
@@ -70,13 +81,6 @@
                                                         </div>
                                                     </td>
                                                     <td>
-
-                                                        <a
-                                                            href="{{ route('admin/view_forum', ['forum_selected' => $forum_posted->id]) }}">
-                                                            <button class = "survey_action">
-                                                                {{ $forum_posted->forumTitle }}
-                                                            </button>
-                                                        </a>
                                                         {{ $forum_posted->forumTitle }}
                                                     </td>
                                                     <td>{{ $forum_posted->forumDesc }}</td>
