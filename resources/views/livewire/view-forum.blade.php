@@ -1,76 +1,3 @@
-{{-- <div>
-    <div class="form-group">
-        <hr>
-        <h4>{{ $forum_selected->forumCategory }}</h4><br>
-        <h2>{{ $forum_selected->forumTitle }}</h2><br>
-        <h4>{{ $forum_selected->forumBody }} </h4>
-        <hr>
-
-        @foreach ($forumReplies as $forumReply)
-            @if ($forumReply['replyingTo'] == null)
-                <div class="reply">
-                    <p>Comments</p>
-                    <hr>
-                    <table>
-                        <tr>
-                            <td>
-                                @php
-                                    $author = $authors->firstWhere('id', $forumReply->replyAuthor);
-                                @endphp
-                                <img height = "100" width = "100" class = "forum-avatar"
-                                    src="{{ $author ? $author->avatar : 'Author not found' }}">
-                                <br>
-                                {{ $author ? ($author->first_name !== $author->last_name ? $author->first_name . ' ' . $author->last_name : $author->first_name) : 'Author not found' }}
-                            </td>
-
-                            <td>{{ $forumReply['replyBody'] }}
-                                <div class = "forum-reply-button" style = "text-align: right;">
-                                    <a
-                                        href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReply->id]) }}">Reply</a>
-                                </div>
-                            </td>
-
-                        </tr>
-                    </table>
-                    <hr>
-                </div>
-            @endif
-            @if ($forumReply['replyingTo'] > 0)
-                <div class="reply-within-a-reply">
-                    @php
-                        $author = $authors->firstWhere('id', $forumReply->replyAuthor);
-                        $comment = $forumReply->firstWhere('id', $forumReply->replyingTo);
-                    @endphp
-                    <p>Replies to comments</p>
-                    <hr>
-                    <p>Replying to: {{ $comment->replyBody }}</p>
-                    <br>
-                    <table>
-                        <tr>
-                            <td>
-                                <img height = "100" width = "100" class = "forum-avatar"
-                                    src="{{ $author ? $author->avatar : 'Author not found' }}">
-                                <br>
-                                {{ $author ? ($author->first_name !== $author->last_name ? $author->first_name . ' ' . $author->last_name : $author->first_name) : 'Author not found' }}
-                            </td>
-
-                            <td>
-                                {{ $forumReply['replyBody'] }}
-                                <div class = "forum-reply-button" style = "text-align: right;">
-                                    <a
-                                        href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReply->id]) }}">Reply</a>
-                                </div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-            @endif
-        @endforeach
-    </div>
-</div>
- --}}
-
 <style>
     .reply {
         margin-left: 20px;
@@ -79,6 +6,16 @@
 
     .reply-within-a-reply {
         margin-left: 40px;
+        /* Increase the indentation for replies within replies */
+    }
+
+    .reply-within-a-reply-within-a-reply {
+        margin-left: 60px;
+        /* Increase the indentation for replies within replies */
+    }
+
+    .reply-within-a-reply-within-a-reply-within-a-reply {
+        margin-left: 80px;
         /* Increase the indentation for replies within replies */
     }
 </style>
@@ -95,19 +32,25 @@
             @if ($forumReply['replyingTo'] == null)
                 <div class="reply">
                     <hr>
+                    <i>{{ $forumReply['created_at']->format('F j, Y, g:i a') }}</i>
                     <table>
                         <tr>
                             <td>
                                 @php
-                                    $author = $authors->firstWhere('id', $forumReply->replyAuthor);
+                                    $forumReplyAuthor = $authors->firstWhere('id', $forumReply->replyAuthor);
+                                    $isOp = $forumReplyAuthor && $forumReplyAuthor->id === $forum_selected->forumAuthor;
                                 @endphp
                                 <img height="100" width="100" class="forum-avatar"
-                                    src="{{ $author ? $author->avatar : 'Author not found' }}">
+                                    src="{{ $forumReplyAuthor ? $forumReplyAuthor->avatar : 'Author not found' }}">
                                 <br>
-                                {{ $author ? ($author->first_name !== $author->last_name ? $author->first_name . ' ' . $author->last_name : $author->first_name) : 'Author not found' }}
+                                {{ $forumReplyAuthor ? ($forumReplyAuthor->first_name !== $forumReplyAuthor->last_name ? ' ' . $forumReplyAuthor->first_name . ' ' . $forumReplyAuthor->last_name : ' ' . $forumReplyAuthor->first_name) : 'Author not found' }}
+                                {{ $isOp ? '[OP]' : '' }}
                             </td>
 
-                            <td>{{ $forumReply['replyBody'] }}
+
+
+                            <td>
+                                {{ $forumReply['replyBody'] }}
                                 <div class="forum-reply-button" style="text-align: right;">
                                     <a
                                         href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReply->id]) }}">Reply</a>
@@ -118,28 +61,31 @@
                     <hr>
 
                     {{-- Display replies to this comment --}}
-                    @foreach ($forumReplies as $replyToComment)
-                        @if ($replyToComment['replyingTo'] == $forumReply->id)
+                    @foreach ($forumReplies as $forumReplyReply)
+                        @if ($forumReplyReply['replyingTo'] == $forumReply->id)
                             <div class="reply-within-a-reply">
                                 @php
-                                    $replyAuthor = $authors->firstWhere('id', $replyToComment->replyAuthor);
+                                    $forumReplyReplyAuthor = $authors->firstWhere('id', $forumReplyReply->replyAuthor);
+                                    $isReplyReplyOp = $forumReplyReplyAuthor && $forumReplyReplyAuthor->id === $forum_selected->forumAuthor;
                                 @endphp
                                 <hr>
                                 <p>Replying to: {{ $forumReply['replyBody'] }}</p>
                                 <br>
+                                <i>{{ $forumReplyReply['created_at']->format('F j, Y, g:i a') }}</i>
                                 <table>
                                     <tr>
                                         <td>
                                             <img height="100" width="100" class="forum-avatar"
-                                                src="{{ $replyAuthor ? $replyAuthor->avatar : 'Author not found' }}">
+                                                src="{{ $forumReplyReplyAuthor ? $forumReplyReplyAuthor->avatar : 'Author not found' }}">
                                             <br>
-                                            {{ $replyAuthor ? ($replyAuthor->first_name !== $replyAuthor->last_name ? $replyAuthor->first_name . ' ' . $replyAuthor->last_name : $replyAuthor->first_name) : 'Author not found' }}
+                                            {{ $forumReplyReplyAuthor ? ($forumReplyReplyAuthor->first_name !== $forumReplyReplyAuthor->last_name ? $forumReplyReplyAuthor->first_name . ' ' . $forumReplyReplyAuthor->last_name : $forumReplyReplyAuthor->first_name) : 'Author not found' }}
+                                            {{ $isReplyReplyOp ? '[OP]' : '' }}
                                         </td>
 
-                                        <td>{{ $replyToComment['replyBody'] }}
+                                        <td>{{ $forumReplyReply['replyBody'] }}
                                             <div class="forum-reply-button" style="text-align: right;">
                                                 <a
-                                                    href="{{ route('admin/reply_forum', ['forum_reply_selected' => $replyToComment->id]) }}">Reply</a>
+                                                    href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReplyReply->id]) }}">Reply</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -147,28 +93,29 @@
                                 <hr>
 
                                 {{-- Display replies within replies --}}
-                                @foreach ($forumReplies as $replyWithinReply)
-                                    @if ($replyWithinReply['replyingTo'] == $replyToComment->id)
-                                        <div class="reply-within-a-reply">
+                                @foreach ($forumReplies as $forumReplyReplyReply)
+                                    @if ($forumReplyReplyReply['replyingTo'] == $forumReplyReply->id)
+                                        <div class="reply-within-a-reply-within-a-reply">
                                             @php
-                                                $replyWithinReplyAuthor = $authors->firstWhere('id', $replyWithinReply->replyAuthor);
+                                                $forumReplyReplyReplyAuthor = $authors->firstWhere('id', $forumReplyReplyReply->replyAuthor);
                                             @endphp
                                             <hr>
-                                            <p>Replying to: {{ $replyToComment['replyBody'] }}</p>
+                                            <p>Replying to: {{ $forumReplyReply['replyBody'] }}</p>
                                             <br>
+                                            <i>{{ $forumReplyReplyReply['created_at']->format('F j, Y, g:i a') }}</i>
                                             <table>
                                                 <tr>
                                                     <td>
                                                         <img height="100" width="100" class="forum-avatar"
-                                                            src="{{ $replyWithinReplyAuthor ? $replyWithinReplyAuthor->avatar : 'Author not found' }}">
+                                                            src="{{ $forumReplyReplyReplyAuthor ? $forumReplyReplyReplyAuthor->avatar : 'Author not found' }}">
                                                         <br>
-                                                        {{ $replyWithinReplyAuthor ? ($replyWithinReplyAuthor->first_name !== $replyWithinReplyAuthor->last_name ? $replyWithinReplyAuthor->first_name . ' ' . $replyWithinReplyAuthor->last_name : $replyWithinReplyAuthor->first_name) : 'Author not found' }}
+                                                        {{ $forumReplyReplyReplyAuthor ? ($forumReplyReplyReplyAuthor->first_name !== $forumReplyReplyReplyAuthor->last_name ? $forumReplyReplyReplyAuthor->first_name . ' ' . $forumReplyReplyReplyAuthor->last_name : $forumReplyReplyReplyAuthor->first_name) : 'Author not found' }}
                                                     </td>
 
-                                                    <td>{{ $replyWithinReply['replyBody'] }}
+                                                    <td>{{ $forumReplyReplyReply['replyBody'] }}
                                                         <div class="forum-reply-button" style="text-align: right;">
-                                                            <a
-                                                                href="{{ route('admin/reply_forum', ['forum_reply_selected' => $replyWithinReply->id]) }}">Reply</a>
+                                                            {{--                                                             <a
+                                                                href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReplyReplyReply->id]) }}">Reply</a> --}}
                                                         </div>
                                                     </td>
                                                 </tr>
