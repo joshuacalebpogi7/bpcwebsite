@@ -97,12 +97,17 @@ body{
       width: 100%;
       padding: 0;
     }
+
+    .rightcolumn{
+      padding: 3%;
+    }
   }
 
   @media screen and (max-width: 414px) {
     .leftcolumn, .rightcolumn {   
       width: 100%;
       padding-top: 5%;
+      padding: 5%;
     }
   }
 
@@ -577,7 +582,7 @@ body{
   @media(max-width:514px){
     .card_0 h1{
       padding-left: 10px;
-      font-size: 28px;
+      font-size: 24px;
     }
 
     .card_0 h2{
@@ -598,7 +603,7 @@ body{
     }
     .row{
       padding: 0;
-      padding-left: 0%;
+      padding: 0%;
     }
   }
 
@@ -1091,7 +1096,7 @@ padding: 10px 15px;
 
 .container1{
   position: relative;
-  max-width: 1250px;
+  max-width: 1200px;
   width: 100%;
   margin: 50px auto;
   padding: 20px;
@@ -1163,7 +1168,6 @@ button.active{
 .post-header{
   width: 100%;
   height: 500px;
-  background: #30a05c;
 }
 
 .post-container{

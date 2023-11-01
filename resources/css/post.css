@@ -246,7 +246,7 @@ header.shadow .logo{
 }
 
 .post-container{
-    max-width: 800px;
+    max-width: 800px !important;
     margin: auto;
     width: 100%;
 }

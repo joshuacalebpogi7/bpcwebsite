@@ -38,7 +38,7 @@
                     <div class="cards">
                         <div class="image"><img src="images/prog-pic.jpg"></div>
                         <div class="content">
-                            <a href="#">
+                            <a href="/events/{{ $event->title }}">
                                 <span class="title">
                                     {{ $event->title }}
                                 </span>
@@ -48,7 +48,7 @@
                                 {{ \Carbon\Carbon::parse($event->event_start)->format('F j, Y g:i A') }} -
                                 {{ \Carbon\Carbon::parse($event->event_end)->format('F j, Y g:i A') }}
                             </p>
-                            <a class="action" href="#">
+                            <a class="action" href="/events/{{ $event->title }}">
                                 Find out more
                                 <span aria-hidden="true">
                                     →
@@ -69,15 +69,26 @@
             @foreach ($jobs as $index => $job)
                 @if ($index < 3)
                     <div class="cookieCard">
-                        <a href="#">
+                        <a href="/jobs/{{ $job->title }}">
                             <p class="cookieHeading">{{ $job->job_title }}</p>
                             <hr class="solid" style="border-top: 2px solid #E9EEF2">
-                            <a href="#">
-                                <p class="cookieDescription">{{ $job->company }}<a href="#"></a></p>
-                                <button class="acceptButton">{{ $job->status }}</button>
+                            <a href="/jobs/{{ $job->title }}">
+                                <p class="cookieDescription">{{ $job->company }}<a href="/jobs/{{ $job->title }}"></a></p>
+                                <button class="acceptButton">{{ $job->job_type }}</button>
                     </div>
                 @endif
             @endforeach
         </div>
     </div>
+    @push('footer')
+        <div class="footer container5">
+            <p>&#169; ALUMNIPORTAL All Rights Reserved</p>
+            <div class="social">
+                <a href="https://www.facebook.com/your_facebook_page"><i class="ri-facebook-circle-fill"></i></a>
+                <a href="https://twitter.com/your_twitter_profile"><i class="ri-twitter-fill"></i></a>
+                <a href="https://www.instagram.com/your_instagram_profile"><i class="ri-instagram-fill"></i></a>
+                <a href="https://www.linkedin.com/in/your_linkedin_profile"><i class="ri-linkedin-box-fill"></i></a>
+            </div>
+        </div>
+    @endpush
 </x-home-layout>

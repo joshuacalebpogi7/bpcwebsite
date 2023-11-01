@@ -77,10 +77,10 @@
         <div class="footer container5">
             <p>&#169; ALUMNIPORTAL All Rights Reserved</p>
             <div class="social">
-                <a href="#"><i class='bx bxl-facebook'></i></a>
-                <a href="#"><i class='bx bxl-twitter'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://www.facebook.com/your_facebook_page"><i class="ri-facebook-circle-fill"></i></a>
+                <a href="https://twitter.com/your_twitter_profile"><i class="ri-twitter-fill"></i></a>
+                <a href="https://www.instagram.com/your_instagram_profile"><i class="ri-instagram-fill"></i></a>
+                <a href="https://www.linkedin.com/in/your_linkedin_profile"><i class="ri-linkedin-box-fill"></i></a>
             </div>
         </div>
     @endpush

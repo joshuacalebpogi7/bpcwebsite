@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <title>Events</title>
+    <title>Gallery</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
     <!-- {{-- fonts --}} -->
@@ -160,6 +160,5 @@
             <a href="https://twitter.com/your_twitter_profile"><i class="ri-twitter-fill"></i></a>
             <a href="https://www.instagram.com/your_instagram_profile"><i class="ri-instagram-fill"></i></a>
             <a href="https://www.linkedin.com/in/your_linkedin_profile"><i class="ri-linkedin-box-fill"></i></a>
-
         </div>
     </div>

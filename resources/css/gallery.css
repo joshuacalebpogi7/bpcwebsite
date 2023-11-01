@@ -17,7 +17,6 @@ body{
 
 .container1{
     width: 100%;
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +57,7 @@ body{
 }
 
 #page-header{
-    background-image: linear-gradient(180deg, rgba(0,165,111,0.6) 0%, rgba(2,25,19,0.865983893557423) 100%), url("../pictures/bg.jpg");
+    background-image: linear-gradient(180deg, rgba(0,165,111,0.6) 0%, rgba(2,25,19,0.865983893557423) 100%), url("/public/images/bg.jpg");
     max-width: 100%;
     height: 20vh;
     background-size: cover;
@@ -97,3 +96,4 @@ body{
     height: 70%;
     z-index: -2;
   }
+

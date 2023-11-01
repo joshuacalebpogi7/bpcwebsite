@@ -121,7 +121,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 75%;
-  height: 8rem;
+  height: 10rem;
   background: #f0ecf1;
   border-radius: 1rem;
   overflow: hidden;
@@ -220,7 +220,7 @@ body {
 button,
 .start_survey {
   margin-top: 10px;
-  margin-left: 40%;
+  margin-left: 35%;
   padding: 10px 40px;
   border-radius: 50px;
   border: 0;
@@ -260,14 +260,16 @@ button:active,
     height: auto;
   }
 
-  button {
+  button,
+  .start_survey {
     margin-left: 35%;
     padding: 8px 32px;
   }
 }
 
 @media (max-width: 560px) {
-  button {
+  button,
+  .start_survey {
     padding: 6px 24px;
   }
 
@@ -282,7 +284,8 @@ button:active,
     width: 95%;
   }
 
-  button {
+  button,
+  .start_survey {
     margin-left: 30%;
     padding: 5px 20px;
   }
