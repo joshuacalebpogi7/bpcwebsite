@@ -18,6 +18,14 @@
         margin-left: 80px;
         /* Increase the indentation for replies within replies */
     }
+
+    table {
+        width: 100%;
+    }
+
+    td {
+        border: 1px solid black;
+    }
 </style>
 
 <div>
@@ -32,10 +40,14 @@
             @if ($forumReply['replyingTo'] == null)
                 <div class="reply">
                     <hr>
-                    <i>{{ $forumReply['created_at']->format('F j, Y, g:i a') }}</i>
                     <table>
                         <tr>
-                            <td>
+                            <td style = "width: 20%; text-align: center;">
+                                <i>{{ $forumReply['created_at']->format('F j, Y g:i a') }}</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style = "width: 20%; text-align: center;">
                                 @php
                                     $forumReplyAuthor = $authors->firstWhere('id', $forumReply->replyAuthor);
                                     $isOp = $forumReplyAuthor && $forumReplyAuthor->id === $forum_selected->forumAuthor;
@@ -44,7 +56,10 @@
                                     src="{{ $forumReplyAuthor ? $forumReplyAuthor->avatar : 'Author not found' }}">
                                 <br>
                                 {{ $forumReplyAuthor ? ($forumReplyAuthor->first_name !== $forumReplyAuthor->last_name ? ' ' . $forumReplyAuthor->first_name . ' ' . $forumReplyAuthor->last_name : ' ' . $forumReplyAuthor->first_name) : 'Author not found' }}
-                                {{ $isOp ? '[OP]' : '' }}
+                                @if ($isOp)
+                                    <br>
+                                    [OP]
+                                @endif
                             </td>
 
 
@@ -71,7 +86,7 @@
                                 <hr>
                                 <p>Replying to: {{ $forumReply['replyBody'] }}</p>
                                 <br>
-                                <i>{{ $forumReplyReply['created_at']->format('F j, Y, g:i a') }}</i>
+                                <i>{{ $forumReplyReply['created_at']->format('F j, Y g:i a') }}</i>
                                 <table>
                                     <tr>
                                         <td>
@@ -79,7 +94,10 @@
                                                 src="{{ $forumReplyReplyAuthor ? $forumReplyReplyAuthor->avatar : 'Author not found' }}">
                                             <br>
                                             {{ $forumReplyReplyAuthor ? ($forumReplyReplyAuthor->first_name !== $forumReplyReplyAuthor->last_name ? $forumReplyReplyAuthor->first_name . ' ' . $forumReplyReplyAuthor->last_name : $forumReplyReplyAuthor->first_name) : 'Author not found' }}
-                                            {{ $isReplyReplyOp ? '[OP]' : '' }}
+                                            @if ($isReplyReplyOp)
+                                                <br>
+                                                [OP]
+                                            @endif
                                         </td>
 
                                         <td>{{ $forumReplyReply['replyBody'] }}
@@ -98,11 +116,12 @@
                                         <div class="reply-within-a-reply-within-a-reply">
                                             @php
                                                 $forumReplyReplyReplyAuthor = $authors->firstWhere('id', $forumReplyReplyReply->replyAuthor);
+                                                $isReplyReplyReplyOp = $forumReplyReplyReplyAuthor && $forumReplyReplyReplyAuthor->id === $forum_selected->forumAuthor;
                                             @endphp
                                             <hr>
                                             <p>Replying to: {{ $forumReplyReply['replyBody'] }}</p>
                                             <br>
-                                            <i>{{ $forumReplyReplyReply['created_at']->format('F j, Y, g:i a') }}</i>
+                                            <i>{{ $forumReplyReplyReply['created_at']->format('F j, Y g:i a') }}</i>
                                             <table>
                                                 <tr>
                                                     <td>
@@ -110,6 +129,10 @@
                                                             src="{{ $forumReplyReplyReplyAuthor ? $forumReplyReplyReplyAuthor->avatar : 'Author not found' }}">
                                                         <br>
                                                         {{ $forumReplyReplyReplyAuthor ? ($forumReplyReplyReplyAuthor->first_name !== $forumReplyReplyReplyAuthor->last_name ? $forumReplyReplyReplyAuthor->first_name . ' ' . $forumReplyReplyReplyAuthor->last_name : $forumReplyReplyReplyAuthor->first_name) : 'Author not found' }}
+                                                        @if ($isReplyReplyReplyOp)
+                                                            <br>
+                                                            [OP]
+                                                        @endif
                                                     </td>
 
                                                     <td>{{ $forumReplyReplyReply['replyBody'] }}
@@ -130,5 +153,14 @@
                 </div>
             @endif
         @endforeach
+        <hr>
+        <form wire:submit.prevent = "commentForum">
+            <input style = "width: 100%;" type = "text" placeholder="Replying to post: {{ $forumTitle }}" required
+                onkeydown="return event.key != 'Enter';" wire:model = "commentBody">{{-- </textarea> --}}
+            <div style = "text-align: right;">
+                <input type = "submit" value = "Post Reply">
+            </div>
+            @dump($commentBody)
+        </form>
     </div>
 </div>
