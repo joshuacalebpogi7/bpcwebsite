@@ -23,9 +23,9 @@
         width: 100%;
     }
 
-    td {
+/*     td {
         border: 1px solid black;
-    }
+    } */
 </style>
 
 <div>
@@ -42,11 +42,21 @@
                     <hr>
                     <table>
                         <tr>
+                            <td></td>
                             <td style = "width: 20%; text-align: center;">
                                 <i>{{ $forumReply['created_at']->format('F j, Y g:i a') }}</i>
                             </td>
                         </tr>
                         <tr>
+                            <td class = "upvote-downvote-area" style = "width: 5%; text-align: center;">
+                                <form {{-- wire:submit.prevent="upvoteComment" --}}>
+                                    <input type = "submit" value = "&#8593;">
+                                </form>
+                                <br>
+                                <form {{-- wire:submit.prevent="downvoteComment" --}}>
+                                    <input type = "submit" value = "&#8595;">
+                                </form>
+                            </td>
                             <td style = "width: 20%; text-align: center;">
                                 @php
                                     $forumReplyAuthor = $authors->firstWhere('id', $forumReply->replyAuthor);
@@ -86,10 +96,24 @@
                                 <hr>
                                 <p>Replying to: {{ $forumReply['replyBody'] }}</p>
                                 <br>
-                                <i>{{ $forumReplyReply['created_at']->format('F j, Y g:i a') }}</i>
                                 <table>
                                     <tr>
-                                        <td>
+                                        <td></td>
+                                        <td style = "width: 20%; text-align: center;">
+                                            <i>{{ $forumReplyReply['created_at']->format('F j, Y g:i a') }}</i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "upvote-downvote-area" style = "width: 5%; text-align: center;">
+                                            <form {{-- wire:submit.prevent="upvoteComment" --}}>
+                                                <input type = "submit" value = "&#8593;">
+                                            </form>
+                                            <br>
+                                            <form {{-- wire:submit.prevent="downvoteComment" --}}>
+                                                <input type = "submit" value = "&#8595;">
+                                            </form>
+                                        </td>
+                                        <td style = "width: 20%; text-align: center;">
                                             <img height="100" width="100" class="forum-avatar"
                                                 src="{{ $forumReplyReplyAuthor ? $forumReplyReplyAuthor->avatar : 'Author not found' }}">
                                             <br>
@@ -121,10 +145,25 @@
                                             <hr>
                                             <p>Replying to: {{ $forumReplyReply['replyBody'] }}</p>
                                             <br>
-                                            <i>{{ $forumReplyReplyReply['created_at']->format('F j, Y g:i a') }}</i>
                                             <table>
                                                 <tr>
-                                                    <td>
+                                                    <td></td>
+                                                    <td style = "width: 20%; text-align: center;">
+                                                        <i>{{ $forumReplyReplyReply['created_at']->format('F j, Y g:i a') }}</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class = "upvote-downvote-area"
+                                                        style = "width: 5%; text-align: center;">
+                                                        <form {{-- wire:submit.prevent="upvoteComment" --}}>
+                                                            <input type = "submit" value = "&#8593;">
+                                                        </form>
+                                                        <br>
+                                                        <form {{-- wire:submit.prevent="downvoteComment" --}}>
+                                                            <input type = "submit" value = "&#8595;">
+                                                        </form>
+                                                    </td>
+                                                    <td style = "width: 20%; text-align: center;">
                                                         <img height="100" width="100" class="forum-avatar"
                                                             src="{{ $forumReplyReplyReplyAuthor ? $forumReplyReplyReplyAuthor->avatar : 'Author not found' }}">
                                                         <br>
@@ -158,7 +197,7 @@
             <input style = "width: 100%;" type = "text" placeholder="Replying to post: {{ $forumTitle }}" required
                 onkeydown="return event.key != 'Enter';" wire:model = "commentBody">{{-- </textarea> --}}
             <div style = "text-align: right;">
-                <input type = "submit" value = "Post Reply">
+                <input type = "submit" value = "Post Comment">
             </div>
             @dump($commentBody)
         </form>

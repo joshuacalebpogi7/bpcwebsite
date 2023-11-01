@@ -79,6 +79,27 @@ DB::rollback();
 } */
     }
 
+    public function upvoteComment()
+    {
+        /* DB::beginTransaction();
+
+        try { */
+        dd($this->replyBody);
+        forum_replies::create([
+            'parentForum' => $this->forum_selected->id,
+            'replyingTo' => null,
+            'replyBody' => $this->commentBody,
+            'replyAuthor' => auth()->user()->id,
+            'active' => true,
+        ]);
+        // DB::commit();
+        //$this->resetForm();
+        /* 
+} catch (\Exception $e) {
+DB::rollback();
+} */
+    }
+
     private function resetForm()
     {
         $this->commentBody = '';
