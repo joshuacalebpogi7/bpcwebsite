@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use App\Models\forums_posted;
 use App\Models\forum_replies;
 use App\Models\User;
@@ -14,6 +15,9 @@ class ViewForum extends Component
     public $forum_selected;
     public $forumTitle;
     public $forumBody;
+    public $forumAuthorId;
+    public $forumAuthor;
+    public $commentBody;
     public $forumCategory;
     public $forumReplies = [];
     public $active;
@@ -41,6 +45,8 @@ class ViewForum extends Component
         $this->forumTitle = $forum_selected->forumTitle;
         $this->forumBody = $forum_selected->forumBody;
         $this->forumCategory = $forum_selected->forumCategory; // Assuming you want to load the category
+        $this->forumAuthorId = $forum_selected->forumAuthor;
+        $this->forumAuthor = User::where('id', $this->forumAuthorId)->first();
 
         // Retrieve the forum replies
         $replies = forum_replies::where('parentForum', $this->forum_selected->id)->get();
@@ -52,8 +58,54 @@ class ViewForum extends Component
     }
 
 
-    public function replyForum()
+    public function commentForum()
     {
+        /* DB::beginTransaction();
+
+        try { */
+        dd($this->replyBody);
+        forum_replies::create([
+            'parentForum' => $this->forum_selected->id,
+            'replyingTo' => null,
+            'replyBody' => $this->commentBody,
+            'replyAuthor' => auth()->user()->id,
+            'active' => true,
+        ]);
+        // DB::commit();
+        //$this->resetForm();
+        /* 
+} catch (\Exception $e) {
+DB::rollback();
+} */
+    }
+
+    public function upvoteComment()
+    {
+        /* DB::beginTransaction();
+
+        try { */
+        dd($this->replyBody);
+        forum_replies::create([
+            'parentForum' => $this->forum_selected->id,
+            'replyingTo' => null,
+            'replyBody' => $this->commentBody,
+            'replyAuthor' => auth()->user()->id,
+            'active' => true,
+        ]);
+        // DB::commit();
+        //$this->resetForm();
+        /* 
+} catch (\Exception $e) {
+DB::rollback();
+} */
+    }
+
+    private function resetForm()
+    {
+        $this->commentBody = '';
+        return redirect("/admin/view_forum/{$this->forum_selected->id}");
+
+
     }
 
     public function render(forums_posted $forum_selected)

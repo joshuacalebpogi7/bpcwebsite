@@ -167,6 +167,8 @@ return new class extends Migration {
         ]);
 
         DB::table('finished_surveys')->insert([
+            'created_at' => now(),
+            'updated_at' => now(),
             'parentSurvey' => 1,
             // Assuming 1 is the ID of the survey
             'respondentID' => 1,
@@ -176,6 +178,8 @@ return new class extends Migration {
 
         /* INSERT FORUM VALUES */
         DB::table('forums_posted')->insert([
+            'created_at' => now(),
+            'updated_at' => now(),
             'forumTitle' => 'YourForumTitle',
             'forumBody' => 'YourForumBody',
             'forumCategory' => 'YourForumCategory',
@@ -188,6 +192,8 @@ return new class extends Migration {
 
         // Insert into the 'forum_replies' table
         DB::table('forum_replies')->insert([
+            'created_at' => now(),
+            'updated_at' => now(),
             'parentForum' => 1,
             // Replace with the parent forum
             'replyingTo' => null,
@@ -200,6 +206,8 @@ return new class extends Migration {
         ]);
 
         DB::table('forum_replies')->insert([
+            'created_at' => now(),
+            'updated_at' => now(),
             'parentForum' => 1,
             // Replace with the parent forum
             'replyingTo' => null,

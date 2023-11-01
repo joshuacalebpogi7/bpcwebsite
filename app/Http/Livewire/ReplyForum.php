@@ -54,7 +54,7 @@ class ReplyForum extends Component
 
     private function resetForm()
     {
-        $this->forumBody = '';
+        $this->replyBody = '';
         return redirect("/admin/view_forum/{$this->forum_selected->id}");
 
 
