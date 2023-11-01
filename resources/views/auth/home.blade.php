@@ -2,7 +2,9 @@
     <x-slot name="title">
         Home
     </x-slot>
-
+    <section id="page-header">
+        <h2 style="color: #fafafa">● HOME ●</h2>
+    </section>
     <div class="row">
         <div class="leftcolumn">
 
