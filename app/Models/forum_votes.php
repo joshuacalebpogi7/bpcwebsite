@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class forum_replies extends Model
+class forum_votes extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         "parentForum",
-        "replyingTo",
-        "replyBody",
-        "replyAuthor",
-        "votes",
+        "parentReply",
+        "voteType",
+        "voteAuthor",
         "active",
     ];
 }

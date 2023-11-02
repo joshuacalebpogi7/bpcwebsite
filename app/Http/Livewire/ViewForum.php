@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use App\Models\forums_posted;
 use App\Models\forum_replies;
+use App\Models\forum_votes;
 use App\Models\User;
 
 class ViewForum extends Component
@@ -17,9 +18,11 @@ class ViewForum extends Component
     public $forumBody;
     public $forumAuthorId;
     public $forumAuthor;
+    public $replyBody;
     public $commentBody;
     public $forumCategory;
     public $forumReplies = [];
+    public $forum_replies = [];
     public $active;
 
     public function __construct()
@@ -27,16 +30,6 @@ class ViewForum extends Component
         $this->user = auth()->user();
     }
     public function mount($forum_selected)
-    {
-        $this->loadForumData($forum_selected);
-    }
-
-    public function updatedForumSelected($newValue)
-    {
-        $this->loadForumData($newValue);
-    }
-
-    private function loadForumData($forum_selected)
     {
         // Set the record instance
         $this->forum_selected = $forum_selected;
@@ -57,59 +50,98 @@ class ViewForum extends Component
         $this->authors = User::whereIn('id', $authorIds)->get();
     }
 
-
-    public function commentForum()
+    public function upvoteComment($commentId)
     {
-        /* DB::beginTransaction();
+        $user = auth()->user();
+        $forumVote = forum_votes::where('parentForum', $this->forum_selected->id)
+            ->where('parentReply', $commentId)
+            ->where('voteAuthor', $user->id)
+            ->first();
 
-        try { */
-        dd($this->replyBody);
-        forum_replies::create([
-            'parentForum' => $this->forum_selected->id,
-            'replyingTo' => null,
-            'replyBody' => $this->commentBody,
-            'replyAuthor' => auth()->user()->id,
-            'active' => true,
-        ]);
-        // DB::commit();
-        //$this->resetForm();
-        /* 
-} catch (\Exception $e) {
-DB::rollback();
-} */
+        if ($forumVote) {
+            // If the user has already upvoted, delete the upvote
+            $forumVote->delete();
+        } else {
+            // If the user hasn't upvoted, create an upvote record
+            forum_votes::create([
+                'parentForum' => $this->forum_selected->id,
+                'parentReply' => $commentId,
+                'voteType' => 'upvote',
+                'voteAuthor' => $user->id,
+                'active' => true,
+            ]);
+        }
+        $this->updateVoteStatus($commentId, $user->id);
     }
 
-    public function upvoteComment()
+    public function downvoteComment($commentId)
     {
-        /* DB::beginTransaction();
+        $user = auth()->user();
+        $forumVote = forum_votes::where('parentForum', $this->forum_selected->id)
+            ->where('parentReply', $commentId)
+            ->where('voteAuthor', $user->id)
+            ->first();
 
-        try { */
-        dd($this->replyBody);
-        forum_replies::create([
-            'parentForum' => $this->forum_selected->id,
-            'replyingTo' => null,
-            'replyBody' => $this->commentBody,
-            'replyAuthor' => auth()->user()->id,
-            'active' => true,
-        ]);
-        // DB::commit();
-        //$this->resetForm();
-        /* 
-} catch (\Exception $e) {
-DB::rollback();
-} */
+        if ($forumVote) {
+            // If the user has already voted, toggle between upvote and downvote
+            if ($forumVote->voteType === 'upvote') {
+                $forumVote->update(['voteType' => 'downvote']);
+            } else {
+                $forumVote->delete();
+            }
+        } else {
+            // If the user hasn't downvoted, create a downvote record
+            forum_votes::create([
+                'parentForum' => $this->forum_selected->id,
+                'parentReply' => $commentId,
+                'voteType' => 'downvote',
+                'voteAuthor' => $user->id,
+                'active' => true,
+            ]);
+        }
+        $this->updateVoteStatus($commentId, $user->id);
+    }
+
+    private function updateVoteStatus($commentId, $userId)
+    {
+        $forumReplies = forum_replies::all();
+        $comment = $forumReplies->firstWhere('id', $commentId);
+
+        if ($comment) {
+            $comment->hasUpvoted = forum_votes::where('parentForum', $this->forum_selected->id)
+                ->where('parentReply', $commentId)
+                ->where('voteType', 'upvote')
+                ->where('voteAuthor', $userId)
+                ->exists();
+
+            $comment->hasDownvoted = forum_votes::where('parentForum', $this->forum_selected->id)
+                ->where('parentReply', $commentId)
+                ->where('voteType', 'downvote')
+                ->where('voteAuthor', $userId)
+                ->exists();
+        }
     }
 
     private function resetForm()
     {
-        $this->commentBody = '';
+        $this->replyBody = '';
         return redirect("/admin/view_forum/{$this->forum_selected->id}");
 
 
     }
 
-    public function render(forums_posted $forum_selected)
+    /*     public function render(forums_posted $forum_selected, forum_replies $forumReplies)
+        {
+            $this->forumReplies = forum_replies::all();
+            return view('livewire.view-forum', ['forum_selected' => $forum_selected, 'forumReplies' => $forumReplies]);
+        } */
+
+    public function render()
     {
-        return view('livewire.view-forum', ['forum_selected' => $forum_selected]);
+        $forumReplies = forum_replies::all();
+        $forum_selected = forums_posted::all();
+        return view('livewire.view-forum')
+            ->with('forumReplies', $forumReplies)
+            ->with('forum_selected', $forum_selected);
     }
 }

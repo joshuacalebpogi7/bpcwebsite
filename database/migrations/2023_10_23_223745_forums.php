@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('replyCount')->nullable();
             $table->unsignedBigInteger('forumAuthor')->nullable();
             $table->unsignedBigInteger('forumUpdateAuthor')->nullable();
+            $table->unsignedBigInteger('votes')->nullable();
             $table->tinyInteger('active')->default(0);
         }); //
 
@@ -29,6 +30,17 @@ return new class extends Migration {
             $table->unsignedBigInteger('replyingTo')->nullable();
             $table->string('replyBody')->nullable();
             $table->unsignedBigInteger('replyAuthor')->nullable();
+            $table->unsignedBigInteger('votes')->nullable();
+            $table->tinyInteger('active')->default(0);
+        }); //
+
+        Schema::create('forum_votes', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('parentForum');
+            $table->unsignedBigInteger('parentReply')->nullable();
+            $table->string('voteType')->nullable();
+            $table->unsignedBigInteger('voteAuthor')->nullable();
             $table->tinyInteger('active')->default(0);
         }); //
     }
@@ -41,5 +53,6 @@ return new class extends Migration {
         // Drop the tables if they exist
         Schema::dropIfExists('forums_posted');
         Schema::dropIfExists('forum_replies');
+        Schema::dropIfExists('forum_votes');
     }
 };
