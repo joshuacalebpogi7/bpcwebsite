@@ -38,15 +38,9 @@
                                                         <!-- First Row - Edit Button -->
                                                         <a href="/admin/edit-news/{{ $news->id }}/{{ $news->title }}"
                                                             class="flex-fill">
-                                                            <button
-                                                                class="btn btn-light me-1 w-100 h-100 p-1 border mb-1"
-                                                                style="width: 150px;">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center">
-                                                                    <img src="{{ URL::asset('/images/icon-edit.svg') }}"
-                                                                        class="mr-2" alt="Edit Icon">
-                                                                    Edit
-                                                                </div>
+                                                            <button type="button" class="btn btn-success btn-icon-text" style="width: 150px; height: 50px; margin: 5px; ">
+                                                                <i class="ti-pencil btn-icon-prepend"></i>                                                    
+                                                                Edit
                                                             </button>
                                                         </a>
 
@@ -55,14 +49,9 @@
                                                             method="post" class="deleteNews">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button
-                                                                class="btn btn-light mt-1 flex-fill w-100 h-100 p-1 border"
-                                                                style="width: 150px;">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center">
-                                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
-                                                                        class="mr-2" alt="Delete Icon">Delete
-                                                                </div>
+                                                            <button type="button" class="btn btn-danger btn-icon-text" style="width: 150px; height: 50px; margin: 5px;">
+                                                                <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                                                Delete
                                                             </button>
                                                         </form>
                                                     </div>

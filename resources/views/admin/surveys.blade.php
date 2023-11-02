@@ -62,14 +62,9 @@
                                                                 </button>
                                                             </a>
                                                             <br>
-                                                            <button class="btn btn-light mt-1 p-1 border"
-                                                                style="width: 150px;"
-                                                                onclick="confirmDeleteSurvey({{ json_encode($survey_posted) }})">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center">
-                                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
-                                                                        class="mr-2" alt="Delete Icon">Delete
-                                                                </div>
+                                                            <button type="button" class="btn btn-danger btn-icon-text" style="width: 150px; height: 50px; margin: 5px;" onclick="confirmDeleteSurvey({{ json_encode($survey_posted) }})">
+                                                                <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                                                Delete
                                                             </button>
                                                         </div>
                                                     </td>
