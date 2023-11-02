@@ -51,14 +51,9 @@
                                                         <div>
                                                             <a href="{{ route('edit_survey', ['survey_selected' => $survey_posted->id]) }}"
                                                                 class="flex-fill">
-                                                                <button class="btn btn-light me-1 p-1 border mb-1"
-                                                                    style="width: 150px;">
-                                                                    <div
-                                                                        class="d-flex justify-content-center align-items-center">
-                                                                        <img src="{{ URL::asset('/images/icon-edit.svg') }}"
-                                                                            class="mr-2" alt="Edit Icon">
-                                                                        Edit
-                                                                    </div>
+                                                                <button type="button" class="btn btn-success btn-icon-text" style="width: 150px; height: 50px; margin: 5px; ">
+                                                                    <i class="ti-pencil btn-icon-prepend"></i>                                                    
+                                                                    Edit
                                                                 </button>
                                                             </a>
                                                             <br>

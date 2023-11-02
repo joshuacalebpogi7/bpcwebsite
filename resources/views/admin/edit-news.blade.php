@@ -3,7 +3,7 @@
         <form action="/admin/update-news/{{ $news->id }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="card mb-4 mb-xl-0">
+            <div class="card mb-4 mb-xl-0" style="margin-top: 10px;">
                 <div class="card-header">News Thumbnail</div>
                 <div class="card-body text-center">
 

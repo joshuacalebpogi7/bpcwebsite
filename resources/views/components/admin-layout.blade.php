@@ -209,31 +209,40 @@
                         <a href="/">&laquo; Back</a>
                     @endif
                     @if (Request::is('admin/add-admin') || Request::is('admin/edit-admin/*'))
-                        <a href="/admin/admins">&laquo; Back</a>
+                        <a href="/admin/admins"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-alumni') || Request::is('admin/edit-alumni/*'))
-                        <a href="/admin/users">&laquo; Back</a>
+                        <a href="/admin/users"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-courses') || Request::is('admin/edit-courses/*'))
-                        <a href="/admin/courses">&laquo; Back</a>
+                        <a href="/admin/courses"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/new_survey') || Request::is('admin/edit_survey/*'))
-                        <a href="/admin/surveys">&laquo; Back</a>
+                        <a href="/admin/surveys"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-news') || Request::is('admin/edit-news/*'))
-                        <a href="/admin/news">&laquo; Back</a>
+                        <a href="/admin/news"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-events') || Request::is('admin/edit-events/*'))
-                        <a href="/admin/events">&laquo; Back</a>
+                        <a href="/admin/events"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-gallery') || Request::is('admin/edit-album/*'))
-                        <a href="/admin/gallery">&laquo; Back</a>
+                        <a href="/admin/gallery"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-jobs') || Request::is('admin/edit-jobs/*'))
-                        <a href="/admin/jobs">&laquo; Back</a>
+                        <a href="/admin/jobs"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/view_forum/*') || Request::is('admin/new_forum') || Request::is('admin/edit_forum/*'))
-                        <a href="/admin/forums">&laquo; Back</a>
+                        <a href="/admin/forums"><button type="button" class="btn btn-primary btn-icon-text">
+                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     {{ $slot }}
                 </div>
