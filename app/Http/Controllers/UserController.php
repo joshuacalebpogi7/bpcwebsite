@@ -54,17 +54,15 @@ class UserController extends Controller
         $action_link = route('reset.password.form',['token'=>$token,'email'=>$request->email]);
         $body = "We are received a request to reset the password for <b>BPC Alumni Portal </b> account associated with ".$request->email.". You can reset your password by clicking the link below";
 
-    Mail::send('email-forgot',['action_link'=>$action_link,'body'=>$body], function($message) use ($request){
-            $message->from('noreply@example.com','BPC Alumni Portal');
-            $message->to($request->email,'Admin')
-                    ->subject('Reset Password');
-    });
+        Mail::send('email-forgot',['action_link'=>$action_link,'body'=>$body], function($message) use ($request){
+                $message->from('noreply@example.com','BPC Alumni Portal');
+                $message->to($request->email,'Admin')
+                        ->subject('Reset Password');
+        });
 
-    return back()->with('success', 'We have e-mailed your password reset link!');
-    }
-    // else{
-    //     return redirect('/forgot-password')->with('error', 'Email not registered!');
-    // }
+        return back()->with('success', 'We have e-mailed your password reset link!');
+        }
+
     }
 
 public function showResetForm(Request $request, $token = null){
