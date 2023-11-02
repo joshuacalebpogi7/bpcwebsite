@@ -12,7 +12,10 @@ class forums_posted extends Model
     protected $fillable = [
         "forumTitle",
         "forumBody",
+        "forumCategory",
         "forumAuthor",
+        "forumUpdateAuthor",
+        "votes",
         "active",
     ];
 
