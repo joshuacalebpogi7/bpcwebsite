@@ -23,7 +23,13 @@
     </div>
     <div class="col-xl-4">
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0">
+        <div class="card mb-4 mb-xl-0" style="margin-bottom: 20px!important;
+        background: rgba(198, 218, 191, 0.67);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(14.1px);
+        -webkit-backdrop-filter: blur(14.1px);
+        border: 1px solid rgba(198, 218, 191, 0.3);">
             <div class="card-header">Profile Picture</div>
             <div class="card-body text-center">
                 <!-- Profile picture image-->
@@ -43,7 +49,7 @@
                 @error('avatar')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-                <button class="btn btn-primary" onclick="document.getElementById('getFile').click()">Upload
+                <button class="btn btn-success" onclick="document.getElementById('getFile').click()">Upload
                     new
                     image</button>
                 @if ($avatar)
@@ -55,12 +61,24 @@
         </div>
 
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0">
+        <div class="card mb-4 mb-xl-0" style="
+        background: rgba(198, 218, 191, 0.67);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(14.1px);
+        -webkit-backdrop-filter: blur(14.1px);
+        border: 1px solid rgba(198, 218, 191, 0.3);">
             <div class="card-header">Account Security</div>
             <div class="card-body">
                 <form wire:submit.prevent="updateAccountSecurity">
                     @csrf
-                    <div class="card">
+                    <div class="card" style="
+                    background: rgba(136, 212, 152, 0.66);
+                    border-radius: 16px;
+                    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                    backdrop-filter: blur(14.4px);
+                    -webkit-backdrop-filter: blur(14.4px);
+                    border: 1px solid rgba(136, 212, 152, 0.3);">
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group">
@@ -134,7 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Save changes</button>
+                    <button class="btn btn-success" type="submit" style="margin: 10px">Save changes</button>
                     <button wire:click.prevent="resetAccountSecurity" class="btn btn-danger">Clear changes</button>
                 </form>
             </div>
@@ -143,12 +161,24 @@
 
     <div class="col-xl-8">
         <!-- Account details card-->
-        <div class="card mb-4">
+        <div class="card mb-4" style="
+        background: rgba(198, 218, 191, 0.67);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(14.1px);
+        -webkit-backdrop-filter: blur(14.1px);
+        border: 1px solid rgba(198, 218, 191, 0.3);">
             <div class="card-header">Account Details</div>
             <div class="card-body">
                 <form wire:submit.prevent="updateProfile">
                     @csrf
-                    <div class="card">
+                    <div class="card" style="
+                    background: rgba(136, 212, 152, 0.66);
+                    border-radius: 16px;
+                    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                    backdrop-filter: blur(14.4px);
+                    -webkit-backdrop-filter: blur(14.4px);
+                    border: 1px solid rgba(136, 212, 152, 0.3);">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
@@ -315,7 +345,7 @@
 
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Save changes</button>
+                    <button class="btn btn-success" type="submit" style="margin: 10px">Save changes</button>
                     <button wire:click.prevent="resetProfile" class="btn btn-danger">Clear changes</button>
                 </form>
             </div>

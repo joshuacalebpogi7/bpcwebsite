@@ -12,14 +12,14 @@
     </div>
     <div class="row">
         <div class="col-md-6 grid-margin stretch-card">
-            <div class="card tale-bg">
+            <div class="card tale-bg" style="background-color: #e9f6ef; !important">
                 <div class="card-people mt-auto">
-                    <img src="/images/alumni.jpg" alt="people">
+                    <img src="/images/newbg.png" alt="people">
                     <div class="weather-info">
                         <div class="d-flex">
                             <div>
                                 <h2 class="mb-0 font-weight-bolder text-info"><i
-                                        class="icon-sun mr-2"></i>{{ date('d') }}
+                                        class="icon-sun mr-2" style="color: #275f14; !important"></i>{{ date('d') }}
                                 </h2>
                             </div>
                             <div class="ml-2">

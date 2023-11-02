@@ -37,7 +37,6 @@
 </head>
 
 <body>
-
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -205,7 +204,7 @@
             <!-- partial -->
 
             <div class="main-panel">
-                <div class="content-wrapper">
+                <div class="content-wrapper" style="background-color: #F5FFF7 !important;">
                     @if (Request::is('admin/edit-profile'))
                         <a href="/">&laquo; Back</a>
                     @endif
