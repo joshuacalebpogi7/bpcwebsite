@@ -19,7 +19,7 @@
                         <div class="d-flex">
                             <div>
                                 <h2 class="mb-0 font-weight-bolder text-info"><i
-                                        class="icon-sun mr-2" style="color: #275f14; !important"></i>{{ date('d') }}
+                                        class="icon-sun mr-2"></i>{{ date('d') }}
                                 </h2>
                             </div>
                             <div class="ml-2">
