@@ -74,7 +74,7 @@ class PageController extends Controller
         if (auth()->check()) {
             return view('auth.news', ['news' => $news->latest()->get()]);
         }
-        return view('news');
+        return view('news', ['newsItem' => $news->latest()->get()]);
     }
 
     public function events(Events $events)
@@ -82,7 +82,7 @@ class PageController extends Controller
         if (auth()->check()) {
             return view('auth.events', ['events' => $events->latest()->get()]);
         }
-        return view('events');
+        return view('events', ['events' => $events->latest()->get()]);
     }
 
     public function jobs(Jobs $jobs, UserJobs $userJobs)

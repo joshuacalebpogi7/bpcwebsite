@@ -36,118 +36,50 @@
                 <a href="/events" class="">Events</a>
                 <a href="/gallery" class="">Gallery</a>
                 @auth
-                <a href="/edit-profile"><img title="My Profile" data-toggle="tooltip" data-placement="bottom"
-                        style="width: 40px; border-radius: 50%; margin: 10px;" src="{{ auth()->user()->avatar }}" /></a>
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Sign Out</button>
-                </form>
-            @else
-            </nav>
+                    <a href="/edit-profile"><img title="My Profile" data-toggle="tooltip" data-placement="bottom"
+                            style="width: 40px; border-radius: 50%; margin: 10px;" src="{{ auth()->user()->avatar }}" /></a>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Sign Out</button>
+                    </form>
+                @else
+                </nav>
                 <a href="/login">
                     <div class="icons">
                         <div id="user-btn" class="fas fa-user"></div>
                     </div>
                 </a>
             @endauth
-        
-        <div class="icons">
-            <div id="menu-btn" class="fas fa-bars"></div>
+
+            <div class="icons">
+                <div id="menu-btn" class="fas fa-bars"></div>
+            </div>
         </div>
-    </div>
     </header>
 
     <section class="post container5">
 
-        <div class="post-box mobile">
-            <img src="images/bg.jpg" alt="" class="post-img">
-            <h2 class="category">Mobile</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
+        @foreach ($events as $eventItem)
+            <div class="post-box {{ $eventItem->category }}">
+                <img src="{{ $eventItem->thumbnail }}" alt="" class="post-img">
+                <h2 class="category">{{ $eventItem->category }}</h2>
+                <a href="/login" class="post-title">
+                    {{ $eventItem->title }}
+                </a>
+                <span class="post-date">{{ $eventItem->created_at->format('F j, Y') }}</span>
+                <p>
+                <div class="post-description">
+                    {!! $eventItem->description !!}
+                </div>
+                </p>
 
-            <div class="profile">
-                <img src="images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
+                <div class="profile">
+                    <img src="{{ $eventItem->updatedBy->avatar }}" alt="" class="profile-img">
+                    <span class="profile-name">{{ $eventItem->updatedBy->username }}</span>
+                </div>
             </div>
-        </div>
+        @endforeach
 
-        <div class="post-box tech">
-            <img src="images/prog-pic.jpg" alt="" class="post-img">
-            <h2 class="category">Tech</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
-
-        <div class="post-box mobile">
-            <img src="images/study-pic.jpg" alt="" class="post-img">
-            <h2 class="category">Mobile</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
-
-        <div class="post-box design">
-            <img src="images/bg.jpg" alt="" class="post-img">
-            <h2 class="category">Design</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
-
-        <div class="post-box tech">
-            <img src="images/prog-pic.jpg" alt="" class="post-img">
-            <h2 class="category">Tech</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
-
-        <div class="post-box design">
-            <img src="images/goal-pic.jpg" alt="" class="post-img">
-            <h2 class="category">Design</h2>
-            <a href="single-page-post.php" class="post-title">
-                How To Create UX Design With Adobe XD
-            </a>
-            <span class="post-date">12 Feb 2022</span>
-            <p class="post-description">Lorem ipsum dolor sit amet consectetur adispisicing</p>
-
-            <div class="profile">
-                <img src="images/gab.png" alt="" class="profile-img">
-                <span class="profile-name">Marques Brown</span>
-            </div>
-        </div>
     </section>
 
     <div class="copyrightText">
