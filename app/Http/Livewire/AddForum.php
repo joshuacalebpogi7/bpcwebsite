@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\DB;
 use App\Models\forums_posted;
 use App\Models\forum_replies;
 
-class NewForum extends Component
+class AddForum extends Component
 {
     public $user;
     public $forumTitle;
     public $forumBody;
+    public $forumCategory;
     public $active = false;
 
     public function __construct()
@@ -29,6 +30,9 @@ class NewForum extends Component
             $new_forum = forums_posted::create([
                 'forumTitle' => $this->forumTitle,
                 'forumBody' => $this->forumBody,
+                'forumCategory' => $this->forumCategory,
+                'forumAuthor' => $this->user->id,
+                'forumUpdateAuthor' => $this->user->id,
                 'active' => $this->active,
             ]);
 
@@ -37,8 +41,9 @@ class NewForum extends Component
 
             // Reset the form upon successful query
             $this->resetForm();
+
         } catch (\Exception $e) {
-            // Rollback the transaction in case of any errors
+            dd($e);// Rollback the transaction in case of any errors
             DB::rollback();
 
             // Handle the error, log it, or display a message to the user
@@ -52,13 +57,14 @@ class NewForum extends Component
     {
         $this->forumTitle = '';
         $this->forumBody = '';
+        $this->forumCategory = '';
         $this->active = false;
-        return redirect()->to('/posted_forums');
+        return redirect('admin/forums');
 
     }
 
     public function render()
     {
-        return view('livewire.new-forum');
+        return view('livewire.add-forum');
     }
 }

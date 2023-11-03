@@ -105,7 +105,7 @@ Route::get('admin/add-news', [PageController::class, 'addNewsPage'])->middleware
 Route::get('admin/add-events', [PageController::class, 'addEventsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/add-jobs', [PageController::class, 'addJobsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/add-gallery', [PageController::class, 'addGalleryPage'])->middleware('can:visitAdminPages');
-Route::get('admin/add-forums', [PageController::class, 'addForumsPage'])->middleware('can:visitAdminPages');
+Route::get('admin/add-forum', [PageController::class, 'addForumPage'])->middleware('can:visitAdminPages');
 Route::get('admin/add-survey', [PageController::class, 'addSurveyPage'])->middleware('can:visitAdminPages');
 //EDIT
 Route::get('admin/edit-alumni/{user:username}', [PageController::class, 'editAlumniPage'])->middleware('can:adminOnly');
@@ -122,6 +122,8 @@ Route::post('admin/add-news', [NewsController::class, 'addNews'])->middleware('c
 Route::post('admin/add-events', [EventsController::class, 'addEvents'])->middleware('can:visitAdminPages');
 Route::post('admin/add-jobs', [JobsController::class, 'addJobs'])->middleware('can:visitAdminPages');
 Route::post('admin/add-courses', [CourseController::class, 'addCourse'])->middleware('can:visitAdminPages');
+Route::post('/admin/add-forum-comment', [ForumsController::class, 'addForumComment'])->middleware('can:visitAdminPages');
+Route::post('/admin/add-forum-vote', [ForumsController::class, 'addForumVote'])->middleware('can:visitAdminPages');
 
 Route::post('/import', [AdminController::class, 'import'])->middleware('can:visitAdminPages');
 Route::post('/import-courses', [AdminController::class, 'importCourses'])->middleware('can:visitAdminPages');
@@ -151,7 +153,7 @@ Route::get('admin/new_survey', function () {
     return view('admin.new_survey');
 })->middleware('can:visitAdminPages');
 Route::get('admin/edit_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeEdited'])->name('edit_survey')->middleware('can:visitAdminPages');
-Route::get('admin/delete_survey/{survey_selected}', [SurveyController::class, 'deleteSurvey'])->name('delete_survey')->middleware('can:visitAdminPages');
+Route::get('delete_survey/{survey_selected}', [SurveyController::class, 'deleteSurvey'])->name('delete_survey')->middleware('can:visitAdminPages');
 /* Route::get('/survey', function () {
     return view('auth.survey');
 })->name('survey'); */
@@ -174,4 +176,8 @@ Route::get('/posted_forums', function () {
 
 Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->middleware('mustBeLoggedIn')->name('view_forum');
 Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->middleware('mustBeLoggedIn')->name('delete_forum');
+
+Route::post('/vote/{parentForum}/{parentReply}', [ForumsController::class, 'vote'])->name('vote');
+
+
 /* ROUTE FOR FORUMS */

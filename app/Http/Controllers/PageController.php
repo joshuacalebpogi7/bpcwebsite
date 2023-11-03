@@ -457,6 +457,11 @@ class PageController extends Controller
         $user = auth()->user();
         return view('admin.add-admin', ['user' => $user]);
     }
+    public function addForumPage(forums_posted $forums_posted)
+    {
+        $user = auth()->user();
+        return view('admin.add-forum', ['forums_posted' => $forums_posted]);
+    }
     public function addSurveyPage()
     {
         return view('admin.add-survey');

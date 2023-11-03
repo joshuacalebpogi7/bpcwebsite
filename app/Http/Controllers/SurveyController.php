@@ -42,7 +42,7 @@ class SurveyController extends Controller
         // Check if the survey exists
         if (!$survey) {
             // Optionally, you can handle the case where the survey doesn't exist
-            return redirect()->back()->with('error', 'Survey not found.');
+            return back()->with('error', 'Survey not found.');
         }
 
         // Delete related survey questions and choices
@@ -53,6 +53,6 @@ class SurveyController extends Controller
         $survey->delete();
 
         // Optionally, you can redirect back to the survey list with a success message
-        return redirect()->route('admin/surveys')->with('success', 'Survey deleted successfully.');
+        return back()->with('success', 'Survey deleted successfully.');
     }
 }
