@@ -91,9 +91,16 @@
                         @foreach ($forum_list as $forum_posted)
                             {{-- @if ($forum_posted['active'] > 0) --}}
                             @php
+                            $count = 0; // Initialize a count variable
                                 $allForumsInactive = false;
-                                $forum_posted->forum_replies = $forum_replies::where('parentForum', $forum_posted->id)->get();
                             @endphp
+                            @foreach ($forum_replies as $forum_reply)
+                                @if ($forum_reply->parentForum === $forum_posted->id)
+                                    @php
+                                        $count++;
+                                    @endphp
+                                @endif
+                            @endforeach
                             {{-- @endif --}}
                             <div class="forum-item">
                                 <div class="row">
@@ -107,7 +114,7 @@
                                     </div>
                                     <div class="col-md-1 forum-info">
                                         <span class="views-number">
-                                            1216
+                                            {{ $count }}
                                         </span>
                                         <div>
                                             <small>Comments</small>
