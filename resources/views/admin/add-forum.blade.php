@@ -1,3 +1,3 @@
 <x-admin-layout>
-    @livewire('new-survey')
+    @livewire('add-forum')
 </x-admin-layout>

@@ -20,4 +20,11 @@
         branding: false,
         promotion: false,
     });
+    tinymce.init({
+        selector: 'textarea#forumBody', // Replace this CSS selector to match the placeholder element for TinyMCE
+        plugins: 'code table lists',
+        toolbar: '',
+        branding: false,
+        promotion: false,
+    });
 </script>

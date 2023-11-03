@@ -11,7 +11,7 @@
     @endpush
     <h2>Forums Records</h2>
     <div>
-        <a href="{{ url('admin/new_forum') }}"><button class="btn btn-primary mb-3"><img
+        <a href="{{ url('admin/add-forum') }}"><button class="btn btn-primary mb-3"><img
                     src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Forum</button></a>
     </div>
 
@@ -34,6 +34,7 @@
                                                 <th>Actions</th>
                                                 <th>Title</th>
                                                 <th>Description</th>
+                                                <th>Category</th>
                                                 <th>Author</th>
                                                 <th>Date Created</th>
 
@@ -52,7 +53,7 @@
                                                                     class="btn btn-warning btn-icon-text"
                                                                     style="width: 150px; height: 50px; margin: 5px; ">
                                                                     <i class="ti-eye btn-icon-prepend"></i>
-                                                                    Edit
+                                                                    View
                                                                 </button>
                                                             </a>
                                                             <a href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}" class="flex-fill">
@@ -63,7 +64,7 @@
                                                                     Edit
                                                                 </button>
                                                             </a>
-                                                            <button class="btn btn-danger btn-icon-text"
+                                                            <button type="button" class="btn btn-danger btn-icon-text"
                                                                 style="width: 150px; height: 50px; margin: 5px;"
                                                                 onclick="confirmDeleteForum({{ json_encode($forum_posted) }})">
                                                                 <i class="ti-trash btn-icon-prepend"></i>
@@ -74,7 +75,13 @@
                                                     <td>
                                                         {{ $forum_posted->forumTitle }}
                                                     </td>
-                                                    <td>{{ $forum_posted->forumDesc }}</td>
+                                                    <td>
+                                                        {{ $forum_posted->forumBody }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $forum_posted->forumCategory }}
+
+                                                    </td>
                                                     <td>
                                                         @php
                                                             $author = $authors->firstWhere('id', $forum_posted->forumAuthor);

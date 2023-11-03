@@ -23,6 +23,7 @@ class ViewForum extends Component
     public $forumCategory;
     public $forumReplies = [];
     public $forum_replies = [];
+    public $forum_votes;
     public $active;
 
     public function __construct()
@@ -48,6 +49,7 @@ class ViewForum extends Component
         // Retrieve the authors of forum replies
         $authorIds = $replies->pluck('replyAuthor');
         $this->authors = User::whereIn('id', $authorIds)->get();
+        $this->forum_votes = forum_votes::all();
     }
 
     public function upvoteComment($commentId)

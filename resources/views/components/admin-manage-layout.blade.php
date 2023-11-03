@@ -85,7 +85,7 @@
                 <a href="/admin/jobs"><button type="button" class="btn btn-primary btn-icon-text">
                     <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
             @endif
-            @if (Request::is('admin/new_forum') || Request::is('admin/edit_forum/*'))
+            @if (Request::is('admin/add-forum') || Request::is('admin/edit_forum/*'))
                 <a href="/admin/forums"><button type="button" class="btn btn-primary btn-icon-text">
                     <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
             @endif

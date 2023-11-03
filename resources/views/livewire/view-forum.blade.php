@@ -34,10 +34,12 @@
         <h4>{{ $forum_selected->forumCategory }}</h4><br>
         <h2>{{ $forum_selected->forumTitle }}</h2><br>
         <h4>{{ $forum_selected->forumBody }}</h4>
-        <b>Posted by: {{ $forumAuthor['first_name'] }} @if ($forumAuthor['first_name'] != $forumAuthor['last_name'])
-                {{ $forumAuthor['last_name'] }}
-            @endif
-        </b>
+        @if (isset($forumAuthor))
+            <b>Posted by: {{ $forumAuthor['first_name'] }} @if ($forumAuthor['first_name'] != $forumAuthor['last_name'])
+                    {{ $forumAuthor['last_name'] }}
+                @endif
+            </b>
+        @endif
         <hr>
 
         @foreach ($forumReplies as $forumReply)
@@ -52,13 +54,21 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class = "upvote-downvote-area" style = "width: 5%; text-align: center;">
-                                <form wire:submit.prevent="upvoteComment({{ $forumReply->id }})">
-                                    <input type = "submit" value = "&#8593;">
+                            <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
+                                <form action="/admin/add-forum-vote" method="post">
+                                    @csrf
+                                    <input type = "hidden" name = "voteType" value = "upvote">
+                                    <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                    <input type = "hidden" name = "parentReply" value = "{{ $forumReply->id }}">
+                                    <input type="submit" value="&#8593;">
                                 </form>
                                 <br>
-                                <form wire:submit.prevent="downvoteComment({{ $forumReply->id }})">
-                                    <input type = "submit" value = "&#8595;">
+                                <form action="/admin/add-forum-vote" method="post">
+                                    @csrf
+                                    <input type = "hidden" name = "voteType" value = "downvote">
+                                    <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                    <input type = "hidden" name = "parentReply" value = "{{ $forumReply->id }}">
+                                    <input type="submit" value="&#8595;">
                                 </form>
                             </td>
                             <td style = "width: 20%; text-align: center;">
@@ -113,13 +123,21 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class = "upvote-downvote-area" style = "width: 5%; text-align: center;">
-                                            <form wire:submit.prevent="upvoteComment({{ $forumReplyReply->id }})">
-                                                <input type = "submit" value = "&#8593;">
+                                        <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
+                                            <form action="/admin/add-forum-vote" method="post">
+                                                @csrf
+                                                <input type = "hidden" name = "voteType" value = "upvote">
+                                                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                                <input type = "hidden" name = "parentReply" value = "{{ $forumReplyReply->id }}">
+                                                <input type="submit" value="&#8593;">
                                             </form>
                                             <br>
-                                            <form wire:submit.prevent="downvoteComment({{ $forumReplyReply->id }})">
-                                                <input type = "submit" value = "&#8595;">
+                                            <form action="/admin/add-forum-vote" method="post">
+                                                @csrf
+                                                <input type = "hidden" name = "voteType" value = "downvote">
+                                                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                                <input type = "hidden" name = "parentReply" value = "{{ $forumReplyReply->id }}">
+                                                <input type="submit" value="&#8595;">
                                             </form>
                                         </td>
                                         <td style = "width: 20%; text-align: center;">
@@ -166,14 +184,21 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class = "upvote-downvote-area"
-                                                        style = "width: 5%; text-align: center;">
-                                                        <form wire:submit.prevent="upvoteComment({{ $forumReplyReplyReply->id }})">
-                                                            <input type = "submit" value = "&#8593;">
+                                                    <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
+                                                        <form action="/admin/add-forum-vote" method="post">
+                                                            @csrf
+                                                            <input type = "hidden" name = "voteType" value = "upvote">
+                                                            <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                                            <input type = "hidden" name = "parentReply" value = "{{ $forumReplyReplyReply->id }}">
+                                                            <input type="submit" value="&#8593;">
                                                         </form>
                                                         <br>
-                                                        <form wire:submit.prevent="downvoteComment({{ $forumReplyReplyReply->id }})">
-                                                            <input type = "submit" value = "&#8595;">
+                                                        <form action="/admin/add-forum-vote" method="post">
+                                                            @csrf
+                                                            <input type = "hidden" name = "voteType" value = "downvote">
+                                                            <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                                            <input type = "hidden" name = "parentReply" value = "{{ $forumReplyReplyReply->id }}">
+                                                            <input type="submit" value="&#8595;">
                                                         </form>
                                                     </td>
                                                     <td style = "width: 20%; text-align: center;">
@@ -209,12 +234,21 @@
             @endif
         @endforeach
         <hr>
-        <form wire:submit.prevent = "commentForum">
-            <input style = "width: 100%;" type = "text" placeholder="Replying to post: {{ $forumTitle }}"
-                onkeydown="return event.key != 'Enter';" wire:model = "commentBody" required>{{-- </textarea> --}}
-            <div style = "text-align: right;">
-                <input type = "submit" value = "Post Comment">
+
+        <form action="/admin/add-forum-comment" method="post" class="deleteEvents">
+            @csrf
+            @method('POST')
+            <input style="width: 100%;" type="text" name="commentBody"
+                placeholder="Replying to post: {{ $forumTitle }}" required onkeydown="return event.key != 'Enter';">
+            <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+            <div style="text-align: right;">
+                <button type="submit" class="btn btn-danger btn-icon-text"
+                    style="width: 200px; height: 50px; margin: 5px;">
+                    <i class="ti-comment btn-icon-prepend"></i>
+                    Post Comment
+                </button>
             </div>
         </form>
+
     </div>
 </div>

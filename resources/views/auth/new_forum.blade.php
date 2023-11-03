@@ -130,7 +130,7 @@
     <!--=============== MAIN ===============-->
     <main class="main container" id="main">
         <img src="/images/bg2.png" class="background-image">
-        @livewire('new-forum') <!-- Include the Livewire component -->
+        @livewire('add-forum') <!-- Include the Livewire component -->
     </main>
     @livewireScripts
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
