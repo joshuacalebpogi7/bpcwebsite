@@ -16,6 +16,11 @@
                 </button>
             </div>
         </div>
+        <div class="filter-wrapper">
+            <div class="filter">
+                <a href="/jobs"><button class="btn-filter">Active</button></a>
+            </div>
+        </div>
         <div class="sort">
             <p>Sort</p>
             <div class="sort-list">

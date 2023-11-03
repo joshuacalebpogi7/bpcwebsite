@@ -36,6 +36,7 @@ Route::get('/', [PageController::class, "home"])->name('home');
 Route::get('/news', [PageController::class, "news"])->middleware('restrictAdmin');
 Route::get('/events', [PageController::class, "events"])->middleware('restrictAdmin');
 Route::get('/jobs', [PageController::class, "jobs"])->middleware('authUser');
+Route::get('/jobs-archive', [PageController::class, "jobsArchive"])->middleware('authUser');
 Route::get('/survey', [PageController::class, "survey"])->middleware('mustBeLoggedIn');
 Route::get('/forums', [PageController::class, "forums"])->middleware('restrictAdmin');
 Route::get('/gallery', [PageController::class, "gallery"])->middleware('restrictAdmin');
@@ -50,6 +51,8 @@ Route::get('/jobs/{jobs:job_title}', [PageController::class, "jobsSinglePage"])-
 Route::get('/events/{events:title}', [PageController::class, "eventsSinglePage"])->middleware('authUser');
 Route::get('/news/{news:title}', [PageController::class, "newsSinglePage"])->middleware('authUser');
 Route::get('/gallery/{album:album_name}', [PageController::class, "gallerySinglePage"])->middleware('authUser');
+Route::post('/auth/add-forum-comment', [ForumsController::class, 'addForumComment'])->middleware('authUser');
+Route::post('/auth/add-forum-vote', [ForumsController::class, 'addForumVote'])->middleware('authUser');
 
 //User POST related routes
 Route::post('/login', [UserController::class, "login"])->middleware('guest');
@@ -176,6 +179,7 @@ Route::get('/posted_forums', function () {
 
 Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->middleware('mustBeLoggedIn')->name('view_forum');
 Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->middleware('mustBeLoggedIn')->name('delete_forum');
+Route::get('/delete_comment/{forum_selected}', [ForumsController::class, 'deleteComment'])->middleware('mustBeLoggedIn')->name('delete_comment');
 
 Route::post('/vote/{parentForum}/{parentReply}', [ForumsController::class, 'vote'])->name('vote');
 

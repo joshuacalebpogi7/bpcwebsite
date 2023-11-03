@@ -1,3 +1,20 @@
+@push('scripts')
+    <script>
+        function confirmDeleteForum(forumData) {
+            if (confirm('Are you sure you want to delete "' + forumData.forumTitle + '"?')) {
+                // If the user confirms, redirect to the delete route
+                window.location.href = "/delete_forum/" + forumData.id;
+            }
+        }
+
+        function confirmDeleteComment(commentData) {
+            if (confirm('Are you sure you want to delete "' + commentData.replyBody + '"?')) {
+                // If the user confirms, redirect to the delete route
+                window.location.href = "/delete_comment/" + commentData.id;
+            }
+        }
+    </script>
+@endpush
 <style>
     .reply {
         margin-left: 20px;
@@ -23,7 +40,7 @@
         width: 100%;
     }
 
-    /*     td {
+    /* td {
         border: 1px solid black;
     } */
 </style>
@@ -31,12 +48,30 @@
 <div>
     <div class="form-group">
         <hr>
-        <h4>{{ $forum_selected->forumCategory }}</h4><br>
+        @if ($forum_selected->forumAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+            <div style = "text-align: right; border: 0px;">
+                {{--             <button onclick="" class="submit-button delete-choice"><img
+                    src="{{ URL::asset('/images/icon-delete.svg') }}">
+            </button> --}}
+                <button type="button" class="btn btn-danger btn-icon-text" style="width: 65px; height: 50px; margin: 5px;"
+                    onclick="confirmDeleteForum({{ json_encode($forum_selected) }})">
+                    <i class="ti-trash btn-icon-prepend"></i>
+                </button>
+            </div>
+        @endif
+        <h4>{{ $forum_selected->forumCategory }} </h4><br>
         <h2>{{ $forum_selected->forumTitle }}</h2><br>
         <h4>{{ $forum_selected->forumBody }}</h4>
+        <br>
         @if (isset($forumAuthor))
-            <b>Posted by: {{ $forumAuthor['first_name'] }} @if ($forumAuthor['first_name'] != $forumAuthor['last_name'])
+            <b>Posted by: <br>
+                <img height="100" width="100" class="forum-avatar"
+                    src="{{ $forumAuthor ? $forumAuthor->avatar : 'Author not found' }}">&nbsp;
+                {{ $forumAuthor['first_name'] }} @if ($forumAuthor['first_name'] != $forumAuthor['last_name'])
                     {{ $forumAuthor['last_name'] }}
+                @endif
+                @if (auth()->user()->id === $forumAuthor->id)
+                    (You)
                 @endif
             </b>
         @endif
@@ -52,23 +87,43 @@
                             <td style = "width: 20%; text-align: center;">
                                 <i>{{ $forumReply['created_at']->format('F j, Y g:i a') }}</i>
                             </td>
+                            <td>
+                                @if ($forumReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                    <div style = "text-align: right; border: 0px;">
+                                        <button onclick="confirmDeleteComment({{ json_encode($forumReply) }})"
+                                            class="submit-button delete-choice"><img
+                                                src="{{ URL::asset('/images/icon-delete.svg') }}">
+                                        </button>
+                                    </div>
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
-                                <form action="/admin/add-forum-vote" method="post">
-                                    @csrf
-                                    <input type = "hidden" name = "voteType" value = "upvote">
-                                    <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
-                                    <input type = "hidden" name = "parentReply" value = "{{ $forumReply->id }}">
-                                    <input type="submit" value="&#8593;">
+                                @if (auth()->user()->user_type != 'alumni')
+                                    <form action="/admin/add-forum-vote" method="post">
+                                    @elseif (auth()->user()->user_type == 'alumni')
+                                        <form action="/auth/add-forum-vote" method="post">
+                                @endif
+                                @csrf
+                                <input type = "hidden" name = "voteType" value = "upvote">
+                                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                <input type = "hidden" name = "parentReply" value = "{{ $forumReply->id }}">
+                                <input type="submit" value="&#8593;">
                                 </form>
                                 <br>
-                                <form action="/admin/add-forum-vote" method="post">
-                                    @csrf
-                                    <input type = "hidden" name = "voteType" value = "downvote">
-                                    <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
-                                    <input type = "hidden" name = "parentReply" value = "{{ $forumReply->id }}">
-                                    <input type="submit" value="&#8595;">
+                                <p><i>{{ $forumReply->upvoteCount - $forumReply->downvoteCount }}</i></p>
+                                <br>
+                                @if (auth()->user()->user_type != 'alumni')
+                                    <form action="/admin/add-forum-vote" method="post">
+                                    @elseif (auth()->user()->user_type == 'alumni')
+                                        <form action="/auth/add-forum-vote" method="post">
+                                @endif
+                                @csrf
+                                <input type = "hidden" name = "voteType" value = "downvote">
+                                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                <input type = "hidden" name = "parentReply" value = "{{ $forumReply->id }}">
+                                <input type="submit" value="&#8595;">
                                 </form>
                             </td>
                             <td style = "width: 20%; text-align: center;">
@@ -93,7 +148,7 @@
 
 
                             <td>
-                                {{ $forumReply['replyBody'] }}
+                                {{ $forumReply['replyBody'] }} <br>
                                 <div class="forum-reply-button" style="text-align: right;">
                                     <a
                                         href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReply->id]) }}">Reply</a>
@@ -113,7 +168,7 @@
                                     $isReplyReplyUser = $forumReplyReplyAuthor && $forumReplyReplyAuthor->id === auth()->user()->id;
                                 @endphp
                                 <hr>
-                                <p><i>Replying to: {{ $forumReply['replyBody'] }}</i></p>
+                                <p><i>Replying to: {{ $forumReply['replyBody'] }} <br></i></p>
                                 <br>
                                 <table>
                                     <tr>
@@ -124,20 +179,35 @@
                                     </tr>
                                     <tr>
                                         <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
-                                            <form action="/admin/add-forum-vote" method="post">
-                                                @csrf
-                                                <input type = "hidden" name = "voteType" value = "upvote">
-                                                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
-                                                <input type = "hidden" name = "parentReply" value = "{{ $forumReplyReply->id }}">
-                                                <input type="submit" value="&#8593;">
+                                            @if (auth()->user()->user_type != 'alumni')
+                                                <form action="/admin/add-forum-vote" method="post">
+                                                @elseif (auth()->user()->user_type == 'alumni')
+                                                    <form action="/auth/add-forum-vote" method="post">
+                                            @endif
+                                            @csrf
+                                            <input type = "hidden" name = "voteType" value = "upvote">
+                                            <input type = "hidden" name = "parentForum"
+                                                value = "{{ $forum_selected->id }}">
+                                            <input type = "hidden" name = "parentReply"
+                                                value = "{{ $forumReplyReply->id }}">
+                                            <input type="submit" value="&#8593;">
                                             </form>
                                             <br>
-                                            <form action="/admin/add-forum-vote" method="post">
-                                                @csrf
-                                                <input type = "hidden" name = "voteType" value = "downvote">
-                                                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
-                                                <input type = "hidden" name = "parentReply" value = "{{ $forumReplyReply->id }}">
-                                                <input type="submit" value="&#8595;">
+                                            <p>{{ $forumReply->upvoteCount - $forumReply->downvoteCount }}</p>
+
+                                            @if (auth()->user()->user_type != 'alumni')
+                                                <form action="/admin/add-forum-vote" method="post">
+                                                @elseif (auth()->user()->user_type == 'alumni')
+                                                    <form action="/auth/add-forum-vote" method="post">
+                                            @endif
+
+                                            @csrf
+                                            <input type = "hidden" name = "voteType" value = "downvote">
+                                            <input type = "hidden" name = "parentForum"
+                                                value = "{{ $forum_selected->id }}">
+                                            <input type = "hidden" name = "parentReply"
+                                                value = "{{ $forumReplyReply->id }}">
+                                            <input type="submit" value="&#8595;">
                                             </form>
                                         </td>
                                         <td style = "width: 20%; text-align: center;">
@@ -184,21 +254,34 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
-                                                        <form action="/admin/add-forum-vote" method="post">
-                                                            @csrf
-                                                            <input type = "hidden" name = "voteType" value = "upvote">
-                                                            <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
-                                                            <input type = "hidden" name = "parentReply" value = "{{ $forumReplyReplyReply->id }}">
-                                                            <input type="submit" value="&#8593;">
+                                                    <td class="upvote-downvote-area"
+                                                        style="width: 5%; text-align: center;">
+                                                        @if (auth()->user()->user_type != 'alumni')
+                                                            <form action="/admin/add-forum-vote" method="post">
+                                                            @elseif (auth()->user()->user_type == 'alumni')
+                                                                <form action="/auth/add-forum-vote" method="post">
+                                                        @endif
+                                                        @csrf
+                                                        <input type = "hidden" name = "voteType" value = "upvote">
+                                                        <input type = "hidden" name = "parentForum"
+                                                            value = "{{ $forum_selected->id }}">
+                                                        <input type = "hidden" name = "parentReply"
+                                                            value = "{{ $forumReplyReplyReply->id }}">
+                                                        <input type="submit" value="&#8593;">
                                                         </form>
                                                         <br>
-                                                        <form action="/admin/add-forum-vote" method="post">
-                                                            @csrf
-                                                            <input type = "hidden" name = "voteType" value = "downvote">
-                                                            <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
-                                                            <input type = "hidden" name = "parentReply" value = "{{ $forumReplyReplyReply->id }}">
-                                                            <input type="submit" value="&#8595;">
+                                                        @if (auth()->user()->user_type != 'alumni')
+                                                            <form action="/admin/add-forum-vote" method="post">
+                                                            @elseif (auth()->user()->user_type == 'alumni')
+                                                                <form action="/auth/add-forum-vote" method="post">
+                                                        @endif
+                                                        @csrf
+                                                        <input type = "hidden" name = "voteType" value = "downvote">
+                                                        <input type = "hidden" name = "parentForum"
+                                                            value = "{{ $forum_selected->id }}">
+                                                        <input type = "hidden" name = "parentReply"
+                                                            value = "{{ $forumReplyReplyReply->id }}">
+                                                        <input type="submit" value="&#8595;">
                                                         </form>
                                                     </td>
                                                     <td style = "width: 20%; text-align: center;">
@@ -233,21 +316,24 @@
                 </div>
             @endif
         @endforeach
-        <hr>
-
-        <form action="/admin/add-forum-comment" method="post" class="deleteEvents">
-            @csrf
-            @method('POST')
-            <input style="width: 100%;" type="text" name="commentBody"
-                placeholder="Replying to post: {{ $forumTitle }}" required onkeydown="return event.key != 'Enter';">
-            <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
-            <div style="text-align: right;">
-                <button type="submit" class="btn btn-danger btn-icon-text"
-                    style="width: 200px; height: 50px; margin: 5px;">
-                    <i class="ti-comment btn-icon-prepend"></i>
-                    Post Comment
-                </button>
-            </div>
+        <br>
+        @if (auth()->user()->user_type != 'alumni')
+            <form action="/admin/add-forum-comment" method="post" class="deleteEvents">
+            @elseif (auth()->user()->user_type == 'alumni')
+                <form action="/auth/add-forum-comment" method="post" class="deleteEvents">
+        @endif
+        @csrf
+        @method('POST')
+        <input style="width: 100%;" type="text" name="commentBody"
+            placeholder="Replying to post: {{ $forumTitle }}" required onkeydown="return event.key != 'Enter';">
+        <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+        <div style="text-align: right;">
+            <button type="submit" class="btn btn-danger btn-icon-text"
+                style="width: 200px; height: 50px; margin: 5px;">
+                <i class="ti-comment btn-icon-prepend"></i>
+                Post Comment
+            </button>
+        </div>
         </form>
 
     </div>

@@ -42,7 +42,11 @@ class ForumsController extends Controller
         $comment->save();
 
         // Redirect the user back to the forum or a specific page
-        return redirect("/admin/view_forum/{$validatedData['parentForum']}");
+        if (auth()->user()->user_type != "alumni") {
+            return redirect("/admin/view_forum/{$validatedData['parentForum']}");
+        } else if (auth()->user()->user_type == "alumni") {
+            return redirect("/view_forum/{$validatedData['parentForum']}");
+        }
     }
 
 
@@ -64,8 +68,35 @@ class ForumsController extends Controller
         // Delete the survey itself
         $forum->delete();
 
-        // Optionally, you can redirect back to the survey list with a success message
-        return back()->with('success', 'Forum deleted successfully.');
+        if (auth()->user()->user_type != "alumni") {
+            // Optionally, you can redirect back to the survey list with a success message
+            return redirect("admin/forums")->with('success', 'Forum deleted successfully.');
+        } elseif (auth()->user()->user_type == "alumni") {
+            return redirect("/forums");
+        }
+    }
+
+    public function deleteComment($replyId)
+    {
+        // Find the survey to be deleted
+        $reply = forum_replies::find($replyId);
+        $reply->delete();
+        // Check if the survey exists
+        if (!$reply) {
+            // Optionally, you can handle the case where the survey doesn't exist
+            return back()->with('error', 'Forum comment not found.');
+        }
+
+        // Delete related survey questions and choices
+        forum_votes::where('parentReply', $replyId)->delete();
+
+        if (auth()->user()->user_type != "alumni") {
+            // Optionally, you can redirect back to the survey list with a success message
+            return back()->with('success', 'Comment deleted successfully.');
+        } elseif (auth()->user()->user_type == "alumni") {
+            return redirect("view_forum/{$reply->parentForum}");
+
+        }
     }
 
     public function addForumVote(Request $request)
@@ -86,7 +117,8 @@ class ForumsController extends Controller
             // A vote already exists
             if ($existingVote->voteType === $voteType) {
                 // If the vote type is the same, delete the existing vote
-                $existingVote->delete();
+                $existingVote->voteType = null;
+                $existingVote->save();
             } else {
                 // If the vote type is different, update the vote type
                 $existingVote->voteType = $voteType;
@@ -101,10 +133,14 @@ class ForumsController extends Controller
                 'voteAuthor' => $voteAuthor,
             ]);
         }
-
-        // Redirect or return a response as needed
-        return redirect("/admin/view_forum/{$parentForum}");
-
+        if (auth()->user()->user_type != "alumni") {
+            // Redirect or return a response as needed
+            return redirect("/admin/view_forum/{$parentForum}");
+        }
+        if (auth()->user()->user_type == "alumni") {
+            // Redirect or return a response as needed
+            return redirect("/view_forum/{$parentForum}");
+        }
     }
 
 

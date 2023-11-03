@@ -23,7 +23,7 @@ class ViewForum extends Component
     public $forumCategory;
     public $forumReplies = [];
     public $forum_replies = [];
-    public $forum_votes;
+    public $forumVotes;
     public $active;
 
     public function __construct()
@@ -49,78 +49,16 @@ class ViewForum extends Component
         // Retrieve the authors of forum replies
         $authorIds = $replies->pluck('replyAuthor');
         $this->authors = User::whereIn('id', $authorIds)->get();
-        $this->forum_votes = forum_votes::all();
-    }
+        //$forumReplies = forum_replies::all();
 
-    public function upvoteComment($commentId)
-    {
-        $user = auth()->user();
-        $forumVote = forum_votes::where('parentForum', $this->forum_selected->id)
-            ->where('parentReply', $commentId)
-            ->where('voteAuthor', $user->id)
-            ->first();
-
-        if ($forumVote) {
-            // If the user has already upvoted, delete the upvote
-            $forumVote->delete();
-        } else {
-            // If the user hasn't upvoted, create an upvote record
-            forum_votes::create([
-                'parentForum' => $this->forum_selected->id,
-                'parentReply' => $commentId,
-                'voteType' => 'upvote',
-                'voteAuthor' => $user->id,
-                'active' => true,
-            ]);
-        }
-        $this->updateVoteStatus($commentId, $user->id);
-    }
-
-    public function downvoteComment($commentId)
-    {
-        $user = auth()->user();
-        $forumVote = forum_votes::where('parentForum', $this->forum_selected->id)
-            ->where('parentReply', $commentId)
-            ->where('voteAuthor', $user->id)
-            ->first();
-
-        if ($forumVote) {
-            // If the user has already voted, toggle between upvote and downvote
-            if ($forumVote->voteType === 'upvote') {
-                $forumVote->update(['voteType' => 'downvote']);
-            } else {
-                $forumVote->delete();
-            }
-        } else {
-            // If the user hasn't downvoted, create a downvote record
-            forum_votes::create([
-                'parentForum' => $this->forum_selected->id,
-                'parentReply' => $commentId,
-                'voteType' => 'downvote',
-                'voteAuthor' => $user->id,
-                'active' => true,
-            ]);
-        }
-        $this->updateVoteStatus($commentId, $user->id);
-    }
-
-    private function updateVoteStatus($commentId, $userId)
-    {
-        $forumReplies = forum_replies::all();
-        $comment = $forumReplies->firstWhere('id', $commentId);
-
-        if ($comment) {
-            $comment->hasUpvoted = forum_votes::where('parentForum', $this->forum_selected->id)
-                ->where('parentReply', $commentId)
+        foreach ($this->forumReplies as $forumReply) {
+            $forumReply->upvoteCount = forum_votes::where('parentReply', $forumReply->id)
                 ->where('voteType', 'upvote')
-                ->where('voteAuthor', $userId)
-                ->exists();
+                ->count();
 
-            $comment->hasDownvoted = forum_votes::where('parentForum', $this->forum_selected->id)
-                ->where('parentReply', $commentId)
+            $forumReply->downvoteCount = forum_votes::where('parentReply', $forumReply->id)
                 ->where('voteType', 'downvote')
-                ->where('voteAuthor', $userId)
-                ->exists();
+                ->count();
         }
     }
 

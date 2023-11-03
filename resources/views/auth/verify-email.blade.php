@@ -110,12 +110,12 @@
 
                     // Update the button text with countdown
                     let countdown = cooldownTime;
-                    requestButton.innerText = `Cooldown: ${countdown} seconds`;
+                    requestButton.innerText = `Please wait: ${countdown} seconds`;
 
                     // Create a countdown timer
                     const countdownInterval = setInterval(function() {
                         countdown--;
-                        requestButton.innerText = `Cooldown: ${countdown} seconds`;
+                        requestButton.innerText = `Please wait: ${countdown} seconds`;
 
                         if (countdown <= 0) {
                             // Re-enable the button when cooldown is over
