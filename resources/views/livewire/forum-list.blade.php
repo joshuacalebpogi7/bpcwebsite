@@ -92,6 +92,7 @@
                             {{-- @if ($forum_posted['active'] > 0) --}}
                             @php
                                 $allForumsInactive = false;
+                                $forum_posted->forum_replies = $forum_replies::where('parentForum', $forum_posted->id)->get();
                             @endphp
                             {{-- @endif --}}
                             <div class="forum-item">
