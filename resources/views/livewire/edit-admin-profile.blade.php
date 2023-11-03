@@ -23,7 +23,8 @@
     </div>
     <div class="col-xl-4">
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0" style="margin-bottom: 20px!important;
+        <div class="card mb-4 mb-xl-0"
+            style="margin-bottom: 20px!important;
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -61,7 +62,8 @@
         </div>
 
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0" style="
+        <div class="card mb-4 mb-xl-0"
+            style="
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -72,7 +74,8 @@
             <div class="card-body">
                 <form wire:submit.prevent="updateAccountSecurity">
                     @csrf
-                    <div class="card" style="
+                    <div class="card"
+                        style="
                     background: rgba(136, 212, 152, 0.66);
                     border-radius: 16px;
                     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -161,7 +164,8 @@
 
     <div class="col-xl-8">
         <!-- Account details card-->
-        <div class="card mb-4" style="
+        <div class="card mb-4"
+            style="
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -172,7 +176,8 @@
             <div class="card-body">
                 <form wire:submit.prevent="updateProfile">
                     @csrf
-                    <div class="card" style="
+                    <div class="card"
+                        style="
                     background: rgba(136, 212, 152, 0.66);
                     border-radius: 16px;
                     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

@@ -51,14 +51,18 @@
                                                         <div>
                                                             <a href="{{ route('edit_survey', ['survey_selected' => $survey_posted->id]) }}"
                                                                 class="flex-fill">
-                                                                <button type="button" class="btn btn-success btn-icon-text" style="width: 150px; height: 50px; margin: 5px; ">
-                                                                    <i class="ti-pencil btn-icon-prepend"></i>                                                    
+                                                                <button type="button"
+                                                                    class="btn btn-success btn-icon-text"
+                                                                    style="width: 150px; height: 50px; margin: 5px; ">
+                                                                    <i class="ti-pencil btn-icon-prepend"></i>
                                                                     Edit
                                                                 </button>
                                                             </a>
                                                             <br>
-                                                            <button type="button" class="btn btn-danger btn-icon-text" style="width: 150px; height: 50px; margin: 5px;" onclick="confirmDeleteSurvey({{ json_encode($survey_posted) }})">
-                                                                <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                                            <button class="btn btn-danger btn-icon-text"
+                                                                style="width: 150px; height: 50px; margin: 5px;"
+                                                                onclick="confirmDeleteSurvey({{ json_encode($survey_posted) }})">
+                                                                <i class="ti-trash btn-icon-prepend"></i>
                                                                 Delete
                                                             </button>
                                                         </div>

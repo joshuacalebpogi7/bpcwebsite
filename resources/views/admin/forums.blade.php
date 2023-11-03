@@ -46,20 +46,27 @@
                                                     <td>{{ $forum_posted->id }}</td>
                                                     <td>
                                                         <div class="d-flex flex-column">
-                                                            <a href="{{ route('admin/view_forum', ['forum_selected' => $forum_posted->id]) }}" class="flex-fill">
-                                                                <button type="button" class="btn btn-warning btn-icon-text" style="width: 150px; height: 50px; margin: 5px; ">
-                                                                    <i class="ti-eye btn-icon-prepend"></i>                                                    
-                                                                    Edit
-                                                                </button>
-                                                        </a>
-                                                            <a href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}" class="flex-fill">
-                                                                <button type="button" class="btn btn-success btn-icon-text" style="width: 150px; height: 50px; margin: 5px; ">
-                                                                    <i class="ti-pencil btn-icon-prepend"></i>                                                    
+                                                            <a href="{{ route('admin/view_forum', ['forum_selected' => $forum_posted->id]) }}"
+                                                                class="flex-fill">
+                                                                <button type="button"
+                                                                    class="btn btn-warning btn-icon-text"
+                                                                    style="width: 150px; height: 50px; margin: 5px; ">
+                                                                    <i class="ti-eye btn-icon-prepend"></i>
                                                                     Edit
                                                                 </button>
                                                             </a>
-                                                            <button type="button" class="btn btn-danger btn-icon-text" style="width: 150px; height: 50px; margin: 5px;" onclick="confirmDeleteForum({{ json_encode($forum_posted) }})">
-                                                                <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                                            <a href="{{-- route('edit_forum', ['forum_selected' => $forum_posted->id]) --}}" class="flex-fill">
+                                                                <button type="button"
+                                                                    class="btn btn-success btn-icon-text"
+                                                                    style="width: 150px; height: 50px; margin: 5px; ">
+                                                                    <i class="ti-pencil btn-icon-prepend"></i>
+                                                                    Edit
+                                                                </button>
+                                                            </a>
+                                                            <button class="btn btn-danger btn-icon-text"
+                                                                style="width: 150px; height: 50px; margin: 5px;"
+                                                                onclick="confirmDeleteForum({{ json_encode($forum_posted) }})">
+                                                                <i class="ti-trash btn-icon-prepend"></i>
                                                                 Delete
                                                             </button>
                                                         </div>

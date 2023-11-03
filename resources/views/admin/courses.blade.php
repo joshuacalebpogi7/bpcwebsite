@@ -52,8 +52,9 @@
                                                         <!-- First Row - Edit Button -->
                                                         <a href="/admin/edit-courses/{{ $course->course }}"
                                                             class="flex-fill">
-                                                            <button type="button" class="btn btn-success btn-icon-text" style="width: 150px; height: 50px; margin: 5px; ">
-                                                                <i class="ti-pencil btn-icon-prepend"></i>                                                    
+                                                            <button type="button" class="btn btn-success btn-icon-text"
+                                                                style="width: 150px; height: 50px; margin: 5px; ">
+                                                                <i class="ti-pencil btn-icon-prepend"></i>
                                                                 Edit
                                                             </button>
                                                         </a>
@@ -63,8 +64,9 @@
                                                             method="post" class="deleteUser">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="button" class="btn btn-danger btn-icon-text" style="width: 150px; height: 50px; margin: 5px;">
-                                                                <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                                            <button class="btn btn-danger btn-icon-text"
+                                                                style="width: 150px; height: 50px; margin: 5px;">
+                                                                <i class="ti-trash btn-icon-prepend"></i>
                                                                 Delete
                                                             </button>
                                                         </form>
