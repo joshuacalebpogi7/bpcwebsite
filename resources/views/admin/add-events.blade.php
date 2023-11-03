@@ -3,7 +3,7 @@
         <form action="/admin/add-events" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="card mb-4 mb-xl-0">
+            <div class="card mb-4 mb-xl-0" style="margin-top: 10px;">
                 <div class="card-header">Event's Thumbnail</div>
                 <div class="card-body text-center">
 

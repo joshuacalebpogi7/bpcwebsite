@@ -19,7 +19,7 @@
         @csrf
         <div class="row">
             <div class="col-md-6">
-                <div class="card mb-4 mb-md-0">
+                <div class="card mb-4 mb-md-0" style="margin-top: 10px;">
                     <div class="card-header">Create Album</div>
                     <div class="card-body">
                         <!-- Album Name input -->
@@ -91,7 +91,7 @@
         <!-- Submit and Reset buttons -->
         <div class="row">
             <div class="col-md-6">
-                <button class="btn btn-primary" type="submit">Add Album</button>
+                <button class="btn btn-primary" type="submit" style="margin: 10px;">Add Album</button>
                 <button wire:click.prevent="resetAlbumForm" class="btn btn-danger">Clear changes</button>
             </div>
         </div>

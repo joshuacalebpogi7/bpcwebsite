@@ -23,7 +23,7 @@
         @csrf
         <div class="row">
             <div class="col-md-6">
-                <div class="card mb-4 mb-md-0">
+                <div class="card mb-4 mb-md-0" style="margin-top: 10px;">
                     <div class="card-header">Edit Album</div>
                     <div class="card-body">
                         <!-- Album Name input -->
@@ -117,7 +117,7 @@
                                     <button wire:click.prevent="setAlbumCover({{ $index }})"
                                         class="btn btn-primary" type="button">Make Album Cover</button>
                                     <button wire:click.prevent="removePhotoConfirmation({{ $index }})"
-                                        class="btn btn-primary" type="button">
+                                        class="btn btn-primary" type="button" style="margin: 5px;">
                                         Remove New Photo
                                     </button>
                                 </div>

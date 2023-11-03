@@ -174,7 +174,7 @@
                             <label for="password">Password</label>
                             <input wire:model="password" class="form-control" type="text" placeholder="Password"
                                 name="password" id="password">
-                            <button class="btn btn-success" wire:click.prevent="generatePassword">Generate
+                            <button class="btn btn-success" wire:click.prevent="generatePassword" style="margin: 10px;">Generate
                                 Password</button>
                             <span class="text-danger">
                                 @error('password')
