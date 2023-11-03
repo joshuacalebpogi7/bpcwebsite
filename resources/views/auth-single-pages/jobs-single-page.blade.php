@@ -122,6 +122,7 @@
     <!--=============== MAIN ===============-->
     <main class="main container" id="main">
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <a href="/jobs"><button class="btn btn-primary" style="border-radius: 20px;">Back</button></a> 
             <div class="container">
                 <div class="row gy-5 gx-4">
                     <div class="col-lg-8">
@@ -160,7 +161,8 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s" style="overflow: hidden;
+                        text-overflow: clip;">
                             <h4 class="mb-4">Job Summary</h4>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Published On:
                                 {{ $job->created_at->format('F j, Y') }}

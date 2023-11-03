@@ -175,20 +175,21 @@
                         wire:model="surveyDesc">
                 </div>
 
-                <div class="form-group">
-                    <hr class="solid" style="border: 1.5px solid #110202">
-                </div>
-
-                @foreach ($questions as $questionIndex => $question)
-                    <div class="form-group" wire:key="question-{{ $questionIndex }}">
-                        @if ($questionIndex > 0)
-                            <div class = "form-group">
-                                <button wire:click.prevent="removeQuestion({{ $questionIndex }})"
-                                    class="submit-button delete-question"><img
-                                        src="{{ URL::asset('/images/icon-delete.svg') }}">
-                                    {{ $questionIndex + 1 }}</button>
-                            </div>
-                        @endif
+        <div class="form-group">
+            <hr class="solid" style="border: 1.5px solid #110202">
+        </div>
+        
+        @foreach ($questions as $questionIndex => $question)
+                <div class="form-group" wire:key="question-{{ $questionIndex }}">
+                    @if ($questionIndex > 0)
+                        <div class = "form-group">
+                            <button type="button" wire:click.prevent="removeQuestion({{ $questionIndex }})"
+                                class="btn btn-danger btn-icon-text">
+                                <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                Delete
+                          </button>
+                        </div>
+                    @endif
 
                         <label for="choiceType_for_question_{{ $questionIndex }}">{{-- Question {{ $questionIndex + 1 }} --}}
                             Type Selected:&nbsp;<span
@@ -226,10 +227,11 @@
                                         class="form-control" id="choice_num_{{ $choiceIndex }}"
                                         wire:model="questions.{{ $questionIndex }}.choices.{{ $choiceIndex }}.choiceNum">
                                     @if ($choiceIndex > 0)
-                                        <button
+                                        <button type="button" style="margin: -5px 5px 5px 5px;"
                                             wire:click.prevent="removeChoice({{ $questionIndex }}, {{ $choiceIndex }})"
-                                            class="submit-button delete-choice"><img
-                                                src="{{ URL::asset('/images/icon-delete.svg') }}">
+                                            class="btn btn-danger btn-icon-text btn-sm">
+                                            <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                        Delete
                                         </button>
                                     @endif
                                     <input class = "form-control input_choice" type="text" name="choiceDesc"
