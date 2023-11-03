@@ -46,10 +46,28 @@
                     <div class="dad-joke-prompt">
                         <hr class="solid" style="border-top: 2px solid #498d69">
                         <div class="col-md-1 forum-infos">
-                            <p>All Discussions: <span class="numbers">1216</span></p>
-                            <p>General Discussions: <span class="numbers">1216</span></p>
-                            <p>Help: <span class="numbers">1216</span></p>
-                            <p>Blog: <span class="numbers">1216</span></p>
+                            @php
+                                $categoryCounts = []; // Initialize an array to store category counts
+                            @endphp
+
+                            {{-- Count the categories --}}
+                            @foreach ($forum_list as $forum_posted)
+                                @php
+                                    $category = $forum_posted->forumCategory;
+                                    $categoryCounts[$category] = ($categoryCounts[$category] ?? 0) + 1;
+                                @endphp
+                            @endforeach
+
+                            {{-- Sort categories by count in descending order --}}
+                            @php
+                                arsort($categoryCounts);
+                                $topCategories = array_slice($categoryCounts, 0, 4);
+                            @endphp
+
+                            {{-- Display the top 4 categories --}}
+                            @foreach ($topCategories as $category => $count)
+                                <p>{{ $category }}: <span class="numbers">{{ $count }}</span></p>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -67,10 +85,19 @@
                     <p class="dad-joke-prompt-heading1">Popular Discussion</p>
                     <div class="dad-joke-prompt1">
                         <hr class="solid" style="border-top: 2px solid #9062b9">
-                        <p>Capstone Prototype</p>
-                        <p>Graduation Ball</p>
-                        <p>IT Night for Bpc</p>
-                        <p>Sleep Deprivation</p>
+
+                        {{--                         @foreach ($forum_list as $forum_posted)
+                            @foreach ($forum_replies as $forum_reply)
+                                @if ($forum_reply->parentForum == $forum_posted->id)
+
+                                @endif
+                            @endforeach
+                        @endforeach --}}
+                        @foreach ($popularDiscussion as $title)
+                            <p><a href = "{{ route('view_forum', ['forum_selected' => $title->id]) }}">{{ $title->forumTitle }}</a> {{-- (Replies: {{ $title->replies_count }}) --}}</p>
+                        @endforeach
+
+
                     </div>
                 </div>
             </div>
@@ -91,7 +118,7 @@
                         @foreach ($forum_list as $forum_posted)
                             {{-- @if ($forum_posted['active'] > 0) --}}
                             @php
-                            $count = 0; // Initialize a count variable
+                                $count = 0; // Initialize a count variable
                                 $allForumsInactive = false;
                             @endphp
                             @foreach ($forum_replies as $forum_reply)

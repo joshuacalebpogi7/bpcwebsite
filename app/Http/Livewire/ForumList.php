@@ -19,6 +19,7 @@ class ForumList extends Component
     public $forum_votes;
     public $forumTitle;
     public $forumBody;
+    public $popularDiscussion;
     public $active;
 
     public function __construct()
@@ -33,6 +34,11 @@ class ForumList extends Component
         $this->forum_replies = forum_replies::all();
         $this->forum_votes = forum_votes::all();
         //$authors = User::all(); // Retrieve the list of authors
+
+        $this->popularDiscussion = forums_posted::withCount('replies')
+        ->orderBy('replies_count', 'desc')
+        ->limit(4)
+        ->get();
 
         return view('livewire.forum-list'); // Pass the authors variable to the view
     }
