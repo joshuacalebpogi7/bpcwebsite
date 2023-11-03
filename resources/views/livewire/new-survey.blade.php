@@ -182,10 +182,11 @@
                 <div class="form-group" wire:key="question-{{ $questionIndex }}">
                     @if ($questionIndex > 0)
                         <div class = "form-group">
-                            <button wire:click.prevent="removeQuestion({{ $questionIndex }})"
-                                class="submit-button delete-question"><img
-                                    src="{{ URL::asset('/images/icon-delete.svg') }}">
-                                {{ $questionIndex + 1 }}</button>
+                            <button type="button" wire:click.prevent="removeQuestion({{ $questionIndex }})"
+                                class="btn btn-danger btn-icon-text">
+                                <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                Delete
+                          </button>
                         </div>
                     @endif
 
@@ -223,10 +224,11 @@
                                     class="form-control" id="choice_num_{{ $choiceIndex }}"
                                     wire:model="questions.{{ $questionIndex }}.choices.{{ $choiceIndex }}.choiceNum">
                                 @if ($choiceIndex > 0)
-                                    <button
+                                    <button type="button" style="margin: -5px 5px 5px 5px;"
                                         wire:click.prevent="removeChoice({{ $questionIndex }}, {{ $choiceIndex }})"
-                                        class="submit-button delete-choice"><img
-                                            src="{{ URL::asset('/images/icon-delete.svg') }}">
+                                        class="btn btn-danger btn-icon-text btn-sm">
+                                        <i class="ti-trash btn-icon-prepend"></i>                                                    
+                                        Delete
                                     </button>
                                 @endif
                                 <input class = "form-control input_choice" type="text" name="choiceDesc"
