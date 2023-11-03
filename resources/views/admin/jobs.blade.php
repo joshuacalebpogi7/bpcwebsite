@@ -65,7 +65,7 @@
                                                 <td>{{ $job->job_type }}</td>
                                                 <td>{{ $job->company }}</td>
                                                 <td>{{ $job->salary }}</td>
-                                                <td>{{ $job->status }}</td>
+                                                <td><strong>{{ $job->status }}</strong></td>
                                                 <td>{{ $job->posted_by }}</td>
                                                 <td>{{ $job->updatedBy?->username }}</td>
                                                 <td>{{ $job->created_at }}</td>
