@@ -13,7 +13,7 @@ use App\Models\forum_votes; // Import the Forum model
 class ForumList extends Component
 {
     public $user;
-    public $authors;
+    public $users;
     public $forum_list;
     public $forum_replies;
     public $forum_votes;
@@ -33,6 +33,7 @@ class ForumList extends Component
         $this->forum_list = forums_posted::all();
         $this->forum_replies = forum_replies::all();
         $this->forum_votes = forum_votes::all();
+        $this->users = User::all();
         //$authors = User::all(); // Retrieve the list of authors
 
         $this->popularDiscussion = forums_posted::withCount('replies')

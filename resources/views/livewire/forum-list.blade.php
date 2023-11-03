@@ -1,5 +1,4 @@
 <!-- resources/views/livewire/forum-list.blade.php -->
-
 <script>
     function confirmDeleteForum(forumData) {
         if (confirm('Are you sure you want to delete "' + forumData.forumTitle + '"?')) {
@@ -94,7 +93,9 @@
                             @endforeach
                         @endforeach --}}
                         @foreach ($popularDiscussion as $title)
-                            <p><a href = "{{ route('view_forum', ['forum_selected' => $title->id]) }}">{{ $title->forumTitle }}</a> {{-- (Replies: {{ $title->replies_count }}) --}}</p>
+                            <p><a
+                                    href = "{{ route('view_forum', ['forum_selected' => $title->id]) }}">{{ $title->forumTitle }}</a>
+                                {{-- (Replies: {{ $title->replies_count }}) --}}</p>
                         @endforeach
 
 
@@ -104,9 +105,9 @@
         </div>
     </div>
 </div>
-
 <div class="container">
     <div class="row">
+        <hr style = "border: solid 1px #57b657;">
         <div class="col-lg-12">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="ibox-content forum-container">
@@ -130,6 +131,16 @@
                             @endforeach
                             {{-- @endif --}}
                             <div class="forum-item">
+                                <div style = "text-align: right;">
+                                    @if ($forum_posted->forumAuthor == auth()->user()->id)
+                                        <button type="button" class="btn btn-danger btn-icon-text"
+                                            style="width: 150px; height: 50px; margin: 5px;"
+                                            onclick="confirmDeleteForum({{ json_encode($forum_posted) }})">
+                                            <i class="ti-trash btn-icon-prepend"></i>
+                                            Delete
+                                        </button>
+                                    @endif
+                                </div>
                                 <div class="row">
                                     <div class="col-md-9">
                                         <div class="forum-icon">
@@ -138,7 +149,18 @@
                                         <small>{{ $forum_posted->forumCategory }}</small>
                                         <a href="{{ route('view_forum', ['forum_selected' => $forum_posted->id]) }}"
                                             class="forum-item-title">{{ $forum_posted->forumTitle }}</a>
-                                        <div class="forum-sub-title">{{ $forum_posted->forumBody }}</div>
+                                        <div class="forum-sub-title">
+                                            {{ $forum_posted->forumBody }}<br><small>Posted by:<br>
+                                                @php
+                                                    $user = $users->firstWhere('id', $forum_posted->forumAuthor);
+                                                @endphp
+                                                {{ $user ? ($user->first_name !== $user->last_name ? $user->first_name . ' ' . $user->last_name : $user->first_name) : 'Author not found' }}
+                                                @if ($forum_posted->forumAuthor == auth()->user()->id)
+                                                    (You)
+                                                @endif
+                                            </small>
+                                        </div>
+
                                     </div>
                                     <div class="col-md-1 forum-info">
                                         <span class="views-number">
@@ -149,6 +171,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr style = "border: solid 1px #57b657;">
+
                             </div>
                         @endforeach
 
