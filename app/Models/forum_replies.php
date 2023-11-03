@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\forum_votes;
 
 class forum_replies extends Model
 {
@@ -17,4 +18,11 @@ class forum_replies extends Model
         "votes",
         "active",
     ];
+
+    // ForumReplies.php
+public function votes()
+{
+    return $this->hasMany(forum_votes::class, 'parentReply');
+}
+
 }
