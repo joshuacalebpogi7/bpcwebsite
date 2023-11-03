@@ -724,6 +724,7 @@ footer{
    align-items: center;
    flex-direction: column;
    flex-wrap: wrap;
+   background-color: #E9EEF2;;
 }
 
 footer .container{
@@ -783,6 +784,7 @@ footer p{
    margin-right: 10px;
    text-decoration: none;
    border-radius: 4px;
+   color: #E9EEF2;
 }
 
 .sci li a:hover{

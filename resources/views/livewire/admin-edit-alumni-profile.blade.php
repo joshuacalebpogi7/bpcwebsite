@@ -52,7 +52,7 @@
     </div>
     {{-- @php
     dd($user->first_name);
-    @endphp --}}s
+    @endphp --}}
 
     <div class="col-xl-4">
         <!-- Profile picture card-->

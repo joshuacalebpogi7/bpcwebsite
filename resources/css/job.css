@@ -106,9 +106,9 @@ body{
 .btn-filter{
     min-width: 110px;
     padding: 0.5rem;
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
-    background-color: var(--whiteColor);
+    background-color:#fdd231;
     cursor: pointer;
 }
 
