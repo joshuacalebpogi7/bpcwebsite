@@ -65,7 +65,7 @@
                                                         </a>
 
                                                         <!-- Second Row - Delete Button -->
-                                                        <form action="/admin/delete-course/{{ $course->course }}"
+                                                        <form action="/admin/delete-course/{{ $course->id }}"
                                                             method="post" class="deleteUser">
                                                             @csrf
                                                             @method('DELETE')
