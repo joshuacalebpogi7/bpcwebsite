@@ -43,7 +43,7 @@ class AddForum extends Component
             $this->resetForm();
 
         } catch (\Exception $e) {
-            dd($e);// Rollback the transaction in case of any errors
+            dd($e); // Rollback the transaction in case of any errors
             DB::rollback();
 
             // Handle the error, log it, or display a message to the user
@@ -59,7 +59,11 @@ class AddForum extends Component
         $this->forumBody = '';
         $this->forumCategory = '';
         $this->active = false;
-        return redirect('admin/forums');
+        if ($this->user->user_type != "alumni") {
+            return redirect('admin/forums');
+        } elseif ($this->user->user_type == "alumni") {
+            return redirect('forums');
+        }
 
     }
 
