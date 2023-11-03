@@ -108,9 +108,10 @@
                                         <div class="forum-icon">
                                             <i class="fa fa-comments"></i>
                                         </div>
+                                        <small>{{ $forum_posted->forumCategory }}</small>
                                         <a href="{{ route('view_forum', ['forum_selected' => $forum_posted->id]) }}"
                                             class="forum-item-title">{{ $forum_posted->forumTitle }}</a>
-                                        <div class="forum-sub-title">{{ $forum_posted->forumDesc }}</div>
+                                        <div class="forum-sub-title">{{ $forum_posted->forumBody }}</div>
                                     </div>
                                     <div class="col-md-1 forum-info">
                                         <span class="views-number">
