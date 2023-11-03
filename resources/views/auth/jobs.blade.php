@@ -18,7 +18,7 @@
         </div>
         <div class="filter-wrapper">
             <div class="filter">
-            <a href="/job-archive"><button class="btn-filter">Archive</button></a> 
+                <a href="/jobs-archive"><button class="btn-filter">Archive</button></a>
             </div>
         </div>
         <div class="sort">

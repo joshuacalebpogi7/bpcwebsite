@@ -36,6 +36,7 @@ Route::get('/', [PageController::class, "home"])->name('home');
 Route::get('/news', [PageController::class, "news"])->middleware('restrictAdmin');
 Route::get('/events', [PageController::class, "events"])->middleware('restrictAdmin');
 Route::get('/jobs', [PageController::class, "jobs"])->middleware('authUser');
+Route::get('/jobs-archive', [PageController::class, "jobsArchive"])->middleware('authUser');
 Route::get('/survey', [PageController::class, "survey"])->middleware('mustBeLoggedIn');
 Route::get('/forums', [PageController::class, "forums"])->middleware('restrictAdmin');
 Route::get('/gallery', [PageController::class, "gallery"])->middleware('restrictAdmin');

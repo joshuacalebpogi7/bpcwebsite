@@ -88,9 +88,14 @@ class PageController extends Controller
     public function jobs(Jobs $jobs, UserJobs $userJobs)
     {
         if (auth()->check()) {
-            return view('auth.jobs', ['jobs' => $jobs->latest()->get(), 'userJobs' => $userJobs]);
+            return view('auth.jobs', ['jobs' => $jobs->where('status', 'active')->latest()->get(), 'userJobs' => $userJobs]);
         }
-        return view('jobs');
+    }
+    public function jobsArchive(Jobs $jobs, UserJobs $userJobs)
+    {
+        if (auth()->check()) {
+            return view('auth.job-archive', ['jobs' => $jobs->where('status', 'archived')->latest()->get(), 'userJobs' => $userJobs]);
+        }
     }
 
     public function survey(surveys_posted $survey_list, User $authors)
