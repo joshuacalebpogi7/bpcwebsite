@@ -1049,3 +1049,93 @@ button.active{
   margin: auto;
   width: 100%;
 }
+
+.add-products{
+  padding:3rem 2rem;
+  max-width: 1200px;
+  margin:0 auto;
+}
+
+.add-products form{
+  max-width: 70rem;
+  padding:2rem;
+  margin:0 auto;
+  text-align: center;
+  border: 1px solid #919191;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.5);;
+  background-color: #fff;
+  border-radius: .5rem;
+}
+
+.add-products form .flex{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.add-products form .flex .inputBox{
+  width: 100%;
+}
+
+.add-products form .box{
+  width: 100%;
+  margin:1rem 0;
+  padding:1.2rem 1.4rem;
+  font-size: 1.8rem;
+  color:#333;
+  border-radius: .5rem;
+  background-color: #f6f6f6;
+  border:.2rem solid #333;
+}
+
+.add-products form .box option{
+  color:#333;
+}
+
+.add-products form textarea{
+  height: 20rem;
+  resize: none;
+}
+
+.btn,
+.delete-btn,
+.option-btn{
+   display: block;
+   width: 100%;
+   margin-top: 1rem;
+   border-radius: .5rem;
+   color: #fff;
+   font-size: 2rem;
+   padding:1.3rem 3rem;
+   text-transform: capitalize;
+   cursor: pointer;
+   text-align: center;
+}
+
+.btn{
+   background-color: rgba(23, 30, 69, 0.93);
+}
+
+.delete-btn{
+   background-color: #e74c3c;
+}
+
+.option-btn{
+   background-color: #f39c12;
+}
+
+.btn:hover,
+.delete-btn:hover,
+.option-btn:hover{
+   background-color: #426778;
+}
+
+.flex-btn{
+   display: flex;
+   flex-wrap: wrap;
+   gap:1rem;
+}
+
+.flex-btn > *{
+   flex:1;
+}
