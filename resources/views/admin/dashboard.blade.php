@@ -523,7 +523,7 @@
                     @json($data['femaleEmployedCount'])
                 ],
                 backgroundColor: [
-                    "#4B49AC", "#FFC100",
+                    "#1fc7ff", "#ff9eb3",
                 ],
                 // borderColor: "rgba(0,0,0,0)"
             }]
@@ -604,7 +604,7 @@
                     @json($data['femaleUnemployedCount'])
                 ],
                 backgroundColor: [
-                    "#4B49AC", "#FFC100",
+                    "#1fc7ff", "#ff9eb3",
                 ],
                 // borderColor: "rgba(0,0,0,0)"
             }]
@@ -685,7 +685,7 @@
                     @json($data['femaleSelfEmployedCount'])
                 ],
                 backgroundColor: [
-                    "#4B49AC", "#FFC100",
+                    "#1fc7ff", "#ff9eb3",
                 ],
                 // borderColor: "rgba(0,0,0,0)"
             }]
@@ -766,13 +766,13 @@
                 labels: @json($data['jobRelatedLabels']),
                 datasets: [{
                         label: 'Related',
-                        data: @json($data['employedByBatch']),
-                        backgroundColor: '#98BDFF'
+                        data: @json($data['jobRelatedCounts']),
+                        backgroundColor: '#1fc7ff'
                     },
                     {
                         label: 'Not Related',
-                        data: @json($data['unemployedByBatch']),
-                        backgroundColor: '#ff9eb3'
+                        data: @json($data['jobUnrelatedCounts']),
+                        backgroundColor: '#ff3d3d'
                     }
                 ]
             },
@@ -838,7 +838,7 @@
                 datasets: [{
                         label: 'Employed',
                         data: @json($data['employedByBatch']),
-                        backgroundColor: '#98BDFF'
+                        backgroundColor: '#1fc7ff'
                     },
                     {
                         label: 'Unemployed',
@@ -909,7 +909,7 @@
                 datasets: [{
                         label: 'Male',
                         data: @json($data['alumniMale']),
-                        backgroundColor: '#98BDFF'
+                        backgroundColor: '#1fc7ff'
                     },
                     {
                         label: 'Female',
@@ -980,7 +980,7 @@
                 datasets: [{
                         label: 'All Alumni',
                         data: @json($data['dataAll']),
-                        backgroundColor: '#98BDFF'
+                        backgroundColor: '#1fc7ff'
                     },
                     {
                         label: 'Verified Alumni',

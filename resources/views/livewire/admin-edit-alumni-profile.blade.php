@@ -56,7 +56,8 @@
 
     <div class="col-xl-4">
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0" style="margin-bottom: 20px!important; margin-top: 10px;
+        <div class="card mb-4 mb-xl-0"
+            style="margin-bottom: 20px!important; margin-top: 10px;
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -97,7 +98,8 @@
 
 
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0" style="
+        <div class="card mb-4 mb-xl-0"
+            style="
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -108,7 +110,8 @@
             <div class="card-body">
                 <form wire:submit.prevent="updateAccountSecurity">
                     @csrf
-                    <div class="card" style="
+                    <div class="card"
+                        style="
                     background: rgba(136, 212, 152, 0.66);
                     border-radius: 16px;
                     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -157,7 +160,8 @@
                                     <label for="new-password">New Password</label>
                                     <input wire:model="new_password"
                                         class="form-control @error('new_password') is-invalid @enderror @if ($new_password) is-valid @endif"
-                                        type="text" placeholder="New Password" name="new_password" id="new-password"
+                                        type="text" placeholder="New Password" name="new_password"
+                                        id="new-password"
                                         @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
                                     @if ($edit == true)
                                         <button class="btn btn-success" wire:click.prevent="generatePassword">Generate
@@ -198,12 +202,14 @@
         @if ($edit)
             <button wire:click.prevent="resetRestrictedEditConfirmation" class="btn btn-danger">Cancel</button>
         @else
-            <button wire:click.prevent="allowRestrictedEditConfirmation" class="btn btn-warning" style="margin: 10px;">Allow edit
+            <button wire:click.prevent="allowRestrictedEditConfirmation" class="btn btn-warning"
+                style="margin: 10px;">Allow edit
                 all</button>
         @endif
 
         <!-- Account details card-->
-        <div class="card mb-4" style="
+        <div class="card mb-4"
+            style="
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -214,7 +220,8 @@
             <div class="card-body">
                 <form wire:submit.prevent="updateProfile">
                     @csrf
-                    <div class="card" style="
+                    <div class="card"
+                        style="
                     background: rgba(136, 212, 152, 0.66);
                     border-radius: 16px;
                     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -541,7 +548,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="monthly-salary">Monthly salary</label>
                                         <input wire:model="state.monthly_salary"
@@ -559,6 +566,56 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category">Job Category</label>
+                                        <select wire:model="state.category"
+                                            class="form-control @error('category') is-invalid @enderror"
+                                            name="category" id="category"
+                                            {{ isset($state['employment_status']) && in_array($state['employment_status'], ['unemployed', '']) ? 'disabled' : '' }}@if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
+                                            <option value="" selected>--Job Category--</option>
+                                            <option value="Sales and Marketing">
+                                                Sales and Marketing
+                                            </option>
+                                            <option value="Customer Service">
+                                                Customer Service
+                                            </option>
+                                            <option value="Human Resources">
+                                                Human Resources</option>
+                                            <option value="Accounting and Finance">
+                                                Accounting and Finance</option>
+                                            <option value="Engineering">
+                                                Engineering</option>
+                                            <option value="Information Technology (IT)">
+                                                Information Technology (IT)</option>
+                                            <option value="Research and Development">
+                                                Research and Development</option>
+                                            <option value="Management">
+                                                Management</option>
+                                            <option value="Healthcare and Medical">
+                                                Healthcare and Medical</option>
+                                            <option value="Legal">
+                                                Legal</option>
+                                            <option value="Teaching and Education">
+                                                Teaching and Education</option>
+                                            <option value="Design and Creative">
+                                                Design and Creative</option>
+                                            <option value="Manufacturing and Production">
+                                                Manufacturing and Production</option>
+                                            <option value="Operations">
+                                                Operations</option>
+                                            <option value="Customer Support">
+                                                Customer Support</option>
+                                            <option value="Administration">
+                                                Administration</option>
+                                        </select>
+                                        <span class="text-danger">
+                                            @error('category')
+                                                <p>{{ $message }}</p>
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
