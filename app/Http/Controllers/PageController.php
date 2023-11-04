@@ -206,14 +206,13 @@ class PageController extends Controller
             $unemployedCount = 0;
 
             if ($users->where('year_graduated', $batch)->count() > 0) {
-                $employedCount = $users->where('employment_status', 'employed', 'self-employed')->whereNotNull('email_verified_at')->count();
+                $employedCount = $users->whereIn('employment_status', ['employed', 'self-employed'])->whereNotNull('email_verified_at')->count();
                 $unemployedCount = $users->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
             }
             array_push($alumniByBatchLabels, $batch);
             array_push($employed, $employedCount);
             array_push($unemployed, $unemployedCount);
         }
-        // dd($unemployed);
 
         //bar alumnigender
         $alumniByGenderLabels = [];
@@ -229,6 +228,24 @@ class PageController extends Controller
                 $alumniFemaleCount = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
             }
             array_push($alumniByGenderLabels, $course->course);
+            array_push($alumniMale, $alumniMaleCount);
+            array_push($alumniFemale, $alumniFemaleCount);
+        }
+
+        //bar job related
+        $jobRelatedLabels = [];
+        $alumniMale = [];
+        $alumniFemale = [];
+
+        foreach ($courses as $course) {
+            $alumniMaleCount = 0;
+            $alumniFemaleCount = 0;
+
+            if ($users->where('course', $course->course)->count() > 0) {
+                $alumniMaleCount = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
+                $alumniFemaleCount = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+            }
+            array_push($jobRelatedLabels, $course->course);
             array_push($alumniMale, $alumniMaleCount);
             array_push($alumniFemale, $alumniFemaleCount);
         }
@@ -298,6 +315,9 @@ class PageController extends Controller
             'alumniByGenderLabels' => $alumniByGenderLabels,
             'alumniMale' => $alumniMale,
             'alumniFemale' => $alumniFemale,
+
+            //job related (bar-chart)
+            'jobRelatedLabels' => $jobRelatedLabels,
 
             //alumni by emp status gender
             'maleEmployedCount' => $maleEmployed,

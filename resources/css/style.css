@@ -133,7 +133,7 @@ body{
     flex-shrink: 0;
   }
 
-  .card_0 p {
+  /* .card_0 p {
     font-size: 18px;
     font-weight: 500;
     line-height: 20px;
@@ -142,11 +142,7 @@ body{
     justify-content: flex-start;
     padding-left: 50px;
     white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: clip;
-    overflow-wrap: break-word;
-    max-width: fit-content;
-  }
+  
 
   .card_0 h1{
     font-size: 32px;
