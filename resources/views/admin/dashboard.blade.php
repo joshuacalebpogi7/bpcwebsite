@@ -46,8 +46,12 @@
                         <div class="card-body">
                             <p class="mb-4">Courses</p>
                             <p class="fs-30 mb-2">{{ $data['courses']->count() }}</p>
-                            <p>{{ number_format($data['verifiedAlumni']->whereNotNull('course')->count() / $data['courses']->count(), 2) }}
-                                (Average alumni in each course)</p>
+                            <p>
+                                @if ($data['courses']->count() > 0)
+                                {{ number_format($data['verifiedAlumni']->whereNotNull('course')->count() / $data['courses']->count(), 2) }}
+                                (Average alumni in each course)
+                                @endif
+                            </p>
                         </div>
                     </div>
                 </div>
