@@ -17,9 +17,11 @@
                             <h1>University News</h1>
                             <h2>{{ $news->title }}</h2>
                             <h6>Posted {{ $news->created_at->diffForHumans() }}</h6>
-                            <p class="small"
-                                style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 200px;">
-                                {!! $news->description !!}</p>
+                            <div class="description-container">
+                                <p class="small">
+                                    {!! $news->description !!}
+                                </p>
+                            </div>
                             <div class="go-corner" href="#">
                                 <div class="go-arrow">
                                     →

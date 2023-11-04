@@ -142,6 +142,15 @@ body{
     justify-content: flex-start;
     padding-left: 50px;
     white-space: nowrap; /* Prevent text from wrapping */
+
+    .card_0 .description-container {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin: 5px 0 10px;
+      color: #012628 !important;
+  }
   
 
   .card_0 h1{
