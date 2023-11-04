@@ -400,7 +400,8 @@
                     {{-- <a href="/admin/users" class="text-info">View all</a> --}}
 
                 </div>
-                <p class="font-weight-400 mt-3">This table shows the list of all employed and self-employed alumni.
+                <p class="font-weight-400 mt-3">This table shows the list of 10 latest employed and self-employed
+                    alumni.
                     <span class="text-success">green status</span> means employed and <span class="text-info">blue
                         status</span> means self-employed. This table shows if the job of the alumni is related to
                     his/her course or not. Only alumni who is not unemployed
@@ -418,9 +419,9 @@
                         </thead>
                         <tbody>
                             @foreach ($data['allAlumniWithJobs'] as $key => $alumniCollection)
-                                @if ($key < 5)
+                                @if ($key < 10)
                                     @foreach ($alumniCollection as $key => $alumni)
-                                        @if ($key < 5)
+                                        @if ($key < 10)
                                             <tr>
                                                 <td>{{ $alumni->first_name . ' ' . $alumni->last_name }}
                                                 </td>
@@ -485,10 +486,10 @@
     <div class="card">
         <div class="card-body">
             <p class="card-title mb-3">Courses</p>
-            <p class="font-weight-400">This chart displays the overall number of
+            <p class="font-weight-400">This table displays the overall number of
                 alumni and the percentage of
                 verified alumni in each course. All alumni, verified or not verified are included in the data
-                for this chart.</p>
+                for this table.</p>
             <div class="table-responsive">
                 <table class="table table-borderless">
                     <thead>
@@ -500,7 +501,7 @@
                     </thead>
                     <tbody>
                         @foreach ($data['courses'] as $key => $course)
-                            @if ($key < 5)
+                            @if ($key < 10)
                                 <tr>
                                     <td class="pl-0">{{ $course->course }}</td>
                                     <td>
