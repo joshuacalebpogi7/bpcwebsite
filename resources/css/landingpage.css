@@ -7,7 +7,10 @@
    outline: none; 
    border:none;
    text-decoration: none;
-   /* color: #E9EEF2; */
+
+}
+a {
+    color: #E9EEF2;
 }
 
 body{

@@ -16,7 +16,7 @@
                 </button>
             </div>
         </div>
-        <div class="filter-wrapper">
+        <div class="filter-wrapper wrapper">
             <div class="filter">
                 <a href="/jobs"><button class="btn-filter">Active</button></a>
             </div>
