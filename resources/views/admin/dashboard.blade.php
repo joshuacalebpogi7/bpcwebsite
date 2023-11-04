@@ -331,10 +331,10 @@
                         <p class="card-title mb-0">Latest Alumni</p>
                         <a href="/admin/users" class="text-info">View all</a>
                     </div>
-                    <p class="font-weight-400 mt-3">This chart shows the list of the 10 latest alumni. Only alumni
+                    <p class="font-weight-400 mt-3">This table shows the list of the 10 latest alumni. Only alumni
                         with confirmed email addresses (verified) are included in the data
                         for
-                        this chart.</p>
+                        this table.</p>
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
@@ -380,10 +380,11 @@
                     <p class="card-title">Alumni by Batch</p>
                     {{-- <a href="#" class="text-info">View all</a> --}}
                 </div>
-                <p class="font-weight-500">The total number of sessions within the
-                    date range. It
-                    is the period time a user is actively engaged with your website, page or app,
-                    etc</p>
+                <p class="font-weight-500">This chart shows the employment status of all alumni by batch where
+                    employed and self-employed is considered employed. Only alumni
+                    with confirmed email addresses (verified) are included in the data
+                    for
+                    this chart.</p>
                 <div id="alumnibatch-legend" class="chartjs-legend mt-4 mb-2"></div>
                 <canvas id="alumnibatch-chart"></canvas>
             </div>
@@ -399,12 +400,12 @@
                     {{-- <a href="/admin/users" class="text-info">View all</a> --}}
 
                 </div>
-                <p class="font-weight-400 mt-3">This chart displays the overall number
-                    of
-                    alumni and how many are purely
-                    verified alumni in each course. All alumni, verified or not verified are included in the
-                    data
-                    for this chart.</p>
+                <p class="font-weight-400 mt-3">This table shows the list of all employed and self-employed alumni.
+                    <span class="text-success">green status</span> means employed and <span class="text-info">blue
+                        status</span> means self-employed. This table shows if the job of the alumni is related to
+                    his/her course or not. Only alumni who is not unemployed
+                    are included in the data for this table.
+                </p>
                 <div class="table-responsive">
                     <table class="table table-striped table-borderless">
                         <thead>
@@ -468,9 +469,11 @@
                 <p class="card-title">Job Related to Course</p>
                 {{-- <a href="#" class="text-info">View all</a> --}}
             </div>
-            <p class="font-weight-500">The total number of sessions within the date range. It
-                is the period time a user is actively engaged with your website, page or app,
-                etc</p>
+            <p class="font-weight-500">This chart provides visual graphs for all employed and self-employed
+                alumni. It shows the number of alumni whose job is related to
+                his/her course or not. Only alumni who is not unemployed
+                are included in the data for this chart.
+            </p>
             <div id="jobrelated-legend" class="chartjs-legend mt-4 mb-2"></div>
             <canvas id="jobrelated-chart"></canvas>
         </div>
@@ -483,7 +486,7 @@
         <div class="card-body">
             <p class="card-title mb-3">Courses</p>
             <p class="font-weight-400">This chart displays the overall number of
-                alumni and how many are purely
+                alumni and the percentage of
                 verified alumni in each course. All alumni, verified or not verified are included in the data
                 for this chart.</p>
             <div class="table-responsive">
@@ -491,7 +494,7 @@
                     <thead>
                         <tr>
                             <th class="pl-0  pb-2 border-bottom">Course</th>
-                            <th class="border-bottom pb-2">Verified Alumni</th>
+                            <th class="border-bottom pb-2">Alumni (Verified %)</th>
                             <th class="border-bottom pb-2">Total</th>
                         </tr>
                     </thead>
@@ -508,7 +511,7 @@
                                             @if ($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() <= 0)
                                                 0%
                                             @else
-                                                {{ number_format(($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%
+                                                {{ number_format(($data['users']->where('course', $course->course)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%
                                             @endif
                                             )
                                         </p>
