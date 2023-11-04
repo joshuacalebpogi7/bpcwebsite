@@ -177,6 +177,7 @@ Route::get('/posted_forums', function () {
     return view('auth.posted_forums');
 })->middleware('mustBeLoggedIn')->name('posted_forums');
 
+Route::get('/reply_forum/{forum_reply_selected}', [PageController::class, 'replyForum'])->middleware('mustBeLoggedIn')->name('reply_forum');
 Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->middleware('mustBeLoggedIn')->name('view_forum');
 Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->middleware('mustBeLoggedIn')->name('delete_forum');
 Route::get('/delete_comment/{forum_selected}', [ForumsController::class, 'deleteComment'])->middleware('mustBeLoggedIn')->name('delete_comment');

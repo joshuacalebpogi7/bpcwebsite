@@ -126,21 +126,18 @@
             <div class="comments-wrp">
                 <div class="comment container3">
                     @if ($forum_selected->forumAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                        <div style = "text-align: right; border: 0px;">
-                            {{--             <button onclick="" class="submit-button delete-choice"><img
-                            src="{{ URL::asset('/images/icon-delete.svg') }}">
-                    </button> --}}
-                            <button type="button" class="btn btn-danger btn-icon-text"
-                                style="width: 65px; height: 50px; margin: 5px;"
+                        <div class = "c-controls">
+                            <button type="button" class="delete"
                                 onclick="confirmDeleteForum({{ json_encode($forum_selected) }})">
-                                <i class="ti-trash btn-icon-prepend"></i>
+                                <img src="{{ asset('/images/icon-delete.svg') }}" alt=""
+                                    class="control-icon">Delete
                             </button>
                         </div>
                     @endif
                     <div class="c-user">
+                        <h3>Posted by</h3>
                         @if (isset($forumAuthor))
-                            <img height="30" width="30" class="usr-img"
-                                src="{{ $forumAuthor ? $forumAuthor->avatar : 'Author not found' }}">
+                            <img class="usr-img" src="{{ $forumAuthor ? $forumAuthor->avatar : 'Author not found' }}">
                             <p class="usr-name"> {{ $forumAuthor['first_name'] }} @if ($forumAuthor['first_name'] != $forumAuthor['last_name'])
                                     {{ $forumAuthor['last_name'] }}
                                 @endif
@@ -157,6 +154,354 @@
                     </div>
                 </div>
             </div>
+            @foreach ($forumReplies as $forumFirstReply)
+                @if ($forumFirstReply['replyingTo'] == null)
+                    <div class="comments-wrp">
+                        <div class="comment container3">
+                            <div class="c-score">
+                                @if (auth()->user()->user_type != 'alumni')
+                                    <form action="/admin/add-forum-vote" method="post">
+                                    @elseif (auth()->user()->user_type == 'alumni')
+                                        <form action="/auth/add-forum-vote" method="post">
+                                @endif
+                                @csrf
+                                <input type = "hidden" name = "voteType" value = "upvote">
+                                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                <input type = "hidden" name = "parentReply" value = "{{ $forumFirstReply->id }}">
+                                <button type="submit">
+                                    <img src="{{ asset('images/icon-plus.svg') }}" alt="plus"
+                                        class="score-control score-plus"></button>
+                                </form>
+                                <p class="score-number">
+                                    {{ $forumFirstReply->upvoteCount - $forumFirstReply->downvoteCount }}
+                                </p>
+                                @if (auth()->user()->user_type != 'alumni')
+                                    <form action="/admin/add-forum-vote" method="post">
+                                    @elseif (auth()->user()->user_type == 'alumni')
+                                        <form action="/auth/add-forum-vote" method="post">
+                                @endif
+                                @csrf
+                                <input type = "hidden" name = "voteType" value = "downvote">
+                                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+                                <input type = "hidden" name = "parentReply" value = "{{ $forumFirstReply->id }}">
+                                <button type="submit">
+                                    <img src="{{ asset('images/icon-minus.svg') }}" alt="minus"
+                                        class="score-control score-minus">
+                                </button>
+                                </form>
+                            </div>
+                            <div class="c-controls">
+                                @if ($forumFirstReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                    <button class="delete"
+                                        onclick="confirmDeleteComment({{ json_encode($forumFirstReply) }})">
+                                        <img src="{{ URL::asset('/images/icon-delete.svg') }}" alt=""
+                                            class="control-icon">Delete</button>
+                                    <button class="edit"><img src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                            alt="" class="control-icon">Edit</button>
+                                @endif
+                                @if (auth()->user()->user_type != 'alumni')
+                                    <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumFirstReply->id]) }}"
+                                        class="reply"><img src="images/icon-reply.svg" alt=""
+                                            class="control-icon">Reply</a>
+                                @elseif (auth()->user()->user_type == 'alumni')
+                                    <a href="{{ route('reply_forum', ['forum_reply_selected' => $forumFirstReply->id]) }}"
+                                        class="reply"><img src="images/icon-reply.svg" alt=""
+                                            class="control-icon">Reply</a>
+                                @endif
+                            </div>
+                            <div class="c-user">
+                                @php
+                                    $forumFirstReplyAuthor = $authors->firstWhere('id', $forumFirstReply->replyAuthor);
+                                    $isFirstReplyOp = $forumFirstReplyAuthor && $forumFirstReplyAuthor->id === $forum_selected->forumAuthor;
+                                    $isFirstReplyUser = $forumFirstReplyAuthor && $forumFirstReplyAuthor->id === auth()->user()->id;
+                                @endphp
+                                <img src="{{ $forumFirstReplyAuthor ? $forumFirstReplyAuthor->avatar : 'Author not found' }}"
+                                    alt="" class="usr-img">
+                                <p class="usr-name">
+                                    {{ $forumFirstReplyAuthor ? ($forumFirstReplyAuthor->first_name !== $forumFirstReplyAuthor->last_name ? ' ' . $forumFirstReplyAuthor->first_name . ' ' . $forumFirstReplyAuthor->last_name : ' ' . $forumFirstReplyAuthor->first_name) : 'Author not found' }}
+                                    @if ($isFirstReplyUser)
+                                        (You)
+                                    @endif
+                                    @if ($isFirstReplyOp)
+                                        [OP]
+                                    @endif
+                                </p>
+                                <p class="cmnt-at">{{ $forumFirstReply['created_at']->diffForHumans() }}</p>
+                            </div>
+                            <p class="c-text">
+                                <span class="reply-to"></span>
+                                <span class="c-body">{{ $forumFirstReply['replyBody'] }}</span>
+                            </p>
+                        </div><!--comment-->
+                        <div class="replies comments-wrp">
+
+                            @foreach ($forumReplies as $forumSecondReply)
+                                @if ($forumSecondReply['replyingTo'] == $forumFirstReply->id)
+                                    @php
+                                        $forumSecondReplyAuthor = $authors->firstWhere('id', $forumSecondReply->replyAuthor);
+                                        $isSecondReplyOp = $forumSecondReplyAuthor && $forumSecondReplyAuthor->id === $forum_selected->forumAuthor;
+                                        $isSecondReplyUser = $forumSecondReplyAuthor && $forumSecondReplyAuthor->id === auth()->user()->id;
+                                    @endphp
+                                    <div class="comment container3">
+                                        <div class="c-score">
+                                            @if (auth()->user()->user_type != 'alumni')
+                                                <form action="/admin/add-forum-vote" method="post">
+                                                @elseif (auth()->user()->user_type == 'alumni')
+                                                    <form action="/auth/add-forum-vote" method="post">
+                                            @endif
+                                            @csrf
+                                            <input type = "hidden" name = "voteType" value = "upvote">
+                                            <input type = "hidden" name = "parentForum"
+                                                value = "{{ $forum_selected->id }}">
+                                            <input type = "hidden" name = "parentReply"
+                                                value = "{{ $forumSecondReply->id }}">
+                                            <button type="submit">
+                                                <img src="{{ asset('images/icon-plus.svg') }}" alt="plus"
+                                                    class="score-control score-plus"></button>
+                                            </form>
+                                            <p class="score-number">
+                                                {{ $forumSecondReply->upvoteCount - $forumSecondReply->downvoteCount }}
+                                            </p>
+                                            @if (auth()->user()->user_type != 'alumni')
+                                                <form action="/admin/add-forum-vote" method="post">
+                                                @elseif (auth()->user()->user_type == 'alumni')
+                                                    <form action="/auth/add-forum-vote" method="post">
+                                            @endif
+                                            @csrf
+                                            <input type = "hidden" name = "voteType" value = "downvote">
+                                            <input type = "hidden" name = "parentForum"
+                                                value = "{{ $forum_selected->id }}">
+                                            <input type = "hidden" name = "parentReply"
+                                                value = "{{ $forumSecondReply->id }}">
+                                            <button type="submit">
+                                                <img src="{{ asset('images/icon-minus.svg') }}" alt="minus"
+                                                    class="score-control score-minus">
+                                            </button>
+                                            </form>
+                                        </div>
+                                        <div class="c-controls">
+                                            @if ($forumSecondReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                <button class="delete"
+                                                    onclick="confirmDeleteComment({{ json_encode($forumSecondReply) }})">
+                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                        alt="" class="control-icon">Delete</button>
+                                                <button class="edit"><img
+                                                        src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                        alt="" class="control-icon">Edit</button>
+                                            @endif
+                                            @if (auth()->user()->user_type != 'alumni')
+                                                <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumSecondReply->id]) }}"
+                                                    class="reply"><img src="images/icon-reply.svg" alt=""
+                                                        class="control-icon">Reply</a>
+                                            @elseif (auth()->user()->user_type == 'alumni')
+                                                <a href="{{ route('reply_forum', ['forum_reply_selected' => $forumSecondReply->id]) }}"
+                                                    class="reply"><img src="images/icon-reply.svg" alt=""
+                                                        class="control-icon">Reply</a>
+                                            @endif
+                                        </div>
+                                        <div class="c-user">
+                                            <img src="{{ $forumSecondReplyAuthor ? $forumSecondReplyAuthor->avatar : 'Author not found' }}"
+                                                alt="" class="usr-img">
+                                            <p class="usr-name">
+                                                {{ $forumSecondReplyAuthor ? ($forumSecondReplyAuthor->first_name !== $forumSecondReplyAuthor->last_name ? ' ' . $forumSecondReplyAuthor->first_name . ' ' . $forumSecondReplyAuthor->last_name : ' ' . $forumSecondReplyAuthor->first_name) : 'Author not found' }}
+                                                @if ($isSecondReplyUser)
+                                                    (You)
+                                                @endif
+                                                @if ($isSecondReplyOp)
+                                                    [OP]
+                                                @endif
+                                            </p>
+                                            <p class="cmnt-at">{{ $forumSecondReply['created_at']->diffForHumans() }}
+                                            </p>
+                                        </div>
+                                        <p class="c-text">
+                                            <span class="reply-to">{{ $forumFirstReply['replyBody'] }}</span>
+                                            <span class="c-body">{{ $forumSecondReply['replyBody'] }}</span>
+                                        </p>
+                                    </div><!--comment-->
+                                    <div class="replies comments-wrp">
+                                        @foreach ($forumReplies as $forumThirdReply)
+                                            @if ($forumThirdReply['replyingTo'] == $forumSecondReply->id)
+                                                @php
+                                                    $forumThirdReplyAuthor = $authors->firstWhere('id', $forumThirdReply->replyAuthor);
+                                                    $isThirdReplyOp = $forumThirdReplyAuthor && $forumThirdReplyAuthor->id === $forum_selected->forumAuthor;
+                                                    $isThirdReplyUser = $forumThirdReplyAuthor && $forumThirdReplyAuthor->id === auth()->user()->id;
+                                                @endphp
+                                                <div class="comment container3">
+                                                    <div class="c-score">
+                                                        @if (auth()->user()->user_type != 'alumni')
+                                                            <form action="/admin/add-forum-vote" method="post">
+                                                            @elseif (auth()->user()->user_type == 'alumni')
+                                                                <form action="/auth/add-forum-vote" method="post">
+                                                        @endif
+                                                        @csrf
+                                                        <input type = "hidden" name = "voteType" value = "upvote">
+                                                        <input type = "hidden" name = "parentForum"
+                                                            value = "{{ $forum_selected->id }}">
+                                                        <input type = "hidden" name = "parentReply"
+                                                            value = "{{ $forumThirdReply->id }}">
+                                                        <button type="submit">
+                                                            <img src="{{ asset('images/icon-plus.svg') }}"
+                                                                alt="plus"
+                                                                class="score-control score-plus"></button>
+                                                        </form>
+                                                        <p class="score-number">
+                                                            {{ $forumThirdReply->upvoteCount - $forumThirdReply->downvoteCount }}
+                                                        </p>
+                                                        @if (auth()->user()->user_type != 'alumni')
+                                                            <form action="/admin/add-forum-vote" method="post">
+                                                            @elseif (auth()->user()->user_type == 'alumni')
+                                                                <form action="/auth/add-forum-vote" method="post">
+                                                        @endif
+                                                        @csrf
+                                                        <input type = "hidden" name = "voteType" value = "downvote">
+                                                        <input type = "hidden" name = "parentForum"
+                                                            value = "{{ $forum_selected->id }}">
+                                                        <input type = "hidden" name = "parentReply"
+                                                            value = "{{ $forumThirdReply->id }}">
+                                                        <button type="submit">
+                                                            <img src="{{ asset('images/icon-minus.svg') }}"
+                                                                alt="minus" class="score-control score-minus">
+                                                        </button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="c-controls">
+                                                        @if ($forumThirdReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                            <button class="delete"
+                                                                onclick="confirmDeleteComment({{ json_encode($forumThirdReply) }})">
+                                                                <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                    alt=""
+                                                                    class="control-icon">Delete</button>
+                                                            <button class="edit"><img
+                                                                    src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                    alt="" class="control-icon">Edit</button>
+                                                        @endif
+                                                        @if (auth()->user()->user_type != 'alumni')
+                                                            <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumThirdReply->id]) }}"
+                                                                class="reply"><img src="images/icon-reply.svg"
+                                                                    alt="" class="control-icon">Reply</a>
+                                                        @elseif (auth()->user()->user_type == 'alumni')
+                                                            <a href="{{ route('reply_forum', ['forum_reply_selected' => $forumThirdReply->id]) }}"
+                                                                class="reply"><img src="images/icon-reply.svg"
+                                                                    alt="" class="control-icon">Reply</a>
+                                                        @endif
+                                                    </div>
+                                                    <div class="c-user">
+                                                        <img src="{{ $forumThirdReplyAuthor ? $forumThirdReplyAuthor->avatar : 'Author not found' }}"
+                                                            alt="" class="usr-img">
+                                                        <p class="usr-name">
+                                                            {{ $forumThirdReplyAuthor ? ($forumThirdReplyAuthor->first_name !== $forumThirdReplyAuthor->last_name ? ' ' . $forumThirdReplyAuthor->first_name . ' ' . $forumThirdReplyAuthor->last_name : ' ' . $forumThirdReplyAuthor->first_name) : 'Author not found' }}
+                                                            @if ($isThirdReplyUser)
+                                                                (You)
+                                                            @endif
+                                                            @if ($isThirdReplyOp)
+                                                                [OP]
+                                                            @endif
+                                                        </p>
+                                                        <p class="cmnt-at">
+                                                            {{ $forumThirdReply['created_at']->diffForHumans() }}
+                                                        </p>
+                                                    </div>
+                                                    <p class="c-text">
+                                                        <span
+                                                            class="reply-to">{{ $forumSecondReply['replyBody'] }}</span>
+                                                        <span
+                                                            class="c-body">{{ $forumThirdReply['replyBody'] }}</span>
+                                                    </p>
+                                                </div><!--comment-->
+                                                <div class="replies comments-wrp">
+                                                    @foreach ($forumReplies as $forumFourthReply)
+                                                    @if ($forumFourthReply['replyingTo'] == $forumThirdReply->id)
+                                                        @php
+                                                            $forumFourthReplyAuthor = $authors->firstWhere('id', $forumFourthReply->replyAuthor);
+                                                            $isFourthReplyOp = $forumFourthReplyAuthor && $forumFourthReplyAuthor->id === $forum_selected->forumAuthor;
+                                                            $isFourthReplyUser = $forumFourthReplyAuthor && $forumFourthReplyAuthor->id === auth()->user()->id;
+                                                        @endphp
+                                                        <div class="comment container3">
+                                                            <div class="c-score">
+                                                                @if (auth()->user()->user_type != 'alumni')
+                                                                    <form action="/admin/add-forum-vote" method="post">
+                                                                    @elseif (auth()->user()->user_type == 'alumni')
+                                                                        <form action="/auth/add-forum-vote" method="post">
+                                                                @endif
+                                                                @csrf
+                                                                <input type = "hidden" name = "voteType" value = "upvote">
+                                                                <input type = "hidden" name = "parentForum"
+                                                                    value = "{{ $forum_selected->id }}">
+                                                                <input type = "hidden" name = "parentReply"
+                                                                    value = "{{ $forumFourthReply->id }}">
+                                                                <button type="submit">
+                                                                    <img src="{{ asset('images/icon-plus.svg') }}"
+                                                                        alt="plus"
+                                                                        class="score-control score-plus"></button>
+                                                                </form>
+                                                                <p class="score-number">
+                                                                    {{ $forumFourthReply->upvoteCount - $forumFourthReply->downvoteCount }}
+                                                                </p>
+                                                                @if (auth()->user()->user_type != 'alumni')
+                                                                    <form action="/admin/add-forum-vote" method="post">
+                                                                    @elseif (auth()->user()->user_type == 'alumni')
+                                                                        <form action="/auth/add-forum-vote" method="post">
+                                                                @endif
+                                                                @csrf
+                                                                <input type = "hidden" name = "voteType" value = "downvote">
+                                                                <input type = "hidden" name = "parentForum"
+                                                                    value = "{{ $forum_selected->id }}">
+                                                                <input type = "hidden" name = "parentReply"
+                                                                    value = "{{ $forumFourthReply->id }}">
+                                                                <button type="submit">
+                                                                    <img src="{{ asset('images/icon-minus.svg') }}"
+                                                                        alt="minus" class="score-control score-minus">
+                                                                </button>
+                                                                </form>
+                                                            </div>
+                                                            <div class="c-controls">
+                                                                @if ($forumFourthReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                                    <button class="delete"
+                                                                        onclick="confirmDeleteComment({{ json_encode($forumFourthReply) }})">
+                                                                        <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                            alt=""
+                                                                            class="control-icon">Delete</button>
+                                                                    <button class="edit"><img
+                                                                            src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                            alt="" class="control-icon">Edit</button>
+                                                                @endif
+                                                            </div>
+                                                            <div class="c-user">
+                                                                <img src="{{ $forumFourthReplyAuthor ? $forumFourthReplyAuthor->avatar : 'Author not found' }}"
+                                                                    alt="" class="usr-img">
+                                                                <p class="usr-name">
+                                                                    {{ $forumFourthReplyAuthor ? ($forumFourthReplyAuthor->first_name !== $forumFourthReplyAuthor->last_name ? ' ' . $forumFourthReplyAuthor->first_name . ' ' . $forumFourthReplyAuthor->last_name : ' ' . $forumFourthReplyAuthor->first_name) : 'Author not found' }}
+                                                                    @if ($isFourthReplyUser)
+                                                                        (You)
+                                                                    @endif
+                                                                    @if ($isFourthReplyOp)
+                                                                        [OP]
+                                                                    @endif
+                                                                </p>
+                                                                <p class="cmnt-at">
+                                                                    {{ $forumFourthReply['created_at']->diffForHumans() }}
+                                                                </p>
+                                                            </div>
+                                                            <p class="c-text">
+                                                                <span
+                                                                    class="reply-to">{{ $forumThirdReply['replyBody'] }}</span>
+                                                                <span
+                                                                    class="c-body">{{ $forumFourthReply['replyBody'] }}</span>
+                                                            </p>
+                                                        </div><!--comment-->
+                                                    @endif
+                                                @endforeach
+                                                </div><!--replies-->
+                                            @endif
+                                        @endforeach
+                                    </div><!--replies-->
+                                @endif
+                            @endforeach
+                        </div><!--replies-->
+                    </div> <!--commentS wrapper-->
+                @endif
+            @endforeach
 
             <div class="comments-wrp">
                 <div class="comment container3">
