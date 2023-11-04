@@ -132,7 +132,7 @@ body{
     left: 20px;
     flex-shrink: 0;
   }
-  
+
     .card_0 .description-container {
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -140,6 +140,7 @@ body{
       overflow: hidden;
       margin: 5px 0 10px;
       color: #012628 !important;
+      padding-left: 50px;
   }
   
 
@@ -466,7 +467,7 @@ body{
       padding-left: 10px;
     }
 
-    .card_0 p{
+    .card_0 .description-container{
       padding-left: 10px;
     }
 
