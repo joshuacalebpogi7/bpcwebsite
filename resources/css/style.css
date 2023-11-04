@@ -132,17 +132,7 @@ body{
     left: 20px;
     flex-shrink: 0;
   }
-
-  .card_0 p {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #666;
-    display: flex;
-    justify-content: flex-start;
-    padding-left: 50px;
-    white-space: nowrap; /* Prevent text from wrapping */
-
+  
     .card_0 .description-container {
       display: -webkit-box;
       -webkit-line-clamp: 3;
