@@ -110,6 +110,7 @@ body{
     border: none;
     background-color:#fdd231;
     cursor: pointer;
+    color: #1e1e1e;
 }
 
 .btn-filter:hover{

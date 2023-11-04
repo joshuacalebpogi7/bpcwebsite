@@ -135,10 +135,9 @@
                             <div class="forum-item">
                                 <div style = "text-align: right;">
                                     @if ($forum_posted->forumAuthor == auth()->user()->id)
-                                        <button type="button" class="btn btn-danger btn-icon-text"
-                                            style="width: 150px; height: 50px; margin: 5px;"
+                                        <button type="button" class="button"
                                             onclick="confirmDeleteForum({{ json_encode($forum_posted) }})">
-                                            <i class="ti-trash btn-icon-prepend"></i>
+                                            <i class="ri-delete-bin-line"></i>
                                             Delete
                                         </button>
                                     @endif

@@ -986,11 +986,17 @@ padding: 10px 15px;
 button{
   padding: 10px 20px;
   font-size: 18px;
-  background: #FFFFFF;
+  background: #e22438;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  color: #fafafa;
+}
+
+button:hover{
+  background: #BC3A41;
+  color: #Fafafa;
 }
 
 button.active{

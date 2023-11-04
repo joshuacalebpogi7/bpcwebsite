@@ -65,13 +65,4 @@
                 </form>
             </div>
     </section>
-
-    {{-- <select name="category" class="box" name="question_type"
-                            id="choiceType_for_question_{{ $questionIndex }}"
-                            wire:model="questions.{{ $questionIndex }}.questionType">
-                            <option value="text">&#128292; Textbox</option>
-                            <option value="radio">&#128280; Multiple Choice</option>
-                            <option value="checkbox">[&#10003;] Checkbox</option>
-                            <option value="dropdown">[&#9660;] Dropdown</option>
-                        </select> --}}
 @endif

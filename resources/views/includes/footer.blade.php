@@ -17,7 +17,7 @@
         <div class="sec quicklinks">
             <h2>Quick Links</h2>
             <ul>
-                <li><a href="https://bpc.edu.ph/about-us/college-profile" target="blank">About</a></li>
+                <li><a href="https://bpc.edu.ph/about-us/history.php" target="blank">About</a></li>
                 <li><a href="https://bpc.edu.ph/" target="blank">FAQ</a></li>
                 <li><a href="https://bpc.edu.ph/" target="blank">Privacy Policy</a></li>
                 <li><a href="https://bpc.edu.ph/" target="blank">Help</a></li>

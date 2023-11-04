@@ -178,12 +178,11 @@
                         <div class="collapse" id="ui-contents">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/events') || Request::is('admin/add-events') || Request::is('admin/edit-events*')) text-warning @endif"
-                                        href="/admin/events">Events</a>
-                                </li>
+                                    class="nav-link @if (Request::is('admin/news') || Request::is('admin/add-news') || Request::is('admin/edit-news*')) text-warning @endif"
+                                    href="/admin/news">News</a></li>
                                 <li class="nav-item"> <a
-                                        class="nav-link @if (Request::is('admin/news') || Request::is('admin/add-news') || Request::is('admin/edit-news*')) text-warning @endif"
-                                        href="/admin/news">News</a></li>
+                                        class="nav-link @if (Request::is('admin/events') || Request::is('admin/add-events') || Request::is('admin/edit-events*')) text-warning @endif"
+                                        href="/admin/events">Events</a></li>
                                 <li class="nav-item"> <a
                                         class="nav-link @if (Request::is('admin/jobs') || Request::is('admin/add-jobs') || Request::is('admin/edit-jobs*')) text-warning @endif"
                                         href="/admin/jobs">Jobs</a></li>
