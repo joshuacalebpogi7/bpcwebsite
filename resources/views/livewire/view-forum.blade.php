@@ -148,7 +148,7 @@
                                     (You)
                                 @endif
                             </p>
-                            <p class="cmnt-at">{{ $forum_selected['created_at']->format('l, F j, Y g:i A') }}</p>
+                            <p class="cmnt-at">{{ $forum_selected['created_at']->diffForHumans() }}</p>
                         @endif
                     </div>
                     <div class = "c-text">
