@@ -245,37 +245,61 @@ class PageController extends Controller
         $jobRelatedLabels = [];
         $jobRelatedCounts = [];
         $jobUnrelatedCounts = [];
+        $jobRelatedAlumni = [];
+        $jobUnrelatedAlumni = [];
+        $allAlumniWithJobs = [];
         
         foreach ($courses as $course) {
-            $jobRelatedCount = 0;
-            $jobUnrelatedCount = 0;
-        
             $courseName = $course->course;
-        
+            
             if (array_key_exists($courseName, $courseToJobCategoryMapping)) {
                 $relatedJobCategory = $courseToJobCategoryMapping[$courseName];
-
+        
                 // Find users with the current course
                 $usersWithCourse = $users->where('course', $courseName);
         
                 if ($usersWithCourse->count() > 0) {
                     // Check if the user's job category matches the related category
-                    $jobRelatedCount = $usersWithCourse->whereIn('category', [$relatedJobCategory])
+                    $jobRelatedUsers = $usersWithCourse->whereIn('category', [$relatedJobCategory])
                         ->whereIn('employment_status', ['employed', 'self-employed'])
                         ->whereNotNull('email_verified_at')
-                        ->count();
-                        
+                        ->get();
+        
                     // Count users with unrelated job categories
-                    $jobUnrelatedCount = User::where('course', $course->course)->whereIn('employment_status', ['employed', 'self-employed'])
-                    ->whereNotNull('email_verified_at')->where('category', '!=', $relatedJobCategory)->count();
-                        // dd($jobUnrelatedCount);
+                    $jobUnrelatedUsers = User::where('course', $courseName)
+                        ->whereIn('employment_status', ['employed', 'self-employed'])
+                        ->whereNotNull('email_verified_at')
+                        ->where('category', '!=', $relatedJobCategory)
+                        ->get();
+        
+                    $jobRelatedCount = $jobRelatedUsers->count();
+                    $jobUnrelatedCount = $jobUnrelatedUsers->count();
+        
+                    // Store the users in the arrays
+                    array_push($jobRelatedAlumni, $jobRelatedUsers);
+                    array_push($jobUnrelatedAlumni, $jobUnrelatedUsers);
+                    // If you want to include all alumni with jobs, you can do it like this
+                    array_push($allAlumniWithJobs, $jobRelatedUsers->merge($jobUnrelatedUsers));
+                } else {
+                    $jobRelatedCount = 0;
+                    $jobUnrelatedCount = 0;
                 }
+            } else {
+                $jobRelatedCount = 0;
+                $jobUnrelatedCount = 0;
             }
         
             array_push($jobRelatedLabels, $courseName);
             array_push($jobRelatedCounts, $jobRelatedCount);
             array_push($jobUnrelatedCounts, $jobUnrelatedCount);
+            
+
+            
         }
+        
+        // Now, you can use $jobRelatedAlumni and $jobUnrelatedAlumni to access the user data for related and unrelated job categories.
+        // dd($allAlumniWithJobs);
+        
         
 
         //pie emp status
@@ -348,6 +372,9 @@ class PageController extends Controller
             'jobRelatedLabels' => $jobRelatedLabels,
             'jobRelatedCounts' => $jobRelatedCounts,
             'jobUnrelatedCounts' => $jobUnrelatedCounts,
+            'jobRelatedAlumni' => $jobRelatedAlumni,
+            'jobUnrelatedAlumni' => $jobUnrelatedAlumni,
+            'allAlumniWithJobs' => $allAlumniWithJobs,
 
             //alumni by emp status gender
             'maleEmployedCount' => $maleEmployed,

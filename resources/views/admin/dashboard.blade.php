@@ -1,5 +1,4 @@
 <x-admin-layout>
-
     <div class="row">
         <div class="col-md-12 grid-margin">
             <div class="row">
@@ -346,10 +345,10 @@
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div class="d-flex justify-content-between">
+                {{-- <div class="d-flex justify-content-between">
                     <p class="card-title mb-0">Alumni Jobs Relation to Course</p>
                     <a href="/admin/users" class="text-info">View all</a>
-                </div>
+                </div> --}}
                 <div class="table-responsive">
                     <table class="table table-striped table-borderless">
                         <thead>
@@ -361,25 +360,43 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data['verifiedAlumni'] as $key => $alumni)
+                            @foreach ($data['allAlumniWithJobs'] as $key => $alumniCollection)
                                 @if ($key < 5)
-                                    <tr>
-                                        <td>Joshua Caleb</td>
-                                        <td class="font-weight-bold">BSIT</td>
-                                        <td>Software Engineer</td>
-                                        <td class="font-weight-medium">
-                                            <div
-                                                class="badge 
-                                    @if ($alumni->employment_status == 'employed') badge-success 
-                                    @elseif ($alumni->employment_status == 'self-employed')
-                                    badge-info
-                                    @else
-                                    badge-danger @endif">
-                                                Related</div>
-                                        </td>
-                                    </tr>
-                                @else
-                                @break
+                                    @foreach ($alumniCollection as $key => $alumni)
+                                        @if ($key < 5)
+                                            <tr>
+                                                <td>{{ $alumni->first_name . ' ' . $alumni->last_name }}
+                                                </td>
+                                                <td class="font-weight-bold">{{ $alumni->course }}</td>
+                                                <td>{{ $alumni->job_title }}</td>
+                                                <td class="font-weight-medium">
+                                                    <div
+                                                        class="badge @if ($alumni->employment_status == 'employed') badge-success @elseif ($alumni->employment_status == 'self-employed') badge-info @else badge-danger @endif">
+
+                                                        @if ($alumni->employment_status == 'unemployed')
+                                                            unemployed
+                                                        @endif
+                                                        @foreach ($data['jobUnrelatedAlumni'] as $collection)
+                                                            @foreach ($collection as $jobUnrelatedAlumnus)
+                                                                @if ($alumni->id == $jobUnrelatedAlumnus->id)
+                                                                    unrelated
+                                                                @endif
+                                                            @endforeach
+                                                        @endforeach
+                                                        @foreach ($data['jobRelatedAlumni'] as $collection)
+                                                            @foreach ($collection as $jobRelatedAlumnus)
+                                                                @if ($alumni->id == $jobRelatedAlumnus->id)
+                                                                    related
+                                                                @endif
+                                                            @endforeach
+                                                        @endforeach
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @else
+                                        @break
+                                    @endif
+                                @endforeach
                             @endif
                         @endforeach
                     </tbody>
@@ -431,7 +448,7 @@
                                             @if ($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() <= 0)
                                                 0%
                                             @else
-                                                ({{ number_format(($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%)
+                                                {{ number_format(($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%
                                             @endif
                                             )
                                         </p>
