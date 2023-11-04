@@ -184,7 +184,7 @@ class PageController extends Controller
 
             if ($users->where('course', $course->course)->count() > 0) {
                 $allAlumniCountByCourse = $users->where('course', $course->course)->count();
-                $verifiedAlumniCountByCourse = $users->where('course', $course->course)->where('user_type', 'alumni')->where('survey_completed', true)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count();
+                $verifiedAlumniCountByCourse = $users->where('course', $course->course)->where('user_type', 'alumni')->whereNotNull('email_verified_at')->count();
             }
             array_push($labels, $course->course);
             array_push($dataAll, $allAlumniCountByCourse);
@@ -206,8 +206,8 @@ class PageController extends Controller
             $unemployedCount = 0;
 
             if ($users->where('year_graduated', $batch)->count() > 0) {
-                $employedCount = $users->whereIn('employment_status', ['employed', 'self-employed'])->whereNotNull('email_verified_at')->count();
-                $unemployedCount = $users->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
+                $employedCount = $users->where('year_graduated', $batch)->whereIn('employment_status', ['employed', 'self-employed'])->whereNotNull('email_verified_at')->count();
+                $unemployedCount = $users->where('year_graduated', $batch)->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
             }
             array_push($alumniByBatchLabels, $batch);
             array_push($employed, $employedCount);
@@ -224,8 +224,8 @@ class PageController extends Controller
             $alumniFemaleCount = 0;
 
             if ($users->where('course', $course->course)->count() > 0) {
-                $alumniMaleCount = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-                $alumniFemaleCount = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+                $alumniMaleCount = $users->where('course', $course->course)->where('gender', 'male')->whereNotNull('email_verified_at')->count();
+                $alumniFemaleCount = $users->where('course', $course->course)->where('gender', 'female')->whereNotNull('email_verified_at')->count();
             }
             array_push($alumniByGenderLabels, $course->course);
             array_push($alumniMale, $alumniMaleCount);
@@ -245,37 +245,61 @@ class PageController extends Controller
         $jobRelatedLabels = [];
         $jobRelatedCounts = [];
         $jobUnrelatedCounts = [];
+        $jobRelatedAlumni = [];
+        $jobUnrelatedAlumni = [];
+        $allAlumniWithJobs = [];
         
         foreach ($courses as $course) {
-            $jobRelatedCount = 0;
-            $jobUnrelatedCount = 0;
-        
             $courseName = $course->course;
-        
+            
             if (array_key_exists($courseName, $courseToJobCategoryMapping)) {
                 $relatedJobCategory = $courseToJobCategoryMapping[$courseName];
-
+        
                 // Find users with the current course
                 $usersWithCourse = $users->where('course', $courseName);
         
                 if ($usersWithCourse->count() > 0) {
                     // Check if the user's job category matches the related category
-                    $jobRelatedCount = $usersWithCourse->whereIn('category', [$relatedJobCategory])
+                    $jobRelatedUsers = $usersWithCourse->whereIn('category', [$relatedJobCategory])
                         ->whereIn('employment_status', ['employed', 'self-employed'])
                         ->whereNotNull('email_verified_at')
-                        ->count();
-                        
+                        ->get();
+        
                     // Count users with unrelated job categories
-                    $jobUnrelatedCount = User::where('course', $course->course)->whereIn('employment_status', ['employed', 'self-employed'])
-                    ->whereNotNull('email_verified_at')->where('category', '!=', $relatedJobCategory)->count();
-                        // dd($jobUnrelatedCount);
+                    $jobUnrelatedUsers = User::where('course', $courseName)
+                        ->whereIn('employment_status', ['employed', 'self-employed'])
+                        ->whereNotNull('email_verified_at')
+                        ->where('category', '!=', $relatedJobCategory)
+                        ->get();
+        
+                    $jobRelatedCount = $jobRelatedUsers->count();
+                    $jobUnrelatedCount = $jobUnrelatedUsers->count();
+        
+                    // Store the users in the arrays
+                    array_push($jobRelatedAlumni, $jobRelatedUsers);
+                    array_push($jobUnrelatedAlumni, $jobUnrelatedUsers);
+                    // If you want to include all alumni with jobs, you can do it like this
+                    array_push($allAlumniWithJobs, $jobRelatedUsers->merge($jobUnrelatedUsers));
+                } else {
+                    $jobRelatedCount = 0;
+                    $jobUnrelatedCount = 0;
                 }
+            } else {
+                $jobRelatedCount = 0;
+                $jobUnrelatedCount = 0;
             }
         
             array_push($jobRelatedLabels, $courseName);
             array_push($jobRelatedCounts, $jobRelatedCount);
             array_push($jobUnrelatedCounts, $jobUnrelatedCount);
+            
+
+            
         }
+        
+        // Now, you can use $jobRelatedAlumni and $jobUnrelatedAlumni to access the user data for related and unrelated job categories.
+        // dd($allAlumniWithJobs);
+        
         
 
         //pie emp status
@@ -296,16 +320,16 @@ class PageController extends Controller
 
 
             if ($alumni->where('employment_status', 'employed')->count() > 0) {
-                $maleEmployed = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-                $femaleEmployed = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+                $maleEmployed = $users->where('gender', 'male')->where('employment_status', 'employed')->whereNotNull('email_verified_at')->count();
+                $femaleEmployed = $users->where('gender', 'female')->where('employment_status', 'employed')->whereNotNull('email_verified_at')->count();
             }
             if ($alumni->where('employment_status', 'unemployed')->count() > 0) {
                 $maleUnemployed = $users->where('gender', 'male')->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
                 $femaleUnemployed = $users->where('gender', 'female')->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
             }
             if ($alumni->where('employment_status', 'self-employed')->count() > 0) {
-                $maleSelfEmployed = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-                $femaleSelfEmployed = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+                $maleSelfEmployed = $users->where('gender', 'male')->where('employment_status', 'self-employed')->whereNotNull('email_verified_at')->count();
+                $femaleSelfEmployed = $users->where('gender', 'female')->where('employment_status', 'self-employed')->whereNotNull('email_verified_at')->count();
             }
             array_push($maleEmployedData, $maleEmployed);
             array_push($femaleEmployedData, $femaleEmployed);
@@ -314,6 +338,7 @@ class PageController extends Controller
             array_push($maleSelfEmployedData, $maleSelfEmployed);
             array_push($femaleSelfEmployedData, $femaleSelfEmployed);
         }
+        // dd($maleSelfEmployed);
 
         $data = [
             //users
@@ -348,6 +373,9 @@ class PageController extends Controller
             'jobRelatedLabels' => $jobRelatedLabels,
             'jobRelatedCounts' => $jobRelatedCounts,
             'jobUnrelatedCounts' => $jobUnrelatedCounts,
+            'jobRelatedAlumni' => $jobRelatedAlumni,
+            'jobUnrelatedAlumni' => $jobUnrelatedAlumni,
+            'allAlumniWithJobs' => $allAlumniWithJobs,
 
             //alumni by emp status gender
             'maleEmployedCount' => $maleEmployed,

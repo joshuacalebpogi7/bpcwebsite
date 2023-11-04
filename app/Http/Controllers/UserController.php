@@ -127,7 +127,7 @@ public function resetPassword(Request $request){
 
                     if ($user->add_info_completed == true) {
                         if ($user->survey_completed == true) {
-                            return redirect('/')->with('success', 'Welcome back' . auth()->user()->first_name . '!');
+                            return redirect('/')->with('success', 'Welcome back ' . auth()->user()->first_name . '!');
                         } else {
                             return redirect('/survey')->with('info', 'Please complete this survey.');
                         }

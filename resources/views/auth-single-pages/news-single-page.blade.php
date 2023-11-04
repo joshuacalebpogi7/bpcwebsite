@@ -143,7 +143,7 @@
             <a href="{{ URL::previous() }}" class="back-home">Back</a>
             <h1 class="header-title">{{ $news->title }}</h1>
             <img src="{{ $news->thumbnail }}" alt="" class="header-img"
-                style="width: 100%; height: 25rem; object-fit: cover;">
+                style="width: 100%; height: 25rem; object-fit: contain;">
         </div>
     </section>
     <section class="post-content post-container">
