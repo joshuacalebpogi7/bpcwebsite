@@ -12,7 +12,7 @@ class AddForum extends Component
     public $user;
     public $forumTitle;
     public $forumBody;
-    public $forumCategory;
+    public $forumCategory = "general";
     public $active = false;
 
     public function __construct()
