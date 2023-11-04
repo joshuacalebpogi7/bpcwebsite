@@ -85,7 +85,7 @@
 
     <template class="reply-input-template">
         <div class="reply-input container">
-            <img src="images/avatars/image-juliusomo.webp" alt="" class="usr-img">
+            <img src="{{ auth()->user()->avatar }}" alt="" class="usr-img">
             <textarea class="cmnt-input" placeholder="Add a comment..."></textarea>
             <button class="bu-primary">SEND</button>
         </div>
@@ -119,16 +119,89 @@
         </div>
     </template>
 
+
+
     <main>
         <div class="comment-section">
+            <div class="comments-wrp">
+                <div class="comment container3">
+                    @if ($forum_selected->forumAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                        <div style = "text-align: right; border: 0px;">
+                            {{--             <button onclick="" class="submit-button delete-choice"><img
+                            src="{{ URL::asset('/images/icon-delete.svg') }}">
+                    </button> --}}
+                            <button type="button" class="btn btn-danger btn-icon-text"
+                                style="width: 65px; height: 50px; margin: 5px;"
+                                onclick="confirmDeleteForum({{ json_encode($forum_selected) }})">
+                                <i class="ti-trash btn-icon-prepend"></i>
+                            </button>
+                        </div>
+                    @endif
+                    <div class="c-user">
+                        @if (isset($forumAuthor))
+                            <img height="30" width="30" class="usr-img"
+                                src="{{ $forumAuthor ? $forumAuthor->avatar : 'Author not found' }}">
+                            <p class="usr-name"> {{ $forumAuthor['first_name'] }} @if ($forumAuthor['first_name'] != $forumAuthor['last_name'])
+                                    {{ $forumAuthor['last_name'] }}
+                                @endif
+                                @if (auth()->user()->id === $forumAuthor->id)
+                                    (You)
+                                @endif
+                            </p>
+                            <p class="cmnt-at">{{ $forum_selected['created_at']->format('l, F j, Y g:i A') }}</p>
+                        @endif
+                    </div>
+                    <div class = "c-text">
+                        <h2>{{ $forum_selected->forumTitle }}</h2>
+                        <p>{{ $forum_selected->forumBody }}</p>
+                    </div>
+                </div>
+            </div>
 
             <div class="comments-wrp">
-
+                <div class="comment container3">
+                    <div class="c-score">
+                        <img src="images/icon-plus.svg" alt="plus" class="score-control score-plus">
+                        <p class="score-number">5</p>
+                        <img src="images/icon-minus.svg" alt="minus" class="score-control score-minus">
+                    </div>
+                    <div class="c-controls">
+                        <a class="delete"><img src="images/icon-delete.svg" alt=""
+                                class="control-icon">Delete</a>
+                        <a class="edit"><img src="images/icon-edit.svg" alt=""
+                                class="control-icon">Edit</a>
+                        <a class="reply"><img src="images/icon-reply.svg" alt=""
+                                class="control-icon">Reply</a>
+                    </div>
+                    <div class="c-user">
+                        <img src="images/avatars/image-maxblagun.webp" alt="" class="usr-img">
+                        <p class="usr-name">maxblagun</p>
+                        <p class="cmnt-at">2 weeks ago</p>
+                    </div>
+                    <p class="c-text">
+                        <span class="reply-to"></span>
+                        <span class="c-body"></span>
+                    </p>
+                </div><!--comment-->
+                <div class="replies comments-wrp">
+                </div><!--replies-->
             </div> <!--commentS wrapper-->
             <div class="reply-input container3">
-                <img src="images/avatars/image-juliusomo.webp" alt="" class="usr-img">
-                <textarea class="cmnt-input" placeholder="Add a comment..."></textarea>
-                <button class="bu-primary">SEND</button>
+                <img src="{{ auth()->user()->avatar }}" alt="" class="usr-img">
+                @if (auth()->user()->user_type != 'alumni')
+                    <form action="/admin/add-forum-comment" method="post">
+                    @elseif (auth()->user()->user_type == 'alumni')
+                        <form action="/auth/add-forum-comment" method="post">
+                @endif
+                @csrf
+                @method('POST')
+                <textarea class="cmnt-input" name="commentBody" placeholder="Replying to post: {{ $forumTitle }}" required
+                    onkeydown="return event.key != 'Enter';"></textarea>
+                <input type = "hidden" name = "parentForum" value = "{{ $forum_selected->id }}">
+
+                <button type="submit" class="bu-primary">Post Comment</button>
+                </form>
+
             </div> <!--reply input-->
         </div> <!--comment sectio-->
 
@@ -141,3 +214,4 @@
             </div>
         </div>
     </main>
+</div>

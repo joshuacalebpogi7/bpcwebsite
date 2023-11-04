@@ -53,6 +53,7 @@ button:hover{
     padding: 1.5rem;
     background-color: var(--White);
 }
+
 .comments-wrp {
     display: flex;
     flex-direction: column;
@@ -73,6 +74,12 @@ button:hover{
     grid-template-columns: auto 1fr auto;
     gap: 1.5rem;
     row-gap: 1rem;
+    color: var(--Grayish-Blue);
+}
+
+.forum_title{
+    margin-bottom: 1rem;
+    display: block;
     color: var(--Grayish-Blue);
 }
 
