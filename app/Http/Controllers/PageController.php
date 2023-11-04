@@ -206,8 +206,8 @@ class PageController extends Controller
             $unemployedCount = 0;
 
             if ($users->where('year_graduated', $batch)->count() > 0) {
-                $employedCount = $users->whereIn('employment_status', ['employed', 'self-employed'])->whereNotNull('email_verified_at')->count();
-                $unemployedCount = $users->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
+                $employedCount = $users->where('year_graduated', $batch)->whereIn('employment_status', ['employed', 'self-employed'])->whereNotNull('email_verified_at')->count();
+                $unemployedCount = $users->where('year_graduated', $batch)->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
             }
             array_push($alumniByBatchLabels, $batch);
             array_push($employed, $employedCount);
@@ -224,8 +224,8 @@ class PageController extends Controller
             $alumniFemaleCount = 0;
 
             if ($users->where('course', $course->course)->count() > 0) {
-                $alumniMaleCount = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-                $alumniFemaleCount = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+                $alumniMaleCount = $users->where('course', $course->course)->where('gender', 'male')->whereNotNull('email_verified_at')->count();
+                $alumniFemaleCount = $users->where('course', $course->course)->where('gender', 'female')->whereNotNull('email_verified_at')->count();
             }
             array_push($alumniByGenderLabels, $course->course);
             array_push($alumniMale, $alumniMaleCount);
@@ -320,16 +320,16 @@ class PageController extends Controller
 
 
             if ($alumni->where('employment_status', 'employed')->count() > 0) {
-                $maleEmployed = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-                $femaleEmployed = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+                $maleEmployed = $users->where('gender', 'male')->where('employment_status', 'employed')->whereNotNull('email_verified_at')->count();
+                $femaleEmployed = $users->where('gender', 'female')->where('employment_status', 'employed')->whereNotNull('email_verified_at')->count();
             }
             if ($alumni->where('employment_status', 'unemployed')->count() > 0) {
                 $maleUnemployed = $users->where('gender', 'male')->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
                 $femaleUnemployed = $users->where('gender', 'female')->where('employment_status', 'unemployed')->whereNotNull('email_verified_at')->count();
             }
             if ($alumni->where('employment_status', 'self-employed')->count() > 0) {
-                $maleSelfEmployed = $users->where('gender', 'male')->whereNotNull('email_verified_at')->count();
-                $femaleSelfEmployed = $users->where('gender', 'female')->whereNotNull('email_verified_at')->count();
+                $maleSelfEmployed = $users->where('gender', 'male')->where('employment_status', 'self-employed')->whereNotNull('email_verified_at')->count();
+                $femaleSelfEmployed = $users->where('gender', 'female')->where('employment_status', 'self-employed')->whereNotNull('email_verified_at')->count();
             }
             array_push($maleEmployedData, $maleEmployed);
             array_push($femaleEmployedData, $femaleEmployed);
@@ -338,6 +338,7 @@ class PageController extends Controller
             array_push($maleSelfEmployedData, $maleSelfEmployed);
             array_push($femaleSelfEmployedData, $femaleSelfEmployed);
         }
+        // dd($maleSelfEmployed);
 
         $data = [
             //users

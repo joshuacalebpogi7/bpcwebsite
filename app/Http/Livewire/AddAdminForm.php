@@ -115,7 +115,7 @@ class AddAdminForm extends Component
             'last_name' => ['required'],
             'birthday' => ['required', 'date_format:Y-m-d'],
             'gender' => ['required', Rule::in(['male', 'female'])],
-            'contact_no' => ['required'],
+            'contact_no' => ['required', 'regex:/^[\+?\d\s]+$/'],
         ]);
         if ($validate) {
             $this->dispatchBrowserEvent('show-add-admin-confirmation');
@@ -136,7 +136,7 @@ class AddAdminForm extends Component
             'last_name' => ['required'],
             'birthday' => ['required', 'date_format:Y-m-d'],
             'gender' => ['required', Rule::in(['male', 'female'])],
-            'contact_no' => ['required'],
+            'contact_no' => ['required', 'regex:/^[\+?\d\s]+$/'],
         ]);
 
         if ($this->birthday) {

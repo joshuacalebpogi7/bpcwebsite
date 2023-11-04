@@ -46,7 +46,8 @@
                         <div class="card-body">
                             <p class="mb-4">Courses</p>
                             <p class="fs-30 mb-2">{{ $data['courses']->count() }}</p>
-                            <p>{{ $data['courses']->count() }} (Total Number of Courses)</p>
+                            <p>{{ number_format($data['verifiedAlumni']->whereNotNull('course')->count() / $data['courses']->count(), 2) }}
+                                (Average alumni in each course)</p>
                         </div>
                     </div>
                 </div>
@@ -81,9 +82,12 @@
                         <p class="card-title">Alumni by Gender</p>
                         {{-- <a href="#" class="text-info">View all</a> --}}
                     </div>
-                    <p class="font-weight-500">The total number of sessions within the date range. It
-                        is the period time a user is actively engaged with your website, page or app,
-                        etc</p>
+                    <p class="font-weight-500">This chart provides a visual breakdown of
+                        the
+                        gender distribution of
+                        alumni in various courses. Only alumni with
+                        confirmed email
+                        addresses (verified) are included in the data for this chart.</span>
                     <div id="alumnigender-legend" class="chartjs-legend mt-4 mb-2"></div>
                     <canvas id="alumnigender-chart"></canvas>
                 </div>
@@ -96,9 +100,10 @@
                         <p class="card-title">Alumni by Course</p>
                         {{-- <a href="#" class="text-info">View all</a> --}}
                     </div>
-                    <p class="font-weight-500">The total number of sessions within the date range. It
-                        is the period time a user is actively engaged with your website, page or app,
-                        etc</p>
+                    <p class="font-weight-500">This chart displays the overall number of
+                        alumni and how many are purely
+                        verified alumni in each course. All alumni, verified or not verified are included in the data
+                        for this chart.</p>
                     <div id="alumni-legend" class="chartjs-legend mt-4 mb-2"></div>
                     <canvas id="alumni-chart"></canvas>
                 </div>
@@ -121,9 +126,22 @@
                                                 {{ $data['verifiedAlumni']->where('employment_status', 'employed')->count() }}
                                             </h1>
                                             <h3 class="font-weight-500 mb-xl-4 text-primary">Employed Alumni</h3>
-                                            <p class="mb-2 mb-xl-0">The total number of sessions within
-                                                the date range. It is the period time a user is actively
-                                                engaged with your website, page or app, etc</p>
+                                            <p class="mb-2 mb-xl-0">This chart provides two visual graphs: <span
+                                                    class="text-info">The graph
+                                                    where it shows the different courses</span>
+                                                illustrates the total number of <em>employed</em>
+                                                alumni on each
+                                                course. (The <span class="text-info">blue progress bar</span> shows the
+                                                percentage of what course has
+                                                the most and least <em>employed</em> alumni) The <span
+                                                    class="text-info">pie chart</span> shows
+                                                the gender
+                                                distribution for
+                                                <em>employed</em> alumni. Only alumni
+                                                with confirmed email addresses (verified) are included in the data
+                                                for
+                                                this chart.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-xl-9">
@@ -139,9 +157,7 @@
                                                                         <div class="progress-bar bg-info"
                                                                             role="progressbar"
                                                                             style="width: 
-                        @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'employed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'employed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }}% @else
-                            0% @endif 
-                    "
+                        @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'employed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'employed')->count() /$data['verifiedAlumni']->where('employment_status', 'employed')->count()) *100 }}% @else 0% @endif "
                                                                             aria-valuenow="70" aria-valuemin="0"
                                                                             aria-valuemax="100">
                                                                         </div>
@@ -174,9 +190,23 @@
                                                 {{ $data['verifiedAlumni']->where('employment_status', 'unemployed')->count() }}
                                             </h1>
                                             <h3 class="font-weight-500 mb-xl-4 text-primary">Unemployed Alumni</h3>
-                                            <p class="mb-2 mb-xl-0">The total number of sessions within
-                                                the date range. It is the period time a user is actively
-                                                engaged with your website, page or app, etc</p>
+                                            <p class="mb-2 mb-xl-0">This chart provides two visual graphs: <span
+                                                    class="text-info">The graph
+                                                    where it shows the different courses</span>
+                                                illustrates the total number of <em>unemployed</em>
+                                                alumni on each
+                                                course. (The <span class="text-info">blue progress bar</span> shows
+                                                the
+                                                percentage of what course has
+                                                the most and least <em>unemployed</em> alumni) The <span
+                                                    class="text-info">pie chart</span> shows
+                                                the gender
+                                                distribution for
+                                                <em>unemployed</em> alumni. Only alumni
+                                                with confirmed email addresses (verified) are included in the data
+                                                for
+                                                this chart.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-xl-9">
@@ -191,7 +221,7 @@
                                                                     <div class="progress progress-md mx-4 mb-1">
                                                                         <div class="progress-bar bg-info"
                                                                             role="progressbar"
-                                                                            style="width: @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'unemployed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'unemployed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }}%  @else 0% @endif"
+                                                                            style="width: @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'unemployed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'unemployed')->count() /$data['verifiedAlumni']->where('employment_status', 'unemployed')->count()) *100 }}%  @else 0% @endif"
                                                                             aria-valuenow="70" aria-valuemin="0"
                                                                             aria-valuemax="100"></div>
                                                                     </div>
@@ -224,9 +254,23 @@
                                                 {{ $data['verifiedAlumni']->where('employment_status', 'self-employed')->count() }}
                                             </h1>
                                             <h3 class="font-weight-500 mb-xl-4 text-primary">Self-employed Alumni</h3>
-                                            <p class="mb-2 mb-xl-0">The total number of sessions within
-                                                the date range. It is the period time a user is actively
-                                                engaged with your website, page or app, etc</p>
+                                            <p class="mb-2 mb-xl-0">This chart provides two visual graphs: <span
+                                                    class="text-info">The graph
+                                                    where it shows the different courses</span>
+                                                illustrates the total number of <em>self-employed</em>
+                                                alumni on each
+                                                course. (The <span class="text-info">blue progress bar</span> shows
+                                                the
+                                                percentage of what course has
+                                                the most and least <em>self-employed</em> alumni) The <span
+                                                    class="text-info">pie chart</span> shows
+                                                the gender
+                                                distribution for
+                                                <em>self-employed</em> alumni. Only alumni
+                                                with confirmed email addresses (verified) are included in the data
+                                                for
+                                                this chart.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-xl-9">
@@ -241,7 +285,7 @@
                                                                     <div class="progress progress-md mx-4 mb-1">
                                                                         <div class="progress-bar bg-info"
                                                                             role="progressbar"
-                                                                            style="width: @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'self-employed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'self-employed')->count() /$data['verifiedAlumni']->where('course', $course->course)->count()) *100 }} @else 0% @endif"
+                                                                            style="width: @if ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'self-employed')->count() > 0) {{ ($data['verifiedAlumni']->where('course', $course->course)->where('employment_status', 'self-employed')->count() /$data['verifiedAlumni']->where('employment_status', 'self-employed')->count()) *100 }}% @else 0% @endif"
                                                                             aria-valuenow="70" aria-valuemin="0"
                                                                             aria-valuemax="100"></div>
                                                                     </div>
@@ -287,6 +331,10 @@
                         <p class="card-title mb-0">Latest Alumni</p>
                         <a href="/admin/users" class="text-info">View all</a>
                     </div>
+                    <p class="font-weight-400 mt-3">This chart shows the list of the 10 latest alumni. Only alumni
+                        with confirmed email addresses (verified) are included in the data
+                        for
+                        this chart.</p>
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
@@ -299,7 +347,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($data['verifiedAlumni'] as $key => $alumni)
-                                    @if ($key < 5)
+                                    @if ($key < 10)
                                         <tr>
                                             <td>{{ $alumni->first_name . ' ' . $alumni->last_name }}</td>
                                             <td class="font-weight-bold">{{ $alumni->course }}</td>
@@ -332,7 +380,8 @@
                     <p class="card-title">Alumni by Batch</p>
                     {{-- <a href="#" class="text-info">View all</a> --}}
                 </div>
-                <p class="font-weight-500">The total number of sessions within the date range. It
+                <p class="font-weight-500">The total number of sessions within the
+                    date range. It
                     is the period time a user is actively engaged with your website, page or app,
                     etc</p>
                 <div id="alumnibatch-legend" class="chartjs-legend mt-4 mb-2"></div>
@@ -345,10 +394,17 @@
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                {{-- <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
                     <p class="card-title mb-0">Alumni Jobs Relation to Course</p>
-                    <a href="/admin/users" class="text-info">View all</a>
-                </div> --}}
+                    {{-- <a href="/admin/users" class="text-info">View all</a> --}}
+
+                </div>
+                <p class="font-weight-400 mt-3">This chart displays the overall number
+                    of
+                    alumni and how many are purely
+                    verified alumni in each course. All alumni, verified or not verified are included in the
+                    data
+                    for this chart.</p>
                 <div class="table-responsive">
                     <table class="table table-striped table-borderless">
                         <thead>
@@ -425,7 +481,11 @@
 <div class="col-md-6 stretch-card grid-margin">
     <div class="card">
         <div class="card-body">
-            <p class="card-title mb-0">Courses</p>
+            <p class="card-title mb-3">Courses</p>
+            <p class="font-weight-400">This chart displays the overall number of
+                alumni and how many are purely
+                verified alumni in each course. All alumni, verified or not verified are included in the data
+                for this chart.</p>
             <div class="table-responsive">
                 <table class="table table-borderless">
                     <thead>
@@ -698,7 +758,7 @@
         var areaData = {
             labels: ["Male", "Female"],
             datasets: [{
-                data: [@json($data['femaleSelfEmployedCount']),
+                data: [@json($data['maleSelfEmployedCount']),
                     @json($data['femaleSelfEmployedCount'])
                 ],
                 backgroundColor: [
@@ -860,7 +920,7 @@
                     {
                         label: 'Unemployed',
                         data: @json($data['unemployedByBatch']),
-                        backgroundColor: '#ff9eb3'
+                        backgroundColor: '#ff3d3d'
                     }
                 ]
             },
