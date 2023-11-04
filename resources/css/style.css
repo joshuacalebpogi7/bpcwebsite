@@ -134,7 +134,7 @@ body{
   }
 
 
-  .card_0 p {
+  /* .card_0 p {
     font-size: 18px;
     font-weight: 500;
     line-height: 20px;
@@ -142,11 +142,25 @@ body{
     display: flex;
     justify-content: flex-start;
     padding-left: 50px;
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Add an ellipsis (...) when text overflows */
-    max-width: 90%; /* Adjust the width to your design */
-  }
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: 90%; 
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  } */
+
+.card_0 .description-container {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 5px 0 10px;
+    color: #012628 !important;
+}
 
   .card_0 h1{
     font-size: 32px;

@@ -763,7 +763,7 @@
         var SalesChart = new Chart(SalesChartCanvas, {
             type: 'bar',
             data: {
-                labels: @json($data['alumniByGenderLabels']),
+                labels: @json($data['jobRelatedLabels']),
                 datasets: [{
                         label: 'Related',
                         data: @json($data['employedByBatch']),
