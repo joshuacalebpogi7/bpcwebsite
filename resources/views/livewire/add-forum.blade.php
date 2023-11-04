@@ -64,7 +64,7 @@
     </div>
 </section>
 
-{{-- <select name="category" class="box" name="question_type"
+                        {{-- <select name="category" class="box" name="question_type"
                             id="choiceType_for_question_{{ $questionIndex }}"
                             wire:model="questions.{{ $questionIndex }}.questionType">
                             <option value="text">&#128292; Textbox</option>
