@@ -3,7 +3,7 @@
         Home
     </x-slot>
     <section id="page-header">
-        <h2 style="color: #fafafa">● HOME ●</h2>
+        <h2 style="color: #fafafa">● <i class="ri-building-line"></i> HOME ●</h2>
     </section>
     <div class="row">
         <div class="leftcolumn">

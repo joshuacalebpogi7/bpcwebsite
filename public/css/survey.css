@@ -41,7 +41,7 @@ body {
   max-width: 1080px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   background-color: #fff;
-  margin: 20px;
+  margin: 20px 20px 0 0;
 }
 
 .dismiss {
@@ -120,7 +120,7 @@ body {
   isolation: isolate;
   position: relative;
   width: 100%;
-  max-width: 75%;
+  /* max-width: 75%; */
   height: 10rem;
   background: #f0ecf1;
   border-radius: 1rem;
@@ -220,7 +220,7 @@ body {
 button,
 .start_survey {
   margin-top: 10px;
-  margin-left: 35%;
+  margin-left: 40%;
   padding: 10px 40px;
   border-radius: 50px;
   border: 0;
@@ -252,17 +252,35 @@ button:active,
   transform: translateY(10px);
   transition: 100ms;
 }
+@media (max-width: 912px) {
+  button,
+  .start_survey {
+    margin-left: 40%;
+    padding: 8px 32px;
+  }
+}
 
-@media (max-width: 768px) {
-
+@media (max-width: 850px) {
   .card {
-    width: 90%;
-    height: auto;
+    margin: 10px 10px 0 0;
   }
 
   button,
   .start_survey {
-    margin-left: 35%;
+    margin-left: 40%;
+    padding: 8px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card{
+    max-width: 90%;
+    margin-left: 30px;
+  }
+
+  button,
+  .start_survey {
+    margin-left: 40%;
     padding: 8px 32px;
   }
 }
@@ -270,7 +288,7 @@ button:active,
 @media (max-width: 560px) {
   button,
   .start_survey {
-    padding: 6px 24px;
+    padding: 6px 20px;
   }
 
   .notibody {
@@ -279,9 +297,9 @@ button:active,
 }
 
 @media (max-width: 480px) {
-
   .card {
-    width: 95%;
+    max-width: 85%;
+    margin-left: 30px;
   }
 
   button,
@@ -289,7 +307,28 @@ button:active,
     margin-left: 30%;
     padding: 5px 20px;
   }
+}
 
+@media (max-width: 350px) {
+  .card {
+    max-width: 85%;
+    margin: 0;
+    /* margin-left: 27px; */
+  }
+
+  .notititle{
+    font-size: 0.9rem;
+  }
+
+  .notibody{
+    font-size: 0.7rem;
+  }
+
+  button,
+  .start_survey {
+    margin-left: 30%;
+    padding: 5px 20px;
+  }
 }
 
 /* Define styles for the table */
