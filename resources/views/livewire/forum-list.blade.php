@@ -12,7 +12,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <section id="page-header">
-    <h2>● FORUM / DISCUSSION ●</h2>
+    <h2 style="color: #fafafa">● FORUM / DISCUSSION ●</h2>
 </section>
 <div class="svg1">
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
     </svg>
 </div>
 <section class="p-category">
-    <a href="{{ url('new_forum') }}">START A NEW DISCUSSION</a>
+    <a href="{{ url('new_forum') }}" style="color: #fafafa">START A NEW DISCUSSION</a>
 </section>
 
 <div class="box-category">
@@ -38,7 +38,7 @@
         <div class="dad-joke">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <img src="pictures/category.png" width="30px">
+                    <img src="images/category.png" width="30px">
                 </div>
                 <div class="dad-joke-prompt-wrap">
                     <p class="dad-joke-prompt-heading">Category</p>
@@ -80,7 +80,7 @@
         <div class="dad-joke1">
             <div class="flex1">
                 <div class="flex-shrink-01">
-                    <img src="pictures/dialog.png" width="30px">
+                    <img src="images/dialog.png" width="30px">
                 </div>
                 <div class="dad-joke-prompt-wrap1">
                     <p class="dad-joke-prompt-heading1">Popular Discussion</p>
@@ -107,7 +107,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container" style="padding: 30px;">
     <div class="row">
         <hr style = "border: solid 1px #57b657;">
         <div class="col-lg-12">
