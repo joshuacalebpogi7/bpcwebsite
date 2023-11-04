@@ -17,9 +17,11 @@
                             <h1>University News</h1>
                             <h2>{{ $news->title }}</h2>
                             <h6>Posted {{ $news->created_at->diffForHumans() }}</h6>
-                            <p class="small"
-                                style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 200px;">
-                                {!! $news->description !!}</p>
+                            <div class="description-container">
+                                <p class="small">
+                                    {!! $news->description !!}
+                                </p>
+                            </div>
                             <div class="go-corner" href="#">
                                 <div class="go-arrow">
                                     →
@@ -89,8 +91,7 @@
         <div class="footer container5">
             <p>&#169; ALUMNIPORTAL All Rights Reserved</p>
             <div class="social">
-                <a href="https://www.facebook.com/your_facebook_page" style="color: #ff0000;"><i
-                        class="ri-facebook-circle-fill"></i></a>
+                <a href="https://www.facebook.com/your_facebook_page"><i class="ri-facebook-circle-fill"></i></a>
                 <a href="https://twitter.com/your_twitter_profile"><i class="ri-twitter-fill"></i></a>
                 <a href="https://www.instagram.com/your_instagram_profile"><i class="ri-instagram-fill"></i></a>
                 <a href="https://www.linkedin.com/in/your_linkedin_profile"><i class="ri-linkedin-box-fill"></i></a>
