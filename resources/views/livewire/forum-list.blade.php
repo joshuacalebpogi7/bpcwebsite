@@ -45,11 +45,10 @@
                     <div class="dad-joke-prompt">
                         <hr class="solid" style="border-top: 2px solid #498d69">
                         <div class="col-md-1 forum-infos">
-                            @php
+                            {{--                             @php
                                 $categoryCounts = []; // Initialize an array to store category counts
                             @endphp
 
-                            {{-- Count the categories --}}
                             @foreach ($forum_list as $forum_posted)
                                 @php
                                     $category = $forum_posted->forumCategory;
@@ -57,15 +56,18 @@
                                 @endphp
                             @endforeach
 
-                            {{-- Sort categories by count in descending order --}}
                             @php
                                 arsort($categoryCounts);
                                 $topCategories = array_slice($categoryCounts, 0, 4);
                             @endphp
 
-                            {{-- Display the top 4 categories --}}
                             @foreach ($topCategories as $category => $count)
                                 <p>{{ $category }}: <span class="numbers">{{ $count }}</span></p>
+                            @endforeach --}}
+                            @foreach ($popularCategories as $category)
+                                <p>{{ $category->forumCategory }}
+                                    <span class="numbers">({{ $category->discussions_count }})</span>
+                                </p>
                             @endforeach
                         </div>
                     </div>
