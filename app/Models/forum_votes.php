@@ -16,4 +16,15 @@ class forum_votes extends Model
         "voteAuthor",
         "active",
     ];
+
+    public function forum()
+    {
+        return $this->belongsTo(forums_posted::class, 'parentForum', 'id');
+    }
+
+    public function replies()
+    {
+        return $this->belongsTo(forum_replies::class, 'parentReply', 'id');
+    }
+
 }

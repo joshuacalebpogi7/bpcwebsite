@@ -316,7 +316,7 @@
                 </div>
             @endif
         @endforeach
-        <hr>
+        <br>
         @if (auth()->user()->user_type != 'alumni')
             <form action="/admin/add-forum-comment" method="post" class="deleteEvents">
             @elseif (auth()->user()->user_type == 'alumni')

@@ -28,17 +28,6 @@ class EditSurvey extends Component
 
     public function mount($survey_selected)
     {
-        //$this->refreshView = $refreshView;
-        $this->loadSurveyData($survey_selected);
-    }
-
-    public function updatedSurveySelected($newValue)
-    {
-        $this->loadSurveyData($newValue);
-    }
-
-    private function loadSurveyData($survey_selected)
-    {
         // Set the record instance
         $this->survey_selected = $survey_selected;
 
@@ -77,7 +66,6 @@ class EditSurvey extends Component
             // Handle Google Forms case if needed
         }
     }
-
     public function updateBuiltIn()
     {
         // Validate the form data
@@ -123,7 +111,7 @@ class EditSurvey extends Component
         }
         // Redirect or display a success message
         session()->flash('message', 'Survey updated successfully.');
-        return redirect()->to('admin/surveys');// Replace with the appropriate route name
+        return redirect()->to('admin/surveys'); // Replace with the appropriate route name
     }
 
 

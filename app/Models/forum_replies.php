@@ -25,4 +25,8 @@ public function votes()
     return $this->hasMany(forum_votes::class, 'parentReply');
 }
 
+public function forum()
+{
+    return $this->belongsTo(forums_posted::class, 'parentForum', 'id');
+}
 }
