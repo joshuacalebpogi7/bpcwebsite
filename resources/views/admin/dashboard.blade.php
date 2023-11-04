@@ -486,7 +486,7 @@
     <div class="card">
         <div class="card-body">
             <p class="card-title mb-3">Courses</p>
-            <p class="font-weight-400">This table displays the overall number of
+            <p class="font-weight-400">This table displays the total number of
                 alumni and the percentage of
                 verified alumni in each course. All alumni, verified or not verified are included in the data
                 for this table.</p>
@@ -495,7 +495,7 @@
                     <thead>
                         <tr>
                             <th class="pl-0  pb-2 border-bottom">Course</th>
-                            <th class="border-bottom pb-2">Alumni (Verified %)</th>
+                            <th class="border-bottom pb-2">Verified Alumni (%)</th>
                             <th class="border-bottom pb-2">Total</th>
                         </tr>
                     </thead>
@@ -507,9 +507,9 @@
                                     <td>
                                         <p class="mb-0"><span class="font-weight-bold mr-2">
 
-                                                {{ $data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() }}
+                                                {{ $data['users']->where('course', $course->course)->whereNotNull('email_verified_at')->count() }}
                                             </span>(
-                                            @if ($data['users']->where('course', $course->course)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count() <= 0)
+                                            @if ($data['users']->where('course', $course->course)->whereNotNull('email_verified_at')->count() <= 0)
                                                 0%
                                             @else
                                                 {{ number_format(($data['users']->where('course', $course->course)->whereNotNull('email_verified_at')->count() /$data['users']->where('course', $course->course)->count()) *100,2) }}%

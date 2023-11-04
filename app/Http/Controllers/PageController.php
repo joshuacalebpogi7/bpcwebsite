@@ -184,7 +184,7 @@ class PageController extends Controller
 
             if ($users->where('course', $course->course)->count() > 0) {
                 $allAlumniCountByCourse = $users->where('course', $course->course)->count();
-                $verifiedAlumniCountByCourse = $users->where('course', $course->course)->where('user_type', 'alumni')->where('survey_completed', true)->where('add_info_completed', true)->whereNotNull('email_verified_at')->count();
+                $verifiedAlumniCountByCourse = $users->where('course', $course->course)->where('user_type', 'alumni')->whereNotNull('email_verified_at')->count();
             }
             array_push($labels, $course->course);
             array_push($dataAll, $allAlumniCountByCourse);
