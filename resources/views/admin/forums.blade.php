@@ -85,7 +85,7 @@
                                                     </td>
                                                     <td>
                                                         @php
-                                                            $author = $users->firstWhere('id', $forum_posted->forumAuthor);
+                                                            $author = $authors->firstWhere('id', $forum_posted->forumAuthor);
                                                         @endphp
                                                         @if (isset($author->first_name))
                                                             {{ $author->first_name }}
