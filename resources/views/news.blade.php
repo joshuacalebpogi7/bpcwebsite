@@ -83,7 +83,7 @@
 
         @foreach ($newsItem as $news)
             <div class="post-box mobile">
-                <img src="images/bg.jpg" alt="" class="post-img">
+                <img src="{{ $news->thumbnail }}" alt="" class="post-img">
                 <h2 class="category">{{ $news->category }}</h2>
                 <a href="/login" class="post-title">
                     {{ $news->title }}
