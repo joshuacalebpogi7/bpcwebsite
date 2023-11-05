@@ -10,7 +10,7 @@
         </script>
     @endpush
     <h2>Forums Records</h2>
-{{--     <div>
+    {{--     <div>
         <a href="{{ url('admin/add-forum') }}"><button class="btn btn-primary mb-3"><img
                     src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Forum</button></a>
     </div> --}}
@@ -87,7 +87,10 @@
                                                         @php
                                                             $author = $authors->firstWhere('id', $forum_posted->forumAuthor);
                                                         @endphp
-                                                        {{ $author ? '[ID ' . $author->id . '] ' . $author->first_name . ' ' . $author->last_name : 'Author not found' }}
+                                                        {{ $author->first_name }}
+                                                        @if ($author->first_name != $author->last_name)
+                                                            {{ $author->last_name }}
+                                                        @endif
                                                     </td>
 
                                                     <td>{{ $forum_posted->created_at }}</td>

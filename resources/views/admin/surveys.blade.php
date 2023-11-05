@@ -85,8 +85,24 @@
                                                     @if ($survey_posted->surveyType === 'google_forms')
                                                         <td>Google Forms</td>
                                                     @endif
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>
+                                                        @php
+                                                            $author = $users->firstWhere('id', $survey_posted->surveyAuthor);
+                                                        @endphp
+                                                        {{$author->first_name}}
+                                                        @if ($author->first_name != $author->last_name)
+                                                            {{$author->last_name}}
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                            $updateAuthor = $users->firstWhere('id', $survey_posted->surveyUpdateAuthor);
+                                                        @endphp
+                                                        {{$updateAuthor->first_name}}
+                                                        @if ($updateAuthor->first_name != $updateAuthor->last_name)
+                                                            {{$updateAuthor->last_name}}
+                                                        @endif
+                                                    </td>
                                                     <td>{{ $survey_posted->created_at }}</td>
                                                     <td>{{ $survey_posted->updated_at }}</td>
 

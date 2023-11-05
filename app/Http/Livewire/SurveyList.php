@@ -6,10 +6,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\surveys_posted; // Import the Survey model
+use App\Models\User; // Import the Survey model
 
 class SurveyList extends Component
 {
     public $user;
+    public $users;
     public $survey_list;
     public $surveyTitle;
     public $surveyDesc;
@@ -26,6 +28,7 @@ class SurveyList extends Component
     {
         // Load the survey list from your database (adjust this query as needed)
         $this->survey_list = surveys_posted::all();
+        $this->users = User::all();;
         
         return view('livewire.survey-list'); // Blade view name
     }
