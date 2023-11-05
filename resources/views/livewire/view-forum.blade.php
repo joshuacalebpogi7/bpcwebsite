@@ -59,7 +59,7 @@
                 </button>
             </div>
         @endif
-        <hr>
+
         <i>{{ $forum_selected['created_at']->diffForHumans() }}</i>
         <br>
         <small>{{ $forum_selected['created_at']->format('F j, Y g:i A') }}</small>
@@ -71,7 +71,7 @@
         <br>
         @if (isset($forumAuthor))
             <b>Posted by: <br>
-                <img height="100" width="100" class="forum-avatar"
+                <img height="50" width="50" class="forum-avatar" style = "border-radius: 50%;"
                     src="{{ $forumAuthor ? $forumAuthor->avatar : 'Author not found' }}">&nbsp;
                 {{ $forumAuthor['first_name'] }} @if ($forumAuthor['first_name'] != $forumAuthor['last_name'])
                     {{ $forumAuthor['last_name'] }}
@@ -81,33 +81,33 @@
                 @endif
             </b>
         @endif
-        <hr>
 
         @foreach ($forumReplies as $forumReply)
             @if ($forumReply['replyingTo'] == null)
                 <div class="reply">
-                    <hr>
-                    <table>
-                        <tr>
-                            {{-- <td></td> --}}
-                            <td style = "width: 20%; text-align: center;">
-                                <i>{{ $forumReply['created_at']->diffForHumans() }}</i>
-                                <br>
-                                <small>{{ $forumReply['created_at']->format('F j, Y g:i A') }}</small>
-                            </td>
-                            <td>
-                                @if ($forumReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                                    <div style = "text-align: right; border: 0px;">
-                                        <button onclick="confirmDeleteComment({{ json_encode($forumReply) }})"
-                                            class="submit-button delete-choice"><img
-                                                src="{{ URL::asset('/images/icon-delete.svg') }}">
-                                        </button>
-                                    </div>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            {{-- <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
+                    <div style = "background: white; border-radius: 20px; margin-top: 10px;">
+                        <table>
+                            <tr>
+                                {{-- <td></td> --}}
+                                <td style = "width: 20%; text-align: center;">
+                                    <i>{{ $forumReply['created_at']->diffForHumans() }}</i>
+                                    <br>
+                                    <small>{{ $forumReply['created_at']->format('F j, Y g:i A') }}</small>
+                                </td>
+                                <td>
+                                    @if ($forumReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                        <div style = "text-align: right; border: 0px;">
+                                            <button onclick="confirmDeleteComment({{ json_encode($forumReply) }})"
+                                                type="button" class="btn btn-danger btn-icon-text"
+                                                style="width: 65px; height: 50px; margin: 5px;">
+                                                <i class="ti-trash btn-icon-prepend"></i>
+                                            </button>
+                                        </div>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                {{-- <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
                                 @if (auth()->user()->user_type != 'alumni')
                                     <form action="/admin/add-forum-vote" method="post">
                                     @elseif (auth()->user()->user_type == 'alumni')
@@ -134,37 +134,38 @@
                                 <input type="submit" value="&#8595;">
                                 </form>
                             </td> --}}
-                            <td style = "width: 20%; text-align: center;">
-                                @php
-                                    $forumReplyAuthor = $authors->firstWhere('id', $forumReply->replyAuthor);
-                                    $isOp = $forumReplyAuthor && $forumReplyAuthor->id === $forum_selected->forumAuthor;
-                                    $isUser = $forumReplyAuthor && $forumReplyAuthor->id === auth()->user()->id;
-                                @endphp
-                                <img height="100" width="100" class="forum-avatar"
-                                    src="{{ $forumReplyAuthor ? $forumReplyAuthor->avatar : 'Author not found' }}">
-                                <br>
-                                {{ $forumReplyAuthor ? ($forumReplyAuthor->first_name !== $forumReplyAuthor->last_name ? ' ' . $forumReplyAuthor->first_name . ' ' . $forumReplyAuthor->last_name : ' ' . $forumReplyAuthor->first_name) : 'Author not found' }}
-                                @if ($isUser)
-                                    (You)
-                                @endif
-                                @if ($isOp)
+                                <td style = "width: 20%; text-align: center;">
+                                    @php
+                                        $forumReplyAuthor = $authors->firstWhere('id', $forumReply->replyAuthor);
+                                        $isOp = $forumReplyAuthor && $forumReplyAuthor->id === $forum_selected->forumAuthor;
+                                        $isUser = $forumReplyAuthor && $forumReplyAuthor->id === auth()->user()->id;
+                                    @endphp
+                                    <img height="50" width="50" class="forum-avatar"
+                                        style = "border-radius: 50%;"
+                                        src="{{ $forumReplyAuthor ? $forumReplyAuthor->avatar : 'Author not found' }}">
                                     <br>
-                                    [OP]
-                                @endif
-                            </td>
+                                    {{ $forumReplyAuthor ? ($forumReplyAuthor->first_name !== $forumReplyAuthor->last_name ? ' ' . $forumReplyAuthor->first_name . ' ' . $forumReplyAuthor->last_name : ' ' . $forumReplyAuthor->first_name) : 'Author not found' }}
+                                    @if ($isUser)
+                                        (You)
+                                    @endif
+                                    @if ($isOp)
+                                        <br>
+                                        [OP]
+                                    @endif
+                                </td>
 
 
 
-                            <td>
-                                {{ $forumReply['replyBody'] }}{{--  <br>
+                                <td>
+                                    {{ $forumReply['replyBody'] }}{{--  <br>
                                 <div class="forum-reply-button" style="text-align: right;">
                                     <a
                                         href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReply->id]) }}">Reply</a>
                                 </div> --}}
-                            </td>
-                        </tr>
-                    </table>
-                    <hr>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
                     {{-- Display replies to this comment --}}
                     @foreach ($forumReplies as $forumReplyReply)
@@ -175,31 +176,34 @@
                                     $isReplyReplyOp = $forumReplyReplyAuthor && $forumReplyReplyAuthor->id === $forum_selected->forumAuthor;
                                     $isReplyReplyUser = $forumReplyReplyAuthor && $forumReplyReplyAuthor->id === auth()->user()->id;
                                 @endphp
-                                <hr>
-                                <p><i>Replying to: {{ $forumReply['replyBody'] }} <br></i></p>
-                                <br>
-                                <table>
-                                    <tr>
-                                        {{-- <td></td> --}}
-                                        <td style = "width: 20%; text-align: center;">
-                                            <i>{{ $forumReplyReply['created_at']->diffForHumans() }}</i>
-                                            <br>
-                                            <small>{{ $forumReplyReply['created_at']->format('F j, Y g:i A') }}</small>
-                                        </td>
-                                        <td>
-                                            @if ($forumReplyReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                                                <div style = "text-align: right; border: 0px;">
-                                                    <button
-                                                        onclick="confirmDeleteComment({{ json_encode($forumReplyReply) }})"
-                                                        class="submit-button delete-choice"><img
-                                                            src="{{ URL::asset('/images/icon-delete.svg') }}">
-                                                    </button>
-                                                </div>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        {{--                                         <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
+                                <div
+                                    style = "background: white; border-radius: 20px; margin-top: 10px;  padding: 10px;">
+
+
+                                    <table>
+                                        <tr>
+                                            {{-- <td></td> --}}
+                                            <td style = "width: 20%; text-align: center;">
+                                                <p><i>Replying to: {{ $forumReply['replyBody'] }}</i></p>
+                                                <i>{{ $forumReplyReply['created_at']->diffForHumans() }}</i>
+                                                <br>
+                                                <small>{{ $forumReplyReply['created_at']->format('F j, Y g:i A') }}</small>
+                                            </td>
+                                            <td>
+                                                @if ($forumReplyReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                    <div style = "text-align: right; border: 0px;">
+                                                        <button
+                                                            onclick="confirmDeleteComment({{ json_encode($forumReplyReply) }})"
+                                                            type="button" class="btn btn-danger btn-icon-text"
+                                                            style="width: 65px; height: 50px; margin: 5px;">
+                                                            <i class="ti-trash btn-icon-prepend"></i>
+                                                        </button>
+                                                    </div>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {{--                                         <td class="upvote-downvote-area" style="width: 5%; text-align: center;">
                                             @if (auth()->user()->user_type != 'alumni')
                                                 <form action="/admin/add-forum-vote" method="post">
                                                 @elseif (auth()->user()->user_type == 'alumni')
@@ -231,29 +235,30 @@
                                             <input type="submit" value="&#8595;">
                                             </form>
                                         </td> --}}
-                                        <td style = "width: 20%; text-align: center;">
-                                            <img height="100" width="100" class="forum-avatar"
-                                                src="{{ $forumReplyReplyAuthor ? $forumReplyReplyAuthor->avatar : 'Author not found' }}">
-                                            <br>
-                                            {{ $forumReplyReplyAuthor ? ($forumReplyReplyAuthor->first_name !== $forumReplyReplyAuthor->last_name ? $forumReplyReplyAuthor->first_name . ' ' . $forumReplyReplyAuthor->last_name : $forumReplyReplyAuthor->first_name) : 'Author not found' }}
-                                            @if ($isReplyReplyUser)
-                                                (You)
-                                            @endif
-                                            @if ($isReplyReplyOp)
+                                            <td style = "width: 20%; text-align: center;">
+                                                <img height="50" width="50" class="forum-avatar"
+                                                    style = "border-radius: 50%;"
+                                                    src="{{ $forumReplyReplyAuthor ? $forumReplyReplyAuthor->avatar : 'Author not found' }}">
                                                 <br>
-                                                [OP]
-                                            @endif
-                                        </td>
+                                                {{ $forumReplyReplyAuthor ? ($forumReplyReplyAuthor->first_name !== $forumReplyReplyAuthor->last_name ? $forumReplyReplyAuthor->first_name . ' ' . $forumReplyReplyAuthor->last_name : $forumReplyReplyAuthor->first_name) : 'Author not found' }}
+                                                @if ($isReplyReplyUser)
+                                                    (You)
+                                                @endif
+                                                @if ($isReplyReplyOp)
+                                                    <br>
+                                                    [OP]
+                                                @endif
+                                            </td>
 
-                                        <td>{{ $forumReplyReply['replyBody'] }}{{-- 
+                                            <td>{{ $forumReplyReply['replyBody'] }}{{-- 
                                             <div class="forum-reply-button" style="text-align: right;">
                                                 <a
                                                     href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReplyReply->id]) }}">Reply</a>
                                             </div> --}}
-                                        </td>
-                                    </tr>
-                                </table>
-                                <hr>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                                 {{-- Display replies within replies --}}
                                 @foreach ($forumReplies as $forumReplyReplyReply)
                                     @if ($forumReplyReplyReply['replyingTo'] == $forumReplyReply->id)
@@ -263,31 +268,34 @@
                                                 $isReplyReplyReplyOp = $forumReplyReplyReplyAuthor && $forumReplyReplyReplyAuthor->id === $forum_selected->forumAuthor;
                                                 $isReplyReplyReplyUser = $forumReplyReplyReplyAuthor && $forumReplyReplyReplyAuthor->id === auth()->user()->id;
                                             @endphp
-                                            <hr>
-                                            <p><i>Replying to: {{ $forumReplyReply['replyBody'] }}</i></p>
-                                            <br>
-                                            <table>
-                                                <tr>
-                                                    {{-- <td></td> --}}
-                                                    <td style = "width: 20%; text-align: center;">
-                                                        <i>{{ $forumReplyReplyReply['created_at']->diffForHumans() }}</i>
-                                                        <br>
-                                                        <small>{{ $forumReplyReplyReply['created_at']->format('F j, Y g:i A') }}</small>
-                                                    </td>
-                                                    <td>
-                                                        @if ($forumReplyReplyReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                                                            <div style = "text-align: right; border: 0px;">
-                                                                <button
-                                                                    onclick="confirmDeleteComment({{ json_encode($forumReplyReplyReply) }})"
-                                                                    class="submit-button delete-choice"><img
-                                                                        src="{{ URL::asset('/images/icon-delete.svg') }}">
-                                                                </button>
-                                                            </div>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    {{--                                                     <td class="upvote-downvote-area"
+                                            <div style = "background: white; border-radius: 20px; margin-top: 10px;">
+
+                                                <table>
+                                                    <tr>
+                                                        {{-- <td></td> --}}
+                                                        <td style = "width: 20%; text-align: center;">
+                                                            <p><i>Replying to: {{ $forumReplyReply['replyBody'] }}</i>
+                                                            </p>
+                                                            <i>{{ $forumReplyReplyReply['created_at']->diffForHumans() }}</i>
+                                                            <br>
+                                                            <small>{{ $forumReplyReplyReply['created_at']->format('F j, Y g:i A') }}</small>
+                                                        </td>
+                                                        <td>
+                                                            @if ($forumReplyReplyReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                                <div style = "text-align: right; border: 0px;">
+                                                                    <button
+                                                                        onclick="confirmDeleteComment({{ json_encode($forumReplyReplyReply) }})"
+                                                                        type="button"
+                                                                        class="btn btn-danger btn-icon-text"
+                                                                        style="width: 65px; height: 50px; margin: 5px;">
+                                                                        <i class="ti-trash btn-icon-prepend"></i>
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        {{--                                                     <td class="upvote-downvote-area"
                                                         style="width: 5%; text-align: center;">
                                                         @if (auth()->user()->user_type != 'alumni')
                                                             <form action="/admin/add-forum-vote" method="post">
@@ -317,29 +325,30 @@
                                                         <input type="submit" value="&#8595;">
                                                         </form>
                                                     </td> --}}
-                                                    <td style = "width: 20%; text-align: center;">
-                                                        <img height="100" width="100" class="forum-avatar"
-                                                            src="{{ $forumReplyReplyReplyAuthor ? $forumReplyReplyReplyAuthor->avatar : 'Author not found' }}">
-                                                        <br>
-                                                        {{ $forumReplyReplyReplyAuthor ? ($forumReplyReplyReplyAuthor->first_name !== $forumReplyReplyReplyAuthor->last_name ? $forumReplyReplyReplyAuthor->first_name . ' ' . $forumReplyReplyReplyAuthor->last_name : $forumReplyReplyReplyAuthor->first_name) : 'Author not found' }}
-                                                        @if ($isReplyReplyReplyUser)
-                                                            (You)
-                                                        @endif
-                                                        @if ($isReplyReplyReplyOp)
+                                                        <td style = "width: 20%; text-align: center;">
+                                                            <img height="50" width="50" class="forum-avatar"
+                                                                style = "border-radius: 50%;"
+                                                                src="{{ $forumReplyReplyReplyAuthor ? $forumReplyReplyReplyAuthor->avatar : 'Author not found' }}">
                                                             <br>
-                                                            [OP]
-                                                        @endif
-                                                    </td>
+                                                            {{ $forumReplyReplyReplyAuthor ? ($forumReplyReplyReplyAuthor->first_name !== $forumReplyReplyReplyAuthor->last_name ? $forumReplyReplyReplyAuthor->first_name . ' ' . $forumReplyReplyReplyAuthor->last_name : $forumReplyReplyReplyAuthor->first_name) : 'Author not found' }}
+                                                            @if ($isReplyReplyReplyUser)
+                                                                (You)
+                                                            @endif
+                                                            @if ($isReplyReplyReplyOp)
+                                                                <br>
+                                                                [OP]
+                                                            @endif
+                                                        </td>
 
-                                                    <td>{{ $forumReplyReplyReply['replyBody'] }}
-                                                        <div class="forum-reply-button" style="text-align: right;">
-                                                            {{--                                                             <a
+                                                        <td>{{ $forumReplyReplyReply['replyBody'] }}
+                                                            <div class="forum-reply-button" style="text-align: right;">
+                                                                {{--                                                             <a
                                                             href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReplyReplyReply->id]) }}">Reply</a> --}}
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <hr>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                             @foreach ($forumReplies as $forumReplyReplyReplyReply)
                                                 @if ($forumReplyReplyReplyReply['replyingTo'] == $forumReplyReplyReply->id)
                                                     <div class="reply-within-a-reply-within-a-reply-within-a-reply">
@@ -348,32 +357,37 @@
                                                             $isReplyReplyReplyReplyOp = $forumReplyReplyReplyReplyAuthor && $forumReplyReplyReplyReplyAuthor->id === $forum_selected->forumAuthor;
                                                             $isReplyReplyReplyReplyUser = $forumReplyReplyReplyReplyAuthor && $forumReplyReplyReplyReplyAuthor->id === auth()->user()->id;
                                                         @endphp
-                                                        <hr>
-                                                        <p><i>Replying to: {{ $forumReplyReplyReply['replyBody'] }}</i>
-                                                        </p>
-                                                        <br>
-                                                        <table>
-                                                            <tr>
-                                                                {{-- <td></td> --}}
-                                                                <td style = "width: 20%; text-align: center;">
-                                                                    <i>{{ $forumReplyReplyReplyReply['created_at']->diffForHumans() }}</i>
-                                                                    <br>
-                                                                    <small>{{ $forumReplyReplyReplyReply['created_at']->format('F j, Y g:i A') }}</small>
-                                                                </td>
-                                                                <td>
-                                                                    @if ($forumReplyReplyReplyReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                                                                        <div style = "text-align: right; border: 0px;">
-                                                                            <button
-                                                                                onclick="confirmDeleteComment({{ json_encode($forumReplyReplyReplyReply) }})"
-                                                                                class="submit-button delete-choice"><img
-                                                                                    src="{{ URL::asset('/images/icon-delete.svg') }}">
-                                                                            </button>
-                                                                        </div>
-                                                                    @endif
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                {{--                                                     <td class="upvote-downvote-area"
+                                                        <div
+                                                            style = "background: white; border-radius: 20px; margin-top: 10px;">
+                                                            <table>
+                                                                <tr>
+                                                                    {{-- <td></td> --}}
+                                                                    <td style = "width: 20%; text-align: center;">
+                                                                        <p><i>Replying to:
+                                                                                {{ $forumReplyReplyReply['replyBody'] }}</i>
+                                                                        </p>
+                                                                        <i>{{ $forumReplyReplyReplyReply['created_at']->diffForHumans() }}</i>
+                                                                        <br>
+                                                                        <small>{{ $forumReplyReplyReplyReply['created_at']->format('F j, Y g:i A') }}</small>
+                                                                    </td>
+                                                                    <td>
+                                                                        @if ($forumReplyReplyReplyReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                                            <div
+                                                                                style = "text-align: right; border: 0px;">
+                                                                                <button
+                                                                                    onclick="confirmDeleteComment({{ json_encode($forumReplyReplyReplyReply) }})"
+                                                                                    type="button"
+                                                                                    class="btn btn-danger btn-icon-text"
+                                                                                    style="width: 65px; height: 50px; margin: 5px;">
+                                                                                    <i
+                                                                                        class="ti-trash btn-icon-prepend"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    {{--                                                     <td class="upvote-downvote-area"
                                                                 style="width: 5%; text-align: center;">
                                                                 @if (auth()->user()->user_type != 'alumni')
                                                                     <form action="/admin/add-forum-vote" method="post">
@@ -403,31 +417,31 @@
                                                                 <input type="submit" value="&#8595;">
                                                                 </form>
                                                             </td> --}}
-                                                                <td style = "width: 20%; text-align: center;">
-                                                                    <img height="100" width="100"
-                                                                        class="forum-avatar"
-                                                                        src="{{ $forumReplyReplyReplyReplyAuthor ? $forumReplyReplyReplyReplyAuthor->avatar : 'Author not found' }}">
-                                                                    <br>
-                                                                    {{ $forumReplyReplyReplyReplyAuthor ? ($forumReplyReplyReplyReplyAuthor->first_name !== $forumReplyReplyReplyReplyAuthor->last_name ? $forumReplyReplyReplyReplyAuthor->first_name . ' ' . $forumReplyReplyReplyReplyAuthor->last_name : $forumReplyReplyReplyReplyAuthor->first_name) : 'Author not found' }}
-                                                                    @if ($isReplyReplyReplyReplyUser)
-                                                                        (You)
-                                                                    @endif
-                                                                    @if ($isReplyReplyReplyReplyOp)
+                                                                    <td style = "width: 20%; text-align: center;">
+                                                                        <img height="50" width="50"
+                                                                            class="forum-avatar"
+                                                                            src="{{ $forumReplyReplyReplyReplyAuthor ? $forumReplyReplyReplyReplyAuthor->avatar : 'Author not found' }}">
                                                                         <br>
-                                                                        [OP]
-                                                                    @endif
-                                                                </td>
+                                                                        {{ $forumReplyReplyReplyReplyAuthor ? ($forumReplyReplyReplyReplyAuthor->first_name !== $forumReplyReplyReplyReplyAuthor->last_name ? $forumReplyReplyReplyReplyAuthor->first_name . ' ' . $forumReplyReplyReplyReplyAuthor->last_name : $forumReplyReplyReplyReplyAuthor->first_name) : 'Author not found' }}
+                                                                        @if ($isReplyReplyReplyReplyUser)
+                                                                            (You)
+                                                                        @endif
+                                                                        @if ($isReplyReplyReplyReplyOp)
+                                                                            <br>
+                                                                            [OP]
+                                                                        @endif
+                                                                    </td>
 
-                                                                <td>{{ $forumReplyReplyReplyReply['replyBody'] }}
-                                                                    <div class="forum-reply-button"
-                                                                        style="text-align: right;">
-                                                                        {{--                                                             <a
+                                                                    <td>{{ $forumReplyReplyReplyReply['replyBody'] }}
+                                                                        <div class="forum-reply-button"
+                                                                            style="text-align: right;">
+                                                                            {{--                                                             <a
                                                                     href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumReplyReplyReplyReply->id]) }}">Reply</a> --}}
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                        <hr>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 @endif
                                             @endforeach
