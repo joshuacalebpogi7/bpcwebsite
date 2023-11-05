@@ -10,10 +10,10 @@
         </script>
     @endpush
     <h2>Forums Records</h2>
-    <div>
+{{--     <div>
         <a href="{{ url('admin/add-forum') }}"><button class="btn btn-primary mb-3"><img
                     src="{{ URL::asset('/images/icon-plus.svg') }}"> Add Forum</button></a>
-    </div>
+    </div> --}}
 
 
     <div class="row">
@@ -56,7 +56,7 @@
                                                                     View
                                                                 </button>
                                                             </a>
-                                                            <a href="#edit{{-- route('admin/edit_forum', ['forum_selected' => $forum_posted->id]) --}}"
+                                                            {{-- <a href="#{{ route('admin/edit_forum', ['forum_selected' => $forum_posted->id]) }}"
                                                                 class="flex-fill">
                                                                 <button type="button"
                                                                     class="btn btn-success btn-icon-text"
@@ -64,7 +64,7 @@
                                                                     <i class="ti-pencil btn-icon-prepend"></i>
                                                                     Edit
                                                                 </button>
-                                                            </a>
+                                                            </a> --}}
                                                             <button type="button" class="btn btn-danger btn-icon-text"
                                                                 style="width: 150px; height: 50px; margin: 5px;"
                                                                 onclick="confirmDeleteForum({{ json_encode($forum_posted) }})">
