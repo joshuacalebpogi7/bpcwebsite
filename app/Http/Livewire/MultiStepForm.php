@@ -150,7 +150,7 @@ class MultiStepForm extends Component
             }
             $this->deleteLockFile();
 
-            return redirect('/survey')->with('info', 'Congrats please complete this survey!');
+            return redirect('/');
         }
     }
     //lock files
