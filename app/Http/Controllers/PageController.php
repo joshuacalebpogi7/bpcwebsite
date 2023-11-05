@@ -91,10 +91,20 @@ class PageController extends Controller
             return view('auth.jobs', ['jobs' => $jobs->where('status', 'active')->latest()->get(), 'userJobs' => $userJobs]);
         }
     }
-    public function jobsArchive(Jobs $jobs, UserJobs $userJobs)
+    public function jobsArchive(Request $request, Jobs $jobs, UserJobs $userJobs)
     {
         if (auth()->check()) {
-            return view('auth.job-archive', ['jobs' => $jobs->where('status', 'archived')->latest()->get(), 'userJobs' => $userJobs]);
+            $selectedSort = $request->input('sort', 0); // Get the selected sort criteria (0 by default)
+    
+        $jobs = Jobs::query();
+
+        if ($selectedSort == 1) {
+            $jobs->orderBy('created_at', 'desc'); // Sort by newest post
+        } elseif ($selectedSort == 2) {
+            $jobs->orderBy('created_at', 'asc'); // Sort by oldest post
+        }
+
+            return view('auth.job-archive', ['jobs' => $jobs->where('status', 'archived')->get(), 'userJobs' => $userJobs]);
         }
     }
 

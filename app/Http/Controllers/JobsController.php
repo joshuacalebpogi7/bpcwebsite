@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jobs;
+use App\Models\UserJobs;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
@@ -10,6 +11,21 @@ use Illuminate\Support\Facades\Storage;
 
 class JobsController extends Controller
 {
+    // public function search(Request $request, UserJobs $userJobs)
+    // {
+    //     // dd('works');
+    //     $query = $request->input('query'); // Get the search query from the request
+        
+    //     // Perform the search based on the query
+    //     $jobsearch = Jobs::where('status', 'active')->where('job_title', 'like', '%' . $query . '%')
+    //         ->orWhere('company', 'like', '%' . $query . '%')
+    //         ->orWhere('location', 'like', '%' . $query . '%')
+    //         ->orWhere('category', 'like', '%' . $query . '%')
+    //         ->orWhere('job_type', 'like', '%' . $query . '%')
+    //         ->get();
+
+    //     return view('auth.jobs', ['jobsearch' => $jobsearch, 'userJobs' => $userJobs]);
+    // }
     public function deleteJobs(Jobs $jobs)
     {
         $jobs->delete();
