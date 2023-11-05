@@ -13,9 +13,9 @@ return new class extends Migration {
         Schema::create('forums_posted', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('forumTitle');
-            $table->string('forumBody')->nullable();
-            $table->string('forumCategory')->nullable();
+            $table->longtext('forumTitle');
+            $table->longtext('forumBody')->nullable();
+            $table->longtext('forumCategory')->nullable();
             $table->unsignedBigInteger('replyCount')->nullable();
             $table->unsignedBigInteger('forumAuthor')->nullable();
             $table->unsignedBigInteger('forumUpdateAuthor')->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->unsignedBigInteger('parentForum');
             $table->unsignedBigInteger('replyingTo')->nullable();
-            $table->string('replyBody')->nullable();
+            $table->longtext('replyBody')->nullable();
             $table->unsignedBigInteger('replyAuthor')->nullable();
             $table->unsignedBigInteger('votes')->nullable();
             $table->tinyInteger('active')->default(0);
@@ -39,7 +39,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->unsignedBigInteger('parentForum');
             $table->unsignedBigInteger('parentReply')->nullable();
-            $table->string('voteType')->nullable();
+            $table->longtext('voteType')->nullable();
             $table->unsignedBigInteger('voteAuthor')->nullable();
             $table->tinyInteger('active')->default(0);
         }); //

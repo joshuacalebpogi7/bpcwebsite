@@ -19,8 +19,12 @@
                 <label for = "forumTitle">Title:</label>
                 <input type="text" class="form-control" id="forumTitle" wire:model="forumTitle" required>
                 <br>
-                <label for = "forumCategory">Category:</label>
-                <input type="text" class="form-control" id="forumCategory" wire:model="forumCategory" required>
+                <select name="forumCategory" class="box" wire:model = "forumCategory" required>
+                    <option value="" selected disabled>Category</option>
+                    <option value="General Discussion">General Discussion</option>
+                    <option value="Help">Help</option>
+                    <option value="Blog">Blog</option>
+                </select>
                 <br>
 
                 <label for ="forumBody">Body</label>

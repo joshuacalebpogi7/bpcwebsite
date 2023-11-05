@@ -560,6 +560,12 @@ public function adminReplyForum(forum_replies $forum_reply_selected, User $autho
     return view('admin.reply_forum', ['forum_reply_selected' => $forum_reply_selected, 'authors' => $authors->get()]);
 }
 
+public function replyForum(forum_replies $forum_reply_selected, User $authors)
+{
+    return view('auth.reply_forum', ['forum_reply_selected' => $forum_reply_selected, 'authors' => $authors->get()]);
+}
+
+
 public function viewForum(forums_posted $forum_selected)
 {
     return view ('auth.view_forum', [

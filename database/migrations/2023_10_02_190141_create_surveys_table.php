@@ -16,11 +16,11 @@ return new class extends Migration {
             $table->timestamps();
             $table->unsignedBigInteger('surveyAuthor')->nullable();
             $table->unsignedBigInteger('surveyUpdateAuthor')->nullable();
-            $table->string('surveyType');
-            $table->string('surveyTitle');
-            $table->string('surveyDesc')->nullable();
-            $table->string('surveyLink')->nullable();
-            $table->string('surveyEditorLink')->nullable();
+            $table->longtext('surveyType');
+            $table->longtext('surveyTitle');
+            $table->longtext('surveyDesc')->nullable();
+            $table->longtext('surveyLink')->nullable();
+            $table->longtext('surveyEditorLink')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('forFirstTimers')->default(0);
         });
@@ -30,8 +30,8 @@ return new class extends Migration {
             $table->timestamps();
             $table->unsignedBigInteger('parentSurvey');
             $table->unsignedBigInteger('questionNum');
-            $table->string('questionType');
-            $table->string('questionDesc');
+            $table->longtext('questionType');
+            $table->longtext('questionDesc');
         });
 
 
@@ -40,7 +40,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('choiceNum');
-            $table->string('choiceDesc');
+            $table->longtext('choiceDesc');
             $table->unsignedBigInteger('parentSurvey');
             $table->unsignedBigInteger('parentQuestion');
         });
@@ -50,8 +50,8 @@ return new class extends Migration {
         Schema::create('survey_answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('answerDesc')->nullable();
-            $table->string('choiceID')->nullable();
+            $table->longtext('answerDesc')->nullable();
+            $table->longtext('choiceID')->nullable();
             $table->unsignedBigInteger('respondentID')->nullable();
             $table->unsignedBigInteger('parentSurvey');
             $table->unsignedBigInteger('questionAnswered')->nullable();

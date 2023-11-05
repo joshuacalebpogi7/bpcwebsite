@@ -1,3 +1,3 @@
-<div>
-    <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
-</div>
+<x-home-layout>
+    @livewire('reply-forum', ['forum_reply_selected' => $forum_reply_selected])
+</x-home-layout>
