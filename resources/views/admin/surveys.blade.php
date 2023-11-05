@@ -100,8 +100,10 @@
                                                         @php
                                                             $updateAuthor = $users->firstWhere('id', $survey_posted->surveyUpdateAuthor);
                                                         @endphp
-                                                        {{ $updateAuthor->first_name }}
-                                                        @if ($updateAuthor->first_name != $updateAuthor->last_name)
+                                                        @if (isset($updateAuthor->first_name))
+                                                            {{ $updateAuthor->first_name }}
+                                                        @endif
+                                                        @if (isset($updateAuthor->last_name) && $updateAuthor->first_name != $updateAuthor->last_name)
                                                             {{ $updateAuthor->last_name }}
                                                         @endif
                                                     </td>
