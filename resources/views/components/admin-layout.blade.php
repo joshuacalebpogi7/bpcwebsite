@@ -42,11 +42,12 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                 <a class="navbar-brand brand-logo mr-5" href="/">
-                    <img src="/images/alumnilogoname.svg" alt="logo" style="height: 10rem; width: auto; padding:20px;" />
+                    <img src="/images/alumnilogoname.svg" alt="logo"
+                        style="height: 10rem; width: auto; padding:20px;" />
                 </a>
 
-                <a class="navbar-brand brand-logo-mini" href="/"><img src="/images/logo.png"
-                        alt="logo" style="height: 50px; width: 50px;" /></a>
+                <a class="navbar-brand brand-logo-mini" href="/"><img src="/images/logo.png" alt="logo"
+                        style="height: 50px; width: 50px;" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -137,7 +138,7 @@
                             <div class="collapse" id="ui-users">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"> <a
-                                            class="nav-link @if (Request::is('admin/admins') || Request::is('admin/add-admin') || Request::is('admin/edit-admin')) text-warning @endif"
+                                            class="nav-link @if (Request::is('admin/admins') || Request::is('admin/add-admin') || Request::is('admin/edit-admin*')) text-warning @endif"
                                             href="/admin/admins">Content Creator</a>
                                     </li>
                                     <li class="nav-item"> <a
@@ -178,8 +179,8 @@
                         <div class="collapse" id="ui-contents">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a
-                                    class="nav-link @if (Request::is('admin/news') || Request::is('admin/add-news') || Request::is('admin/edit-news*')) text-warning @endif"
-                                    href="/admin/news">News</a></li>
+                                        class="nav-link @if (Request::is('admin/news') || Request::is('admin/add-news') || Request::is('admin/edit-news*')) text-warning @endif"
+                                        href="/admin/news">News</a></li>
                                 <li class="nav-item"> <a
                                         class="nav-link @if (Request::is('admin/events') || Request::is('admin/add-events') || Request::is('admin/edit-events*')) text-warning @endif"
                                         href="/admin/events">Events</a></li>
@@ -209,39 +210,39 @@
                     @endif
                     @if (Request::is('admin/add-admin') || Request::is('admin/edit-admin/*'))
                         <a href="/admin/admins"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-alumni') || Request::is('admin/edit-alumni/*'))
                         <a href="/admin/users"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-courses') || Request::is('admin/edit-courses/*'))
                         <a href="/admin/courses"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/new_survey') || Request::is('admin/edit_survey/*') || Request::is('admin/view_survey/*'))
                         <a href="/admin/surveys"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-news') || Request::is('admin/edit-news/*'))
                         <a href="/admin/news"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-events') || Request::is('admin/edit-events/*'))
                         <a href="/admin/events"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-gallery') || Request::is('admin/edit-album/*'))
                         <a href="/admin/gallery"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/add-jobs') || Request::is('admin/edit-jobs/*'))
                         <a href="/admin/jobs"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     @if (Request::is('admin/view_forum/*') || Request::is('admin/add-forum') || Request::is('admin/edit_forum/*'))
                         <a href="/admin/forums"><button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
+                                <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
                     {{ $slot }}
                 </div>

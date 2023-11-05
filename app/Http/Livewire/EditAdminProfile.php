@@ -199,6 +199,10 @@ class EditAdminProfile extends Component
             $this->state['civil_status'] !== auth()->user()->civil_status ||
             $this->state['contact_no'] !== auth()->user()->contact_no ||
             $this->state['address'] !== auth()->user()->address ||
+            $this->state['first_name'] !== auth()->user()->first_name ||
+            $this->state['middle_name'] !== auth()->user()->middle_name ||
+            $this->state['last_name'] !== auth()->user()->last_name ||
+            $this->state['birthday'] !== auth()->user()->birthday ||
             $this->state['postal_code'] !== auth()->user()->postal_code
         ) {
             $birthday = Carbon::createFromFormat('Y-m-d', $this->state['birthday']);
