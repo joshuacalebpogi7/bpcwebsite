@@ -56,7 +56,8 @@
 
     <div class="col-xl-4">
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0" style="margin-bottom: 20px!important;
+        <div class="card mb-4 mb-xl-0"
+            style="margin-bottom: 20px!important;
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -95,7 +96,8 @@
         </div>
 
         <!-- Profile picture card-->
-        <div class="card mb-4 mb-xl-0" style="
+        <div class="card mb-4 mb-xl-0"
+            style="
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -106,7 +108,8 @@
             <div class="card-body">
                 <form wire:submit.prevent="updateAccountSecurity">
                     @csrf
-                    <div class="card" style="
+                    <div class="card"
+                        style="
                     background: rgba(136, 212, 152, 0.66);
                     border-radius: 16px;
                     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -114,10 +117,10 @@
                     -webkit-backdrop-filter: blur(14.4px);
                     border: 1px solid rgba(136, 212, 152, 0.3);">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row" style="flex-direction: column;">
 
                                 <div class="form-group">
-                                    <label for="username">Username/Student No.</label>
+                                    <label for="username">Username</label>
                                     <input wire:model="state.username"
                                         class="form-control @error('username') is-invalid @enderror @if ($this->state['username'] !== $this->user->username) is-valid @endif"
                                         type="username" placeholder="Username" name="username" id="username"
@@ -156,7 +159,8 @@
                                     <label for="new-password">New Password</label>
                                     <input wire:model="new_password"
                                         class="form-control @error('new_password') is-invalid @enderror @if ($new_password) is-valid @endif"
-                                        type="text" placeholder="New Password" name="new_password" id="new-password"
+                                        type="text" placeholder="New Password" name="new_password"
+                                        id="new-password"
                                         @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
                                     @if ($edit == true)
                                         <button class="btn btn-success" wire:click.prevent="generatePassword">Generate
@@ -197,12 +201,14 @@
         @if ($edit)
             <button wire:click.prevent="resetRestrictedEditConfirmation" class="btn btn-danger">Cancel</button>
         @else
-            <button wire:click.prevent="allowRestrictedEditConfirmation" class="btn btn-warning" style="margin: 10px">Allow edit
+            <button wire:click.prevent="allowRestrictedEditConfirmation" class="btn btn-warning"
+                style="margin: 10px">Allow edit
                 all</button>
         @endif
 
         <!-- Account details card-->
-        <div class="card mb-4" style="
+        <div class="card mb-4"
+            style="
         background: rgba(198, 218, 191, 0.67);
         border-radius: 16px;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -213,7 +219,8 @@
             <div class="card-body">
                 <form wire:submit.prevent="updateProfile">
                     @csrf
-                    <div class="card" style="
+                    <div class="card"
+                        style="
                     background: rgba(136, 212, 152, 0.66);
                     border-radius: 16px;
                     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -366,41 +373,45 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group">
-                                    <label for="address">Full address</label>
-                                    <input wire:model="state.address"
-                                        class="form-control @error('address') is-invalid @enderror" type="text"
-                                        placeholder="Street address, apt, suite, unit, building, floor, barangay, city, province, etc."
-                                        name="address" id="address"
-                                        @if ($edit == false) style="cursor: not-allowed;"
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                        <label for="address">Full address</label>
+                                        <input wire:model="state.address"
+                                            class="form-control @error('address') is-invalid @enderror"
+                                            type="text"
+                                            placeholder="Street address, apt, suite, unit, building, floor, barangay, city, province, etc."
+                                            name="address" id="address"
+                                            @if ($edit == false) style="cursor: not-allowed;"
                                         disabled readonly @endif>
 
-                                    @error('address')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
+                                        @error('address')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="postal-code">Postal code</label>
+                                        <input wire:model="state.postal_code"
+                                            class="form-control @error('postal_code') is-invalid @enderror"
+                                            type="text" placeholder="Postal code" name="postal_code"
+                                            id="postal-code"
+                                            @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
 
-                                <div class="form-group">
-                                    <label for="postal-code">Postal code</label>
-                                    <input wire:model="state.postal_code"
-                                        class="form-control @error('postal_code') is-invalid @enderror"
-                                        type="text" placeholder="Postal code" name="postal_code" id="postal-code"
-                                        @if ($edit == false) style="cursor: not-allowed;" disabled readonly @endif>
+                                        @error('postal_code')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
 
-                                    @error('postal_code')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-
+                                    </div>
                                 </div>
-
                             </div>
 
                         </div>
