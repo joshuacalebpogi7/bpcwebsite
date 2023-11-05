@@ -89,10 +89,10 @@
                                                         @php
                                                             $author = $users->firstWhere('id', $survey_posted->surveyAuthor);
                                                         @endphp
-                                                        @if ($author->first_name != null)
+                                                        @if (isset($author->first_name))
                                                             {{ $author->first_name }}
                                                         @endif
-                                                        @if ($author->last_name != null && $author->first_name != $author->last_name)
+                                                        @if (isset($author->last_name) && $author->first_name != $author->last_name)
                                                             {{ $author->last_name }}
                                                         @endif
                                                     </td>

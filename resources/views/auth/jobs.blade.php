@@ -15,6 +15,7 @@
             </div>
         </div>
         <div class="wrapper">
+
             @foreach ($jobs as $job)
                 <div class="card">
                     <div class="card-left blue-bg">
@@ -31,9 +32,12 @@
                                 <p>
                                     <ion-icon name="today-outline"></ion-icon>{{ $job->created_at->diffForHumans() }}
                                 </p>
-                                <p>
+                                <p class="job-created-at">
                                     <ion-icon name="hourglass-outline"></ion-icon>{{ $job->job_type }}
                                 </p>
+                                {{-- <p class="job-created-at">{{ date('Y-m-d H:i:s', strtotime($job->created_at)) }}</p> --}}
+
+
                                 <p>
                                     {{-- @php
                                         dd($userJobs->where('job_id', $job->id)->count());
