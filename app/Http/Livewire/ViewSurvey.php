@@ -7,11 +7,12 @@ use App\Models\surveys_posted;
 use App\Models\survey_questions;
 use App\Models\survey_choices;
 use App\Models\survey_answers;
+use App\Models\User;
 
 class ViewSurvey extends Component
 {
-
     public $user;
+    public $respondents;
     public $surveyType = '';
     public $surveyTitle;
     public $surveyDesc;
@@ -43,11 +44,13 @@ class ViewSurvey extends Component
         $this->forFirstTimers = $survey_selected->forFirstTimers;
         $this->survey_questions = survey_questions::where('parentSurvey', $this->survey_selected->id)->get();
         $this->survey_answers = survey_answers::where('parentSurvey', $this->survey_selected->id)->get();
+        //$this->respondents = User::where('id', $this->survey_answers->respondentID)->get();
+        $this->respondents = User::all();
 
     }
 
-    public function render(surveys_posted $survey_selected, survey_questions $survey_questions, survey_choices $survey_choices, survey_answers $survey_answers)
+    public function render(surveys_posted $survey_selected, survey_questions $survey_questions, survey_choices $survey_choices, survey_answers $survey_answers, User $users)
     {
-        return view('livewire.view-survey', ['survey_selected' => $survey_selected, 'survey_questions' => $survey_questions, 'survey_choices' => $survey_choices, 'survey_answers' => $survey_answers]);
+        return view('livewire.view-survey', ['survey_selected' => $survey_selected, 'survey_questions' => $survey_questions, 'survey_choices' => $survey_choices, 'survey_answers' => $survey_answers, 'users' => $users, 'respondents' => $this->respondents,]);
     }
 }

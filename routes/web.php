@@ -160,6 +160,7 @@ Route::get('admin/new_survey', function () {
 })->middleware('can:visitAdminPages');
 Route::get('admin/edit_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeEdited'])->name('edit_survey')->middleware('can:visitAdminPages');
 Route::get('delete_survey/{survey_selected}', [SurveyController::class, 'deleteSurvey'])->name('delete_survey')->middleware('can:visitAdminPages');
+Route::get('delete_answer/{answer_selected}', [SurveyController::class, 'deleteAnswer'])->name('delete_answer')->middleware('can:visitAdminPages');
 /* Route::get('/survey', function () {
     return view('auth.survey');
 })->name('survey'); */
