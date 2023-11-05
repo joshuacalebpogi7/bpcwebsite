@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use App\Models\forums_posted;
 use App\Models\forum_replies;
+use App\Models\Logs;
 
 class AddForum extends Component
 {
@@ -35,6 +36,15 @@ class AddForum extends Component
                 'forumUpdateAuthor' => $this->user->id,
                 'active' => $this->active,
             ]);
+
+            if ($new_forum) {
+                $log_forum = Logs::create([
+                    'log_author' => $this->user->id,
+                    'logged_first_name' => $this->user->first_name,
+                    'logged_last_name' => $this->user->last_name,
+                    'loggedBody' => "Created " . $new_forum->forumTitle . " forum"
+                ]);
+            }
 
             // Commit the transaction upon successful query
             DB::commit();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Logs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,6 +19,16 @@ class CourseController extends Controller
             "showMethod" => "slideDown",
             "hideMethod" => "slideUp"
         ]);
+
+        if ($course->wasDeleted()) {
+            $log = Logs::create([
+                'log_author' => auth()->user()->id,
+                'logged_first_name' => auth()->user()->first_name,
+                'logged_last_name' => auth()->user()->last_name,
+                'loggedBody' => "Deleted " . $course->course . " course"
+            ]);
+        }
+
         return back();
     }
 

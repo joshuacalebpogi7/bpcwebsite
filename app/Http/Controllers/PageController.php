@@ -19,11 +19,12 @@ use App\Models\GalleryAlbum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Livewire\Components\SurveyList;
+use App\Models\Logs;
 
 class PageController extends Controller
 {
     //user pages
-    public function home(News $news, Events $events, Jobs $jobs)
+    public function home(News $news, Events $events, Jobs $jobs, User $user)
     {
         if (auth()->check()) {
             $user = auth()->user();
@@ -37,7 +38,7 @@ class PageController extends Controller
             }
 
             if ($user->user_type != 'alumni') {
-                return $this->adminDashboard($user);
+                return $this->adminDashboard();
             }
         }
 
@@ -414,6 +415,9 @@ class PageController extends Controller
 
             //course
             'jobs' => Jobs::all(),
+
+            //Logs
+            'logs' => Logs::all(),
 
         ];
         // dd($user->where('course', $course->course)->get());

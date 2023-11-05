@@ -544,56 +544,24 @@
     <div class="card-body">
         <p class="card-title">Notifications</p>
         <ul class="icon-data-list">
-            <li>
-                <div class="d-flex">
-                    <img src="/admin-dashboard/images/faces/face1.jpg" alt="user">
-                    <div>
-                        <p class="text-info mb-1">Isabella Becker</p>
-                        <p class="mb-0">Sales dashboard have been created</p>
-                        <small>9:30 am</small>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="d-flex">
-                    <img src="/admin-dashboard/images/faces/face2.jpg" alt="user">
-                    <div>
-                        <p class="text-info mb-1">Adam Warren</p>
-                        <p class="mb-0">You have done a great job #TW111</p>
-                        <small>10:30 am</small>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="d-flex">
-                    <img src="/admin-dashboard/images/faces/face3.jpg" alt="user">
-                    <div>
-                        <p class="text-info mb-1">Leonard Thornton</p>
-                        <p class="mb-0">Sales dashboard have been created</p>
-                        <small>11:30 am</small>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="d-flex">
-                    <img src="/admin-dashboard/images/faces/face4.jpg" alt="user">
-                    <div>
-                        <p class="text-info mb-1">George Morrison</p>
-                        <p class="mb-0">Sales dashboard have been created</p>
-                        <small>8:50 am</small>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="d-flex">
-                    <img src="/admin-dashboard/images/faces/face5.jpg" alt="user">
-                    <div>
-                        <p class="text-info mb-1">Ryan Cortez</p>
-                        <p class="mb-0">Herbs are fun and easy to grow.</p>
-                        <small>9:00 am</small>
-                    </div>
-                </div>
-            </li>
+            @if (!empty($data['logs']))
+                @foreach ($data['logs'] as $log)
+                @php
+                    $log_user = $data['users']->find($log->log_author);
+                @endphp
+                    <li>
+                        <div class="d-flex">
+                            <img src="{{ $log_user->avatar }}" alt="user">
+                            <div>
+                                <p class="text-info mb-1">{{ $log_user->first_name }} {{ $log_user->last_name }}
+                                </p>
+                                <p class="mb-0">{{ $log->loggedBody }}</p>
+                                <small>{{ $log->created_at->diffForHumans() }}<br>{{ $log->created_at->format('D, M j, Y g:i A') }}</small>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            @endif
         </ul>
     </div>
 </div>
