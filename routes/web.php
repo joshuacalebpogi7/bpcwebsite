@@ -48,6 +48,7 @@ Route::get('/additional-info', [PageController::class, "addInfo"])->middleware('
 Route::get('/edit-profile', [PageController::class, "editProfile"])->middleware('authUser');
 
 Route::get('/jobs/{jobs:job_title}', [PageController::class, "jobsSinglePage"])->middleware('authUser');
+// Route::post('/jobs/search', [JobsController::class,"search"]);
 Route::get('/events/{events:title}', [PageController::class, "eventsSinglePage"])->middleware('authUser');
 Route::get('/news/{news:title}', [PageController::class, "newsSinglePage"])->middleware('authUser');
 Route::get('/gallery/{album:album_name}', [PageController::class, "gallerySinglePage"])->middleware('authUser');

@@ -7,15 +7,7 @@
     @endpush
 
     <div class="main-5">
-        <div class="main-header">
-            <ion-icon class="menu-bar" name="menu-outline"></ion-icon>
-            <div class="search">
-                <input type="text" placeholder="Search your best job here...">
-                <button class="btn-search">
-                    <ion-icon name="search-outline">
-                </button>
-            </div>
-        </div>
+
         <div class="filter-wrapper wrapper">
             <div class="filter">
                 <a href="/jobs-archive"><button class="btn-filter">Archive</button></a>
@@ -24,14 +16,16 @@
         <div class="sort">
             <p>Sort</p>
             <div class="sort-list">
-                <select>
+                <select id="sort-select">
                     <option value="0">All</option>
                     <option value="1">Newest Post</option>
                     <option value="2">Oldest Post</option>
+
                 </select>
             </div>
         </div>
         <div class="wrapper">
+
             @foreach ($jobs as $job)
                 <div class="card">
                     <div class="card-left blue-bg">
@@ -48,9 +42,12 @@
                                 <p>
                                     <ion-icon name="today-outline"></ion-icon>{{ $job->created_at->diffForHumans() }}
                                 </p>
-                                <p>
+                                <p class="job-created-at">
                                     <ion-icon name="hourglass-outline"></ion-icon>{{ $job->job_type }}
                                 </p>
+                                {{-- <p class="job-created-at">{{ date('Y-m-d H:i:s', strtotime($job->created_at)) }}</p> --}}
+
+
                                 <p>
                                     {{-- @php
                                         dd($userJobs->where('job_id', $job->id)->count());

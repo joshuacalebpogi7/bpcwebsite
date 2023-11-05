@@ -48,8 +48,8 @@
                             <p class="fs-30 mb-2">{{ $data['courses']->count() }}</p>
                             <p>
                                 @if ($data['courses']->count() > 0)
-                                {{ number_format($data['verifiedAlumni']->whereNotNull('course')->count() / $data['courses']->count(), 2) }}
-                                (Average alumni in each course)
+                                    {{ number_format($data['verifiedAlumni']->whereNotNull('course')->count() / $data['courses']->count(), 2) }}
+                                    (Average alumni in each course)
                                 @endif
                             </p>
                         </div>
@@ -499,6 +499,7 @@
                     <thead>
                         <tr>
                             <th class="pl-0  pb-2 border-bottom">Course</th>
+                            <th class="pl-0  pb-2 border-bottom">Course Name</th>
                             <th class="border-bottom pb-2">Verified Alumni (%)</th>
                             <th class="border-bottom pb-2">Total</th>
                         </tr>
@@ -508,6 +509,7 @@
                             @if ($key < 10)
                                 <tr>
                                     <td class="pl-0">{{ $course->course }}</td>
+                                    <td class="pl-0">{{ $course->description }}</td>
                                     <td>
                                         <p class="mb-0"><span class="font-weight-bold mr-2">
 
