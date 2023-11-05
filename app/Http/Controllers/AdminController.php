@@ -48,12 +48,12 @@ class AdminController extends Controller
     }
     public function deleteUser(User $user)
     {
-        $userAlumniDeleted = $user->where('user_type', 'alumni')->delete();
-        $userDeleted = $user->delete();
-        if ($userAlumniDeleted) {
+        if ($user->user_type == 'alumni') {
+            $user->delete();
             return redirect('/admin/users')->with('success', 'User successfully deleted!');
         }
-        elseif($userDeleted){
+        elseif($user->user_type == 'content creator'){
+            $user->delete();
             return redirect('/admin/admins')->with('success', 'User successfully deleted!');
         }
         else{
