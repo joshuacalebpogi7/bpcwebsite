@@ -139,6 +139,7 @@ class MultiStepForm extends Component
                 "job_location" => trim(strip_tags($this->job_location)),
                 "monthly_salary" => $this->monthly_salary,
                 "add_info_completed" => true,
+                "survey_completed" => true,
                 "avatar" => $avatar_name,
                 "password" => $this->confirm_password,
                 'default_password' => null
@@ -149,7 +150,7 @@ class MultiStepForm extends Component
             }
             $this->deleteLockFile();
 
-            return redirect('/survey')->with('info', 'Congrats please complete this survey!');
+            return redirect('/');
         }
     }
     //lock files

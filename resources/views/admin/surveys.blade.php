@@ -89,10 +89,10 @@
                                                         @php
                                                             $author = $users->firstWhere('id', $survey_posted->surveyAuthor);
                                                         @endphp
-                                                        @if ($author->first_name != null)
+                                                        @if (isset($author->first_name))
                                                             {{ $author->first_name }}
                                                         @endif
-                                                        @if ($author->last_name != null && $author->first_name != $author->last_name)
+                                                        @if (isset($author->last_name) && $author->first_name != $author->last_name)
                                                             {{ $author->last_name }}
                                                         @endif
                                                     </td>
@@ -100,8 +100,10 @@
                                                         @php
                                                             $updateAuthor = $users->firstWhere('id', $survey_posted->surveyUpdateAuthor);
                                                         @endphp
-                                                        {{ $updateAuthor->first_name }}
-                                                        @if ($updateAuthor->first_name != $updateAuthor->last_name)
+                                                        @if (isset($updateAuthor->first_name))
+                                                            {{ $updateAuthor->first_name }}
+                                                        @endif
+                                                        @if (isset($updateAuthor->last_name) && $updateAuthor->first_name != $updateAuthor->last_name)
                                                             {{ $updateAuthor->last_name }}
                                                         @endif
                                                     </td>
