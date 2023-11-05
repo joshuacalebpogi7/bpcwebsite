@@ -565,6 +565,16 @@ public function replyForum(forum_replies $forum_reply_selected, User $authors)
     return view('auth.reply_forum', ['forum_reply_selected' => $forum_reply_selected, 'authors' => $authors->get()]);
 }
 
+public function adminEditForum(forums_posted $forum_selected, User $authors)
+{
+    return view('admin.edit_forum', ['forum_selected' => $forum_selected, 'authors' => $authors->get()]);
+}
+
+public function editForum(forums_posted $forum_selected, User $authors)
+{
+    return view('auth.edit_forum', ['forum_selected' => $forum_selected, 'authors' => $authors->get()]);
+}
+
 
 public function viewForum(forums_posted $forum_selected)
 {

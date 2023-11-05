@@ -75,16 +75,16 @@
 
                             <select name="forumCategory" class="box" wire:model = "forumCategory" required>
                                 <option value="" selected disabled>Category</option>
-                                <option value="general">General Discussion</option>
-                                <option value="help">Help</option>
-                                <option value="blog">Blog</option>
+                                <option value="General Discussion">General Discussion</option>
+                                <option value="Help">Help</option>
+                                <option value="Blog">Blog</option>
                             </select>
 
                         </div>
                     </div>
                     <textarea name="forumBody" class="box" required placeholder = "Body" cols="30" rows="10"
                         wire:model = "forumBody"></textarea>
-                    <input type="submit" class="btn">
+                    <input type="submit" value = "Post" class="btn">
                 </form>
             </div>
     </section>

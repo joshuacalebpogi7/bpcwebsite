@@ -56,12 +56,14 @@
                                                                     View
                                                                 </button>
                                                             </a>
-
-                                                            <button type="button" class="btn btn-success btn-icon-text"
-                                                                style="width: 150px; height: 50px; margin: 5px; ">
-                                                                <i class="ti-pencil btn-icon-prepend"></i>
-                                                                Edit
-                                                            </button>
+                                                            <a href="#edit{{-- route('admin/edit_forum', ['forum_selected' => $forum_posted->id]) --}}"
+                                                                class="flex-fill">
+                                                                <button type="button"
+                                                                    class="btn btn-success btn-icon-text"
+                                                                    style="width: 150px; height: 50px; margin: 5px; ">
+                                                                    <i class="ti-pencil btn-icon-prepend"></i>
+                                                                    Edit
+                                                                </button>
                                                             </a>
                                                             <button type="button" class="btn btn-danger btn-icon-text"
                                                                 style="width: 150px; height: 50px; margin: 5px;"

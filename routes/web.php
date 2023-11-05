@@ -118,6 +118,8 @@ Route::get('admin/edit-news/{news:id}/{title}', [PageController::class, 'editNew
 Route::get('admin/edit-events/{events:id}/{title}', [PageController::class, 'editEventsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/edit-jobs/{jobs:id}/{title}', [PageController::class, 'editJobsPage'])->middleware('can:visitAdminPages');
 Route::get('admin/edit-album/{album:id}/{album_name}', [PageController::class, 'editGalleryPage'])->middleware('can:visitAdminPages');
+Route::get('admin/edit_forum/{forum_selected}', [PageController::class, 'adminEditForum'])->middleware('can:visitAdminPages')->name('admin/edit_forum');
+
 
 
 //Admin POST related routes
@@ -178,6 +180,7 @@ Route::get('/posted_forums', function () {
 })->middleware('mustBeLoggedIn')->name('posted_forums');
 
 Route::get('/reply_forum/{forum_reply_selected}', [PageController::class, 'replyForum'])->middleware('mustBeLoggedIn')->name('reply_forum');
+Route::get('/edit_forum/{forum_selected}', [PageController::class, 'editForum'])->middleware('mustBeLoggedIn')->name('edit_forum');
 Route::get('/view_forum/{forum_selected}', [ForumsController::class, 'viewForum'])->middleware('mustBeLoggedIn')->name('view_forum');
 Route::get('/delete_forum/{forum_selected}', [ForumsController::class, 'deleteForum'])->middleware('mustBeLoggedIn')->name('delete_forum');
 Route::get('/delete_comment/{forum_selected}', [ForumsController::class, 'deleteComment'])->middleware('mustBeLoggedIn')->name('delete_comment');
