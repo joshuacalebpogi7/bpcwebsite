@@ -122,7 +122,7 @@
     <!--=============== MAIN ===============-->
     <main class="main container" id="main">
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <a href="/jobs"><button class="btn btn-primary" style="border-radius: 20px;">Back</button></a> 
+            <a href="/jobs"><button class="btn btn-primary" style="border-radius: 20px; margin: 0 0 20px 45px;">Back</button></a> 
             <div class="container">
                 <div class="row gy-5 gx-4">
                     <div class="col-lg-8">
