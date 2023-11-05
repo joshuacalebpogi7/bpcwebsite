@@ -12,7 +12,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <section id="page-header">
-    <h2 style="color: #fafafa">● FORUM / DISCUSSION ●</h2>
+    <h2 style="color: #fafafa">● <i class="ri-discuss-line"></i> FORUM ●</h2>
 </section>
 <div class="svg1">
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">

@@ -305,9 +305,7 @@ class AdminEditAdminProfile extends Component
                 Validator::make($this->state, [
                     'civil_status' => ['nullable', Rule::in(['single', 'married', 'separated', 'widowed'])],
                     'contact_no' => ['nullable', 'regex:/^[\+?\d\s]+$/'],
-                    'first_name' => ['required'],
-                    'middle_name' => ['required'],
-                    'last_name' => ['required'],
+                    
                     'birthday' => ['required', 'date_format:Y-m-d'],
                     'gender' => ['required', Rule::in(['male', 'female'])],
                 ])->validate();
@@ -317,14 +315,24 @@ class AdminEditAdminProfile extends Component
                     'contact_no' => trim($this->state['contact_no']),
                     'address' => trim(strip_tags($this->state['address'])),
                     'postal_code' => trim(strip_tags($this->state['postal_code'])),
-                    'first_name' => trim(strip_tags(ucwords($this->state['first_name']))),
-                    'middle_name' => trim(strip_tags(ucwords($this->state['middle_name']))),
-                    'last_name' => trim(strip_tags(ucwords($this->state['last_name']))),
-                    'birthday' => $this->state['birthday'],
-                    'gender' => $this->state['gender'],
-                    'age' => $age,
+
                 ]);
             }
+
+            Validator::make($this->state, [
+                    'first_name' => ['required'],
+                    'middle_name' => ['required'],
+                    'last_name' => ['required'],
+            ])->validate();
+
+            $this->user->update([
+                'first_name' => trim(strip_tags(ucwords($this->state['first_name']))),
+                'middle_name' => trim(strip_tags(ucwords($this->state['middle_name']))),
+                'last_name' => trim(strip_tags(ucwords($this->state['last_name']))),
+                'birthday' => $this->state['birthday'],
+                'gender' => $this->state['gender'],
+                'age' => $age,
+            ]);
 
             toastr()->success('', 'Profile updated successfully!', [
                 "showEasing" => "swing",

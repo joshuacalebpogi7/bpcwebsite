@@ -136,7 +136,7 @@
         <div class="row" style="margin-top:50px">
             <div class="col-md-10 offset-md-1">
 
-                <h1>Additional Information</h1>
+                <h1 style="color: #00a56f;">Bulacan Polytechnic College Data Alumni Questionnaire</h1>
                 <hr>
                 @livewire('multi-step-form')
             </div>
