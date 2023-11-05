@@ -85,10 +85,12 @@
                                                     </td>
                                                     <td>
                                                         @php
-                                                            $author = $authors->firstWhere('id', $forum_posted->forumAuthor);
+                                                            $author = $users->firstWhere('id', $survey_posted->surveyAuthor);
                                                         @endphp
-                                                        {{ $author->first_name }}
-                                                        @if ($author->first_name != $author->last_name)
+                                                        @if ($author->first_name != null)
+                                                            {{ $author->first_name }}
+                                                        @endif
+                                                        @if ($author->last_name != null && $author->first_name != $author->last_name)
                                                             {{ $author->last_name }}
                                                         @endif
                                                     </td>
