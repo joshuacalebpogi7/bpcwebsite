@@ -1,7 +1,7 @@
 @if (auth()->user()->user_type != 'alumni')
     <div class = "container5">
         <header class="header">
-            <h1 id="title" class="text-center">Create A Discussion</h1>
+            <h1 id="title" class="text-center">Edit {{ $forum_selected->forumTitle }}</h1>
             {{-- <label id="name-label">Survey Type</label>
          <select class="form-control" wire:model="surveyType">
             <option disabled selected value="">Choose type</option>
@@ -9,7 +9,7 @@
             <option value="Google_form">Google Forms</option>
         </select> --}}
         </header>
-        <form id="survey-form" wire:submit.prevent="createForumPost">
+        <form id="survey-form" wire:submit.prevent="updateForumPost">
             @csrf
             <div class="form-group">
                 <label>
@@ -45,7 +45,7 @@
             <a href = "{{ url('forums') }}" class="back-home">Back To Forum</a>
             <div class="container1">
 
-                <form id="survey-form" wire:submit.prevent="createForumPost" action="" method="POST"
+                <form id="survey-form" wire:submit.prevent="editForumPost" action="" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="flex">
