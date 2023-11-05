@@ -131,4 +131,7 @@ class JobsController extends Controller
         return back();
 
     }
+    
 }
+
+

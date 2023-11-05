@@ -151,6 +151,7 @@ Route::delete('admin/delete-photo/{gallery:id}', [GalleryController::class, 'del
 Route::delete('admin/delete-course/{course:id}', [CourseController::class, 'deleteCourse'])->middleware('can:visitAdminPages');
 
 //Admin VIEW related routes
+Route::get('admin/view_survey/{survey_selected}', [PageController::class, 'adminViewSurvey'])->middleware('can:visitAdminPages')->name('admin/view_survey');
 Route::get('admin/view_forum/{forum_selected}', [PageController::class, 'adminViewForum'])->middleware('can:visitAdminPages')->name('admin/view_forum');
 Route::get('admin/reply_forum/{forum_reply_selected}', [PageController::class, 'adminReplyForum'])->middleware('can:visitAdminPages')->name('admin/reply_forum');
 
@@ -160,6 +161,7 @@ Route::get('admin/new_survey', function () {
 })->middleware('can:visitAdminPages');
 Route::get('admin/edit_survey/{survey_selected}', [SurveyController::class, 'fetchSurveyToBeEdited'])->name('edit_survey')->middleware('can:visitAdminPages');
 Route::get('delete_survey/{survey_selected}', [SurveyController::class, 'deleteSurvey'])->name('delete_survey')->middleware('can:visitAdminPages');
+Route::get('delete_answer/{answer_selected}', [SurveyController::class, 'deleteAnswer'])->name('delete_answer')->middleware('can:visitAdminPages');
 /* Route::get('/survey', function () {
     return view('auth.survey');
 })->name('survey'); */

@@ -433,9 +433,9 @@ class PageController extends Controller
     {
         return view('admin.courses', ['courses' => $courses->latest()->get(), 'user' => $user]);
     }
-    public function adminSurvey(surveys_posted $survey_list, User $authors)
+    public function adminSurvey(surveys_posted $survey_list, User $users)
     {
-        return view('admin.surveys', ['survey_list' => $survey_list->get(), 'authors' => $authors->get()]);
+        return view('admin.surveys', ['survey_list' => $survey_list->get(), 'users' => $users->get()]);
     }
     public function adminNews(News $news)
     {
@@ -560,6 +560,11 @@ class PageController extends Controller
         return view('admin.add-survey');
     }
 //ADMIN VIEW PAGES
+public function adminViewSurvey(surveys_posted $survey_selected, User $user)
+{
+    return view('admin.view_survey', ['survey_selected' => $survey_selected, 'user' => $user->get()]);
+}
+
 public function adminViewForum(forums_posted $forum_selected, User $authors)
 {
     return view('admin.view_forum', ['forum_selected' => $forum_selected, 'authors' => $authors->get()]);

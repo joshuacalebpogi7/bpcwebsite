@@ -219,7 +219,7 @@
                         <a href="/admin/courses"><button type="button" class="btn btn-primary btn-icon-text">
                             <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif
-                    @if (Request::is('admin/new_survey') || Request::is('admin/edit_survey/*'))
+                    @if (Request::is('admin/new_survey') || Request::is('admin/edit_survey/*') || Request::is('admin/view_survey/*'))
                         <a href="/admin/surveys"><button type="button" class="btn btn-primary btn-icon-text">
                             <i class="ti-angle-double-left btn-icon-prepend"></i>Back</button></a>
                     @endif

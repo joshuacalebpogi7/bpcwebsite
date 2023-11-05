@@ -7,21 +7,11 @@
     @endpush
 
     <div class="main-5">
-
+        <div class="main-header">
+        </div>
         <div class="filter-wrapper wrapper">
             <div class="filter">
                 <a href="/jobs-archive"><button class="btn-filter">Archive</button></a>
-            </div>
-        </div>
-        <div class="sort">
-            <p>Sort</p>
-            <div class="sort-list">
-                <select id="sort-select">
-                    <option value="0">All</option>
-                    <option value="1">Newest Post</option>
-                    <option value="2">Oldest Post</option>
-
-                </select>
             </div>
         </div>
         <div class="wrapper">

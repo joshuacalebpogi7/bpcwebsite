@@ -12,10 +12,10 @@ class ReplyForum extends Component
 {
 
     public $user;
-    public $author;
     public $forum_author;
     public $forum_selected;
     public $forum_reply_selected;
+    public $forum_reply_author;
     public $replyBody;
     public $forumReplies = [];
     public $active;
@@ -30,7 +30,7 @@ class ReplyForum extends Component
         $this->forum_selected = forums_posted::where('id', $this->forum_reply_selected->parentForum)->first();
         $this->forum_author = User::where('id', $this->forum_selected->forumAuthor)->first();
         $this->forum_reply_selected = $forum_reply_selected;
-        $this->author = User::where('id', $this->forum_reply_selected->replyAuthor)->first();
+        $this->forum_reply_author = User::where('id', $this->forum_reply_selected->replyAuthor)->first();
     }
 
     public function replyForum()
