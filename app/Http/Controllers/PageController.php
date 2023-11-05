@@ -550,6 +550,11 @@ class PageController extends Controller
         return view('admin.add-survey');
     }
 //ADMIN VIEW PAGES
+public function adminViewSurvey(surveys_posted $survey_selected, User $user)
+{
+    return view('admin.view_survey', ['survey_selected' => $survey_selected, 'user' => $user->get()]);
+}
+
 public function adminViewForum(forums_posted $forum_selected, User $authors)
 {
     return view('admin.view_forum', ['forum_selected' => $forum_selected, 'authors' => $authors->get()]);

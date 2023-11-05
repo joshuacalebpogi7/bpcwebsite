@@ -49,6 +49,16 @@
                                                     <td>{{ $survey_posted->id }}</td>
                                                     <td>
                                                         <div>
+                                                            <a href="{{ route('admin/view_survey', ['survey_selected' => $survey_posted->id]) }}"
+                                                            class="flex-fill">
+                                                            <button type="button"
+                                                                class="btn btn-warning btn-icon-text"
+                                                                style="width: 150px; height: 50px; margin: 5px; ">
+                                                                <i class="ti-eye btn-icon-prepend"></i>
+                                                                View Answers
+                                                            </button>
+                                                        </a>
+                                                        <br>
                                                             <a href="{{ route('edit_survey', ['survey_selected' => $survey_posted->id]) }}"
                                                                 class="flex-fill">
                                                                 <button type="button"
