@@ -46,51 +46,6 @@ body{
     gap: 1rem;
 }
 
-.menu-bar{
-    background-color: var(--whiteColor);
-    padding: 0.5rem;
-    border-radius: 20px;
-    display: none;
-}
-
-.search{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    border: none;
-    background-color: none;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    position: relative;
-    background-color: var(--whiteColor);
-}
-
-.search input{
-    width: 90%;
-    border: none;
-    color: var(--darkGreyColor);
-}
-
-.btn-search{
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    padding: 0 5%;
-    border: none;
-    background-color: var(--primaryColor);
-    color: var(--whiteColor);
-    font-size: 18px;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    cursor: pointer;
-}
-
-.btn-search:hover{
-    background-color: var(--secondaryColor);
-    color: var(--fontColor);
-}
-
 .filter-wrapper{
     margin: 1rem 0;
     font-size: 14px;
@@ -117,25 +72,6 @@ body{
     background-color: var(--primaryColor);
     color: var(--whiteColor);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.sort{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.sort p{
-    font-size: 14px;
-}
-
-.sort-list select{
-    height: 1.5rem;
-    border-radius: 20px;
-    border: none;
-    margin-top: 0 0.5rem;
-    padding-left: 0.5rem;
 }
 
 .wrapper{
