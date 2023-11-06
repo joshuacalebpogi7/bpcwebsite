@@ -523,7 +523,7 @@
                                 <button type="button" class="delete"
                                     onclick="confirmDeleteForum({{ json_encode($forum_selected) }})">
                                     <img src="{{ asset('/images/icon-delete.svg') }}" alt=""
-                                        class="control-icon">Delete
+                                        class="control-icon">
                                 </button>
                             </div>
                         @endif
@@ -551,6 +551,16 @@
                 @foreach ($forumReplies as $forumFirstReply)
                     @if ($forumFirstReply['replyingTo'] == null)
                         <div class="comments-wrp">
+                            <div style = "text-align: right;">
+                                @if ($forumFirstReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                    <button class="delete"
+                                        onclick="confirmDeleteComment({{ json_encode($forumFirstReply) }})">
+                                        <img src="{{ URL::asset('/images/icon-delete.svg') }}" alt=""
+                                            class="control-icon"></button>
+                                    <button class="edit"><img src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                            alt="" class="control-icon"></button>
+                                @endif
+                            </div>
                             <div class="comment container3">
                                 <div class="c-score">
                                     @if (auth()->user()->user_type != 'alumni')
@@ -587,14 +597,7 @@
                                     </form>
                                 </div>
                                 <div class="c-controls">
-                                    @if ($forumFirstReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                                        <button class="delete"
-                                            onclick="confirmDeleteComment({{ json_encode($forumFirstReply) }})">
-                                            <img src="{{ URL::asset('/images/icon-delete.svg') }}" alt=""
-                                                class="control-icon">Delete</button>
-                                        <button class="edit"><img src="{{ URL::asset('/images/icon-edit.svg') }}"
-                                                alt="" class="control-icon">Edit</button>
-                                    @endif
+
                                     @if (auth()->user()->user_type != 'alumni')
                                         <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumFirstReply->id]) }}"
                                             class="reply"><img src="images/icon-reply.svg" alt=""
@@ -638,6 +641,17 @@
                                             $isSecondReplyOp = $forumSecondReplyAuthor && $forumSecondReplyAuthor->id === $forum_selected->forumAuthor;
                                             $isSecondReplyUser = $forumSecondReplyAuthor && $forumSecondReplyAuthor->id === auth()->user()->id;
                                         @endphp
+                                        <div style = "text-align: right;">
+                                            @if ($forumSecondReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                <button class="delete"
+                                                    onclick="confirmDeleteComment({{ json_encode($forumSecondReply) }})">
+                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                        alt="" class="control-icon"></button>
+                                                <button class="edit"><img
+                                                        src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                        alt="" class="control-icon"></button>
+                                            @endif
+                                        </div>
                                         <div class="comment container3">
                                             <div class="c-score">
                                                 @if (auth()->user()->user_type != 'alumni')
@@ -676,15 +690,6 @@
                                                 </form>
                                             </div>
                                             <div class="c-controls">
-                                                @if ($forumSecondReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                                                    <button class="delete"
-                                                        onclick="confirmDeleteComment({{ json_encode($forumSecondReply) }})">
-                                                        <img src="{{ URL::asset('/images/icon-delete.svg') }}"
-                                                            alt="" class="control-icon">Delete</button>
-                                                    <button class="edit"><img
-                                                            src="{{ URL::asset('/images/icon-edit.svg') }}"
-                                                            alt="" class="control-icon">Edit</button>
-                                                @endif
                                                 @if (auth()->user()->user_type != 'alumni')
                                                     <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumSecondReply->id]) }}"
                                                         class="reply"><img src="images/icon-reply.svg"
@@ -712,8 +717,13 @@
                                                 </p>
                                             </div>
                                             <p class="c-text">
-                                                <span class="reply-to">{{ $forumFirstReply['replyBody'] }}</span>
-                                                <span class="c-body">{{ $forumSecondReply['replyBody'] }}</span>
+                                                <span class="reply-to"></span>
+                                                <span class="c-body">
+                                                    <span style = "font-size: small;">&#11177;
+                                                        {{ $forumFirstReply['replyBody'] }}</span>
+                                                    <br>
+                                                    {{ $forumSecondReply['replyBody'] }}
+                                                </span>
                                             </p>
                                         </div><!--comment-->
                                         <div class="replies comments-wrp">
@@ -724,6 +734,18 @@
                                                         $isThirdReplyOp = $forumThirdReplyAuthor && $forumThirdReplyAuthor->id === $forum_selected->forumAuthor;
                                                         $isThirdReplyUser = $forumThirdReplyAuthor && $forumThirdReplyAuthor->id === auth()->user()->id;
                                                     @endphp
+                                                    <div style = "text-align: right;">
+
+                                                        @if ($forumThirdReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                            <button class="delete"
+                                                                onclick="confirmDeleteComment({{ json_encode($forumThirdReply) }})">
+                                                                <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                    alt="" class="control-icon"></button>
+                                                            <button class="edit"><img
+                                                                    src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                    alt="" class="control-icon"></button>
+                                                        @endif
+                                                    </div>
                                                     <div class="comment container3">
                                                         <div class="c-score">
                                                             @if (auth()->user()->user_type != 'alumni')
@@ -767,17 +789,6 @@
                                                             </form>
                                                         </div>
                                                         <div class="c-controls">
-                                                            @if ($forumThirdReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                                                                <button class="delete"
-                                                                    onclick="confirmDeleteComment({{ json_encode($forumThirdReply) }})">
-                                                                    <img src="{{ URL::asset('/images/icon-delete.svg') }}"
-                                                                        alt=""
-                                                                        class="control-icon">Delete</button>
-                                                                <button class="edit"><img
-                                                                        src="{{ URL::asset('/images/icon-edit.svg') }}"
-                                                                        alt=""
-                                                                        class="control-icon">Edit</button>
-                                                            @endif
                                                             @if (auth()->user()->user_type != 'alumni')
                                                                 <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumThirdReply->id]) }}"
                                                                     class="reply"><img src="images/icon-reply.svg"
@@ -805,10 +816,12 @@
                                                             </p>
                                                         </div>
                                                         <p class="c-text">
-                                                            <span
-                                                                class="reply-to">{{ $forumSecondReply['replyBody'] }}</span>
-                                                            <span
-                                                                class="c-body">{{ $forumThirdReply['replyBody'] }}</span>
+                                                            <span class="reply-to"></span>
+                                                            <span class="c-body">
+                                                                <span style = "font-size: small;">&#11177;
+                                                                    {{ $forumSecondReply['replyBody'] }}</span>
+                                                                <br>
+                                                                {{ $forumThirdReply['replyBody'] }}</span>
                                                         </p>
                                                     </div><!--comment-->
                                                     <div class="replies comments-wrp">
@@ -819,6 +832,20 @@
                                                                     $isFourthReplyOp = $forumFourthReplyAuthor && $forumFourthReplyAuthor->id === $forum_selected->forumAuthor;
                                                                     $isFourthReplyUser = $forumFourthReplyAuthor && $forumFourthReplyAuthor->id === auth()->user()->id;
                                                                 @endphp
+                                                                <div style = "text-align: right;">
+
+                                                                    @if ($forumFourthReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
+                                                                        <button class="delete"
+                                                                            onclick="confirmDeleteComment({{ json_encode($forumFourthReply) }})">
+                                                                            <img src="{{ URL::asset('/images/icon-delete.svg') }}"
+                                                                                alt=""
+                                                                                class="control-icon"></button>
+                                                                        <button class="edit"><img
+                                                                                src="{{ URL::asset('/images/icon-edit.svg') }}"
+                                                                                alt=""
+                                                                                class="control-icon"></button>
+                                                                    @endif
+                                                                </div>
                                                                 <div class="comment container3">
                                                                     <div class="c-score">
                                                                         @if (auth()->user()->user_type != 'alumni')
@@ -865,17 +892,6 @@
                                                                         </form>
                                                                     </div>
                                                                     <div class="c-controls">
-                                                                        @if ($forumFourthReply->replyAuthor === auth()->user()->id || auth()->user()->user_type != 'alumni')
-                                                                            <button class="delete"
-                                                                                onclick="confirmDeleteComment({{ json_encode($forumFourthReply) }})">
-                                                                                <img src="{{ URL::asset('/images/icon-delete.svg') }}"
-                                                                                    alt=""
-                                                                                    class="control-icon">Delete</button>
-                                                                            <button class="edit"><img
-                                                                                    src="{{ URL::asset('/images/icon-edit.svg') }}"
-                                                                                    alt=""
-                                                                                    class="control-icon">Edit</button>
-                                                                        @endif
                                                                     </div>
                                                                     <div class="c-user">
                                                                         <img src="{{ $forumFourthReplyAuthor ? $forumFourthReplyAuthor->avatar : 'Author not found' }}"
@@ -894,10 +910,13 @@
                                                                         </p>
                                                                     </div>
                                                                     <p class="c-text">
-                                                                        <span
-                                                                            class="reply-to">{{ $forumThirdReply['replyBody'] }}</span>
-                                                                        <span
-                                                                            class="c-body">{{ $forumFourthReply['replyBody'] }}</span>
+                                                                        <span class="reply-to"></span>
+                                                                        <span class="c-body">
+
+                                                                            <span style = "font-size: small;">&#11177;
+                                                                                {{ $forumThirdReply['replyBody'] }}</span>
+                                                                            <br>
+                                                                            {{ $forumFourthReply['replyBody'] }}</span>
                                                                     </p>
                                                                 </div><!--comment-->
                                                             @endif

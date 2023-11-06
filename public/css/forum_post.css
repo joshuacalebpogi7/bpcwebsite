@@ -93,7 +93,8 @@ button:hover{
     gap: 1rem;
     padding: .75rem;
     padding-top: .5rem;
-    width: 1rem;
+    /* width: 1rem; */
+    width: 60%;
     box-sizing: content-box;
     background-color: var(--Very-light-gray);
     border-radius: 8px;
@@ -144,7 +145,6 @@ button:hover{
 }
 .delete{
     color: var(--Soft-Red);
-    display: none;
 }
 .control-icon{
     margin-right: .5rem;
