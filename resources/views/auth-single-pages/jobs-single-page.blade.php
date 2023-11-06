@@ -202,21 +202,15 @@
                         </div>
                         <div class="col-12">
                             <div>
-                                <form action="{{-- /submit-application/{{ $job->id }} --}}#" method="POST">
-                                    @csrf
-                                    <!-- Your form fields go here -->
-                                    @if ($job->status == 'active')
-                                        <a href="mailto:{{ $job->email }}"><button
-                                                class="btn btn-primary w-100">Apply Now</button></a>
-                                    @else
-                                        <button class="btn btn-primary w-100" disabled
-                                            style="background-color: #ccc; cursor: not-allowed;">Archived</button>
-                                    @endif
-
-                                </form>
+                                <!-- Your form fields go here -->
+                                @if ($job->status == 'active')
+                                <a href="mailto:{{ $job->email }}"><button
+                                    class="btn btn-primary w-100">Apply Now</button></a>
+                                @else
+                                    <button class="btn btn-primary w-100" disabled
+                                        style="background-color: #ccc; cursor: not-allowed;">Archived</button>
+                                @endif
                             </div>
-
-
                         </div>
                     </div>
                 </div>
