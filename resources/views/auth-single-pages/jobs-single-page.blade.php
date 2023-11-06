@@ -122,7 +122,8 @@
     <!--=============== MAIN ===============-->
     <main class="main container" id="main">
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <a href="/jobs"><button class="btn btn-primary" style="border-radius: 20px; margin: 0 0 20px 45px;">Back</button></a> 
+            <a href="/jobs"><button class="btn btn-primary"
+                    style="border-radius: 20px; margin: 0 0 20px 45px;">Back</button></a>
             <div class="container">
                 <div class="row gy-5 gx-4">
                     <div class="col-lg-8">
@@ -161,7 +162,8 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s" style="overflow: hidden;
+                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s"
+                            style="overflow: hidden;
                         text-overflow: clip;">
                             <h4 class="mb-4">Job Summary</h4>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Published On:
@@ -202,18 +204,17 @@
                         </div>
                         <div class="col-12">
                             <div>
-                                <form action="{{-- /submit-application/{{ $job->id }} --}}#" method="POST">
-                                    @csrf
-                                    <!-- Your form fields go here -->
-                                    @if ($job->status == 'active')
-                                        <a href="mailto:{{ $job->email }}"><button
-                                                class="btn btn-primary w-100">Apply Now</button></a>
-                                    @else
-                                        <button class="btn btn-primary w-100" disabled
-                                            style="background-color: #ccc; cursor: not-allowed;">Archived</button>
-                                    @endif
 
-                                </form>
+                                <!-- Your form fields go here -->
+                                @if ($job->status == 'active')
+                                    <a href="mailto:{{ $job->email }}"><button class="btn btn-primary w-100">Apply
+                                            Now</button></a>
+                                @else
+                                    <button class="btn btn-primary w-100" disabled
+                                        style="background-color: #ccc; cursor: not-allowed;">Archived</button>
+                                @endif
+
+
                             </div>
 
 

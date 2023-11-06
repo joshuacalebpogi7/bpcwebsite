@@ -551,7 +551,9 @@
                 @endphp
                     <li>
                         <div class="d-flex">
+                            @if(isset($log_user->avatar))
                             <img src="{{ $log_user->avatar }}" alt="user">
+                            @endif
                             <div>
                                 <p class="text-info mb-1">{{ $log_user->first_name }} {{ $log_user->last_name }}
                                 </p>
