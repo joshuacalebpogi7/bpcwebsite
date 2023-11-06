@@ -81,6 +81,12 @@
                         <span class="sidebar__link-name">Gallery</span>
                         <span class="sidebar__link-floating">Gallery</span>
                     </a>
+
+                    <a href="/survey" class="sidebar__link {{ request()->is('survey') ? 'active-link' : '' }}">
+                        <i class="ri-survey-line"></i>
+                        <span class="sidebar__link-name">Survey</span>
+                        <span class="sidebar__link-floating">Survey</span>
+                    </a>
                 </div>
 
                 <h3 class="sidebar__title">
@@ -204,7 +210,6 @@
                         </div>
                         <div class="col-12">
                             <div>
-
                                 <!-- Your form fields go here -->
                                 @if ($job->status == 'active')
                                     <a href="mailto:{{ $job->email }}"><button class="btn btn-primary w-100">Apply
@@ -213,11 +218,7 @@
                                     <button class="btn btn-primary w-100" disabled
                                         style="background-color: #ccc; cursor: not-allowed;">Archived</button>
                                 @endif
-
-
                             </div>
-
-
                         </div>
                     </div>
                 </div>
