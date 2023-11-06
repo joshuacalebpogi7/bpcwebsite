@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
+    {{-- <link rel="stylesheet" href="resources/css/app.css"> --}}
     @vite(['resources/css/app.css'])
     @vite(['resources/js/design.js'])
     @livewireStyles
@@ -25,19 +25,19 @@
     @include('includes.header')
 
     @if (session()->has('accept'))
-    <div class="container container-narrow">
-        <div class="alert alert-success text-center">
-            {{ session('accept') }}
+        <div class="container container-narrow">
+            <div class="alert alert-success text-center">
+                {{ session('accept') }}
+            </div>
         </div>
-    </div>
     @endif
 
     @if (session()->has('reject'))
-    <div class="container container-narrow">
-        <div class="alert alert-danger text-center">
-            {{ session('reject') }}
+        <div class="container container-narrow">
+            <div class="alert alert-danger text-center">
+                {{ session('reject') }}
+            </div>
         </div>
-    </div>
     @endif
 
     {{ $slot }}
