@@ -544,7 +544,7 @@
     <div class="card-body">
         <p class="card-title">Notifications</p>
         <ul class="icon-data-list">
-            @if (!empty($data['logs']))
+            {{-- @if (!empty($data['logs']))
                 @foreach ($data['logs'] as $log)
                 @php
                     $log_user = $data['users']->find($log->log_author);
@@ -561,7 +561,7 @@
                         </div>
                     </li>
                 @endforeach
-            @endif
+            @endif --}}
         </ul>
     </div>
 </div>
