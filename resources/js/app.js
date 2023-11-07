@@ -14,7 +14,7 @@ tinymce.init({
     selector: 'textarea', // Replace this CSS selector to match the placeholder element for TinyMCE
     plugins: 'searchreplace fullscreen link pagebreak nonbreaking advlist lists wordcount emoticons',
     menubar: '',
-    toolbar: '',
+    toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | table',
     toolbar_sticky: true,
     branding: false,
     promotion: false,
