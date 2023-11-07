@@ -61,7 +61,7 @@
                         <span class="sidebar__link-name">Events</span>
                         <span class="sidebar__link-floating">Events</span>
                     </a>
-
+    
                     <a href="/jobs" class="sidebar__link {{ request()->is('jobs') ? 'active-link' : '' }}">
                         <i class="ri-briefcase-4-fill"></i>
                         <span class="sidebar__link-name">Jobs</span>
@@ -83,22 +83,7 @@
                     </a>
                 </div>
 
-                <h3 class="sidebar__title">
-                    <span>Others</span>
-                </h3>
-
                 <div class="sidebar__list">
-                    <a href="#" class="sidebar__link">
-                        <i class="ri-customer-service-fill"></i>
-                        <span class="sidebar__link-name">Support</span>
-                        <span class="sidebar__link-floating">Support</span>
-                    </a>
-
-                    <a href="#" class="sidebar__link">
-                        <i class="ri-settings-3-line"></i>
-                        <span class="sidebar__link-name">Settings</span>
-                        <span class="sidebar__link-floating">Settings</span>
-                    </a>
 
                     <a href="/logout" class="sidebar__link"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
