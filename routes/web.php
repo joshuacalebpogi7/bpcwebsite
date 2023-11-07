@@ -62,6 +62,9 @@ Route::post('/submit-survey', [UserController::class, "submitSurvey"])->middlewa
 Route::post('/submit-application/{jobs:id}', [UserController::class, "submitApplication"])->middleware('authUser');
 
 
+// Route::post('/email/verify', [AdminController::class, "verifyEmail"])->middleware('authUser', 'emailNotVerified');
+
+
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth', 'emailNotVerified')->name('verification.notice');
@@ -77,8 +80,9 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('resent', 'Verification link sent!');
+    return redirect('/')->with('resent', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 
 Route::get('/forgot-password', [PageController::class, "forgotPassword"])->middleware('guest');
 Route::post('/submit-forgot-password', [UserController::class, "submitForgotPassword"])->middleware('guest');

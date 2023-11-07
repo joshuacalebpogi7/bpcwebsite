@@ -10,7 +10,7 @@
 
 <title>Forums</title>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/styles.css">
 <section id="page-header">
     <h2 style="color: #fafafa">● <i class="ri-discuss-line"></i> FORUM ●</h2>
 </section>

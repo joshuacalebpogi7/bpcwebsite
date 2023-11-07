@@ -597,11 +597,11 @@
                                     @endif
                                     @if (auth()->user()->user_type != 'alumni')
                                         <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumFirstReply->id]) }}"
-                                            class="reply"><img src="images/icon-reply.svg" alt=""
+                                            class="reply"><img src="/images/icon-reply.svg" alt=""
                                                 class="control-icon">Reply</a>
                                     @elseif (auth()->user()->user_type == 'alumni')
                                         <a href="{{ route('reply_forum', ['forum_reply_selected' => $forumFirstReply->id]) }}"
-                                            class="reply"><img src="images/icon-reply.svg" alt=""
+                                            class="reply"><img src="/images/icon-reply.svg" alt=""
                                                 class="control-icon">Reply</a>
                                     @endif
                                 </div>
@@ -687,11 +687,11 @@
                                                 @endif
                                                 @if (auth()->user()->user_type != 'alumni')
                                                     <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumSecondReply->id]) }}"
-                                                        class="reply"><img src="images/icon-reply.svg"
+                                                        class="reply"><img src="/images/icon-reply.svg"
                                                             alt="" class="control-icon">Reply</a>
                                                 @elseif (auth()->user()->user_type == 'alumni')
                                                     <a href="{{ route('reply_forum', ['forum_reply_selected' => $forumSecondReply->id]) }}"
-                                                        class="reply"><img src="images/icon-reply.svg"
+                                                        class="reply"><img src="/images/icon-reply.svg"
                                                             alt="" class="control-icon">Reply</a>
                                                 @endif
                                             </div>
@@ -780,11 +780,11 @@
                                                             @endif
                                                             @if (auth()->user()->user_type != 'alumni')
                                                                 <a href="{{ route('admin/reply_forum', ['forum_reply_selected' => $forumThirdReply->id]) }}"
-                                                                    class="reply"><img src="images/icon-reply.svg"
+                                                                    class="reply"><img src="/images/icon-reply.svg"
                                                                         alt="" class="control-icon">Reply</a>
                                                             @elseif (auth()->user()->user_type == 'alumni')
                                                                 <a href="{{ route('reply_forum', ['forum_reply_selected' => $forumThirdReply->id]) }}"
-                                                                    class="reply"><img src="images/icon-reply.svg"
+                                                                    class="reply"><img src="/images/icon-reply.svg"
                                                                         alt="" class="control-icon">Reply</a>
                                                             @endif
                                                         </div>

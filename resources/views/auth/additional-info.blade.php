@@ -116,10 +116,12 @@
 
             <a href="/edit-profile" style="text-decoration: none; color: var(--white-color);">
                 <div class="sidebar__account">
-                    <img src="/images/gab.png" alt="sidebar image" class="sidebar__perfil">
+                    <img src="{{ auth()->user()->avatar }}" alt="sidebar image" class="sidebar__perfil">
                     <div class="sidebar__names">
-                        <h3 class="sidebar__name">Gab Pogi</h3>
-                        <span class="sidebar__email" style="text-decoration: none; color: inherit;">bpc@email.com</span>
+                        <h3 class="sidebar__name">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
+                        </h3>
+                        <span class="sidebar__email"
+                            style="text-decoration: none; color: inherit;">{{ auth()->user()->email }}</span>
                     </div>
                     <i class="ri-arrow-right-s-line"></i>
                 </div>
@@ -132,25 +134,25 @@
 
     <!--=============== MAIN ===============-->
     <main class="main container" id="main">
-    <div class="container2">
-        <div class="row" style="margin-top:50px">
-            <div class="col-md-10 offset-md-1">
+        <div class="container2">
+            <div class="row" style="margin-top:50px">
+                <div class="col-md-10 offset-md-1">
 
-                <h1 style="color: #00a56f;">Bulacan Polytechnic College Data Alumni Questionnaire</h1>
-                <hr>
-                @livewire('multi-step-form')
+                    <h1 style="color: #00a56f;">Bulacan Polytechnic College Data Alumni Questionnaire</h1>
+                    <hr>
+                    @livewire('multi-step-form')
+                </div>
             </div>
         </div>
-    </div>
     </main>
 
-@livewireScripts
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-    integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{-- @stack('scripts') --}}
+    @livewireScripts
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- @stack('scripts') --}}
 </body>
 
 </html>

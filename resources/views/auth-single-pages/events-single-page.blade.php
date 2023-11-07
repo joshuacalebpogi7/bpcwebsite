@@ -12,13 +12,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href='https:/unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
     @vite(['resources/css/style.css'])
     @vite(['resources/css/styles.css'])
     @vite(['resources/js/main.js'])
     @vite(['resources/css/events.css'])
     @vite(['resources/js/post.js'])
+    <link rel="stylesheet" href='{{ asset('css/post.css') }}' rel='stylesheet'>
 
     @livewireStyles
 </head>
@@ -51,19 +52,19 @@
                         <span class="sidebar__link-floating">Home</span>
                     </a>
 
-                    <a href="/news" class="sidebar__link {{ request()->is('news') ? 'active-link' : '' }}">
+                    <a href="/news" class="sidebar__link {{ request()->is('news*') ? 'active-link' : '' }}">
                         <i class="ri-newspaper-line"></i>
                         <span class="sidebar__link-name">News</span>
                         <span class="sidebar__link-floating">News</span>
                     </a>
 
-                    <a href="/events" class="sidebar__link {{ request()->is('events') ? 'active-link' : '' }}">
+                    <a href="/events" class="sidebar__link {{ request()->is('events*') ? 'active-link' : '' }}">
                         <i class="ri-calendar-event-line"></i>
                         <span class="sidebar__link-name">Events</span>
                         <span class="sidebar__link-floating">Events</span>
                     </a>
 
-                    <a href="/jobs" class="sidebar__link {{ request()->is('jobs') ? 'active-link' : '' }}">
+                    <a href="/jobs" class="sidebar__link {{ request()->is('jobs*') ? 'active-link' : '' }}">
                         <i class="ri-briefcase-4-fill"></i>
                         <span class="sidebar__link-name">Jobs</span>
                         <span class="sidebar__link-floating">Jobs</span>
@@ -71,19 +72,19 @@
                 </div>
 
                 <div class="sidebar__list">
-                    <a href="/forums" class="sidebar__link {{ request()->is('forums') ? 'active-link' : '' }}">
+                    <a href="/forums" class="sidebar__link {{ request()->is('forums*') ? 'active-link' : '' }}">
                         <i class="ri-team-fill"></i>
                         <span class="sidebar__link-name">Forum</span>
                         <span class="sidebar__link-floating">Forum</span>
                     </a>
 
-                    <a href="/gallery" class="sidebar__link {{ request()->is('gallery') ? 'active-link' : '' }}">
+                    <a href="/gallery" class="sidebar__link {{ request()->is('gallery*') ? 'active-link' : '' }}">
                         <i class="ri-gallery-fill"></i>
                         <span class="sidebar__link-name">Gallery</span>
                         <span class="sidebar__link-floating">Gallery</span>
                     </a>
 
-                    <a href="/survey" class="sidebar__link {{ request()->is('survey') ? 'active-link' : '' }}">
+                    <a href="/survey" class="sidebar__link {{ request()->is('survey*') ? 'active-link' : '' }}">
                         <i class="ri-survey-line"></i>
                         <span class="sidebar__link-name">Survey</span>
                         <span class="sidebar__link-floating">Survey</span>
@@ -132,9 +133,6 @@
     <x-slot name="title">
         {{ $events->title }}
     </x-slot>
-    @vite(['resources/css/styles.css'])
-    @vite(['resources/css/post.css'])
-    @vite(['resources/js/post.js'])
 
 
     <section class="post-header">
@@ -162,3 +160,9 @@
             <a href="https://www.linkedin.com/in/your_linkedin_profile"><i class="ri-linkedin-box-fill"></i></a>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>

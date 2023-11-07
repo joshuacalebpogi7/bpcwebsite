@@ -15,10 +15,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     {{-- @vite(['resources/css/job.css']) --}}
-    @vite(['resources/css/bootstrap.min.css'])
+    {{-- @vite(['resources/css/bootstrap.min.css']) --}}
     @vite(['resources/css/styles.css'])
     @vite(['resources/js/main.js'])
-
+    <link rel="stylesheet" href='{{ asset('css/bootstrap.min.css') }}' rel='stylesheet'>
     @livewireStyles
 </head>
 
@@ -50,19 +50,19 @@
                         <span class="sidebar__link-floating">Home</span>
                     </a>
 
-                    <a href="/news" class="sidebar__link {{ request()->is('news') ? 'active-link' : '' }}">
+                    <a href="/news" class="sidebar__link {{ request()->is('news*') ? 'active-link' : '' }}">
                         <i class="ri-newspaper-line"></i>
                         <span class="sidebar__link-name">News</span>
                         <span class="sidebar__link-floating">News</span>
                     </a>
 
-                    <a href="/events" class="sidebar__link {{ request()->is('events') ? 'active-link' : '' }}">
+                    <a href="/events" class="sidebar__link {{ request()->is('events*') ? 'active-link' : '' }}">
                         <i class="ri-calendar-event-line"></i>
                         <span class="sidebar__link-name">Events</span>
                         <span class="sidebar__link-floating">Events</span>
                     </a>
 
-                    <a href="/jobs" class="sidebar__link {{ request()->is('jobs') ? 'active-link' : '' }}">
+                    <a href="/jobs" class="sidebar__link {{ request()->is('jobs*') ? 'active-link' : '' }}">
                         <i class="ri-briefcase-4-fill"></i>
                         <span class="sidebar__link-name">Jobs</span>
                         <span class="sidebar__link-floating">Jobs</span>
@@ -70,19 +70,19 @@
                 </div>
 
                 <div class="sidebar__list">
-                    <a href="/forums" class="sidebar__link {{ request()->is('forums') ? 'active-link' : '' }}">
+                    <a href="/forums" class="sidebar__link {{ request()->is('forums*') ? 'active-link' : '' }}">
                         <i class="ri-team-fill"></i>
                         <span class="sidebar__link-name">Forum</span>
                         <span class="sidebar__link-floating">Forum</span>
                     </a>
 
-                    <a href="/gallery" class="sidebar__link {{ request()->is('gallery') ? 'active-link' : '' }}">
+                    <a href="/gallery" class="sidebar__link {{ request()->is('gallery*') ? 'active-link' : '' }}">
                         <i class="ri-gallery-fill"></i>
                         <span class="sidebar__link-name">Gallery</span>
                         <span class="sidebar__link-floating">Gallery</span>
                     </a>
 
-                    <a href="/survey" class="sidebar__link {{ request()->is('survey') ? 'active-link' : '' }}">
+                    <a href="/survey" class="sidebar__link {{ request()->is('survey*') ? 'active-link' : '' }}">
                         <i class="ri-survey-line"></i>
                         <span class="sidebar__link-name">Survey</span>
                         <span class="sidebar__link-floating">Survey</span>

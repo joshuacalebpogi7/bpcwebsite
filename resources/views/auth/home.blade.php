@@ -42,7 +42,7 @@
             @foreach ($events as $index => $event)
                 @if ($index < 3)
                     <div class="cards">
-                        <div class="image"><img src="images/prog-pic.jpg"></div>
+                        <div class="image"><img src="{{ $event->thumbnail }}"></div>
                         <div class="content">
                             <a href="/events/{{ $event->title }}">
                                 <span class="title">
@@ -79,9 +79,10 @@
                             <p class="cookieHeading">{{ $job->job_title }}</p>
                             <hr class="solid" style="border-top: 2px solid #E9EEF2">
                             <a href="/jobs/{{ $job->title }}">
-                                <p class="cookieDescription">{{ $job->company }}<a
-                                        href="/jobs/{{ $job->title }}"></a></p>
-                                <button class="acceptButton">{{ $job->job_type }}</button>
+                                <p class="cookieDescription">{{ $job->company }}<a href="/jobs/{{ $job->title }}">
+                                </p>
+                                <a href="/jobs/{{ $job->title }}"><button
+                                        class="acceptButton">{{ $job->job_type }}</button></a>
                     </div>
                 @endif
             @endforeach
